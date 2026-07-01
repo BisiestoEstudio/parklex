@@ -1,0 +1,320 @@
+$sm: 576px;
+$md: 768px;
+$lg: 1024px;
+$xl: 1280px;
+
+// Duración de las transiciones
+$dur-bar:   0.35s;
+$dur-panel: 0.45s;
+
+.b-offset-menu {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1000;
+
+	// -------------------------------------------------------
+	// Barra superior
+	// -------------------------------------------------------
+	&__bar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0 var(--layout-margin, 24px);
+		height: 56px;
+		background-color: transparent;
+		color: var(--black);
+		position: relative;
+		z-index: 2;
+
+		border-bottom: 2px solid currentColor;
+		transform: translateY(0);
+		visibility: visible;
+		transition: transform $dur-bar ease, background-color $dur-bar ease, color $dur-bar ease, visibility 0s 0s;
+	}
+
+	// Barra con fondo rojo cuando se ha hecho scroll o el panel está abierto
+	&.is-scrolled &__bar,
+	&.is-open &__bar {
+		background-color: var(--red);
+		color: var(--white);
+	}
+
+	// Borde rojo cuando está scrolled pero el panel no está abierto
+/* 	&.is-scrolled:not(.is-open) &__bar {
+		border-bottom-color: var(--red);
+	} */
+
+	// Ocultar barra al bajar el scroll
+	&.is-scrolled-down &__bar {
+		transform: translateY(-100%);
+		visibility: hidden;
+		transition: transform $dur-bar ease, background-color $dur-bar ease, color $dur-bar ease, visibility 0s $dur-bar;
+	}
+
+	// -------------------------------------------------------
+	// Logo
+	// -------------------------------------------------------
+	&__logo-img {
+		filter: brightness(0);
+		transition: filter $dur-bar ease;
+	}
+
+	&.is-scrolled &__logo-img,
+	&.is-open &__logo-img {
+		filter: brightness(0) invert(1);
+	}
+
+	&__logo {
+		display: flex;
+		align-items: center;
+		flex-shrink: 0;
+		height: 32px;
+
+		// Output de get_custom_logo() y preview del editor
+		.custom-logo-link,
+		a {
+			display: flex;
+			align-items: center;
+			height: 100%;
+		}
+
+		.custom-logo,
+		&-img {
+			height: 100%;
+			width: auto;
+			display: block;
+			object-fit: contain;
+		}
+	}
+
+	// -------------------------------------------------------
+	// Toggle (hamburger)
+	// -------------------------------------------------------
+	&__toggle {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		background: none;
+		border: none;
+		cursor: pointer;
+		color: inherit;
+		padding: 0;
+		font-weight: 500 !important;
+	}
+
+	&__toggle-label {
+		// visible en desktop, opcional en mobile
+	}
+
+	&.is-open &__toggle-label {
+		display: none;
+	}
+
+	// Icono + / ×
+	&__toggle-icon {
+		position: relative;
+		width: 20px;
+		height: 20px;
+		flex-shrink: 0;
+
+		span {
+			position: absolute;
+			left: 0;
+			right: 0;
+			height: 1.5px;
+			background-color: currentColor;
+			transition: transform $dur-bar ease, opacity $dur-bar ease;
+
+			&:first-child {
+				top: 50%;
+				transform: translateY(-50%);
+			}
+
+			&:last-child {
+				top: 50%;
+				transform: translateY(-50%) rotate(90deg);
+			}
+		}
+	}
+
+	// Cuando está abierto: el + se convierte en ×
+	&.is-open &__toggle-icon {
+		span:first-child {
+			transform: translateY(-50%) rotate(45deg);
+		}
+		span:last-child {
+			transform: translateY(-50%) rotate(-45deg);
+		}
+	}
+
+	// -------------------------------------------------------
+	// Panel overlay
+	// -------------------------------------------------------
+	&__panel {
+		position: fixed;
+		inset: 0;
+		display: flex;
+		align-items: stretch;
+
+		pointer-events: none;
+		opacity: 0;
+		transition: opacity $dur-panel ease;
+
+		&[aria-hidden="false"] {
+			opacity: 1;
+			pointer-events: auto;
+		}
+
+	}
+
+	&.is-open &__panel {
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	&__panel-inner {
+		overflow: auto;
+		display: grid;
+		grid-template-columns: 1fr;
+		width: 100%;
+		padding: 80px var(--layout-margin) fluid(80px, 40px);
+		gap: fluid(40px, 24px);
+	}
+
+	// -------------------------------------------------------
+	// Navegación
+	// -------------------------------------------------------
+	&__nav {
+		align-self: end;
+	}
+
+	&__menu {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+
+		li {
+			border-top: 1px solid rgba(255, 255, 255, 0.2);
+
+			&:last-child {
+				border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+			}
+		}
+
+		a {
+			display: block;
+			padding: 18px 0;
+			color: var(--white);
+			text-decoration: none;
+			font-family: var(--heading-font);
+			font-weight: var(--font-weight-bold);
+			font-size: clamp(24px, 4vw, 40px);
+			letter-spacing: -0.01em;
+			text-transform: uppercase;
+			transition: opacity 0.2s ease;
+
+			&:hover,
+			&:focus-visible {
+				opacity: 0.6;
+			}
+		}
+	}
+
+
+	// -------------------------------------------------------
+	// Vista previa en el editor (no se muestra en frontend)
+	// -------------------------------------------------------
+	&__panel-preview {
+		background-color: var(--red);
+		color: var(--white, #fcfcfc);
+
+		.b-offset-menu__panel-inner {
+			padding-top: 20px;
+		}
+	}
+
+	&__nav-empty,
+	&__nav-label {
+		font-size: 13px;
+		opacity: 0.7;
+		font-style: italic;
+	}
+
+	&__logo-placeholder {
+		font-size: 11px;
+		opacity: 0.5;
+		font-family: var(--heading-font);
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+	}
+
+	.is-preview {
+		pointer-events: none;
+	}
+
+	.wp-block-navigation-item__label {
+		font-family: var(--display-font);
+		text-transform: uppercase;
+		font-size: min(14.5svh, 10cqw);
+		line-height: var(--display-height);
+		display: block;
+		line-height: 1;
+		transition: color 0.5s ease;
+		&:hover {
+			color: var(--black);
+		}
+	}
+
+}
+
+@media (min-width: $md) {
+	.b-offset-menu {
+		&__bar {
+			height: 64px;
+		}
+		&__columns {
+			flex-direction: column !important;
+			justify-content: space-between !important;
+		}
+	}
+}
+
+
+@media (min-width: $lg) {
+	.b-offset-menu {
+		&__bar {
+			height: 72px;
+		}
+
+		&__logo {
+			height: 36px;
+		}
+
+		&__panel-inner {
+			align-items: end;
+		}
+
+		&__columns {
+			flex-direction: row !important;
+			justify-content: default !important;
+		}
+
+
+	}
+}
+
+// Evitar scroll en body cuando el menú está abierto
+body.menu-is-open {
+	overflow: hidden;
+}
+
+// Versión en blanco: el setting de página invierte el color del menú en el top
+body.has-header-white .b-offset-menu:not(.is-scrolled):not(.is-open) .b-offset-menu__bar {
+	color: var(--white);
+}
+
+body.has-header-white .b-offset-menu:not(.is-scrolled):not(.is-open) .b-offset-menu__logo-img {
+	filter: brightness(0) invert(1);
+}

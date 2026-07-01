@@ -1,0 +1,67 @@
+/***********************
+2. Layout
+***********************/
+html{
+	background: var(--blanco);
+} 
+
+body{
+  min-height: 100dvh;
+  scroll-behavior: smooth;
+	text-rendering: optimizeSpeed;
+
+}
+
+.wp-site-blocks{
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+
+  > main{
+    flex-grow: 1;
+  }
+}
+
+
+
+.alignright {
+	float:right;
+}
+.alignleft {
+	float: left;
+}
+
+.content{
+  flex-grow: 999;
+}
+
+
+
+
+.alignexpand{
+  max-width: unset;
+}
+
+
+.alignwide{
+  max-width: var(--widesize);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+.alignmedium{
+  max-width: var(--mediumsize) !important;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+
+/* :root :where(.is-layout-constrained) > * {
+  margin-block-start: 0 !important;
+  margin-block-end: 0 !important;
+}
+ */
+
+

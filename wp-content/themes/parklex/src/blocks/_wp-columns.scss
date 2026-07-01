@@ -1,0 +1,16 @@
+.b-imagen-texto .wp-block-columns,
+.b-experience-header .wp-block-columns,
+.b-section .wp-block-columns{
+	flex-wrap: wrap !important;
+
+    .wp-block-column{
+        min-width: min(300px, 100%);
+    }
+
+    &.is-style-text-button{
+        dis
+        .wp-block-column{
+            min-width: min(300px, 100%);
+        }
+    }
+}

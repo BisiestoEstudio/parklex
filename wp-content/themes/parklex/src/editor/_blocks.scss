@@ -1,0 +1,14 @@
+.wp-block-separator{
+width: 258px;
+height: 6px;
+background-color: var(--wp--preset--color--main-yellow);
+border: none;
+}
+
+:where(.editor-styles-wrapper) .wp-block-list {
+    list-style-type: disc;
+    padding-left: 16px;
+    margin-block-end: 18px;
+
+}
+

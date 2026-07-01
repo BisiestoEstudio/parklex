@@ -1,0 +1,36 @@
+.footer{
+
+    gap: 24px;
+    &__bottom{
+        padding: 0 var(--layout-margin);
+    }
+
+
+
+}
+
+@media screen and (max-width: 782px) {
+    .footer{
+        &__columns{
+            display: grid !important;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        &__logo-area{
+            grid-column: span 2;
+        }
+
+
+
+        &__bottom{
+            padding: 0 var(--layout-margin);
+            flex-direction: column-reverse !important;
+            align-items: flex-start !important;
+        }
+
+        &__legal-nav{
+            flex-direction: column !important;
+            align-items: flex-start !important;
+        }
+    }
+}

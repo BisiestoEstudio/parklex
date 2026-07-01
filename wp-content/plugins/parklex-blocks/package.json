@@ -1,0 +1,19 @@
+{
+  "name": "parklex-blocks",
+  "version": "1.0.0",
+  "description": "Gutenberg blocks plugin.",
+  "private": true,
+  "scripts": {
+    "build": "wp-scripts build",
+    "start": "wp-scripts start",
+    "lint:js": "wp-scripts lint-js",
+    "lint:css": "wp-scripts lint-style",
+    "packages-update": "wp-scripts packages-update"
+  },
+  "devDependencies": {
+    "@lehoczky/postcss-fluid": "^1.0.3",
+    "@wordpress/icons": "^13.0.0",
+    "@wordpress/scripts": "^30.0.0",
+    "cssnano": "^7.1.9"
+  }
+}

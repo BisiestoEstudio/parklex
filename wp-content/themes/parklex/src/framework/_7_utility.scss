@@ -1,0 +1,94 @@
+/***********************
+3. Utilities classes
+***********************/
+
+.u_bold{
+  font-weight: var(--font-weight-bold);
+}
+
+
+.u_hidden,
+.js-hidden{
+  display: none !important;
+}
+
+.u_overflow-hidden{
+  overflow: hidden;
+}
+
+.u_relative{
+  position:relative;
+}
+
+.u_absolute{
+  position: absolute;
+}
+.u_overflow-hidden{
+  overflow: hidden;
+}
+
+.u_hide-mobile,
+.u_hide-mobile-menu{
+  display: none !important;
+}
+
+
+.u_text-negative,
+.u_text-negative *{
+  color: white;
+}
+
+.u_text-positive,
+.u_text-positive *{
+  color: var(--wp--preset--color--black);
+}
+
+.has-white-color,
+.has-white-color a{
+  color: var(--wp--preset--color--white) !important;
+}
+
+
+
+.u_text-center{
+  text-align: center;
+}
+
+
+
+@media screen and (max-width: calc($md - 1px)) {
+  .is-style-only_desktop{
+    display: none !important;
+  }
+}
+
+@media screen and (min-width: $md) {
+  .u_only-mobile, .is-style-only_mobile {
+    display: none !important;
+  }
+  .u_hide-mobile{
+    display: block !important;
+  }
+}
+
+@media screen and (min-width: $lg) {
+  .u_hide-desktop{
+    display: none;
+  }
+}
+
+@media screen and (max-width: $lg) {
+  .u_only-desktop{
+    display: none !important;
+  }
+}
+
+/*Breakpoint del menú*/
+@media screen and (min-width: $breakpoint-menu){
+  .u_hide-mobile-menu{
+    display: block !important;
+  }
+  .u_hide-desktop-menu{
+    display: none !important;
+  }
+}
