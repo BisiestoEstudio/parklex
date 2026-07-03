@@ -7,11 +7,13 @@ const VARIATION_ATTRIBUTES = {
 	verticalAlignment: 'bottom',
 	isStackedOnMobile: true,
 	linkDestination: 'none',
+	className: 'b-bisiesto-variation',
+	mediaWidth: 55,
 };
 
 registerBlockVariation( 'core/media-text', {
-	name: 'media-test',
-	title: __( 'Media Test', 'parklex-blocks' ),
+	name: 'media-text',
+	title: __( 'Media Text', 'parklex-blocks' ),
 	description: __(
 		'Imagen y texto en ancho wide, alineado abajo y apilado en móvil.',
 		'parklex-blocks'
@@ -28,3 +30,4 @@ registerBlockVariation( 'core/media-text', {
 			( [ key, value ] ) => blockAttributes[ key ] === value
 		),
 } );
+

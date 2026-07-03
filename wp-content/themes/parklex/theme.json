@@ -86,48 +86,28 @@
         },
         {
           "name": "M",
-          "size": "24px",
-          "slug": "m",
-          "fluid": {
-            "min": "16px",
-            "max": "24px"
-          }
+          "size": "var(--spacing-m)",
+          "slug": "m"
         },
         {
           "name": "ML",
-          "size": "32px",
-          "slug": "ml",
-          "fluid": {
-            "min": "24px",
-            "max": "32px"
-          }
+          "size": "var(--spacing-ml)",
+          "slug": "ml"
         },
         {
           "name": "L",
-          "size": "40px",
-          "slug": "l",
-          "fluid": {
-            "min": "24px",
-            "max": "40px"
-          }
+          "size": "var(--spacing-l)",
+          "slug": "l"
         },
         {
           "name": "XL",
-          "size": "64px",
-          "slug": "xl",
-          "fluid": {
-            "min": "40px",
-            "max": "64px"
-          }
+          "size": "var(--spacing-xl)",
+          "slug": "xl"
         },
         {
           "name": "XXL",
-          "size": "80px",
-          "slug": "xxl",
-          "fluid": {
-            "min": "40px",
-            "max": "80px"
-          }
+          "size": "var(--spacing-xxl)",
+          "slug": "xxl"
         },
         {
           "name": "XXXL",

@@ -4,7 +4,7 @@ import { ToggleControl } from '@wordpress/components';
 import { useSelect, useDispatch } from '@wordpress/data';
 import { store as editorStore } from '@wordpress/editor';
 import { __ } from '@wordpress/i18n';
-import './block-variations/media-test';
+import './block-variations/media-text';
 
 const SUPPORTED_POST_TYPES = [ 'page', 'post', 'experience' ];
 const META_KEY = '_header_color_white';
