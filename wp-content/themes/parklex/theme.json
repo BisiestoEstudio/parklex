@@ -8,8 +8,8 @@
 			"backgroundSize": true
     },
     "layout": {
-      "contentSize": "753",
-      "wideSize": "1500"
+      "contentSize": "753px",
+      "wideSize": "1500px"
     },
     "color": {
       "defaultPalette": false,
@@ -41,6 +41,11 @@
           "slug": "gray-light",
           "color": "#f1f1f1",
           "name": "Gray Light"
+        },
+        {
+          "slug": "gray-dark",
+          "color": "#413e3b",
+          "name": "Gray Dark"
         }
       ],
       "gradients": [
@@ -143,65 +148,44 @@
       "lineHeight": false,
       "fontFamilies": [
         {
-          "fontFamily": "'Suisse Intl', sans-serif",
-          "name": "Suisse Intl",
-          "slug": "heading",
+          "fontFamily": "'Neue Haas Grotesk Text Pro', sans-serif",
+          "name": "Neue Haas Grotesk Text Pro",
+          "slug": "base",
           "fontFace": [
             {
-              "fontFamily": "Suisse Intl",
+              "fontFamily": "Neue Haas Grotesk Text Pro",
               "fontWeight": "400",
               "fontStyle": "normal",
               "fontDisplay": "swap",
-              "src": ["file:./assets/fonts/SuisseIntl-Regular.woff2", "file:./assets/fonts/SuisseIntl-Regular.woff"]
+              "src": ["file:./assets/fonts/NeueHaasGroteskText-55Roman-Web.woff2"]
             },
             {
-              "fontFamily": "Suisse Intl",
+              "fontFamily": "Neue Haas Grotesk Text Pro",
+              "fontWeight": "400",
+              "fontStyle": "italic",
+              "fontDisplay": "swap",
+              "src": ["file:./assets/fonts/NeueHaasGroteskText-56Italic-Web.woff2"]
+            },
+            {
+              "fontFamily": "Neue Haas Grotesk Text Pro",
               "fontWeight": "500",
               "fontStyle": "normal",
               "fontDisplay": "swap",
-              "src": ["file:./assets/fonts/SuisseIntl-Bold.woff2", "file:./assets/fonts/SuisseIntl-Bold.woff"]
+              "src": ["file:./assets/fonts/NeueHaasGroteskText-65Medium-Web.woff2"]
             }
           ]
         },
         {
-          "fontFamily": "'Gobold', sans-serif",
-          "name": "Gobold",
+          "fontFamily": "'Century Gothic', serif",
+          "name": "Century Gothic",
           "slug": "display",
           "fontFace": [
             {
-              "fontFamily": "Gobold",
+              "fontFamily": "Century Gothic",
               "fontWeight": "400",
               "fontStyle": "normal",
               "fontDisplay": "swap",
-              "src": ["file:./assets/fonts/Gobold-Regular.woff2", "file:./assets/fonts/Gobold-Regular.woff"]
-            }
-          ]
-        },
-        {
-          "fontFamily": "'Playfair Display', serif",
-          "name": "Playfair Display",
-          "slug": "playfair-display",
-          "fontFace": [
-            {
-              "fontFamily": "Playfair Display",
-              "fontWeight": "500",
-              "fontStyle": "normal",
-              "fontDisplay": "swap",
-              "src": ["file:./assets/fonts/playfair-display-v40-latin-500.woff2", "file:./assets/fonts/playfair-display-v40-latin-500.ttf"]
-            },
-            {
-              "fontFamily": "Playfair Display",
-              "fontWeight": "600",
-              "fontStyle": "normal",
-              "fontDisplay": "swap",
-              "src": ["file:./assets/fonts/playfair-display-v40-latin-600.woff2", "file:./assets/fonts/playfair-display-v40-latin-600.ttf"]
-            },
-            {
-              "fontFamily": "Playfair Display",
-              "fontWeight": "600",
-              "fontStyle": "italic",
-              "fontDisplay": "swap",
-              "src": ["file:./assets/fonts/playfair-display-v40-latin-600italic.woff2", "file:./assets/fonts/playfair-display-v40-latin-600italic.ttf"]
+              "src": ["file:./assets/fonts/CenturyGothicStdRegular.woff2", "file:./assets/fonts/CenturyGothicStdRegular.woff"]
             }
           ]
         }
@@ -216,71 +200,101 @@
       },
       "fontSizes": [
         {
-          "slug": "display-xs",
-          "size": "24px",
-          "name": "Display XS",
-          "fluid":{
-            "min": "24px",
-            "max": "32px"
-          }
-        },
-        {
-          "slug": "display-s",
-          "size": "var(--display-s-size)",
-          "name": "Display S",
-          "fluid": false
-        },
-        {
-          "slug": "display-m",
-          "size": "var(--display-m-size)",
-          "name": "Display M",
-          "fluid": false
-        },
-        {
-          "slug": "display-l",
-          "size": "var(--display-l-size)",
-          "name": "Display L",
-          "fluid": false
-        },
-        {
-          "slug": "h1",
-          "size": "32px",
-          "name": "H1",
+          "slug": "display-xl",
+          "size": "28px",
+          "name": "Display XL",
           "fluid": {
-            "min": "32px",
+            "min": "28px",
             "max": "48px"
           }
         },
         {
-          "slug": "h2",
-          "size": "28px",
-          "name": "H2",
+          "slug": "h2-display",
+          "size": "22px",
+          "name": "H2 Display",
           "fluid": {
-            "min": "28px",
-            "max": "40px"
-          }
-        },
-        {
-          "slug": "h3",
-          "size": "24px",
-          "name": "H3",
-          "fluid": {
-            "min": "24px",
+            "min": "22px",
             "max": "32px"
           }
         },
         {
-          "slug": "h4",
+          "slug": "display-m",
           "size": "20px",
-          "name": "H4",
+          "name": "Display M",
           "fluid": {
             "min": "20px",
             "max": "24px"
           }
         },
         {
-          "slug": "base",
+          "slug": "display-s",
           "size": "18px",
+          "name": "Display S",
+          "fluid": {
+            "min": "18px",
+            "max": "20px"
+          }
+        },
+        {
+          "slug": "display-xs",
+          "size": "16px",
+          "name": "Display XS",
+          "fluid": false
+        },
+        {
+          "slug": "display-xxs",
+          "size": "14px",
+          "name": "Display XXS",
+          "fluid": false
+        },
+        {
+          "slug": "h1",
+          "size": "24px",
+          "name": "H1",
+          "fluid": {
+            "min": "24px",
+            "max": "40px"
+          }
+        },
+        {
+          "slug": "h2",
+          "size": "22px",
+          "name": "H2",
+          "fluid": {
+            "min": "22px",
+            "max": "32px"
+          }
+        },
+        {
+          "slug": "h3",
+          "size": "20px",
+          "name": "H3",
+          "fluid": {
+            "min": "20px",
+            "max": "24px"
+          }
+        },
+        {
+          "slug": "h4",
+          "size": "18px",
+          "name": "H4",
+          "fluid": {
+            "min": "18px",
+            "max": "20px"
+          }
+        },
+        {
+          "slug": "h5",
+          "size": "18px",
+          "name": "H5",
+          "fluid": {
+            "min": "18px",
+            "max": "20px"
+          }
+        },
+        {
+          "slug": "base",
+          "size": "16px",
           "name": "Base",
           "fluid": false
         },
@@ -305,7 +319,7 @@
     },
     "typography": {
       "fontFamily": "var(--base-font)",
-      "fontWeight": "regular",
+      "fontWeight": "400",
       "fontSize": "var(--wp--preset--font-size--base)",
       "lineHeight": "var(--base-height)"
     },
@@ -371,18 +385,27 @@
     "blocks": {
       "core/button": {
         "typography": {
-          "fontFamily": "var(--display-font)"
+          "fontFamily": "var(--display-font)",
+          "textTransform": "uppercase"
         },
         "spacing": {
           "padding": {
-            "top": "12px",
-            "bottom": "12px",
-            "left": "24px",
-            "right": "24px"
+            "top": "var(--wp--preset--spacing--s)",
+            "bottom": "var(--wp--preset--spacing--s)",
+            "left": "var(--wp--preset--spacing--ml)",
+            "right": "var(--wp--preset--spacing--ml)"
           }
         },
         "border": {
-          "radius": "0"
+          "radius": "999px"
+        },
+        "color": {
+          "background": "var(--wp--preset--color--black)"
+        },
+        ":hover": {
+          "color": {
+            "background": "var(--wp--preset--color--gray-dark)"
+          }
         }
       }
     }

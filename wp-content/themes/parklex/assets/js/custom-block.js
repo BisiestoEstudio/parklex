@@ -1,11 +1,10 @@
 wp.domReady(() => {
 
     const buttonStyles = {
-        small: 'Small',
-        large: 'Large',
+        small: 'Glass',
+        large: 'Link',
     }
 
-    wp.blocks.unregisterBlockStyle('core/button', ['fill', 'outline']);
     bisRegisterBlockVariation('core/button', buttonStyles);
 
 });

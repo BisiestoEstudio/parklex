@@ -44,6 +44,7 @@
   --extrawidesize: 1440px;
 
   --widesize: var(--wp--layout--wideSize);
+
   --mediumsize: 1720px;
   --contentsize: var(--wp--layout--contentSize);
 
@@ -55,10 +56,10 @@
 
   /** Tipography variables **/
   --base-font:  'Neue Haas Grotesk Text Pro', sans-serif;
-  --heading-font: 'Playfair Display', serif;
+  --heading-font: 'Neue Haas Grotesk Text Pro', sans-serif;
   --display-font: 'Century Gothic', serif;
   --font-weight-regular: 400;
-  --font-weight-bold: 700;
+  --font-weight-bold: 500;
 
   --display-s-size: clamp(32px, 3.15vw, 64px);
   --display-m-size: clamp(36px, 5.3vw, 120px);

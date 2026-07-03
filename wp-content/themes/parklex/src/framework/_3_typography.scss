@@ -33,63 +33,6 @@ figcaption{
   text-align: center;
 }
 
-main p:not(main .b-bisiesto p),
-main .has-base-font-size:not(main .b-bisiesto .has-base-font-size),
-main ul:not(main .b-bisiesto ul),
-main ol:not(main .b-bisiesto ol)
-{
-  margin-block-start: 0;
-  margin-block-end: 0.75rem; /* 12px */
-}
-
-main  h1:not(main .b-bisiesto h1),
-main .has-h-1-font-size:not(main .b-bisiesto .has-h-1-font-size)
-{
-  margin-block-end: 1.5rem; /* 24px */
-}
-
-main  h2:not(main .b-bisiesto h2),
-main .has-h-2-font-size:not(main .b-bisiesto .has-h-2-font-size)
-{
-  margin-block-start: 2rem; /* 64px */
-  margin-block-end: 1.5rem;
-}
-
-main h3:not(main .b-bisiesto h3),
-main .has-h-3-font-size:not(main .b-bisiesto .has-h-3-font-size){
-  margin-block-start: 2rem; /* 64px */
-  margin-block-end: 0.75rem; /* 12px */
-}
-
-main h4:not(main .b-bisiesto h4),
-main .has-h-4-font-size:not(main .b-bisiesto .has-h-4-font-size)
-{
-  margin-block-start: 2rem; /* 40px */
-  margin-block-end: 0.75rem; /* 12px */
-}
-
-main h5:not(main .b-bisiesto h5),
-main .has-h-5-font-size:not(main .b-bisiesto .has-h-5-font-size){
-  margin-block-start: 2rem; /* 40px */
-  margin-block-end: 0.75rem; /* 12px */
-}
-
-main .is-style-display_xl:not(main .b-bisiesto .is-style-display_xl){
-  margin-block-start: 0; /* 0px */
-  margin-block-end: 1.5rem; /* 24px */
-}
-
-main .is-style-display_l:not(main .b-bisiesto .is-style-display_l){
-  margin-block-start: 4rem; /* 64px */
-}
-
-main .is-style-display_m:not(main .b-bisiesto .is-style-display_m){
-  margin-block-start: 2.5rem; /* 40px */
-}
-
-main .is-style-display_s:not(main .b-bisiesto .is-style-display_s){
-  margin-block-start: 2.5rem; /* 40px */
-}
 
 
 .b-bisiesto,
@@ -100,16 +43,17 @@ main .is-style-display_s:not(main .b-bisiesto .is-style-display_s){
 }
 
 .b-bisiesto .is-prose > *{
-  margin-block-start: 0px;
-  margin-block-end: var(--innerblocks-gap);
+  margin-block-start: var(--innerblocks-gap);
+  margin-block-end: 0;
+  &:first-child{
+    margin-block-start: 0;
+  }
 }
 
-.b-bisiesto .is-prose > *:last-child{
-  margin-block-end: 0px;
-}
 
 
-.has-base-font-size{
+
+.has-text-font-size{
   font-family: var(--base-font);
   line-height: var(--base-height);
   font-weight: var(--font-weight-regular);
@@ -185,10 +129,12 @@ h6, .has-h-6-font-size{
   }
 }
 
+.display-xl, .has-display-xl-font-size,
+.h2-display, .has-h-2-display-font-size,
+.display-m, .has-display-m-font-size,
 .display-s, .has-display-s-font-size,
 .display-xs, .has-display-xs-font-size,
-.display-l, .has-display-l-font-size,
-.display-m, .has-display-m-font-size{
+.display-xxs, .has-display-xxs-font-size{
   font-family: var(--display-font);
   line-height: var(--display-height);
   font-weight: 400;

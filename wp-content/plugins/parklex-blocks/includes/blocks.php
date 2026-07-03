@@ -45,7 +45,7 @@ class Blocks {
 		return array_merge(
 			array(
 				array(
-					'slug'  => 'bis',
+					'slug'  => 'bisiesto',
 					'title' => 'Parklex',
 					'icon'  => null,
 				),
