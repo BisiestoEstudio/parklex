@@ -1,0 +1,16 @@
+.b-icon-gallery {
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 24px;
+	align-items: center;
+
+	.wp-block-image {
+		margin: 0;
+
+		img {
+			width: 100%;
+			height: auto;
+			object-fit: contain;
+		}
+	}
+}

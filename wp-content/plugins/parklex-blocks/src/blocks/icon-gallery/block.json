@@ -1,0 +1,43 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bisiesto/icon-gallery",
+	"title": "Icon Gallery",
+	"category": "bisiesto",
+	"icon": {
+		"src": "grid-view",
+		"foreground": "#7900D8"
+	},
+	"description": "Rejilla de iconos/logos con selección de imágenes tipo galería, sin controles de layout.",
+	"keywords": [ "gallery", "logos", "icons", "grid" ],
+	"allowedBlocks": [ "core/image" ],
+	"attributes": {
+		"align": {
+			"type": "string",
+			"default": "wide"
+		}
+	},
+	"supports": {
+		"html": false,
+		"anchor": true,
+		"align": [ "wide", "full" ],
+		"spacing": {
+			"margin": true,
+			"padding": true,
+			"blockGap": true
+		},
+		"color": {
+			"background": true
+		},
+		"layout": {
+			"default": { "type": "flex" },
+			"allowSwitching": false,
+			"allowInheriting": false,
+			"allowEditing": false
+		}
+	},
+	"textdomain": "parklex-blocks",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}
