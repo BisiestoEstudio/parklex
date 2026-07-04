@@ -1,0 +1,45 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bisiesto/icon-marquee",
+	"title": "Icon Marquee",
+	"category": "bisiesto",
+	"icon": {
+		"src": "controls-repeat",
+		"foreground": "#7900D8"
+	},
+	"description": "Fila de iconos/logos con scroll horizontal continuo (marquee).",
+	"keywords": [ "marquee", "logos", "scroll", "carousel" ],
+	"allowedBlocks": [ "core/image" ],
+	"attributes": {
+		"align": {
+			"type": "string",
+			"default": "full"
+		},
+		"speed": {
+			"type": "number",
+			"default": 0
+		},
+		"repeatCount": {
+			"type": "number",
+			"default": 2
+		}
+	},
+	"supports": {
+		"html": false,
+		"anchor": true,
+		"align": [ "wide", "full" ],
+		"spacing": {
+			"margin": true,
+			"padding": true
+		},
+		"color": {
+			"background": true
+		}
+	},
+	"textdomain": "parklex-blocks",
+	"render": "file:./render.php",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

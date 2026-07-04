@@ -1,0 +1,48 @@
+$icon-marquee-gap: 48px;
+
+.b-icon-marquee {
+	overflow: hidden;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: $icon-marquee-gap;
+
+	&__track {
+		display: flex;
+		align-items: center;
+		gap: $icon-marquee-gap;
+	}
+
+	&__item {
+		flex-shrink: 0;
+		width: fit-content;
+		display: flex;
+		align-items: center;
+		gap: $icon-marquee-gap;
+		animation: b-icon-marquee-scroll 20s linear infinite;
+	}
+
+	&:hover &__item {
+		animation-play-state: paused;
+	}
+
+	.wp-block-image {
+		margin: 0;
+		flex: 0 0 auto;
+
+		img {
+			height: 48px;
+			width: auto;
+			object-fit: contain;
+		}
+	}
+}
+
+@keyframes b-icon-marquee-scroll {
+	from {
+		transform: translateX( 0 );
+	}
+	to {
+		transform: translateX( calc( -100% - #{ $icon-marquee-gap } ) );
+	}
+}
