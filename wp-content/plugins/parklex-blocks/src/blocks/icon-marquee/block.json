@@ -23,19 +23,21 @@
 		"repeatCount": {
 			"type": "number",
 			"default": 2
+		},
+		"invertDirection": {
+			"type": "boolean",
+			"default": false
 		}
 	},
 	"supports": {
 		"html": false,
-		"anchor": true,
+		"anchor": false,
 		"align": [ "wide", "full" ],
 		"spacing": {
 			"margin": true,
 			"padding": true
 		},
-		"color": {
-			"background": true
-		}
+		"color": false
 	},
 	"textdomain": "parklex-blocks",
 	"render": "file:./render.php",

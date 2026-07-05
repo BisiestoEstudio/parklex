@@ -1,22 +1,16 @@
 $icon-marquee-gap: 48px;
 
 .b-icon-marquee {
-	overflow: hidden;
 	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
+	overflow: hidden;
 	gap: $icon-marquee-gap;
-
-	&__track {
-		display: flex;
-		align-items: center;
-		gap: $icon-marquee-gap;
-	}
+	align-items: center;
 
 	&__item {
 		flex-shrink: 0;
 		width: fit-content;
 		display: flex;
+		flex-wrap: nowrap;
 		align-items: center;
 		gap: $icon-marquee-gap;
 		animation: b-icon-marquee-scroll 20s linear infinite;
@@ -26,23 +20,31 @@ $icon-marquee-gap: 48px;
 		animation-play-state: paused;
 	}
 
+	&--invert &__item {
+		animation-direction: reverse;
+	}
+
 	.wp-block-image {
 		margin: 0;
-		flex: 0 0 auto;
+		flex-shrink: 0;
+		width: fluid(250px, 150px);
+
 
 		img {
-			height: 48px;
-			width: auto;
 			object-fit: contain;
+			width: 100%;
+			height: auto;
 		}
+
 	}
 }
 
 @keyframes b-icon-marquee-scroll {
-	from {
+	0% {
 		transform: translateX( 0 );
 	}
-	to {
+
+	100% {
 		transform: translateX( calc( -100% - #{ $icon-marquee-gap } ) );
 	}
 }

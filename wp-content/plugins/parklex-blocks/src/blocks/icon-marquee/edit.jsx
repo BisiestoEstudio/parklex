@@ -8,7 +8,7 @@ import {
 	useInnerBlocksProps,
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
-import { PanelBody, RangeControl } from '@wordpress/components';
+import { PanelBody, RangeControl, ToggleControl } from '@wordpress/components';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { useBisiestoBlockProps } from '../../hooks/useBisiestoBlockProps';
 
@@ -28,10 +28,12 @@ function imagesToBlocks( media ) {
 }
 
 export default function Edit( { attributes, setAttributes, clientId } ) {
-	const { speed, repeatCount } = attributes;
+	const { speed, repeatCount, invertDirection } = attributes;
 
 	const blockProps = useBisiestoBlockProps( {
-		className: `align${ attributes.align }`,
+		className: `align${ attributes.align }${
+			invertDirection ? ' b-icon-marquee--invert' : ''
+		}`,
 	} );
 
 	const innerImageBlocks = useSelect(
@@ -88,6 +90,13 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						min={ 2 }
 						max={ 6 }
 						step={ 1 }
+					/>
+					<ToggleControl
+						label={ __( 'Invertir dirección', 'parklex-blocks' ) }
+						checked={ !! invertDirection }
+						onChange={ ( value ) =>
+							setAttributes( { invertDirection: value } )
+						}
 					/>
 				</PanelBody>
 			</InspectorControls>

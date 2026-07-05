@@ -5,8 +5,9 @@ defined( 'ABSPATH' ) || exit;
 /** @var string $content */
 /** @var WP_Block|null $block */
 
-$speed        = $attributes['speed'] ?? 0;
-$repeat_count = max( 2, (int) ( $attributes['repeatCount'] ?? 2 ) );
+$speed            = $attributes['speed'] ?? 0;
+$repeat_count     = max( 2, (int) ( $attributes['repeatCount'] ?? 2 ) );
+$invert_direction = $attributes['invertDirection'] ?? false;
 
 if ( '' === trim( $content ) ) {
 	return;
@@ -20,19 +21,15 @@ if ( $speed ) {
 	$duration = (int) $duration;
 }
 
-$item_style = sprintf( 'animation-duration:%dms;', $duration );
+$animation_duration = 'style="animation-duration:' . $duration . 'ms"';
 ?>
 
-<div <?php echo bis_get_block_prop( $block, true ); ?>>
-	<div class="b-icon-marquee__track">
-		<?php for ( $i = 0; $i < $repeat_count; $i++ ) : ?>
-			<div
-				class="b-icon-marquee__item"
-				style="<?php echo esc_attr( $item_style ); ?>"
-				<?php echo $i > 0 ? 'aria-hidden="true"' : ''; ?>
-			>
-				<?php echo $content; ?>
-			</div>
-		<?php endfor; ?>
+<div <?php echo bis_get_block_prop( $block, false, array(
+	'class' => $invert_direction ? 'b-icon-marquee--invert' : '',
+) ); ?>>
+	<?php for ( $i = 0; $i < $repeat_count; $i++ ) : ?>
+	<div class="b-icon-marquee__item" <?php echo $animation_duration; ?><?php echo $i > 0 ? ' aria-hidden="true"' : ''; ?>>
+		<?php echo $content; ?>
 	</div>
+	<?php endfor; ?>
 </div>
