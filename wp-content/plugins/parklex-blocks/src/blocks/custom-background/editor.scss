@@ -1,0 +1,33 @@
+.b-custom-background {
+	position: relative !important;
+	inset: auto !important;
+	overflow: visible !important;
+	border: 2px dashed rgba(0, 0, 0, 0.2);
+	border-radius: 4px;
+	padding: 8px;
+
+	&__preview {
+		max-height: 160px;
+		width: 100%;
+		object-fit: cover;
+		opacity: 0.8;
+	}
+
+	&__placeholder {
+		padding: 16px;
+		text-align: center;
+		color: #888;
+
+		span {
+			display: block;
+			font-weight: 500;
+			font-size: 13px;
+			margin-bottom: 4px;
+		}
+
+		p {
+			font-size: 12px;
+			margin: 0;
+		}
+	}
+}

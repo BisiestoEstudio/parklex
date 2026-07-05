@@ -4,7 +4,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Genera los atributos HTML del wrapper del bloque.
  * Convierte wp-block-{namespace}-{name} → b-{namespace} b-{name}
- * Añade alignfull e is-layout-constrained si $is_layout_constrained=true.
+ * Añade is-layout-constrained y has-global-padding si $is_layout_constrained=true.
  */
 function bis_get_block_prop( $block, $is_layout_constrained = false, $extra_attributes = [] ) {
 	$parts     = explode( '/', $block->name );
@@ -25,7 +25,6 @@ function bis_get_block_prop( $block, $is_layout_constrained = false, $extra_attr
 	$new_classes = [ "b-{$namespace}", "b-{$name}" ];
 
 	if ( $is_layout_constrained ) {
-		$new_classes[] = 'alignfull';
 		$new_classes[] = 'is-layout-constrained';
 		$new_classes[] = 'has-global-padding';
 	}

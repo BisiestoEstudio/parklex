@@ -16,11 +16,6 @@
 			"type": "string",
 			"default": "full"
 		},
-		"contentSize": {
-			"type": "string",
-			"enum": [ "expand", "wide", "medium", "content" ],
-			"default": "wide"
-		},
 		"gap": {
 			"type": "string",
 			"default": false
@@ -28,14 +23,10 @@
 		"anchor": {
 			"type": "string",
 			"default": ""
-		},
-		"backgroundVideo": {
-			"type": "object",
-			"default": { "url": "", "posterId": 0 }
 		}
 	},
 	"supports": {
-		"align": false,
+		"align": [ "wide", "full" ],
 		"anchor": true,
 		"background": {
 			"backgroundImage": true,
@@ -47,11 +38,9 @@
 		},
 		"spacing": {
 			"padding": true,
-			"blockGap": true
+			"blockGap": true,
+			"margin": true
 		}
-	},
-	"providesContext": {
-		"bisiesto/sectionContentSize": "contentSize"
 	},
 	"styles": [
 		{

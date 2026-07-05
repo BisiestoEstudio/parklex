@@ -4,18 +4,8 @@
 	--section-gap: var(--innerblocks-gap);
 	overflow: hidden;
 
-	&__video {
-		position: absolute;
-		inset: 0;
-		min-width: 100%;
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		pointer-events: none;
-		z-index: 0;
-	}
-
-	.b-background-shape {
+	.b-background-shape,
+	.b-custom-background {
 		max-width: unset;
 	}
 
@@ -31,7 +21,7 @@
 		h4, 
 		h5, 
 		h6{
-			max-width: var(--unset);
+
 		}
 
 		.is-style-center & {

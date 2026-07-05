@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bisiesto/custom-background",
+	"version": "0.1.0",
+	"title": "Custom Background",
+	"category": "bisiesto",
+	"icon": { "src": "format-video", "foreground": "#7900D8" },
+	"description": "Vídeo de fondo posicionado detrás del contenido de un section",
+	"parent": [ "bisiesto/section" ],
+	"example": {},
+	"attributes": {
+		"video": { "type": "object", "default": { "url": "", "posterId": 0 } }
+	},
+	"supports": {
+		"html": false,
+		"anchor": false,
+		"align": false
+	},
+	"textdomain": "parklex-blocks",
+	"render": "file:./render.php",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}
