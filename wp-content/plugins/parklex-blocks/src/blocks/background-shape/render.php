@@ -78,6 +78,6 @@ if ( $max_height !== '' ) {
 
 $style_attr = implode( ';', $styles );
 ?>
-<div <?php echo bis_get_block_prop($block, false); ?> style="<?php echo esc_attr( $style_attr ); ?>">
+<div <?php echo bis_get_block_prop($block, false, array( 'class' => 'c-background' ) ); ?> style="<?php echo esc_attr( $style_attr ); ?>">
 	<?php bis_paint_image( is_numeric( $image ) ? intval( $image ) : $image ); ?>
 </div>
