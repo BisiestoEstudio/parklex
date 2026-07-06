@@ -23,6 +23,10 @@
 		"anchor": {
 			"type": "string",
 			"default": ""
+		},
+		"layout": {
+			"type": "object",
+			"default": { "type": "constrained" }
 		}
 	},
 	"supports": {
@@ -34,12 +38,19 @@
 		},
 		"color": {
 			"background": true,
-			"text": true
+			"text": true,
+			"gradients": true
 		},
 		"spacing": {
 			"padding": true,
 			"blockGap": true,
 			"margin": true
+		},
+		"layout": {
+			"default": { "type": "constrained" },
+			"allowSwitching": false,
+			"allowInheriting": false,
+			"allowEditing": false
 		}
 	},
 	"styles": [
