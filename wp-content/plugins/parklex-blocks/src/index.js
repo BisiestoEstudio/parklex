@@ -5,6 +5,8 @@ import { useSelect, useDispatch } from '@wordpress/data';
 import { store as editorStore } from '@wordpress/editor';
 import { __ } from '@wordpress/i18n';
 import './block-variations/media-text';
+import './block-variations/spec-row';
+import './block-variations/info-card';
 
 const SUPPORTED_POST_TYPES = [ 'page', 'post', 'experience' ];
 const META_KEY = '_header_color_white';
