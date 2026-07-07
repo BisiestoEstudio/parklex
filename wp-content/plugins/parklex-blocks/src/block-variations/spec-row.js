@@ -22,7 +22,13 @@ registerBlockVariation( 'core/group', {
 	attributes: VARIATION_ATTRIBUTES,
 	innerBlocks: [
 		[ 'core/paragraph', { placeholder: __( 'Etiqueta', 'parklex-blocks' ) } ],
-		[ 'core/paragraph', { content: '<strong>' + __( 'Valor', 'parklex-blocks' ) + '</strong>' } ],
+		[
+			'core/paragraph',
+			{
+				placeholder: __( 'Valor', 'parklex-blocks' ),
+				style: { typography: { fontWeight: '500' } },
+			},
+		],
 	],
 	isActive: ( blockAttributes ) =>
 		blockAttributes?.layout?.type === VARIATION_ATTRIBUTES.layout.type &&

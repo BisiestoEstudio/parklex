@@ -1,0 +1,45 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bisiesto/icon-card",
+	"version": "0.1.0",
+	"title": "Icon Card",
+	"category": "bisiesto",
+	"icon": {
+		"src": "excerpt-view",
+		"foreground": "#7900D8"
+	},
+	"description": "Tarjeta con icono, título y descripción desplegable sobre imagen de fondo.",
+	"keywords": [ "icon", "card", "tarjeta" ],
+	"example": {},
+	"attributes": {
+		"anchor": { "type": "string", "default": "" },
+		"icon": { "type": "number", "default": 0 },
+		"title": { "type": "string", "default": "" },
+		"description": { "type": "string", "default": "" },
+		"overlayColor": { "type": "string", "default": "#020202" },
+		"overlayOpacity": { "type": "number", "default": 40 }
+	},
+	"supports": {
+		"html": false,
+		"anchor": true,
+		"align": false,
+		"background": {
+			"backgroundImage": true,
+			"backgroundSize": true
+		},
+		"color": {
+			"background": true,
+			"text": true
+		},
+		"spacing": {
+			"padding": true
+		}
+	},
+	"textdomain": "parklex-blocks",
+	"render": "file:./render.php",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
+}

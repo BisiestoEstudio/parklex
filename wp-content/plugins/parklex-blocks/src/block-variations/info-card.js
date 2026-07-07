@@ -17,7 +17,7 @@ const VARIATION_ATTRIBUTES = {
 	layout: { type: 'default' },
 };
 
-const SPEC_ROW = ( label, value ) => [
+const SPEC_ROW = ( labelPlaceholder, valuePlaceholder ) => [
 	'core/group',
 	{
 		layout: {
@@ -27,8 +27,14 @@ const SPEC_ROW = ( label, value ) => [
 		},
 	},
 	[
-		[ 'core/paragraph', { content: label } ],
-		[ 'core/paragraph', { content: '<strong>' + value + '</strong>' } ],
+		[ 'core/paragraph', { placeholder: labelPlaceholder } ],
+		[
+			'core/paragraph',
+			{
+				placeholder: valuePlaceholder,
+				style: { typography: { fontWeight: '500' } },
+			},
+		],
 	],
 ];
 
@@ -66,11 +72,14 @@ registerBlockVariation( 'core/group', {
 				],
 			],
 		],
-		SPEC_ROW( __( 'Largo', 'parklex-blocks' ), '' ),
-		SPEC_ROW( __( 'Anchos', 'parklex-blocks' ), '' ),
-		SPEC_ROW( __( 'Espesores', 'parklex-blocks' ), '' ),
-		SPEC_ROW( __( 'Materia prima certificada', 'parklex-blocks' ), '' ),
-		SPEC_ROW( __( 'Reacción al fuego', 'parklex-blocks' ), '' ),
+		SPEC_ROW(
+			__( 'Etiqueta', 'parklex-blocks' ),
+			__( 'Valor', 'parklex-blocks' )
+		),
+		SPEC_ROW(
+			__( 'Etiqueta', 'parklex-blocks' ),
+			__( 'Valor', 'parklex-blocks' )
+		),
 	],
 	isActive: ( blockAttributes ) =>
 		blockAttributes?.backgroundColor === VARIATION_ATTRIBUTES.backgroundColor &&
