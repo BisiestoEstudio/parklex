@@ -5,12 +5,37 @@
 	"version": "0.1.0",
 	"title": "Custom Background",
 	"category": "bisiesto",
-	"icon": { "src": "format-video", "foreground": "#7900D8" },
-	"description": "Vídeo de fondo posicionado detrás del contenido de un section",
+	"icon": { "src": "format-image", "foreground": "#7900D8" },
+	"description": "Imagen o vídeo de fondo posicionado detrás del contenido de un section",
 	"parent": [ "bisiesto/section", "bisiesto/media-cover" ],
 	"example": {},
 	"attributes": {
-		"video": { "type": "object", "default": { "url": "", "posterId": 0 } }
+		"media": {
+			"type": "object",
+			"default": {
+				"mediaType": "image",
+				"imageId": 0,
+				"videoUrl": "",
+				"posterId": 0
+			}
+		},
+		"focalPoint": {
+			"type": "object",
+			"default": { "x": 0.5, "y": 0.5 }
+		},
+		"overlayColor": {
+			"type": "string",
+			"default": ""
+		},
+		"overlayOpacity": {
+			"type": "number",
+			"default": 50
+		},
+		"objectFit": {
+			"type": "string",
+			"enum": [ "cover", "contain" ],
+			"default": "cover"
+		}
 	},
 	"supports": {
 		"html": false,
