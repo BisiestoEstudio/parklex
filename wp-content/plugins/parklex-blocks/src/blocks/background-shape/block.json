@@ -7,7 +7,7 @@
 	"category": "bisiesto",
 	"icon": { "src": "format-image", "foreground": "#7900D8" },
 	"description": "Imagen decorativa posicionada en el fondo de un section",
-	"parent": [ "bisiesto/section", "bisiesto/offset-menu" ],
+	"parent": [ "bisiesto/section", "bisiesto/offset-menu", "bisiesto/media-cover" ],
 	"example": {},
 	"attributes": {
 		"imageId": { "type": ["number", "string"], "default": 0 },

@@ -7,6 +7,7 @@ import { __ } from '@wordpress/i18n';
 import './block-variations/media-text';
 import './block-variations/spec-row';
 import './block-variations/info-card';
+import './block-variations/text-card';
 
 const SUPPORTED_POST_TYPES = [ 'page', 'post', 'experience' ];
 const META_KEY = '_header_color_white';

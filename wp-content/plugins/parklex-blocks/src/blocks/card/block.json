@@ -11,7 +11,7 @@
 	},
 	"description": "Card genérica con inner blocks de texto e imagen",
 	"example": {},
-	"parent": ["bisiesto/cards"],
+	"parent": [],
 	"attributes": {
 		"anchor": { "type": "string", "default": "" },
 		"image": { "type": "number", "default": 0 },

@@ -1,0 +1,43 @@
+.b-media-cover {
+	position: relative;
+	display: flex;
+	overflow: hidden;
+	min-height: 100vh;
+	padding: var(--wp--preset--spacing--xl) 0;
+
+	&__content {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		width: 100%;
+
+		&--v-top {
+			align-items: flex-start;
+		}
+
+		&--v-center {
+			align-items: center;
+		}
+
+		&--v-bottom {
+			align-items: flex-end;
+		}
+
+		&--h-left {
+			justify-content: flex-start;
+		}
+
+		&--h-center {
+			justify-content: center;
+		}
+
+		&--h-right {
+			justify-content: flex-end;
+		}
+	}
+
+	&__inner {
+	
+		max-width: 350px;
+	}
+}

@@ -1,9 +1,9 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "bisiesto/cards",
+	"name": "bisiesto/cards-grid",
 	"version": "0.1.0",
-	"title": "Cards",
+	"title": "Cards Grid",
 	"category": "bisiesto",
 	"icon": {
 		"src": "grid-view",
@@ -11,33 +11,21 @@
 	},
 	"description": "Contenedor de cards",
 	"example": {},
-	"parent": ["bisiesto/section", "bisiesto/scroll-over", "bisiesto/wrapper"],
 	"attributes": {
 		"anchor": { "type": "string", "default": "" },
-		"cardType": { "type": "string", "default": "card-image" }
+		"align": { "type": "string", "default": "wide" },
+		"columns": { "type": "number", "default": 4 },
+		"gap": { "type": "string", "default": false }
 	},
-	"providesContext": {
-		"bisiesto/cardType": "cardType"
-	},
-	"styles": [
-		{
-			"name": "4-columns",
-			"label": "4 columnas",
-			"isDefault": true
-		},
-		{
-			"name": "3-columns",
-			"label": "3 columnas"
-		},
-		{
-			"name": "2-columns",
-			"label": "2 columnas"
-		}
-	],
 	"supports": {
 		"html": false,
 		"anchor": true,
-		"align": false,
+		"align": [ "wide", "full" ],
+		"spacing": {
+			"margin": true,
+			"padding": true,
+			"blockGap": true
+		},
 		"color": {
 			"background": false,
 			"text": false

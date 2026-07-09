@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { registerBlockVariation } from '@wordpress/blocks';
-import { blockDefault } from '@wordpress/icons';
+import { receipt } from '@wordpress/icons';
 
 const VARIATION_ATTRIBUTES = {
 	backgroundColor: 'gray-light',
@@ -46,7 +46,7 @@ registerBlockVariation( 'core/group', {
 		'parklex-blocks'
 	),
 	category: 'bisiesto',
-	icon: { src: blockDefault, foreground: '#7900D8' },
+	icon: { src: receipt, foreground: '#7900D8' },
 	attributes: VARIATION_ATTRIBUTES,
 	innerBlocks: [
 		[

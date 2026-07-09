@@ -6,4 +6,18 @@
     &__content > .block-editor-inner-blocks > .block-editor-block-list__layout > *:last-child {
         margin-block-end: 0;
     }
+
+    &__content > .block-editor-inner-blocks > .block-editor-block-list__layout {
+        > h1:not(.has-text-align-right):not(.has-text-align-left),
+        > h2:not(.has-text-align-right):not(.has-text-align-left),
+        > h3:not(.has-text-align-right):not(.has-text-align-left),
+        > h4:not(.has-text-align-right):not(.has-text-align-left),
+        > h5:not(.has-text-align-right):not(.has-text-align-left),
+        > h6:not(.has-text-align-right):not(.has-text-align-left),
+        > p:not(.has-text-align-right):not(.has-text-align-left) 
+        {
+            text-align: center;
+        }
+    }
+    
 }

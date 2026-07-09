@@ -7,7 +7,7 @@
 	"category": "bisiesto",
 	"icon": { "src": "format-video", "foreground": "#7900D8" },
 	"description": "Vídeo de fondo posicionado detrás del contenido de un section",
-	"parent": [ "bisiesto/section" ],
+	"parent": [ "bisiesto/section", "bisiesto/media-cover" ],
 	"example": {},
 	"attributes": {
 		"video": { "type": "object", "default": { "url": "", "posterId": 0 } }

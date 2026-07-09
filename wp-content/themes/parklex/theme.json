@@ -189,9 +189,9 @@
           }
         },
         {
-          "slug": "h2-display",
+          "slug": "display-l",
           "size": "22px",
-          "name": "H2 Display",
+          "name": "Display L",
           "fluid": {
             "min": "22px",
             "max": "32px"

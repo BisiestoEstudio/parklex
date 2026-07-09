@@ -73,9 +73,9 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						onChange={ ( value ) =>
 							setAttributes( { speed: value ?? 0 } )
 						}
-						min={ -5 }
-						max={ 5 }
-						step={ 1 }
+						min={ -10 }
+						max={ 10 }
+						step={ 0.5 }
 					/>
 					<RangeControl
 						label={ __( 'Repeticiones', 'parklex-blocks' ) }

@@ -25,7 +25,7 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<div { ...blockProps }>
 			<div
-				className="b-section__content"
+				className="b-section__content alignfull has-global-padding"
 				style={ gap ? { '--section-gap': gap } : undefined }
 			>
 				<InnerBlocks templateLock={ false } />

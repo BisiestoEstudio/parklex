@@ -34,6 +34,9 @@ figcaption{
 }
 
 
+.b-bisiesto{
+  margin-block-start: 24px;
+}
 
 .b-bisiesto,
 .b-bisiesto *,
@@ -130,11 +133,12 @@ h6, .has-h-6-font-size{
 }
 
 .display-xl, .has-display-xl-font-size,
-.h2-display, .has-h-2-display-font-size,
+.display-l, .has-display-l-font-size,
 .display-m, .has-display-m-font-size,
 .display-s, .has-display-s-font-size,
 .display-xs, .has-display-xs-font-size,
 .display-xxs, .has-display-xxs-font-size{
+  letter-spacing: 30%;
   font-family: var(--display-font);
   line-height: var(--display-height);
   font-weight: 400;

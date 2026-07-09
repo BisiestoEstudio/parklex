@@ -1,0 +1,48 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bisiesto/media-cover",
+	"version": "0.1.0",
+	"title": "Media Cover",
+	"category": "bisiesto",
+	"icon": {
+		"src": "cover-image",
+		"foreground": "#7900D8"
+	},
+	"description": "Media de fondo a pantalla completa con un contenido de texto posicionable.",
+	"example": {},
+	"attributes": {
+		"contentPosition": {
+			"type": "string",
+			"default": "center center"
+		},
+		"anchor": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"supports": {
+		"html": false,
+		"anchor": true,
+		"align": false,
+		"background": {
+			"backgroundImage": true,
+			"backgroundSize": true
+		},
+		"spacing": {
+			"padding": true
+		},
+		"color": {
+			"background": true,
+			"text": true
+		},
+		"dimensions": {
+			"minHeight": true
+		}
+	},
+	"textdomain": "parklex-blocks",
+	"render": "file:./render.php",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

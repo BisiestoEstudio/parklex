@@ -1,0 +1,18 @@
+
+/* WordPress sobredimensiona el iframe del vídeo de fondo (embebido, ej. Vimeo)
+   con width:100vw / height:100vh, pero eso no respeta el ratio real del vídeo
+   (16:9), así que en pantallas muy verticales u horizontales el propio player
+   de Vimeo renderiza el vídeo en modo "contain" y aparecen bandas negras.
+   Sobreescribimos el tamaño del iframe para que mantenga siempre el ratio 16:9
+   y sea mayor que el contenedor en ambos ejes, para poder recortarlo (cover)
+   con el overflow:hidden que ya trae el bloque Cover. */
+.wp-block-cover .wp-block-cover__embed-background iframe,
+.wp-block-cover .wp-block-cover__embed-background .wp-block-embed__wrapper iframe {
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 56.25vw; /* 16:9 en base al ancho */
+    min-width: 177.78vh; /* 16:9 en base al alto */
+    min-height: 100vh;
+    transform: translate(-50%, -50%);
+}
