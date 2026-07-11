@@ -1,0 +1,38 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bisiesto/acabados",
+	"version": "0.1.0",
+	"title": "Acabados",
+	"category": "bisiesto",
+	"icon": {
+		"src": "admin-appearance",
+		"foreground": "#7900D8"
+	},
+	"description": "Muestra 4 productos filtrados por un término de la taxonomía Tipo de producto.",
+	"keywords": [ "acabados", "productos", "products" ],
+	"example": {},
+	"attributes": {
+		"anchor": { "type": "string", "default": "" },
+		"align": { "type": "string", "default": "wide" },
+		"productsType": { "type": "number", "default": 0 }
+	},
+	"supports": {
+		"html": false,
+		"anchor": true,
+		"align": [ "wide", "full" ],
+		"spacing": {
+			"margin": true,
+			"padding": true
+		},
+		"color": {
+			"background": false,
+			"text": false
+		}
+	},
+	"textdomain": "parklex-blocks",
+	"render": "file:./render.php",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

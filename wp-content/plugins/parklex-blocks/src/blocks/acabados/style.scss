@@ -1,0 +1,48 @@
+.b-acabados {
+	&__grid {
+		display: grid;
+		gap: var(--wp--preset--spacing--sm);
+		grid-template-columns: repeat(1, 1fr);
+	}
+
+	&__item {
+		display: block;
+		color: inherit;
+		text-decoration: none;
+	}
+
+	&__image {
+		aspect-ratio: 1 / 1;
+		overflow: hidden;
+	}
+
+	&__img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	&__title {
+		margin-top: var(--wp--preset--spacing--xs);
+		margin-bottom: 0;
+	}
+
+	&__placeholder {
+		grid-column: 1 / -1;
+		text-align: center;
+		color: var(--wp--preset--color--gray, #666);
+	}
+}
+
+@media (min-width: 768px) {
+	.b-acabados__grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (min-width: 1024px) {
+	.b-acabados__grid {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
