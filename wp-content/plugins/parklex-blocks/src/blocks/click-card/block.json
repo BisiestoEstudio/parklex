@@ -24,6 +24,18 @@
 			"default": { "url": "", "title": "", "target": null, "rel": null }
 		}
 	},
+	"styles": [
+		{
+			"name": "default",
+			"label": "Default",
+			"isDefault": true
+		},
+		{
+			"name": "big",
+			"label": "Big",
+			"isDefault": false
+		}
+	],
 	"supports": {
 		"html": false,
 		"anchor": true,

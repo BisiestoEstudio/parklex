@@ -1,0 +1,99 @@
+.b-layout-2-proyectos {
+	&__wrapper {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-areas:
+			"text"
+			"card2"
+			"card1";
+		gap: var(--wp--preset--spacing--m);
+	}
+
+	&__text {
+		grid-area: text;
+		max-width: 360px;
+	}
+
+	&__project {
+		display: grid;
+		gap: var(--wp--preset--spacing--m);
+
+		&--1 {
+			grid-area: card1;
+		}
+
+		&--2 {
+			grid-area: card2;
+		}
+	}
+
+	&__image {
+		display: block;
+		overflow: hidden;
+		aspect-ratio: 343 / 428;
+
+		img {
+			display: block;
+			inset: 0;
+			object-fit: cover;
+		}
+	}
+
+	&__placeholder {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 220px;
+		text-align: center;
+		background: var(--wp--preset--color--gray-light);
+	}
+
+	&__caption {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+		margin-top: var(--wp--preset--spacing--xs);
+	}
+
+	&__author {
+		opacity: 0.7;
+	}
+}
+
+@media (min-width: 1080px) {
+	.b-layout-2-proyectos {
+		&__text {
+			min-height: min(450px, 25vw);
+			justify-self: flex-end;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+		&__wrapper {
+			grid-template-columns: 2fr 3fr;
+			grid-template-areas:
+				"text card2"
+				"card1 card2";
+			column-gap: var(--wp--preset--spacing--xl);
+			row-gap: var(--wp--preset--spacing--m);
+		}
+		&__project--1 {
+			max-width: 336px;
+			justify-self: center;
+		}
+
+		&__project--2 {
+			align-self: self-start;
+
+			.b-layout-2-proyectos__image {
+				aspect-ratio: 687/579;
+
+				img {
+					object-fit: cover;
+					width: 100%;
+					height: 100%;
+				}
+			}
+		}
+	}
+}

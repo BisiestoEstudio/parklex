@@ -6,7 +6,13 @@
 	&__media {
 		position: relative;
 		overflow: hidden;
-		aspect-ratio: 6 / 5;
+		aspect-ratio: 688 / 387;
+	}
+
+	&.is-style-big {
+		.b-click-card__media {
+			aspect-ratio: 687 / 579;
+		}
 	}
 
 	&__front {
@@ -50,9 +56,11 @@
 		padding: var(--wp--preset--spacing--m);
 		opacity: 0;
 		transition: opacity 0.4s ease;
+		display: grid;
+		place-items: center;
 
 		p {
-			margin: 0;
+			max-width: 350px;
 			color: var(--wp--preset--color--white);
 		}
 	}
