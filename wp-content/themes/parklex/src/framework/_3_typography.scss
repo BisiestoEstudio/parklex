@@ -138,7 +138,6 @@ h6, .has-h-6-font-size{
 .display-s, .has-display-s-font-size,
 .display-xs, .has-display-xs-font-size,
 .display-xxs, .has-display-xxs-font-size{
-  letter-spacing: 30%;
   font-family: var(--display-font);
   line-height: var(--display-height);
   font-weight: 400;
@@ -148,6 +147,22 @@ h6, .has-h-6-font-size{
   }
 }
 
+
+.display-xl, .has-display-xl-font-size{
+  letter-spacing: 40%;
+}
+
+.display-l, .has-display-l-font-size{
+  letter-spacing: 20%;
+}
+
+.display-s, .has-display-s-font-size{
+  letter-spacing: 5%;
+}
+
+.display-xs, .has-display-xs-font-size{
+  letter-spacing: 40%;
+}
 
 
 

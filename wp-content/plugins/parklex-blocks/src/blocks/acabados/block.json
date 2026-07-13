@@ -14,13 +14,12 @@
 	"example": {},
 	"attributes": {
 		"anchor": { "type": "string", "default": "" },
-		"align": { "type": "string", "default": "wide" },
 		"productsType": { "type": "number", "default": 0 }
 	},
 	"supports": {
 		"html": false,
 		"anchor": true,
-		"align": [ "wide", "full" ],
+		"align": false,
 		"spacing": {
 			"margin": true,
 			"padding": true

@@ -31,9 +31,9 @@ if ( ! $query->have_posts() ) {
 }
 ?>
 
-<section <?php echo bis_get_block_prop( $block, true ); ?>>
+<div <?php echo bis_get_block_prop( $block, false, array( 'class' => 'alignfull' ) ); ?>>
 	<div class="b-acabados__grid swiper">
-		<div class="swiper-wrapper">
+		<div class="swiper-wrapper b-acabados__wrapper">
 			<?php
 			while ( $query->have_posts() ) :
 				$query->the_post();
@@ -42,7 +42,7 @@ if ( ! $query->have_posts() ) {
 					<div class="b-acabados__image">
 						<?php echo get_the_post_thumbnail( get_the_ID(), 'medium', array( 'class' => 'b-acabados__img' ) ); ?>
 					</div>
-					<h3 class="b-acabados__title"><?php echo esc_html( get_the_title() ); ?></h3>
+					<h3 class="b-acabados__title has-display-m-font-size"><?php echo esc_html( get_the_title() ); ?></h3>
 				</a>
 				<?php
 			endwhile;
@@ -50,4 +50,4 @@ if ( ! $query->have_posts() ) {
 			?>
 		</div>
 	</div>
-</section>
+</div>

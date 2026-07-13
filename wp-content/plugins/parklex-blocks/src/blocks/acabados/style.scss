@@ -1,17 +1,23 @@
 .b-acabados {
+	overflow: hidden;
+
 	&__grid {
-		overflow: hidden;
+		overflow: visible;
+		padding-left: var(--layout-margin) !important;
+		padding-right: var(--layout-margin) !important;
+	}
+
+	&__wrapper {
+
 	}
 
 	&__item {
-		display: block;
-		height: auto;
-		color: inherit;
-		text-decoration: none;
+		display: grid !important;
+		gap: var(--wp--preset--spacing--m);
 	}
 
 	&__image {
-		aspect-ratio: 1 / 1;
+		aspect-ratio: 343 / 420;
 		overflow: hidden;
 	}
 
@@ -23,8 +29,8 @@
 	}
 
 	&__title {
-		margin-top: var(--wp--preset--spacing--xs);
 		margin-bottom: 0;
+
 	}
 
 	&__placeholder {
@@ -34,14 +40,21 @@
 }
 
 // Mobile: carrusel Swiper (< 768px).
-.b-acabados__grid.swiper .swiper-wrapper {
-	gap: var(--wp--preset--spacing--sm);
-}
 
 // Desktop/tablet: Swiper se deshabilita (breakpoint 768 en view.js) y volvemos a grid.
 @media (min-width: 768px) {
-	.b-acabados__grid {
-		overflow: visible;
+	.b-acabados {
+
+		&__grid {
+			overflow: visible;
+
+		}
+
+		&__wrapper {
+			max-width: var(--widesize);
+			margin-left: auto;
+			margin-right: auto;
+		}
 
 		.swiper-wrapper {
 			display: grid;
@@ -56,7 +69,7 @@
 			margin-right: 0 !important;
 		}
 
-		.b-acabados__placeholder {
+		&__placeholder {
 			grid-column: 1 / -1;
 		}
 	}
