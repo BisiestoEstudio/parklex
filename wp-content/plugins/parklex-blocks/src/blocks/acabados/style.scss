@@ -17,6 +17,7 @@
 	}
 
 	&__image {
+		position: relative;
 		aspect-ratio: 343 / 420;
 		overflow: hidden;
 	}
@@ -26,6 +27,13 @@
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+
+		&--hover {
+			position: absolute;
+			inset: 0;
+			opacity: 0;
+			transition: opacity 0.4s ease;
+		}
 	}
 
 	&__title {
@@ -78,5 +86,11 @@
 @media (min-width: 1024px) {
 	.b-acabados__grid .swiper-wrapper {
 		grid-template-columns: repeat(4, 1fr);
+	}
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.b-acabados__item:hover .b-acabados__img--hover {
+		opacity: 1;
 	}
 }
