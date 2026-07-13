@@ -74,33 +74,35 @@ export default function Edit( { attributes, setAttributes } ) {
 			</InspectorControls>
 
 			<section { ...blockProps }>
-				<div className="b-acabados__grid">
-					{ ! productsType ? (
-						<p className="b-acabados__placeholder">
-							{ __( 'Selecciona un término de producto en el panel lateral.', 'parklex-blocks' ) }
-						</p>
-					) : products === null ? (
-						<Spinner />
-					) : products.length === 0 ? (
-						<p className="b-acabados__placeholder">
-							{ __( 'No hay productos con este término.', 'parklex-blocks' ) }
-						</p>
-					) : (
-						products.map( ( product ) => (
-							<div className="b-acabados__item" key={ product.id }>
-								<div className="b-acabados__image">
-									{ getImageUrl( product.featured_media ) && (
-										<img
-											src={ getImageUrl( product.featured_media ) }
-											alt=""
-											className="b-acabados__img"
-										/>
-									) }
+				<div className="b-acabados__grid swiper">
+					<div className="swiper-wrapper">
+						{ ! productsType ? (
+							<p className="b-acabados__placeholder">
+								{ __( 'Selecciona un término de producto en el panel lateral.', 'parklex-blocks' ) }
+							</p>
+						) : products === null ? (
+							<Spinner />
+						) : products.length === 0 ? (
+							<p className="b-acabados__placeholder">
+								{ __( 'No hay productos con este término.', 'parklex-blocks' ) }
+							</p>
+						) : (
+							products.map( ( product ) => (
+								<div className="b-acabados__item swiper-slide" key={ product.id }>
+									<div className="b-acabados__image">
+										{ getImageUrl( product.featured_media ) && (
+											<img
+												src={ getImageUrl( product.featured_media ) }
+												alt=""
+												className="b-acabados__img"
+											/>
+										) }
+									</div>
+									<h3 className="b-acabados__title">{ product.title?.rendered || '' }</h3>
 								</div>
-								<h3 className="b-acabados__title">{ product.title?.rendered || '' }</h3>
-							</div>
-						) )
-					) }
+							) )
+						) }
+					</div>
 				</div>
 			</section>
 		</>

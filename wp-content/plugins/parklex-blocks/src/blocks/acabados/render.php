@@ -32,20 +32,22 @@ if ( ! $query->have_posts() ) {
 ?>
 
 <section <?php echo bis_get_block_prop( $block, true ); ?>>
-	<div class="b-acabados__grid">
-		<?php
-		while ( $query->have_posts() ) :
-			$query->the_post();
-			?>
-			<a class="b-acabados__item" href="<?php echo esc_url( get_permalink() ); ?>">
-				<div class="b-acabados__image">
-					<?php echo get_the_post_thumbnail( get_the_ID(), 'medium', array( 'class' => 'b-acabados__img' ) ); ?>
-				</div>
-				<h3 class="b-acabados__title"><?php echo esc_html( get_the_title() ); ?></h3>
-			</a>
+	<div class="b-acabados__grid swiper">
+		<div class="swiper-wrapper">
 			<?php
-		endwhile;
-		wp_reset_postdata();
-		?>
+			while ( $query->have_posts() ) :
+				$query->the_post();
+				?>
+				<a class="b-acabados__item swiper-slide" href="<?php echo esc_url( get_permalink() ); ?>">
+					<div class="b-acabados__image">
+						<?php echo get_the_post_thumbnail( get_the_ID(), 'medium', array( 'class' => 'b-acabados__img' ) ); ?>
+					</div>
+					<h3 class="b-acabados__title"><?php echo esc_html( get_the_title() ); ?></h3>
+				</a>
+				<?php
+			endwhile;
+			wp_reset_postdata();
+			?>
+		</div>
 	</div>
 </section>

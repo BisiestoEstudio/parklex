@@ -1,12 +1,11 @@
 .b-acabados {
 	&__grid {
-		display: grid;
-		gap: var(--wp--preset--spacing--sm);
-		grid-template-columns: repeat(1, 1fr);
+		overflow: hidden;
 	}
 
 	&__item {
 		display: block;
+		height: auto;
 		color: inherit;
 		text-decoration: none;
 	}
@@ -29,20 +28,42 @@
 	}
 
 	&__placeholder {
-		grid-column: 1 / -1;
 		text-align: center;
 		color: var(--wp--preset--color--gray, #666);
 	}
 }
 
+// Mobile: carrusel Swiper (< 768px).
+.b-acabados__grid.swiper .swiper-wrapper {
+	gap: var(--wp--preset--spacing--sm);
+}
+
+// Desktop/tablet: Swiper se deshabilita (breakpoint 768 en view.js) y volvemos a grid.
 @media (min-width: 768px) {
 	.b-acabados__grid {
-		grid-template-columns: repeat(2, 1fr);
+		overflow: visible;
+
+		.swiper-wrapper {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: var(--wp--preset--spacing--sm);
+			transform: none !important;
+		}
+
+		.swiper-slide {
+			width: auto !important;
+			height: auto !important;
+			margin-right: 0 !important;
+		}
+
+		.b-acabados__placeholder {
+			grid-column: 1 / -1;
+		}
 	}
 }
 
 @media (min-width: 1024px) {
-	.b-acabados__grid {
+	.b-acabados__grid .swiper-wrapper {
 		grid-template-columns: repeat(4, 1fr);
 	}
 }
