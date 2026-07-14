@@ -5,7 +5,6 @@ import { useSelect, useDispatch } from '@wordpress/data';
 import { store as editorStore } from '@wordpress/editor';
 import { __ } from '@wordpress/i18n';
 import './block-variations/media-text';
-import './block-variations/spec-row';
 import './block-variations/info-card';
 import './block-variations/text-card';
 

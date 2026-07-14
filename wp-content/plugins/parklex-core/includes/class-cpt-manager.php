@@ -225,7 +225,7 @@ class Bis_Core_CPT_Manager {
 				'has_archive'        => 'products',
 				'hierarchical'       => true,
 				'menu_position'      => null,
-				'supports'           => array( 'title', 'thumbnail' ),
+				'supports'           => array( 'title', 'editor', 'thumbnail' ),
 				'menu_icon'          => 'dashicons-cart',
 			)
 		);

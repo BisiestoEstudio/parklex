@@ -1,0 +1,42 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bisiesto/zoom-image",
+	"version": "0.1.0",
+	"title": "Zoom Image",
+	"category": "bisiesto",
+	"icon": {
+		"src": "format-image",
+		"foreground": "#7900D8"
+	},
+	"description": "Imagen que hace zoom centrado en el puntero del ratón al pasar por encima, en dispositivos no táctiles.",
+	"keywords": [ "imagen", "image", "zoom", "hover" ],
+	"example": {},
+	"attributes": {
+		"anchor": { "type": "string", "default": "" },
+		"align": { "type": "string", "default": "wide" },
+		"id": { "type": "number", "default": 0 },
+		"url": { "type": "string", "default": "" },
+		"alt": { "type": "string", "default": "" },
+		"aspectRatio": { "type": "string", "default": "" },
+		"scale": { "type": "string", "enum": [ "cover", "contain" ], "default": "cover" }
+	},
+	"supports": {
+		"html": false,
+		"anchor": true,
+		"align": [ "wide", "full" ],
+		"spacing": {
+			"margin": true
+		},
+		"color": {
+			"background": false,
+			"text": false
+		}
+	},
+	"textdomain": "parklex-blocks",
+	"render": "file:./render.php",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"viewScript": "file:./view.js",
+	"style": "file:./style-index.css"
+}
