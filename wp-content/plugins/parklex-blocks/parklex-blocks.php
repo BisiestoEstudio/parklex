@@ -21,3 +21,4 @@ define( 'BIS_BLOCKS_URL', plugin_dir_url( __FILE__ ) );
 include_once 'includes/utils.php';
 include_once 'includes/blocks.php';
 include_once 'includes/editor-plugins.php';
+include_once 'includes/related-projects.php';

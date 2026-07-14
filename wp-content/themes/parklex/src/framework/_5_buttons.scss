@@ -28,7 +28,7 @@ input[type="submit"]
   text-decoration: none;
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out;
   background-color: var(--background-color);
-  color: var(--color);
+  color: var(--white);
   border: none;
   width: fit-content;
   display: inline-flex;
@@ -36,31 +36,25 @@ input[type="submit"]
   cursor: pointer;
 
   &:hover{
-    --background-color: var(--hover-background-color);
+    background-color: var(--gray-dark);
   }
 
   &:enabled:active{
-    --background-color: var(--hover-background-color);
+    background-color: var(--gray-dark);
   }
 
   &:disabled{
-    background-color: --gray;
+    background-color: var(--gray);
     cursor: not-allowed;
   }
 
   .has-white-color &{
-    --color: var(--black) !important;
-    --hover-color: var(--white);
-    --background-color: var(--white);
+    color: var(--black) !important;
+    background-color: var(--white);
 
-    &:hover{
-      --background-color: var(--black);
-      --color: var(--white);
-    }
-
+    &:hover,
     &:enabled:active{
-      --background-color: var(--black);
-      --color: var(--white);
+      background-color: var(--gray-light);
     }
   }
 }
@@ -70,11 +64,23 @@ input[type="submit"]
 {
   background-color: transparent;
   border: 1px solid $buttons-background-color;
-  color: var(--black);
+  color: var(--black) ;
 
   &:hover{
     background-color: $buttons-background-color;
     color: $buttons-color;
+  }
+
+  .has-white-color &{
+
+    border-color:var(--white);
+    color: var(--white) !important;
+
+    &:hover{
+      background-color: var(--gray-light);
+      color: var(--black) !important;
+      border-color: var(--gray-light);
+    }
   }
 }
 

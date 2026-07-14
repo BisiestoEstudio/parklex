@@ -1,0 +1,39 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bisiesto/related-project",
+	"version": "0.1.0",
+	"title": "Related Project",
+	"category": "bisiesto",
+	"icon": {
+		"src": "columns",
+		"foreground": "#7900D8"
+	},
+	"description": "Dos proyectos destacados a dos columnas, elegidos automáticamente según el contexto o seleccionados a mano.",
+	"keywords": [ "proyecto", "layout", "columnas" ],
+	"example": {},
+	"attributes": {
+		"anchor": { "type": "string", "default": "" },
+		"mode": { "type": "string", "enum": [ "auto", "manual" ], "default": "auto" },
+		"project1": { "type": "number", "default": 0 },
+		"project2": { "type": "number", "default": 0 }
+	},
+	"supports": {
+		"html": false,
+		"anchor": true,
+		"align": false,
+		"spacing": {
+			"margin": true,
+			"padding": true
+		},
+		"color": {
+			"background": true,
+			"text": true
+		}
+	},
+	"textdomain": "parklex-blocks",
+	"render": "file:./render.php",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

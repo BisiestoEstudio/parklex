@@ -378,14 +378,6 @@
         },
         "border": {
           "radius": "999px"
-        },
-        "color": {
-          "background": "var(--wp--preset--color--black)"
-        },
-        ":hover": {
-          "color": {
-            "background": "var(--wp--preset--color--gray-dark)"
-          }
         }
       }
     }

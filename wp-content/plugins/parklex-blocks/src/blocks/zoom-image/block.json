@@ -26,7 +26,8 @@
 		"anchor": true,
 		"align": [ "wide", "full" ],
 		"spacing": {
-			"margin": true
+			"margin": true,
+			"padding": true
 		},
 		"color": {
 			"background": false,

@@ -1,0 +1,57 @@
+.b-related-project {
+	&__wrapper {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--wp--preset--spacing--m);
+	}
+
+	&__project {
+		display: grid;
+		gap: var(--wp--preset--spacing--m);
+	}
+
+	&__image {
+		display: block;
+		overflow: hidden;
+		aspect-ratio: 343 / 428;
+
+		img {
+			display: block;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	&__placeholder {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 220px;
+		text-align: center;
+		background: var(--wp--preset--color--gray-light);
+	}
+
+	&__caption {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+		margin-top: var(--wp--preset--spacing--xs);
+	}
+
+	&__author {
+		opacity: 0.7;
+	}
+}
+
+@media (min-width: 768px) {
+	.b-related-project {
+		&__wrapper {
+			grid-template-columns: 1fr 1fr;
+		}
+
+		&__image {
+			aspect-ratio: 687 / 579;
+		}
+	}
+}
