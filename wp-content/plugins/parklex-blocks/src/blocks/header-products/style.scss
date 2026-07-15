@@ -24,6 +24,8 @@
 
 	&__main-image {
 		aspect-ratio: 580 / 550;
+		width: 100%;
+		max-height: 75vh;
 		overflow: hidden;
 
 		img {
@@ -45,7 +47,7 @@
 
 	&__thumbs {
 		display: grid;
-		grid-template-columns: repeat( 5, 1fr );
+		grid-template-columns: repeat( 6, 1fr );
 		gap: var( --wp--preset--spacing--xs );
 		margin-top: var( --wp--preset--spacing--xs );
 	}

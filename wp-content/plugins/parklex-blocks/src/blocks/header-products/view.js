@@ -14,6 +14,8 @@ addEventListener( 'DOMContentLoaded', function () {
 					return;
 				}
 
+				mainImg.removeAttribute( 'srcset' );
+				mainImg.removeAttribute( 'sizes' );
 				mainImg.src = fullSrc;
 
 				thumbs.forEach( ( item ) => item.classList.remove( 'is-active' ) );
