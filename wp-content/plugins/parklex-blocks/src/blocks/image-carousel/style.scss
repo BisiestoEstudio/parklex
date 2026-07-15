@@ -1,13 +1,13 @@
 .b-image-carousel {
 	overflow: hidden;
+	padding: 0 var(--layout-margin);
 
 	&__grid {
-		overflow: visible;
+		overflow: visible !important;
 	}
 
 	&__wrapper {
 		display: flex;
-		gap: var(--wp--preset--spacing--m);
 	}
 
 	.wp-block-image {
@@ -19,7 +19,7 @@
 			display: block;
 			width: 100%;
 			height: 100%;
-			aspect-ratio: 3 / 4;
+			aspect-ratio: 522 / 566;
 			object-fit: cover;
 		}
 	}

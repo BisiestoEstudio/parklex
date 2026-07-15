@@ -6,8 +6,8 @@ addEventListener( 'DOMContentLoaded', function () {
 			spaceBetween: 16,
 			watchOverflow: true,
 			breakpoints: {
-				768: { slidesPerView: 2.2, spaceBetween: 24 },
-				1080: { slidesPerView: 3.2, spaceBetween: 32 },
+				768: { slidesPerView: 2.2, spaceBetween: 16 },
+				1080: { slidesPerView: 2.7, spaceBetween: 16 },
 			},
 		} );
 	} );
