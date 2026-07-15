@@ -1,0 +1,37 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bisiesto/project-scrollover",
+	"version": "0.1.0",
+	"title": "Project Scrollover",
+	"category": "bisiesto",
+	"icon": {
+		"src": "slides",
+		"foreground": "#7900D8"
+	},
+	"description": "Contenido libre junto a un listado de proyectos seleccionados manualmente.",
+	"keywords": [ "proyecto", "scrollover", "carrusel" ],
+	"example": {},
+	"attributes": {
+		"anchor": { "type": "string", "default": "" },
+		"projects": { "type": "array", "default": [] }
+	},
+	"supports": {
+		"html": false,
+		"anchor": true,
+		"align": false,
+		"spacing": {
+			"margin": true,
+			"padding": true
+		},
+		"color": {
+			"background": true,
+			"text": true
+		}
+	},
+	"textdomain": "parklex-blocks",
+	"render": "file:./render.php",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

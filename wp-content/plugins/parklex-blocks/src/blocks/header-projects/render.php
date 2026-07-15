@@ -109,7 +109,7 @@ $term_links = function ($terms) {
 			</div>
 
 
-			<div class="b-header-projects__spec-group">
+			<div class="b-header-projects__spec-group span-2">
 				<div class="b-header-projects__spec">
 					<span class="b-header-projects__spec-label"><?php esc_html_e('Tipo de obra', 'parklex-blocks'); ?></span>
 					<span class="b-header-projects__spec-value"><?php echo wp_kses_post($term_links($work_type_terms)); ?></span>

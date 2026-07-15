@@ -1,0 +1,38 @@
+.b-image-carousel {
+	overflow: hidden;
+
+	&__grid {
+		overflow: visible;
+	}
+
+	&__wrapper {
+		display: flex;
+		gap: var(--wp--preset--spacing--m);
+	}
+
+	.wp-block-image {
+		flex: 0 0 auto;
+		width: 82%;
+		margin: 0;
+
+		img {
+			display: block;
+			width: 100%;
+			height: 100%;
+			aspect-ratio: 3 / 4;
+			object-fit: cover;
+		}
+	}
+}
+
+@media (min-width: 768px) {
+	.b-image-carousel .wp-block-image {
+		width: 45%;
+	}
+}
+
+@media (min-width: 1080px) {
+	.b-image-carousel .wp-block-image {
+		width: 31%;
+	}
+}

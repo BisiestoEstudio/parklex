@@ -25,17 +25,7 @@
 		padding: var( --wp--preset--spacing--l ) 0;
 	}
 
-	&__intro {
-		max-width: 500px;
-	}
 
-
-
-	&__content {
-		> * + * {
-			margin-top: var( --wp--preset--spacing--m );
-		}
-	}
 
 	&__specs{
 		display: grid;
@@ -66,6 +56,30 @@
 	}
 }
 
+@media ( min-width: 782px ) {
+	.b-header-projects {
+
+		&__specs {
+			grid-template-columns: repeat(3, 1fr);
+	
+			.span-2 {
+				grid-column: span 2;
+			}
+	
+	
+		}
+
+		&__intro {
+			max-width: 720px;
+		}
+	
+		&__content {
+			max-width: 720px;
+		}
+	
+	}
+}
+
 @media ( min-width: 1080px ) {
 	.b-header-projects {
 		&__media {
@@ -73,10 +87,17 @@
 		}
 
 		&__section {
-			grid-template-columns: 1fr min(770px, 60%);
+			grid-template-columns: 1fr 65%;
 	
 		}
 
+		&__intro {
+			max-width: 420px;
+		}
+	
+		&__content {
+			max-width: 420px;
+		}
 
 
 	}
