@@ -1,15 +1,12 @@
 .b-project-scrollover {
 	position: relative;
 
-	&__media-wrap {
-		position: sticky;
-		top: 0;
-		height: 100vh;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		overflow: hidden;
+	&__wrapper {
+		position: relative;
 		z-index: 1;
+		display: grid;
+		place-items: center;
+		padding: var(--wp--preset--spacing--xl) 0;
 	}
 
 	&__projects {
@@ -17,24 +14,19 @@
 		z-index: 2;
 		display: grid;
 		grid-template-columns: repeat(1, 1fr);
-		gap: var(--wp--preset--spacing--md, 24px);
-
-		@media (min-width: 768px) {
-			grid-template-columns: repeat(2, 1fr);
-		}
-
-		@media (min-width: 1024px) {
-			grid-template-columns: repeat(3, 1fr);
-		}
+		gap: var(--wp--preset--spacing--m);
 	}
 
 	&__project {
+		display: grid;
+		gap: var(--wp--preset--spacing--m);
+
 	}
 
 	&__image {
 		display: block;
 		overflow: hidden;
-		aspect-ratio: 343 / 428;
+		aspect-ratio: 333 / 420;
 
 		img {
 			display: block;
@@ -45,13 +37,77 @@
 	}
 
 	&__caption {
-		display: flex;
-		flex-direction: column;
-		gap: 2px;
-		margin-top: var(--wp--preset--spacing--xs);
+		display: grid;
 	}
 
-	&__author {
-		opacity: 0.7;
+
+	&__spacer {
+		display: none;
+	}
+}
+
+@media (min-width: 768px) {
+	.b-project-scrollover{
+	&__projects {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+		&__inner{
+			width: 460px;
+		}
+	}
+}
+
+@media (min-width: 1080px) {
+	.b-project-scrollover {
+
+		&__wrapper {
+			position: sticky;
+			top: 0;
+			height: 100lvh;
+			padding: 0;
+			overflow: hidden;
+		}
+
+		&__project-wrapper{
+			aspect-ratio: 460 / 950;
+			display: grid;
+
+			&:nth-child(3n + 1) {
+				place-items: end start;
+			}
+
+			&:nth-child(3n + 2) {
+				place-items: start center;
+			}
+
+
+			&:nth-child(3n) {
+				place-items: center end;
+			}
+
+
+		}
+
+		&__projects {
+			grid-template-columns: repeat(3, 1fr);
+			gap: var(--wp--preset--spacing--l);
+
+
+
+		}
+
+		&__project{
+			width: 360px;
+
+			// Justificar al final los proyectos en filas de múltiplos de 3
+
+
+		}
+
+
+		&__spacer {
+			display: block;
+		}
 	}
 }

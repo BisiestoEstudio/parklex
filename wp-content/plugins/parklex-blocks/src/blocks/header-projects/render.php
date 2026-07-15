@@ -53,7 +53,7 @@ $term_links = function ($terms) {
 <section <?php echo bis_get_block_prop($block, true, array('class' => 'alignfull')); ?>>
 	<div class="b-header-projects__media alignfull">
 		<?php if ($featured_id) : ?>
-			<?php echo wp_get_attachment_image($featured_id, 'large', false, array('class' => 'b-header-projects__main-img')); ?>
+			<?php echo wp_get_attachment_image($featured_id, 'full', false, array('class' => 'b-header-projects__main-img')); ?>
 		<?php endif; ?>
 	</div>
 
