@@ -4,6 +4,7 @@ import { useSelect } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
 import { store as editorStore } from '@wordpress/editor';
 import { useBisiestoBlockProps } from '../../hooks/useBisiestoBlockProps';
+import './editor.scss';
 
 function useTermNames( termIds, taxonomy ) {
 	return useSelect(

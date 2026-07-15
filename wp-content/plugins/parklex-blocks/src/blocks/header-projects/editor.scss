@@ -1,0 +1,10 @@
+.b-header-projects {
+	&__placeholder {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 220px;
+		text-align: center;
+		background: var( --wp--preset--color--gray-light );
+	}
+}

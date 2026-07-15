@@ -1,8 +1,6 @@
 .b-header-projects {
 	&__media {
-		aspect-ratio: 3 / 4;
-		width: 100%;
-		max-height: 75vh;
+		aspect-ratio: 1 / 1;
 		overflow: hidden;
 	}
 
@@ -13,13 +11,11 @@
 		object-fit: cover;
 	}
 
-	&__placeholder {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		min-height: 220px;
-		text-align: center;
-		background: var( --wp--preset--color--gray-light );
+	&__section {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var( --wp--preset--spacing--m );
+		padding: var( --wp--preset--spacing--m ) 0;
 	}
 
 	&__info {
@@ -33,15 +29,7 @@
 		max-width: 500px;
 	}
 
-	&__title {
-		text-transform: uppercase;
-		letter-spacing: 0.15em;
-		margin-bottom: var( --wp--preset--spacing--xs ) !important;
-	}
 
-	&__author {
-		color: var( --wp--preset--color--gray );
-	}
 
 	&__content {
 		> * + * {
@@ -49,21 +37,32 @@
 		}
 	}
 
+	&__specs{
+		display: grid;
+		gap: var( --wp--preset--spacing--ml );
+	}
+
 	&__spec {
 		display: flex;
 		flex-direction: column;
 		gap: var( --wp--preset--spacing--xxs );
+
+	}
+
+	&__spec-group {
 		padding-left: var( --wp--preset--spacing--s );
 		border-left: 1px solid currentColor;
+		display: grid;
+		gap: var( --wp--preset--spacing--l );
 	}
 
 	&__spec-label {
-		font-weight: bold;
+		font-weight: 500;
 		text-transform: uppercase;
 	}
 
 	&__spec-value a {
-		text-decoration: underline;
+		text-decoration: underline !important;
 	}
 }
 
@@ -73,49 +72,12 @@
 			aspect-ratio: 1600 / 520;
 		}
 
-		&__info {
-			grid-template-columns: 1.6fr 1fr 1fr 1fr;
-			grid-template-areas:
-				"intro   year     location product"
-				"content acabado  worktype solutions"
-				"content photo    .        .";
-			gap: var( --wp--preset--spacing--l ) var( --wp--preset--spacing--m );
+		&__section {
+			grid-template-columns: 1fr min(770px, 60%);
+	
 		}
 
-		&__intro {
-			grid-area: intro;
-		}
 
-		&__content {
-			grid-area: content;
-		}
 
-		&__spec--year {
-			grid-area: year;
-		}
-
-		&__spec--location {
-			grid-area: location;
-		}
-
-		&__spec--product {
-			grid-area: product;
-		}
-
-		&__spec--acabado {
-			grid-area: acabado;
-		}
-
-		&__spec--photo {
-			grid-area: photo;
-		}
-
-		&__spec--worktype {
-			grid-area: worktype;
-		}
-
-		&__spec--solutions {
-			grid-area: solutions;
-		}
 	}
 }
