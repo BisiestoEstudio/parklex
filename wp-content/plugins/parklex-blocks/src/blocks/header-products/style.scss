@@ -1,0 +1,117 @@
+.b-header-products {
+	padding: var( --wp--preset--spacing--m ) 0;
+	&__wrapper {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-areas:
+			"media"
+			"content";
+		gap: var( --wp--preset--spacing--l );
+	}
+
+	&__media {
+		grid-area: media;
+		display: grid;
+		gap: var( --wp--preset--spacing--xs );
+	}
+
+	&__content {
+		grid-area: content;
+		display: grid;
+		grid-template-rows: auto 1fr;
+		gap: var( --wp--preset--spacing--m );
+	}
+
+	&__main-image {
+		aspect-ratio: 580 / 550;
+		overflow: hidden;
+
+		img {
+			display: block;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	&__placeholder {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 220px;
+		text-align: center;
+		background: var( --wp--preset--color--gray-light );
+	}
+
+	&__thumbs {
+		display: grid;
+		grid-template-columns: repeat( 5, 1fr );
+		gap: var( --wp--preset--spacing--xs );
+		margin-top: var( --wp--preset--spacing--xs );
+	}
+
+	&__thumb {
+		display: block;
+		padding: 0;
+		border: none;
+		background: none;
+		cursor: pointer;
+		aspect-ratio: 1 / 1;
+		overflow: hidden;
+		opacity: 0.6;
+		transition: opacity 0.15s ease-in-out;
+
+		&.is-active,
+		&:hover {
+			opacity: 1;
+		}
+
+		img {
+			display: block;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	&__details {
+		max-width: 500px;
+	}
+
+	&__eyebrow {
+		margin-bottom: var( --wp--preset--spacing--xs ) !important;
+	}
+
+	&__title {
+		margin-bottom: var( --wp--preset--spacing--m ) !important;
+	}
+
+	&__inner {
+		margin-top: var( --wp--preset--spacing--m );
+
+		> * + * {
+			margin-top: var( --wp--preset--spacing--m );
+		}
+	}
+}
+
+@media ( min-width: 1080px ) {
+	.b-header-products {
+		&__wrapper {
+			grid-template-columns: 1fr 1fr;
+			grid-template-areas: "content media";
+			gap: var( --wp--preset--spacing--xl );
+			align-items: start;
+		}
+
+		&__content {
+			align-self: stretch;
+		}
+
+		&__inner {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+	}
+}

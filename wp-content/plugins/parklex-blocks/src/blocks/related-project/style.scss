@@ -3,6 +3,7 @@
 		display: grid;
 		grid-template-columns: 1fr;
 		gap: var(--wp--preset--spacing--m);
+		align-items: start;
 	}
 
 	&__project {
