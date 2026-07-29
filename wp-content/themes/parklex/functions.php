@@ -15,5 +15,6 @@ define( 'BIS_THEME_URI', get_template_directory_uri() );
 include_once get_template_directory() . '/includes/utils.php';
 include_once get_template_directory() . '/includes/class-config.php';
 include_once get_template_directory() . '/includes/class-assets.php';
+include_once get_template_directory() . '/includes/class-acf.php';
 
 

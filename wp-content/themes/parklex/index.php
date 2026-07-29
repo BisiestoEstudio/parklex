@@ -1,5 +1,9 @@
-<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
+<?php
+defined( 'ABSPATH' ) || exit;
 
+get_header();
+
+echo do_blocks( <<<'BLOCKS'
 <!-- wp:group {"tagName":"main","layout":{"type":"constrained"}} -->
 <main class="wp-block-group">
 	<!-- wp:query {"queryId":1,"query":{"perPage":10,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","inherit":true}} -->
@@ -17,5 +21,7 @@
 	<!-- /wp:query -->
 </main>
 <!-- /wp:group -->
+BLOCKS
+);
 
-<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->
+get_footer();

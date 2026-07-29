@@ -25,6 +25,10 @@ class Bis_Theme_Config
         add_theme_support('title-tag');
         // Load framework/blocks/editor CSS inside the block/site editor
         add_theme_support('editor-styles');
+        // Required so the wp:site-logo block keeps working outside the Site Editor
+        add_theme_support('custom-logo');
+        add_theme_support('html5', array('search-form', 'gallery', 'caption', 'style', 'script'));
+        add_theme_support('automatic-feed-links');
     }
 
 

@@ -6,7 +6,6 @@ class Bis_Core_CPT_Manager {
 	public static function register() {
 		self::register_technical_zone();
 		self::register_proyecto();
-		self::register_case_studies();
 		self::register_project_internal();
 		self::register_products();
 		self::register_distributor();
@@ -102,49 +101,6 @@ class Bis_Core_CPT_Manager {
 		);
 	}
 
-	private static function register_case_studies() {
-		$labels = array(
-			'name'               => _x( 'Case Studies', 'post type general name', 'parklex-core' ),
-			'singular_name'      => _x( 'Case Study', 'post type singular name', 'parklex-core' ),
-			'menu_name'          => _x( 'Case Studies', 'admin menu', 'parklex-core' ),
-			'name_admin_bar'     => _x( 'Case Study', 'add new on admin bar', 'parklex-core' ),
-			'add_new'            => _x( 'Add New', 'Case Study', 'parklex-core' ),
-			'add_new_item'       => __( 'Add Case Study', 'parklex-core' ),
-			'new_item'           => __( 'New Case Study', 'parklex-core' ),
-			'edit_item'          => __( 'Edit Case Study', 'parklex-core' ),
-			'view_item'          => __( 'View Case Study', 'parklex-core' ),
-			'all_items'          => __( 'All Case Studies', 'parklex-core' ),
-			'search_items'       => __( 'Search Case Studies', 'parklex-core' ),
-			'parent_item_colon'  => __( 'Parent Case Study:', 'parklex-core' ),
-			'not_found'          => __( 'No Case Studies found.', 'parklex-core' ),
-			'not_found_in_trash' => __( 'No Case Studies found in Trash.', 'parklex-core' ),
-		);
-
-		register_post_type(
-			'case-studies',
-			array(
-				'labels'             => $labels,
-				'description'        => __( 'Case Studies', 'parklex-core' ),
-				'public'             => true,
-				'publicly_queryable' => true,
-				'show_ui'            => true,
-				'show_in_menu'       => true,
-				'show_in_rest'       => true,
-				'query_var'          => true,
-				'capability_type'    => 'page',
-				'has_archive'        => true,
-				'hierarchical'       => true,
-				'rewrite'            => array(
-					'slug'       => 'case-studies',
-					'with_front' => false,
-				),
-				'menu_position'      => null,
-				'supports'           => array( 'title', 'excerpt', 'thumbnail', 'editor' ),
-				'menu_icon'          => 'dashicons-building',
-			)
-		);
-	}
-
 	private static function register_project_internal() {
 		$labels = array(
 			'name'               => _x( 'Internal Projects', 'post type general name', 'parklex-core' ),
@@ -225,7 +181,7 @@ class Bis_Core_CPT_Manager {
 				'has_archive'        => 'products',
 				'hierarchical'       => true,
 				'menu_position'      => null,
-				'supports'           => array( 'title', 'editor', 'excerpt', 'thumbnail' ),
+				'supports'           => array( 'title', 'editor', 'excerpt', 'thumbnail', 'page-attributes' ),
 				'menu_icon'          => 'dashicons-cart',
 			)
 		);

@@ -1,3 +1,7 @@
+<?php
+defined( 'ABSPATH' ) || exit;
+
+echo do_blocks( <<<'BLOCKS'
 <!-- wp:group {"tagName":"footer","className":"footer","style":{"spacing":{"padding":{"top":"var:preset|spacing|fluid-m","bottom":"var:preset|spacing|fluid-m"},"margin":{"top":"var:preset|spacing|0","bottom":"var:preset|spacing|0"}}},"backgroundColor":"red","textColor":"white","layout":{"type":"constrained"}} -->
 <footer class="wp-block-group footer has-white-color has-red-background-color has-text-color has-background"
 	style="margin-top:var(--wp--preset--spacing--0);margin-bottom:var(--wp--preset--spacing--0);padding-top:var(--wp--preset--spacing--fluid-m);padding-bottom:var(--wp--preset--spacing--fluid-m)">
@@ -58,3 +62,10 @@
 	<!-- /wp:group -->
 </footer>
 <!-- /wp:group -->
+BLOCKS
+);
+?>
+
+<?php wp_footer(); ?>
+</body>
+</html>
