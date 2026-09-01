@@ -30,3 +30,30 @@
 
     }
 }
+
+.c-technical-card-body {
+    display: flex;
+    gap: var(--wp--preset--spacing--m);
+
+    &__sidebar {
+        width: 260px;
+        display: grid;
+        gap: var(--wp--preset--spacing--xl);
+    }
+
+    &__clasification-group {
+        display: grid;
+        gap: var(--wp--preset--spacing--sm);
+    }
+
+
+    &__clasification-title {
+        text-transform: uppercase;
+    }
+
+    &__clasification-terms {
+        display: grid;
+        gap: var(--wp--preset--spacing--sm);
+    }
+
+}

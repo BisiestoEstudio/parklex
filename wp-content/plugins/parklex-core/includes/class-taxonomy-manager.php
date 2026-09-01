@@ -21,10 +21,7 @@ class Bis_Core_Taxonomy_Manager {
 				'show_admin_column' => true,
 				'show_in_nav_menus' => true,
 				'show_in_rest'      => true,
-				'rewrite'           => array(
-					'slug'       => 'technical-card/category',
-					'with_front' => false,
-				),
+				'rewrite'           => false,
 			)
 		);
 
@@ -38,10 +35,7 @@ class Bis_Core_Taxonomy_Manager {
 				'show_admin_column' => true,
 				'show_in_nav_menus' => true,
 				'show_in_rest'      => true,
-				'rewrite'           => array(
-					'slug'       => 'technical-card/classification',
-					'with_front' => false,
-				),
+				'rewrite'           => false,
 			)
 		);
 
