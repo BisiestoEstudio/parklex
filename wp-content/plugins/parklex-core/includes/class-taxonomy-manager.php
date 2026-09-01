@@ -4,27 +4,42 @@ defined( 'ABSPATH' ) || exit;
 class Bis_Core_Taxonomy_Manager {
 
 	public static function register() {
-		self::register_technical_zone_taxonomies();
+		self::register_technical_card_taxonomies();
 		self::register_proyecto_taxonomies();
 		self::register_products_taxonomies();
 		self::register_project_internal_taxonomies();
-		self::register_request_taxonomies();
-		self::register_distributor_taxonomies();
 	}
 
-	private static function register_technical_zone_taxonomies() {
+	private static function register_technical_card_taxonomies() {
 		register_taxonomy(
-			'category_technical_zone',
-			'technical-zone',
+			'category_technical_card',
+			'technical-card',
 			array(
-				'label'             => __( 'Technical Area Category', 'parklex-core' ),
+				'label'             => __( 'Technical Card Category', 'parklex-core' ),
 				'hierarchical'      => true,
 				'show_ui'           => true,
 				'show_admin_column' => true,
 				'show_in_nav_menus' => true,
 				'show_in_rest'      => true,
 				'rewrite'           => array(
-					'slug'       => 'technical-area/category',
+					'slug'       => 'technical-card/category',
+					'with_front' => false,
+				),
+			)
+		);
+
+		register_taxonomy(
+			'classification_technical_card',
+			'technical-card',
+			array(
+				'label'             => __( 'Technical Card Classification', 'parklex-core' ),
+				'hierarchical'      => true,
+				'show_ui'           => true,
+				'show_admin_column' => true,
+				'show_in_nav_menus' => true,
+				'show_in_rest'      => true,
+				'rewrite'           => array(
+					'slug'       => 'technical-card/classification',
 					'with_front' => false,
 				),
 			)
@@ -154,69 +169,6 @@ class Bis_Core_Taxonomy_Manager {
 				)
 			);
 		}
-	}
-
-	private static function register_request_taxonomies() {
-		$taxonomies = array(
-			'request_zone'         => array(
-				'name'          => __( 'Areas', 'parklex-core' ),
-				'singular_name' => __( 'Area', 'parklex-core' ),
-			),
-			'request_subject'      => array(
-				'name'          => __( 'Subjects', 'parklex-core' ),
-				'singular_name' => __( 'Subject', 'parklex-core' ),
-			),
-			'request_profesion'    => array(
-				'name'          => __( 'Professions', 'parklex-core' ),
-				'singular_name' => __( 'Profession', 'parklex-core' ),
-			),
-			'request_know'         => array(
-				'name'          => __( 'How Did You Find Us?', 'parklex-core' ),
-				'singular_name' => __( 'How Did You Find Us?', 'parklex-core' ),
-			),
-			'request_project_size' => array(
-				'name'          => __( 'Project Sizes', 'parklex-core' ),
-				'singular_name' => __( 'Project Size', 'parklex-core' ),
-			),
-			'request_language'     => array(
-				'name'          => __( 'Languages', 'parklex-core' ),
-				'singular_name' => __( 'Language', 'parklex-core' ),
-			),
-		);
-
-		foreach ( $taxonomies as $taxonomy => $names ) {
-			register_taxonomy(
-				$taxonomy,
-				'request',
-				array(
-					'label'             => $names['name'],
-					'labels'            => array(
-						'name'          => $names['name'],
-						'singular_name' => $names['singular_name'],
-					),
-					'public'            => true,
-					'show_in_nav_menus' => true,
-					'hierarchical'      => true,
-					'query_var'         => true,
-					'show_in_rest'      => false,
-				)
-			);
-		}
-	}
-
-	private static function register_distributor_taxonomies() {
-		register_taxonomy(
-			'distributor_interno',
-			'distributor',
-			array(
-				'label'             => __( 'Internal', 'parklex-core' ),
-				'public'            => true,
-				'show_in_nav_menus' => true,
-				'hierarchical'      => true,
-				'query_var'         => true,
-				'show_in_rest'      => true,
-			)
-		);
 	}
 
 }

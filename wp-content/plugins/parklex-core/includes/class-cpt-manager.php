@@ -4,40 +4,37 @@ defined( 'ABSPATH' ) || exit;
 class Bis_Core_CPT_Manager {
 
 	public static function register() {
-		self::register_technical_zone();
+		self::register_technical_card();
 		self::register_proyecto();
 		self::register_project_internal();
 		self::register_products();
-		self::register_distributor();
-		self::register_request();
-		self::register_reviews();
 
 		add_filter( 'post_type_link', array( __CLASS__, 'filter_products_permalink' ), 1, 2 );
 	}
 
-	private static function register_technical_zone() {
+	private static function register_technical_card() {
 		$labels = array(
-			'name'               => _x( 'Technical Areas', 'post type general name', 'parklex-core' ),
-			'singular_name'      => _x( 'Technical Area', 'post type singular name', 'parklex-core' ),
-			'menu_name'          => _x( 'Technical Areas', 'admin menu', 'parklex-core' ),
-			'name_admin_bar'     => _x( 'Technical Area', 'add new on admin bar', 'parklex-core' ),
-			'add_new'            => _x( 'Add New', 'Technical Area', 'parklex-core' ),
-			'add_new_item'       => __( 'Add Technical Area', 'parklex-core' ),
-			'new_item'           => __( 'New Technical Area', 'parklex-core' ),
-			'edit_item'          => __( 'Edit Technical Area', 'parklex-core' ),
-			'view_item'          => __( 'View Technical Area', 'parklex-core' ),
-			'all_items'          => __( 'All Technical Areas', 'parklex-core' ),
-			'search_items'       => __( 'Search Technical Areas', 'parklex-core' ),
-			'parent_item_colon'  => __( 'Parent Technical Area:', 'parklex-core' ),
-			'not_found'          => __( 'No Technical Areas found.', 'parklex-core' ),
-			'not_found_in_trash' => __( 'No Technical Areas found in Trash.', 'parklex-core' ),
+			'name'               => _x( 'Technical Cards', 'post type general name', 'parklex-core' ),
+			'singular_name'      => _x( 'Technical Card', 'post type singular name', 'parklex-core' ),
+			'menu_name'          => _x( 'Technical Cards', 'admin menu', 'parklex-core' ),
+			'name_admin_bar'     => _x( 'Technical Card', 'add new on admin bar', 'parklex-core' ),
+			'add_new'            => _x( 'Add New', 'Technical Card', 'parklex-core' ),
+			'add_new_item'       => __( 'Add Technical Card', 'parklex-core' ),
+			'new_item'           => __( 'New Technical Card', 'parklex-core' ),
+			'edit_item'          => __( 'Edit Technical Card', 'parklex-core' ),
+			'view_item'          => __( 'View Technical Card', 'parklex-core' ),
+			'all_items'          => __( 'All Technical Cards', 'parklex-core' ),
+			'search_items'       => __( 'Search Technical Cards', 'parklex-core' ),
+			'parent_item_colon'  => __( 'Parent Technical Card:', 'parklex-core' ),
+			'not_found'          => __( 'No Technical Cards found.', 'parklex-core' ),
+			'not_found_in_trash' => __( 'No Technical Cards found in Trash.', 'parklex-core' ),
 		);
 
 		register_post_type(
-			'technical-zone',
+			'technical-card',
 			array(
 				'labels'             => $labels,
-				'description'        => __( 'Technical Area', 'parklex-core' ),
+				'description'        => __( 'Technical Card', 'parklex-core' ),
 				'public'             => true,
 				'publicly_queryable' => true,
 				'show_ui'            => true,
@@ -46,7 +43,7 @@ class Bis_Core_CPT_Manager {
 				'query_var'          => true,
 				'capability_type'    => 'page',
 				'rewrite'            => array(
-					'slug'       => 'technical-area',
+					'slug'       => 'technical-card',
 					'with_front' => false,
 				),
 				'has_archive'        => true,
@@ -183,121 +180,6 @@ class Bis_Core_CPT_Manager {
 				'menu_position'      => null,
 				'supports'           => array( 'title', 'editor', 'excerpt', 'thumbnail', 'page-attributes' ),
 				'menu_icon'          => 'dashicons-cart',
-			)
-		);
-	}
-
-	private static function register_distributor() {
-		$labels = array(
-			'name'               => _x( 'Distributors', 'post type general name', 'parklex-core' ),
-			'singular_name'      => _x( 'Distributor', 'post type singular name', 'parklex-core' ),
-			'menu_name'          => _x( 'Distributors', 'admin menu', 'parklex-core' ),
-			'name_admin_bar'     => _x( 'Distributor', 'add new on admin bar', 'parklex-core' ),
-			'add_new'            => _x( 'Add New', 'Distributor', 'parklex-core' ),
-			'add_new_item'       => __( 'Add Distributor', 'parklex-core' ),
-			'new_item'           => __( 'New Distributor', 'parklex-core' ),
-			'edit_item'          => __( 'Edit Distributor', 'parklex-core' ),
-			'view_item'          => __( 'View Distributor', 'parklex-core' ),
-			'all_items'          => __( 'All Distributors', 'parklex-core' ),
-			'search_items'       => __( 'Search Distributors', 'parklex-core' ),
-			'parent_item_colon'  => __( 'Parent Distributor:', 'parklex-core' ),
-			'not_found'          => __( 'No Distributors found.', 'parklex-core' ),
-			'not_found_in_trash' => __( 'No Distributors found in Trash.', 'parklex-core' ),
-		);
-
-		register_post_type(
-			'distributor',
-			array(
-				'labels'             => $labels,
-				'description'        => __( 'Distributors', 'parklex-core' ),
-				'public'             => true,
-				'publicly_queryable' => true,
-				'show_ui'            => true,
-				'show_in_menu'       => true,
-				'show_in_rest'       => true,
-				'query_var'          => true,
-				'capability_type'    => 'page',
-				'has_archive'        => true,
-				'hierarchical'       => true,
-				'menu_position'      => null,
-				'supports'           => array( 'title', 'thumbnail' ),
-				'menu_icon'          => 'dashicons-businessman',
-			)
-		);
-	}
-
-	private static function register_request() {
-		$labels = array(
-			'name'               => _x( 'Requests', 'post type general name', 'parklex-core' ),
-			'singular_name'      => _x( 'Request', 'post type singular name', 'parklex-core' ),
-			'menu_name'          => _x( 'Requests', 'admin menu', 'parklex-core' ),
-			'name_admin_bar'     => _x( 'Request', 'add new on admin bar', 'parklex-core' ),
-			'add_new'            => _x( 'Add New', 'Request', 'parklex-core' ),
-			'add_new_item'       => __( 'Add Request', 'parklex-core' ),
-			'new_item'           => __( 'New Request', 'parklex-core' ),
-			'edit_item'          => __( 'Edit Request', 'parklex-core' ),
-			'view_item'          => __( 'View Request', 'parklex-core' ),
-			'all_items'          => __( 'All Requests', 'parklex-core' ),
-			'search_items'       => __( 'Search Requests', 'parklex-core' ),
-			'parent_item_colon'  => __( 'Parent Request:', 'parklex-core' ),
-			'not_found'          => __( 'No Requests found.', 'parklex-core' ),
-			'not_found_in_trash' => __( 'No Requests found in Trash.', 'parklex-core' ),
-		);
-
-		register_post_type(
-			'request',
-			array(
-				'labels'             => $labels,
-				'description'        => __( 'Requests', 'parklex-core' ),
-				'public'             => true,
-				'show_ui'            => true,
-				'show_in_menu'       => true,
-				'publicly_queryable' => false,
-				'show_in_rest'       => false,
-				'query_var'          => true,
-				'capability_type'    => 'post',
-				'has_archive'        => true,
-				'hierarchical'       => true,
-				'menu_position'      => null,
-				'supports'           => array( 'title', 'thumbnail' ),
-			)
-		);
-	}
-
-	private static function register_reviews() {
-		$labels = array(
-			'name'               => _x( 'Reviews', 'post type general name', 'parklex-core' ),
-			'singular_name'      => _x( 'Review', 'post type singular name', 'parklex-core' ),
-			'menu_name'          => _x( 'Reviews', 'admin menu', 'parklex-core' ),
-			'name_admin_bar'     => _x( 'Review', 'add new on admin bar', 'parklex-core' ),
-			'add_new'            => _x( 'Add New', 'Review', 'parklex-core' ),
-			'add_new_item'       => __( 'Add Review', 'parklex-core' ),
-			'new_item'           => __( 'New Review', 'parklex-core' ),
-			'edit_item'          => __( 'Edit Review', 'parklex-core' ),
-			'view_item'          => __( 'View Review', 'parklex-core' ),
-			'all_items'          => __( 'All Reviews', 'parklex-core' ),
-			'search_items'       => __( 'Search Reviews', 'parklex-core' ),
-			'parent_item_colon'  => __( 'Parent Review:', 'parklex-core' ),
-			'not_found'          => __( 'No Reviews found.', 'parklex-core' ),
-			'not_found_in_trash' => __( 'No Reviews found in Trash.', 'parklex-core' ),
-		);
-
-		register_post_type(
-			'reviews',
-			array(
-				'labels'             => $labels,
-				'description'        => __( 'Reviews', 'parklex-core' ),
-				'public'             => false,
-				'publicly_queryable' => false,
-				'show_ui'            => true,
-				'show_in_menu'       => true,
-				'show_in_rest'       => false,
-				'query_var'          => false,
-				'capability_type'    => 'post',
-				'has_archive'        => false,
-				'hierarchical'       => true,
-				'menu_position'      => null,
-				'supports'           => array( 'title' ),
 			)
 		);
 	}
