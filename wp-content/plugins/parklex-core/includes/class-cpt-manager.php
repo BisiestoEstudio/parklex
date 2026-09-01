@@ -43,7 +43,7 @@ class Bis_Core_CPT_Manager {
 				'query_var'          => true,
 				'capability_type'    => 'page',
 				'rewrite'            => array(
-					'slug'       => 'technical-card',
+					'slug'       => 'technical-zone',
 					'with_front' => false,
 				),
 				'has_archive'        => true,

@@ -1,0 +1,22 @@
+.c-technical-card-categories {
+	background-color: var(--gray-light);
+    padding: var(--wp--preset--spacing--m) 0;
+    overflow-x: scroll;
+
+    &__list {
+        display: flex;
+        width: fit-content;
+        gap: 1rem;
+        padding-left: var(--layout-margin);
+        padding-right: var(--layout-margin);
+    }
+
+    &__link {
+        text-transform: uppercase;
+        display: block;
+        padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm);
+        border: 1px solid var(--gray);
+        white-space: nowrap;
+
+    }
+}
