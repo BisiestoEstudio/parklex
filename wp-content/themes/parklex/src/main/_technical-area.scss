@@ -121,7 +121,28 @@
     }
 }
 
-.c-technical-image {
+.c-technical-video-trigger {
+    border: none;
+    background: none;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.c-technical-media {
+    position: relative;
+    aspect-ratio: 514 / 290;
+    overflow: hidden;
+
+    &__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+    }
+}
+
+.c-technical-row {
     display: flex;
     flex-direction: column;
     gap: var(--wp--preset--spacing--sm);
@@ -137,27 +158,6 @@
     &__actions {
         display: flex;
         gap: var(--wp--preset--spacing--s);
-    }
-
-    &__link {
-        border: none;
-        background: none;
-        text-decoration: underline;
-        cursor: pointer;
-    }
-
-    &__media {
-        position: relative;
-        aspect-ratio: 514 / 290;
-        overflow: hidden;
-    }
-
-    &__img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-        display: block;
     }
 }
 
