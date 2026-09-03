@@ -39,22 +39,6 @@ class Bis_Core_Taxonomy_Manager {
 			)
 		);
 
-		register_taxonomy(
-			'tag_technical_card',
-			'technical-card',
-			array(
-				'label'             => __( 'Technical Card Tags', 'parklex-core' ),
-				'hierarchical'      => false,
-				'show_ui'           => true,
-				'show_admin_column' => true,
-				'show_in_nav_menus' => true,
-				'show_in_rest'      => true,
-				'rewrite'           => array(
-					'slug'       => 'technical-card/tag',
-					'with_front' => false,
-				),
-			)
-		);
 	}
 
 	private static function register_proyecto_taxonomies() {

@@ -89,8 +89,16 @@ get_header();
 		</div>
 		<div class="c-technical-card-list__grid">
 			<?php
+			if ( '' !== $active_classification ) :
+				get_template_part( 'templates/technical-clasification' );
+			else:
+				get_template_part( 'templates/technical-home' );
+
+			endif;
+
 			while ( have_posts() ) :
 				the_post();
+				the_title();
 				the_content();
 			endwhile;
 			?>

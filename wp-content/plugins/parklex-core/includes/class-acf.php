@@ -13,7 +13,27 @@ class ACF
      */
     public static function init()
     {
+        add_action( 'acf/init', array( __CLASS__, 'register_options_pages' ) );
         add_action( 'acf/include_fields', array( __CLASS__, 'register_custom_fields' ) );
+    }
+
+    /**
+     * Registra las páginas de opciones de ACF
+     */
+    public static function register_options_pages()
+    {
+        if ( ! function_exists( 'acf_add_options_sub_page' ) ) {
+            return;
+        }
+
+        acf_add_options_sub_page( array(
+            'page_title'  => __( 'Ajustes de Fichas Técnicas', 'parklex-core' ),
+            'menu_title'  => __( 'Ajustes', 'parklex-core' ),
+            'menu_slug'   => 'acf-options-technical-card',
+            'parent_slug' => 'edit.php?post_type=technical-card',
+            'capability'  => 'manage_options',
+            'redirect'    => false,
+        ) );
     }
 
     /**
