@@ -1,8 +1,11 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
+global $wp_query;
+
 $active_classification = $args['active_classification'];
 $active_category       = $args['active_category'];
+$query                 = ! empty( $args['query'] ) ? $args['query'] : $wp_query;
 
 $classification_term = get_term_by( 'slug', $active_classification, 'classification_technical_card' );
 
@@ -19,9 +22,10 @@ if ( $classification_term && ! is_wp_error( $classification_term ) ) {
 
 <div class="c-technical-card-grid <?= $grid_type ?>">
 	<?php
-	while ( have_posts() ) :
-		the_post();
+	while ( $query->have_posts() ) :
+		$query->the_post();
 		get_template_part( 'templates/technical', $card_type, array( 'disable_label' => $disable_label ) );
 	endwhile;
+	wp_reset_postdata();
 	?>
 </div>
