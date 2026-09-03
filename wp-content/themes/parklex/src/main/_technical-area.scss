@@ -28,6 +28,10 @@
         border: 1px solid var(--gray);
         white-space: nowrap;
 
+        &.active {
+            border-color: var(--black);
+        }
+
     }
 }
 
@@ -56,4 +60,27 @@
         gap: var(--wp--preset--spacing--sm);
     }
 
+    &__clasification-link{
+        &.active {
+            font-weight: var(--font-weight-bold);
+            display: flex;
+            align-items: center;
+            gap: var(--wp--preset--spacing--xxs);
+            &::before {
+                content: '';
+                display: block;
+                width: 4px;
+                height: 4px;
+                background-color: var(--black);
+            }
+            
+        }
+    }
+
+}
+
+@media (max-width: $md) {
+    .c-technical-card-body {
+        flex-direction: column;
+    }
 }

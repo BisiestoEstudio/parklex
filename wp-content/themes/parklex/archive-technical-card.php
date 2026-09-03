@@ -72,10 +72,16 @@ get_header();
 						<?php if ( ! empty( $classification_children ) && ! is_wp_error( $classification_children ) ) : ?>
 							<ul class="c-technical-card-body__clasification-terms">
 								<?php foreach ( $classification_children as $classification_child ) : ?>
+									<?php
+									$classification_child_is_active = $active_classification === $classification_child->slug;
+									$classification_child_href       = $classification_child_is_active
+										? remove_query_arg( 'classification_technical_card' )
+										: add_query_arg( 'classification_technical_card', $classification_child->slug );
+									?>
 									<li class="c-technical-card-body__clasification-term">
 										<a
-											class="c-technical-card-body__clasification-link<?php echo $active_classification === $classification_child->slug ? ' active' : ''; ?>"
-											href="<?php echo esc_url( add_query_arg( 'classification_technical_card', $classification_child->slug ) ); ?>"
+											class="c-technical-card-body__clasification-link<?php echo $classification_child_is_active ? ' active' : ''; ?>"
+											href="<?php echo esc_url( $classification_child_href ); ?>"
 										>
 											<?php echo esc_html( $classification_child->name ); ?>
 										</a>
