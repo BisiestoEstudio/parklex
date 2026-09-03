@@ -16,7 +16,7 @@ $image         = get_field( 'image' );
 
 		<div class="c-technical-image__actions">
 			<?php if ( ! empty( $vimeo_url ) ) : ?>
-				<button type="button" class="c-technical-image__link js-technical-video-trigger" data-vimeo-url="<?php echo esc_url( $vimeo_url ); ?>">
+				<button type="button" class="c-technical-image__link js-technical-video-trigger has-base-font-size" data-vimeo-url="<?php echo esc_url( $vimeo_url ); ?>">
 					<?php esc_html_e( 'Ver', 'parklex' ); ?>
 				</button>
 			<?php endif; ?>
