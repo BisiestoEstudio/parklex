@@ -20,7 +20,15 @@ class Bis_Theme_Assets {
 		wp_enqueue_style( 'bis-theme-blocks', BIS_THEME_URI . '/assets/css/blocks.css', array( 'bis-theme-main' ), BIS_THEME_VERSION );
 
 		// JS
-
+		if ( is_post_type_archive( 'technical-card' ) ) {
+			wp_enqueue_script(
+				'bis-theme-technical-video-modal',
+				BIS_THEME_URI . '/assets/js/technical-video-modal.js',
+				array(),
+				BIS_THEME_VERSION,
+				true
+			);
+		}
 	}
 
 	public static function enqueue_editor_styles() {

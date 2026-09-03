@@ -5,7 +5,7 @@
 defined( 'ABSPATH' ) || exit;
 
 $disable_label = ! empty( $args['disable_label'] );
-$link          = get_field( 'link' );
+$vimeo_url     = get_field( 'link' );
 $image         = get_field( 'image' );
 ?>
 <div class="c-technical-image">
@@ -15,10 +15,10 @@ $image         = get_field( 'image' );
 		<p class="c-technical-image__title"><?php echo esc_html( get_the_title() ); ?></p>
 
 		<div class="c-technical-image__actions">
-			<?php if ( ! empty( $link['url'] ) ) : ?>
-				<a class="c-technical-image__link" href="<?php echo esc_url( $link['url'] ); ?>" <?php echo ! empty( $link['target'] ) ? 'target="' . esc_attr( $link['target'] ) . '"' : ''; ?>>
-					<?php echo esc_html( ! empty( $link['title'] ) ? $link['title'] : __( 'Ver', 'parklex' ) ); ?>
-				</a>
+			<?php if ( ! empty( $vimeo_url ) ) : ?>
+				<button type="button" class="c-technical-image__link js-technical-video-trigger" data-vimeo-url="<?php echo esc_url( $vimeo_url ); ?>">
+					<?php esc_html_e( 'Ver', 'parklex' ); ?>
+				</button>
 			<?php endif; ?>
 
 			<?php get_template_part( 'templates/technical-downloads' ); ?>
