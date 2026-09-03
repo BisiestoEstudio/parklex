@@ -13,7 +13,7 @@ $downloads_field = array(
 	'label'        => __( 'Downloads', 'parklex-core' ),
 	'name'         => 'downloads',
 	'type'         => 'repeater',
-	'required'     => 0,
+	'required'     => 1,
 	'layout'       => 'table',
 	'button_label' => __( 'Add File', 'parklex-core' ),
 	'sub_fields'   => array(
@@ -22,7 +22,7 @@ $downloads_field = array(
 			'label'         => __( 'File', 'parklex-core' ),
 			'name'          => 'file',
 			'type'          => 'file',
-			'required'      => 0,
+			'required'      => 1,
 			'return_format' => 'array',
 			'library'       => 'all',
 		),
@@ -30,12 +30,12 @@ $downloads_field = array(
 );
 
 $link_field = array(
-	'key'           => "{$group_key}_link",
-	'label'         => __( 'Link', 'parklex-core' ),
-	'name'          => 'link',
-	'type'          => 'link',
-	'required'      => 0,
-	'return_format' => 'array',
+	'key'          => "{$group_key}_link",
+	'label'        => __( 'Link al video de vimeo', 'parklex-core' ),
+	'instructions' => __( 'El link debe ser de un video de vimeo. De lo contrario, no funcionará', 'parklex-core' ),
+	'name'         => 'link',
+	'type'         => 'url',
+	'required'     => 0,
 );
 
 $image_field = array(

@@ -36,11 +36,11 @@
 }
 
 .c-technical-card-body {
-    display: flex;
+    display: grid;
+    grid-template-columns: 260px 1fr;
     gap: var(--wp--preset--spacing--m);
 
     &__sidebar {
-        width: 260px;
         display: grid;
         gap: var(--wp--preset--spacing--xl);
     }
@@ -79,8 +79,62 @@
 
 }
 
+.c-technical{
+    &-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--wp--preset--spacing--xs);
+    }
+    
+    &-chip {
+        padding: var(--wp--preset--spacing--xxs);
+        background-color: var(--gray-light);
+    }
+    
+    &-downloads {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--wp--preset--spacing--xxs);
+    }
+    
+    &-download-link {
+        display: flex;
+        align-items: center;
+        gap: var(--wp--preset--spacing--xxs);
+    
+        &::before {
+            content: url('../images/download-icon.svg');
+            display: block;
+            width: 24px;
+            height: 24px;
+        }
+    }
+    
+    &-card{
+        padding: var(--wp--preset--spacing--m);
+        border: 1px solid var(--black);
+        border-radius: var(--border-radius);
+        display: flex;
+        flex-direction: column;
+        gap: var(--wp--preset--spacing--m);
+    }
+}
+
+.c-technical-card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--wp--preset--spacing--m);
+    &.grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+
+
+
 @media (max-width: $md) {
     .c-technical-card-body {
-        flex-direction: column;
+
     }
 }
