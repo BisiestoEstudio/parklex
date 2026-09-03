@@ -11,7 +11,7 @@ $group_key = 'bisiesto_tax_classification_technical_card';
 $card_type_field = array(
 	'key'           => "{$group_key}_card_type",
 	'label'         => __( 'Tipo de Ficha', 'parklex-core' ),
-	'name'          => 'tipo_de_ficha',
+	'name'          => 'card_type',
 	'type'          => 'select',
 	'required'      => 0,
 	'choices'       => array(
@@ -25,12 +25,12 @@ $card_type_field = array(
 	'return_format' => 'value',
 );
 
-$has_label_field = array(
-	'key'           => "{$group_key}_has_label",
-	'label'         => __( 'Has Label', 'parklex-core' ),
-	'name'          => 'has_label',
+$disable_label_field = array(
+	'key'           => "{$group_key}_disable_label",
+	'label'         => __( 'Disable Label', 'parklex-core' ),
+	'name'          => 'disable_label',
 	'type'          => 'true_false',
-	'instructions'  => __( 'Indica si las etiquetas están activadas.', 'parklex-core' ),
+	'instructions'  => __( 'Marca esta opción para desactivar las etiquetas.', 'parklex-core' ),
 	'required'      => 0,
 	'default_value' => 0,
 	'ui'            => 1,
@@ -41,7 +41,7 @@ acf_add_local_field_group( array(
 	'title'                 => $title,
 	'fields'                => array(
 		$card_type_field,
-		$has_label_field,
+		$disable_label_field,
 	),
 	'show_in_rest'          => true,
 	'location'              => array(

@@ -2,14 +2,26 @@
 defined( 'ABSPATH' ) || exit;
 
 get_header();
+
+$active_category = isset( $_GET['category_technical_card'] )
+? sanitize_title( wp_unslash( $_GET['category_technical_card'] ) )
+: false;
+
+$active_classification = isset( $_GET['classification_technical_card'] )
+? sanitize_title( wp_unslash( $_GET['classification_technical_card'] ) )
+: false;
+
+$template_params = array(
+	'active_category' => $active_category,
+	'active_classification' => $active_classification,
+);
+
 ?>
 
 <main class="entry-content is-layout-constrained has-global-padding">
 	<div class="c-technical-card-categories alignfull">
 		<?php
-		$active_category = isset( $_GET['category_technical_card'] )
-			? sanitize_title( wp_unslash( $_GET['category_technical_card'] ) )
-			: '';
+
 
 		$technical_card_categories = get_terms(
 			array(
@@ -22,7 +34,7 @@ get_header();
 			<ul class="c-technical-card-categories__list alignwide">
 				<li class="c-technical-card-categories__item">
 					<a
-						class="c-technical-card-categories__link<?php echo '' === $active_category ? ' active' : ''; ?>"
+						class="c-technical-card-categories__link<?php echo $active_category ? ' active' : ''; ?>"
 						href="<?php echo esc_url( remove_query_arg( 'category_technical_card' ) ); ?>"
 					>
 						<?php esc_html_e( 'All', 'parklex' ); ?>
@@ -44,10 +56,6 @@ get_header();
 	<div class="c-technical-card-body alignwide">
 		<div class="c-technical-card-body__sidebar">
 			<?php
-			$active_classification = isset( $_GET['classification_technical_card'] )
-				? sanitize_title( wp_unslash( $_GET['classification_technical_card'] ) )
-				: '';
-
 			$classification_parents = get_terms(
 				array(
 					'taxonomy'   => 'classification_technical_card',
@@ -95,18 +103,13 @@ get_header();
 		</div>
 		<div class="c-technical-card-list__grid">
 			<?php
-			if ( '' !== $active_classification ) :
-				get_template_part( 'templates/technical-clasification' );
+			if ( $active_classification ) :
+				get_template_part( 'templates/technical', 'classification', $template_params );
 			else:
-				get_template_part( 'templates/technical-home' );
+				get_template_part( 'templates/technical', 'home', $template_params );
 
 			endif;
 
-			while ( have_posts() ) :
-				the_post();
-				the_title();
-				the_content();
-			endwhile;
 			?>
 		</div>
 	</div>

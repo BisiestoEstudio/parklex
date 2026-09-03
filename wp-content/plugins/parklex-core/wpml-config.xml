@@ -1,0 +1,6 @@
+<wpml-config>
+	<custom-term-fields>
+		<custom-term-field action="copy">card_type</custom-term-field>
+		<custom-term-field action="copy">disable_label</custom-term-field>
+	</custom-term-fields>
+</wpml-config>
