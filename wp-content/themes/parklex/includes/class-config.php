@@ -29,6 +29,7 @@ class Bis_Theme_Config
         add_theme_support('custom-logo');
         add_theme_support('html5', array('search-form', 'gallery', 'caption', 'style', 'script'));
         add_theme_support('automatic-feed-links');
+        add_theme_support('woocommerce');
     }
 
 
