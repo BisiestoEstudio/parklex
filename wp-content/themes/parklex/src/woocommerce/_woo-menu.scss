@@ -1,0 +1,38 @@
+/**
+ * Wholesale top bar (My Account / Logout / Bag)
+ * Rendered by header-woocommerce.php — see .add-menu markup there.
+ */
+
+.add-menu {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--m, 16px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--base-font);
+  font-size: 13px;
+  font-weight: var(--font-weight-regular);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+
+  li {
+    margin: 0;
+  }
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      color: var(--gray-dark);
+    }
+  }
+
+  .cart-contents {
+    gap: 4px;
+  }
+}

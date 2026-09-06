@@ -1,0 +1,15 @@
+/**
+ * Bag link (cart count)
+ * Rendered by header-woocommerce.php (.cart-contents / .inside-cart-wrap / .inside-cart).
+ */
+
+.inside-cart-wrap {
+  .inside-cart {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+  }
+}

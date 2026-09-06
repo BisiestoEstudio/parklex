@@ -13,7 +13,5 @@ defined( 'ABSPATH' ) || exit;
 <?php wp_body_open(); ?>
 
 <header>
-<?php
-
-?>
+<?php get_template_part( 'header-woocommerce' ); ?>
 </header>

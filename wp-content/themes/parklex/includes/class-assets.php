@@ -18,7 +18,7 @@ class Bis_Theme_Assets {
 		wp_enqueue_style( 'bis-theme-framework', BIS_THEME_URI . '/assets/css/framework.min.css', array(), BIS_THEME_VERSION );
 		wp_enqueue_style( 'bis-theme-main', BIS_THEME_URI . '/assets/css/main.min.css', array( 'bis-theme-framework' ), BIS_THEME_VERSION );
 		wp_enqueue_style( 'bis-theme-blocks', BIS_THEME_URI . '/assets/css/blocks.css', array( 'bis-theme-main' ), BIS_THEME_VERSION );
-
+		wp_enqueue_style( 'bis-theme-woocommerce', BIS_THEME_URI . '/assets/css/woocommerce.min.css', array( 'bis-theme-main' ), BIS_THEME_VERSION );
 		// JS
 		if ( is_post_type_archive( 'technical-card' ) ) {
 			wp_enqueue_script(

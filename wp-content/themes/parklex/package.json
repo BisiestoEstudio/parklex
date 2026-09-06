@@ -18,7 +18,8 @@
     "watch-framework": "postcss src/framework.postcss.scss --output assets/css/framework.min.css --watch",
     "watch-main": "postcss src/main.postcss.scss --output assets/css/main.min.css --watch",
     "watch-editor": "postcss src/editor.postcss.scss --output assets/css/editor.min.css --watch",
-    "start": "npm run watch-framework | npm run watch-main | npm run watch-editor | npm run watch-blocks"
+    "watch-woocommerce": "postcss src/woocommerce.scss --output assets/css/woocommerce.min.css --watch",
+    "start": "npm run watch-framework | npm run watch-main | npm run watch-editor | npm run watch-blocks | npm run watch-woocommerce"
   },
   "author": "Elena Titos",
   "license": "ISC"

@@ -15,6 +15,8 @@ class Bis_Core_WooCommerce_Legacy {
 		add_filter( 'ngettext', array( __CLASS__, 'change_cart_string' ), 100, 3 );
 		add_filter( 'add_to_cart_text', array( __CLASS__, 'custom_single_add_to_cart_text' ) );
 		add_filter( 'woocommerce_product_single_add_to_cart_text', array( __CLASS__, 'custom_single_add_to_cart_text' ) );
+
+		add_filter( 'woocommerce_add_to_cart_fragments', array( __CLASS__, 'cart_count_fragment' ) );
 	}
 
 	/**
@@ -39,5 +41,14 @@ class Bis_Core_WooCommerce_Legacy {
 	 */
 	public static function custom_single_add_to_cart_text() {
 		return __( 'Add to bag', 'woocommerce' );
+	}
+
+	/**
+	 * Keep the header cart count in sync via WooCommerce's own native fragment refresh
+	 * (wc-cart-fragments), no custom AJAX endpoint needed.
+	 */
+	public static function cart_count_fragment( $fragments ) {
+		$fragments['.inside-cart-wrap .inside-cart'] = '<span class="inside-cart">' . WC()->cart->get_cart_contents_count() . '</span>';
+		return $fragments;
 	}
 }

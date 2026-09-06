@@ -6,6 +6,7 @@ class Bis_Theme_Config
     static function init()
     {
         add_action('after_setup_theme', array(__CLASS__, 'customize_theme'));
+        add_action('after_setup_theme', array(__CLASS__, 'register_menus'));
         add_filter('style_loader_tag', array(__CLASS__, 'add_rel_preload'), 10, 4);
         add_action('init', array(__CLASS__, 'remove_headlinks'));
         add_filter('upload_mimes', array(__CLASS__, 'allow_svg'));
@@ -30,6 +31,18 @@ class Bis_Theme_Config
         add_theme_support('html5', array('search-form', 'gallery', 'caption', 'style', 'script'));
         add_theme_support('automatic-feed-links');
         add_theme_support('woocommerce');
+    }
+
+
+    /**
+     * Register nav menu locations
+     */
+    static function register_menus()
+    {
+        register_nav_menus(array(
+            'primary'   => __('Primary Menu', 'parklex'),
+            'shop_menu' => __('Shop Menu (distributor role)', 'parklex'),
+        ));
     }
 
 
