@@ -11,6 +11,15 @@ $group_key = "bisiesto_cpt_{$cpt}";
 
 
 
+$sku_group_key = "{$group_key}_sku";
+$sku_group = array(
+    'key' => $sku_group_key,
+    'label' => __('SKU', 'parklex-core'),
+    'name' => 'sku',
+    'type' => 'text',
+    'translations' => 'sync',
+);
+
 $gallery_group_key = "{$group_key}_gallery";
 $gallery_group = array(
     'key' => $gallery_group_key,
@@ -25,6 +34,7 @@ acf_add_local_field_group( array(
     'key'                   => $group_key,
     'title'                 => $title,
     'fields'                => array(
+        $sku_group,
         $gallery_group,
     ),
     'show_in_rest'          => true,

@@ -8,10 +8,12 @@ class Bis_Core_Loader {
 		require_once BIS_CORE_DIR . 'includes/class-taxonomy-manager.php';
 		require_once BIS_CORE_DIR . 'includes/class-acf.php';
 		require_once BIS_CORE_DIR . 'includes/class-woocommerce-legacy.php';
+		require_once BIS_CORE_DIR . 'includes/class-roles-legacy.php';
 
 		add_action( 'init', array( 'Bis_Core_CPT_Manager', 'register' ) );
 		add_action( 'init', array( 'Bis_Core_Taxonomy_Manager', 'register' ) );
 		add_action( 'init', array( 'Bis_Core_WooCommerce_Legacy', 'init' ) );
+		add_action( 'init', array( 'Bis_Core_Roles_Legacy', 'init' ) );
 	}
 
 	public static function activate() {
