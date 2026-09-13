@@ -22,26 +22,6 @@ acf_add_local_field_group( array(
 			'layout' => 'block',
 			'sub_fields' => array(
 				array(
-					'key' => 'field_606acdde3bd85',
-					'label' => 'Zona',
-					'name' => 'zona',
-					'aria-label' => '',
-					'type' => 'text',
-					'instructions' => '',
-					'required' => 0,
-					'conditional_logic' => 0,
-					'wrapper' => array(
-						'width' => '',
-						'class' => '',
-						'id' => '',
-					),
-					'default_value' => '',
-					'placeholder' => '',
-					'prepend' => '',
-					'append' => '',
-					'maxlength' => '',
-				),
-				array(
 					'key' => 'field_606acdfe3bd86',
 					'label' => 'Year',
 					'name' => 'year',

@@ -143,20 +143,20 @@ class Bis_Core_CPT_Manager {
 
 	private static function register_products() {
 		$labels = array(
-			'name'               => _x( 'Products', 'post type general name', 'parklex-core' ),
-			'singular_name'      => _x( 'Product', 'post type singular name', 'parklex-core' ),
-			'menu_name'          => _x( 'Products', 'admin menu', 'parklex-core' ),
-			'name_admin_bar'     => _x( 'Product', 'add new on admin bar', 'parklex-core' ),
-			'add_new'            => _x( 'Add New', 'Product', 'parklex-core' ),
-			'add_new_item'       => __( 'Add Product', 'parklex-core' ),
-			'new_item'           => __( 'New Product', 'parklex-core' ),
-			'edit_item'          => __( 'Edit Product', 'parklex-core' ),
-			'view_item'          => __( 'View Product', 'parklex-core' ),
-			'all_items'          => __( 'All Products', 'parklex-core' ),
-			'search_items'       => __( 'Search Products', 'parklex-core' ),
-			'parent_item_colon'  => __( 'Parent Product:', 'parklex-core' ),
-			'not_found'          => __( 'No Products found.', 'parklex-core' ),
-			'not_found_in_trash' => __( 'No Products found in Trash.', 'parklex-core' ),
+			'name'               => _x( 'Acabados', 'post type general name', 'parklex-core' ),
+			'singular_name'      => _x( 'Acabado', 'post type singular name', 'parklex-core' ),
+			'menu_name'          => _x( 'Acabados', 'admin menu', 'parklex-core' ),
+			'name_admin_bar'     => _x( 'Acabado', 'add new on admin bar', 'parklex-core' ),
+			'add_new'            => _x( 'Add New', 'Acabado', 'parklex-core' ),
+			'add_new_item'       => __( 'Add Acabado', 'parklex-core' ),
+			'new_item'           => __( 'New Acabado', 'parklex-core' ),
+			'edit_item'          => __( 'Edit Acabado', 'parklex-core' ),
+			'view_item'          => __( 'View Acabado', 'parklex-core' ),
+			'all_items'          => __( 'All Acabados', 'parklex-core' ),
+			'search_items'       => __( 'Search Acabados', 'parklex-core' ),
+			'parent_item_colon'  => __( 'Parent Acabado:', 'parklex-core' ),
+			'not_found'          => __( 'No Acabados found.', 'parklex-core' ),
+			'not_found_in_trash' => __( 'No Acabados found in Trash.', 'parklex-core' ),
 		);
 
 		register_post_type(

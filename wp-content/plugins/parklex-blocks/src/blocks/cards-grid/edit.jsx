@@ -4,7 +4,7 @@ import { PanelBody, RangeControl } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
 import { useBisiestoBlockProps } from '../../hooks/useBisiestoBlockProps';
 
-const ALLOWED_BLOCKS = [ 'bisiesto/icon-card', 'bisiesto/click-card', 'core/group' ];
+const ALLOWED_BLOCKS = [ 'bisiesto/icon-card', 'bisiesto/click-card', 'core/group', 'core/block' ];
 
 export default function Edit( { attributes, setAttributes } ) {
 	const { columns, gap, style } = attributes;
