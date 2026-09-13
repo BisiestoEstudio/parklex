@@ -26,6 +26,9 @@ class Bis_Core_WooCommerce_Legacy {
 		add_action( 'woocommerce_checkout_update_order_meta', array( __CLASS__, 'save_project_name_field' ) );
 		add_action( 'woocommerce_admin_order_data_after_billing_address', array( __CLASS__, 'render_project_name_admin_field' ) );
 		add_action( 'woocommerce_process_shop_order_meta', array( __CLASS__, 'save_project_name_admin_field' ), 45, 2 );
+
+		add_filter( 'woocommerce_available_variation', array( __CLASS__, 'apply_distributor_max_qty_to_variation' ) );
+		add_filter( 'woocommerce_quantity_input_args', array( __CLASS__, 'apply_distributor_max_qty_to_quantity_input' ), 10, 2 );
 	}
 
 	/**
@@ -143,5 +146,57 @@ class Bis_Core_WooCommerce_Legacy {
 		if ( isset( $_POST['project_name'] ) ) {
 			update_post_meta( $order_id, 'project_name', sanitize_text_field( $_POST['project_name'] ) );
 		}
+	}
+
+	/**
+	 * Limit the max quantity of a variation for "distributor" users.
+	 */
+	public static function apply_distributor_max_qty_to_variation( $args ) {
+		$product = wc_get_product( $args['variation_id'] );
+
+		if ( current_user_can( 'distributor' ) ) {
+			$args['max_value'] = self::get_distributor_max_qty( $product->get_parent_id() );
+		}
+
+		return $args;
+	}
+
+	/**
+	 * Limit the max quantity in the product quantity input for "distributor" users.
+	 */
+	public static function apply_distributor_max_qty_to_quantity_input( $args, $product ) {
+		if ( current_user_can( 'distributor' ) ) {
+			$args['max_value'] = self::get_distributor_max_qty( $product->get_id() );
+		}
+
+		return $args;
+	}
+
+	/**
+	 * Resolve the max quantity for the current distributor user: global option value
+	 * (fallback 20) overridden by a per-product value. NOTE: a per-user value also
+	 * exists (distributor_max_qty on the user) but, same as in the original code,
+	 * it is read and never actually applied.
+	 */
+	private static function get_distributor_max_qty( $product_id ) {
+		$max_qty_global  = get_field( 'distributor_max_qty', 'option' );
+		$max_qty_product = get_field( 'distributor_max_qty', $product_id );
+		$max_qty_user    = get_field( 'distributor_max_qty', 'user_' . get_current_user_id() );
+
+		if ( ! $max_qty_global ) {
+			$max_qty_global = 20;
+		}
+
+		$max_qty = $max_qty_global;
+
+		if ( $max_qty_product ) {
+			$max_qty = $max_qty_product;
+		}
+
+		if ( $max_qty_user ) {
+			$max_qty = $max_qty_global;
+		}
+
+		return $max_qty;
 	}
 }
