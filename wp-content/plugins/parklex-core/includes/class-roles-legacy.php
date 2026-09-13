@@ -6,6 +6,7 @@ class Bis_Core_Roles_Legacy {
 
 	public static function init() {
 		add_action( 'admin_menu', array( __CLASS__, 'hide_menus_sample_supervisor' ), 11 );
+		add_action( 'template_redirect', array( __CLASS__, 'redirect_distributor_and_guests' ) );
 	}
 
 	/**
@@ -78,5 +79,21 @@ class Bis_Core_Roles_Legacy {
 
 		remove_action( 'admin_bar_menu', 'wpseo_admin_bar_menu', 95 );
 		remove_menu_page( 'wpseo_dashboard' );
+	}
+
+	/**
+	 * Redirect distributor/sample_supervisor users to the "Samples" product category,
+	 * and guests away from WooCommerce pages to the "My account" page.
+	 */
+	public static function redirect_distributor_and_guests() {
+		if ( ( current_user_can( 'distributor' ) || current_user_can( 'sample_supervisor' ) ) && ( is_front_page() || is_shop() ) ) {
+			wp_redirect( get_term_link( 'samples', 'product_cat' ) );
+			exit();
+		}
+
+		if ( ! is_user_logged_in() && ( is_woocommerce() || is_shop() || is_cart() || is_checkout() || is_tax( 'product_cat' ) ) ) {
+			wp_redirect( get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) );
+			exit();
+		}
 	}
 }

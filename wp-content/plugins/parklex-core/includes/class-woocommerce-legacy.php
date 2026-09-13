@@ -17,6 +17,15 @@ class Bis_Core_WooCommerce_Legacy {
 		add_filter( 'woocommerce_product_single_add_to_cart_text', array( __CLASS__, 'custom_single_add_to_cart_text' ) );
 
 		add_filter( 'woocommerce_add_to_cart_fragments', array( __CLASS__, 'cart_count_fragment' ) );
+
+		add_action( 'add_meta_boxes', array( __CLASS__, 'add_shipping_meta_box' ) );
+		add_action( 'save_post', array( __CLASS__, 'save_shipping_meta_box' ), 20, 1 );
+
+		add_action( 'woocommerce_after_order_notes', array( __CLASS__, 'add_project_name_field' ) );
+		add_action( 'woocommerce_checkout_process', array( __CLASS__, 'validate_project_name_field' ) );
+		add_action( 'woocommerce_checkout_update_order_meta', array( __CLASS__, 'save_project_name_field' ) );
+		add_action( 'woocommerce_admin_order_data_after_billing_address', array( __CLASS__, 'render_project_name_admin_field' ) );
+		add_action( 'woocommerce_process_shop_order_meta', array( __CLASS__, 'save_project_name_admin_field' ), 45, 2 );
 	}
 
 	/**
@@ -50,5 +59,89 @@ class Bis_Core_WooCommerce_Legacy {
 	public static function cart_count_fragment( $fragments ) {
 		$fragments['.inside-cart-wrap .inside-cart'] = '<span class="inside-cart">' . WC()->cart->get_cart_contents_count() . '</span>';
 		return $fragments;
+	}
+
+	/**
+	 * Add a "Shipping details" meta box (courier + cost) to the order edit page.
+	 */
+	public static function add_shipping_meta_box() {
+		add_meta_box(
+			'shipping',
+			__( 'Shipping details', 'parklex-core' ),
+			array( __CLASS__, 'render_shipping_meta_box' ),
+			'shop_order',
+			'side'
+		);
+	}
+
+	public static function render_shipping_meta_box( $post ) {
+		wp_nonce_field( 'bis_core_save_shipping_meta_box', 'bis_core_shipping_meta_box_nonce' );
+
+		echo '<p>Courier: <input type="text" style="width:100%" id="shipping_courier" name="shipping_courier" value="' . esc_attr( get_post_meta( $post->ID, 'shipping_courier', true ) ) . '" /></p>';
+		echo '<p>Cost: <input type="text" style="width:100%" id="shipping_cost" name="shipping_costs" value="' . esc_attr( get_post_meta( $post->ID, 'shipping_costs', true ) ) . '" /></p>';
+	}
+
+	public static function save_shipping_meta_box( $post_id ) {
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return;
+		}
+
+		if ( ! isset( $_POST['bis_core_shipping_meta_box_nonce'] ) || ! wp_verify_nonce( $_POST['bis_core_shipping_meta_box_nonce'], 'bis_core_save_shipping_meta_box' ) ) {
+			return;
+		}
+
+		if ( isset( $_POST['post_type'] ) && 'shop_order' === $_POST['post_type'] ) {
+			if ( ! current_user_can( 'edit_shop_order', $post_id ) ) {
+				return;
+			}
+		}
+
+		if ( isset( $_POST['shipping_costs'] ) ) {
+			update_post_meta( $post_id, 'shipping_costs', sanitize_text_field( $_POST['shipping_costs'] ) );
+		}
+
+		if ( isset( $_POST['shipping_courier'] ) ) {
+			update_post_meta( $post_id, 'shipping_courier', sanitize_text_field( $_POST['shipping_courier'] ) );
+		}
+	}
+
+	/**
+	 * Add a required "Project Name" field to the checkout.
+	 */
+	public static function add_project_name_field( $checkout ) {
+		woocommerce_form_field( 'project_name', array(
+			'type'     => 'text',
+			'required' => true,
+			'class'    => array( 'form-row-wide' ),
+			'label'    => __( 'Project Name', 'parklex-core' ),
+		), $checkout->get_value( 'project_name' ) );
+	}
+
+	public static function validate_project_name_field() {
+		if ( ! isset( $_POST['project_name'] ) || ! $_POST['project_name'] ) {
+			wc_add_notice( __( 'You must enter a Project Name.', 'parklex-core' ), 'error' );
+		}
+	}
+
+	public static function save_project_name_field( $order_id ) {
+		if ( ! empty( $_POST['project_name'] ) ) {
+			update_post_meta( $order_id, 'project_name', sanitize_text_field( $_POST['project_name'] ) );
+		}
+	}
+
+	/**
+	 * Show the "Project Name" field as editable in the admin order edit screen.
+	 */
+	public static function render_project_name_admin_field( $order ) {
+		$project_name = get_post_meta( $order->get_id(), 'project_name', true );
+
+		echo '<p><strong>' . __( 'Project Name', 'parklex-core' ) . ':</strong><br>';
+		echo '<input type="text" name="project_name" value="' . esc_attr( $project_name ) . '" style="width:100%;" /></p>';
+	}
+
+	public static function save_project_name_admin_field( $order_id, $post ) {
+		if ( isset( $_POST['project_name'] ) ) {
+			update_post_meta( $order_id, 'project_name', sanitize_text_field( $_POST['project_name'] ) );
+		}
 	}
 }
