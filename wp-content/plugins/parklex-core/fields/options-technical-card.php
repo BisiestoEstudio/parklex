@@ -24,11 +24,35 @@ $classification_categories_field = array(
 	'multiple'      => 0,
 );
 
+$presentations_technical_cards_field = array(
+	'key'           => "{$group_key}_presentations_technical_cards",
+	'label'         => __( 'Presentations', 'parklex-core' ),
+	'name'          => 'presentations_technical_cards',
+	'instructions'  => __( 'Fichas técnicas que se mostrarán en la pestaña "Presentations" de Mi Cuenta. El orden de selección se conserva.', 'parklex-core' ),
+	'type'          => 'relationship',
+	'post_type'     => array( 'technical-card' ),
+	'filters'       => array( 'search' ),
+	'return_format' => 'id',
+);
+
+$submit_documents_technical_cards_field = array(
+	'key'           => "{$group_key}_submit_documents_technical_cards",
+	'label'         => __( 'Submit Documents', 'parklex-core' ),
+	'name'          => 'submit_documents_technical_cards',
+	'instructions'  => __( 'Fichas técnicas que se mostrarán en la pestaña "Submit Documents" de Mi Cuenta. El orden de selección se conserva.', 'parklex-core' ),
+	'type'          => 'relationship',
+	'post_type'     => array( 'technical-card' ),
+	'filters'       => array( 'search' ),
+	'return_format' => 'id',
+);
+
 acf_add_local_field_group( array(
 	'key'                   => $group_key,
 	'title'                 => $title,
 	'fields'                => array(
 		$classification_categories_field,
+		$presentations_technical_cards_field,
+		$submit_documents_technical_cards_field,
 	),
 	'location'              => array(
 		array(
