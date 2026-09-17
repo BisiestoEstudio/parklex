@@ -29,6 +29,12 @@ class Bis_Core_WooCommerce_Legacy {
 
 		add_filter( 'woocommerce_available_variation', array( __CLASS__, 'apply_distributor_max_qty_to_variation' ) );
 		add_filter( 'woocommerce_quantity_input_args', array( __CLASS__, 'apply_distributor_max_qty_to_quantity_input' ), 10, 2 );
+
+		add_filter( 'woocommerce_my_account_my_orders_columns', array( __CLASS__, 'add_my_orders_columns' ) );
+		add_action( 'woocommerce_my_account_my_orders_column_project-name', array( __CLASS__, 'render_my_orders_project_name_column' ) );
+		add_action( 'woocommerce_my_account_my_orders_column_courier', array( __CLASS__, 'render_my_orders_courier_column' ) );
+
+		add_filter( 'woocommerce_email_recipient_new_order', array( __CLASS__, 'add_new_order_email_recipient_for_spain' ), 10, 2 );
 	}
 
 	/**
@@ -198,5 +204,46 @@ class Bis_Core_WooCommerce_Legacy {
 		}
 
 		return $max_qty;
+	}
+
+	/**
+	 * Add "Project name" and "Courier" columns to the My Account > Orders table,
+	 * right before the "Total" column, preserving any other columns already present.
+	 */
+	public static function add_my_orders_columns( $columns ) {
+		$new_columns = array();
+
+		foreach ( $columns as $key => $label ) {
+			if ( 'order-total' === $key ) {
+				$new_columns['project-name'] = __( 'Project name', 'parklex-core' );
+				$new_columns['courier']      = __( 'Courier', 'parklex-core' );
+			}
+			$new_columns[ $key ] = $label;
+		}
+
+		return $new_columns;
+	}
+
+	public static function render_my_orders_project_name_column( $order ) {
+		echo esc_html( get_post_meta( $order->get_id(), 'project_name', true ) ?: '—' );
+	}
+
+	public static function render_my_orders_courier_column( $order ) {
+		echo esc_html( get_post_meta( $order->get_id(), 'shipping_courier', true ) ?: '—' );
+	}
+
+	/**
+	 * CC the "new order" admin notification to a fixed recipient when the order ships to Spain.
+	 */
+	public static function add_new_order_email_recipient_for_spain( $recipient, $order ) {
+		if ( ! $order instanceof WC_Order ) {
+			return $recipient;
+		}
+
+		if ( 'ES' === $order->get_shipping_country() ) {
+			$recipient .= ', ingrid.iribas@parklexprodema.com';
+		}
+
+		return $recipient;
 	}
 }
