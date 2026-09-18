@@ -92,6 +92,10 @@
 			dragSortHeuristics: { sortInterval: 0 },
 		} );
 
+		window.addEventListener( 'resize', function () {
+			grid.refreshItems().layout();
+		} );
+
 		function syncImagesIdsField() {
 			var input = getImagesIdsInput();
 

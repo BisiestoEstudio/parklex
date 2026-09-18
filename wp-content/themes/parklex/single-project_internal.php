@@ -44,9 +44,11 @@ while ( have_posts() ) :
 							<div class="grid-sizer"></div>
 							<?php foreach ( $images as $image ) : ?>
 								<figure class="grid-item<?php echo esc_attr( $grid_class ); ?>">
-									<a href="<?php echo esc_url( $image['url'] ); ?>" data-fancybox="gallery">
-										<img src="<?php echo esc_url( $image['sizes']['large'] ?? $image['url'] ); ?>" loading="lazy" alt="<?php echo esc_attr( $image['alt'] ); ?>">
-									</a>
+									<div class="grid-item__inner">
+										<a href="<?php echo esc_url( $image['url'] ); ?>" data-fancybox="gallery">
+											<img src="<?php echo esc_url( $image['sizes']['large'] ?? $image['url'] ); ?>" loading="lazy" alt="<?php echo esc_attr( $image['alt'] ); ?>">
+										</a>
+									</div>
 								</figure>
 							<?php endforeach; ?>
 						</div>
@@ -55,9 +57,9 @@ while ( have_posts() ) :
 			</div>
 
 			<div class="c-internal-project__details">
-				<h1><?php echo esc_html( $title ); ?></h1>
+				<h1 class="c-internal-project__title"><?php echo esc_html( $title ); ?></h1>
 
-				<ul class="c-internal-project__details-list">
+				<dl class="c-internal-project__meta">
 					<?php
 					$fields = array(
 						'year'                => __( 'Year', 'parklex' ),
@@ -72,7 +74,10 @@ while ( have_posts() ) :
 							continue;
 						endif;
 						?>
-						<li><?php echo esc_html( $label ); ?>: <?php echo esc_html( $value ); ?></li>
+						<div class="c-internal-project__meta-row">
+							<dt><?php echo esc_html( $label ); ?></dt>
+							<dd><?php echo esc_html( $value ); ?></dd>
+						</div>
 					<?php endforeach; ?>
 
 					<?php
@@ -97,18 +102,21 @@ while ( have_posts() ) :
 						endif;
 						$terms = is_array( $terms ) ? $terms : array( $terms );
 						?>
-						<li><?php echo esc_html( $label ); ?>: <?php echo esc_html( implode( ', ', wp_list_pluck( $terms, 'name' ) ) ); ?></li>
+						<div class="c-internal-project__meta-row">
+							<dt><?php echo esc_html( $label ); ?></dt>
+							<dd><?php echo esc_html( implode( ', ', wp_list_pluck( $terms, 'name' ) ) ); ?></dd>
+						</div>
 					<?php endforeach; ?>
+				</dl>
 
-					<?php $comments = get_field( 'comments' ); ?>
-					<?php if ( $comments ) : ?>
-						<li><?php esc_html_e( 'Comments', 'parklex' ); ?>: <?php echo esc_html( $comments ); ?></li>
-					<?php endif; ?>
-				</ul>
+				<?php $comments = get_field( 'comments' ); ?>
+				<?php if ( $comments ) : ?>
+					<p class="c-internal-project__comments"><?php echo esc_html( $comments ); ?></p>
+				<?php endif; ?>
 
 				<?php if ( ! $hide_download_link && ! empty( $download_urls ) ) : ?>
 					<a
-						class="btn download-zip"
+ 						class="c-internal-project__download download-zip btn btn--primary"
 						href="#"
 						data-filename="<?php echo esc_attr( 'internal-project-' . get_post_field( 'post_name', get_the_ID() ) ); ?>"
 						data-urls="<?php echo esc_attr( wp_json_encode( $download_urls ) ); ?>"

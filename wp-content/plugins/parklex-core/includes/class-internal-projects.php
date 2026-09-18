@@ -34,7 +34,7 @@ class Bis_Core_Internal_Projects {
 			return;
 		}
 
-		echo '<style>#bis-internal-project-custom-gallery{display:none;}</style>';
+		echo '<style>#bis-internal-project-custom-gallery,.bis-internal-project-images-ids{display:none;}</style>';
 	}
 
 	/**
@@ -61,8 +61,10 @@ class Bis_Core_Internal_Projects {
 		<div class="c-internal-project-form__grid" data-role="gallery-grid">
 			<?php for ( $i = 0; $i < $max_images; $i++ ) : ?>
 				<div class="c-internal-project-form__item" data-role="gallery-item">
-					<img class="c-internal-project-form__item-img" src="" alt="" hidden>
-					<input type="file" class="c-internal-project-form__file" data-role="gallery-input" accept="image/*" multiple>
+					<div class="c-internal-project-form__item-inner">
+						<img class="c-internal-project-form__item-img" src="" alt="" hidden>
+						<input type="file" class="c-internal-project-form__file" data-role="gallery-input" accept="image/*" multiple>
+					</div>
 				</div>
 			<?php endfor; ?>
 		</div>

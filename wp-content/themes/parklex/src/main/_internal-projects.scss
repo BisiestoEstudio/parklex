@@ -49,18 +49,57 @@
 
 .c-internal-project {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: var(--wp--preset--spacing--l);
+    grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+    gap: var(--wp--preset--spacing--xl);
+    align-items: start;
 
-    &__details-list {
+    &__details {
+        position: sticky;
+        top: var(--wp--preset--spacing--m);
+    }
+
+    &__title {
+        margin-top: 0;
+        margin-bottom: var(--wp--preset--spacing--m);
+    }
+
+    &__meta {
         display: flex;
         flex-direction: column;
-        gap: var(--wp--preset--spacing--xxs);
+        margin: 0 0 var(--wp--preset--spacing--m);
+        border-top: 1px solid var(--black);
+    }
+
+    &__meta-row {
+        display: grid;
+        grid-template-columns: 40% 1fr;
+        gap: var(--wp--preset--spacing--sm);
+        padding: var(--wp--preset--spacing--xs) 0;
+        border-bottom: 1px solid var(--black);
+
+        dt {
+            font-weight: 500;
+        }
+
+        dd {
+            margin: 0;
+        }
+    }
+
+    &__comments {
+        margin-top: calc(-1 * var(--wp--preset--spacing--xs));
         margin-bottom: var(--wp--preset--spacing--m);
     }
 
     &__notes {
-        margin-top: var(--wp--preset--spacing--m);
+        margin-top: var(--wp--preset--spacing--l);
+        padding-top: var(--wp--preset--spacing--m);
+        border-top: 1px solid var(--black);
+        font-size: 0.875em;
+
+        p:first-child {
+            margin-top: 0;
+        }
     }
 }
 
@@ -75,7 +114,7 @@
 }
 
 .images-grid-inpr .grid-item {
-    margin-bottom: var(--wp--preset--spacing--sm);
+    position: absolute;
 
     &.width-full {
         width: 100%;
@@ -85,22 +124,43 @@
         width: 50%;
     }
 
+    &__inner {
+        margin: var(--wp--preset--spacing--xxs);
+        overflow: hidden;
+        border-radius: var(--border-radius);
+    }
+
+    a {
+        display: block;
+    }
+
     img {
         width: 100%;
         display: block;
+        transition: transform 0.3s ease;
+    }
+
+    a:hover img {
+        transform: scale(1.03);
     }
 }
 
 .download-zip {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--wp--preset--spacing--xxs);
+    &__spinner {
+        &:not([hidden]) {
+            display: inline;
+        }
+    }
 }
 
 @media (max-width: $md) {
     .c-internal-projects,
     .c-internal-project {
         grid-template-columns: 1fr;
+    }
+
+    .c-internal-project__details {
+        position: static;
     }
 
     .c-internal-projects__grid {
