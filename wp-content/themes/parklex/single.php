@@ -4,7 +4,7 @@ defined( 'ABSPATH' ) || exit;
 get_header();
 ?>
 
-<main class="entry-content is-layout-constrained">
+<main class="entry-content is-layout-constrained has-global-padding">
 	<?php
 	while ( have_posts() ) :
 		the_post();

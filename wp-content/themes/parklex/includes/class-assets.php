@@ -29,6 +29,40 @@ class Bis_Theme_Assets {
 				true
 			);
 		}
+
+		if ( is_singular( 'project_internal' ) || is_post_type_archive( 'project_internal' ) ) {
+			self::enqueue_internal_projects_assets();
+		}
+	}
+
+	/**
+	 * Third-party libraries for the Internal Projects gallery (masonry grid, lightbox,
+	 * client-side zip download) — vendored locally, no CDN, same pattern as Swiper in
+	 * parklex-blocks. Only the single view needs the gallery libs; the archive only
+	 * needs the plain filter-reload script.
+	 */
+	private static function enqueue_internal_projects_assets() {
+		$deps = array();
+
+		if ( is_singular( 'project_internal' ) ) {
+			wp_enqueue_style( 'bis-theme-fancybox', BIS_THEME_URI . '/assets/css/vendor/fancybox.css', array(), BIS_THEME_VERSION );
+
+			wp_enqueue_script( 'bis-theme-jszip', BIS_THEME_URI . '/assets/js/vendor/jszip.js', array(), BIS_THEME_VERSION, true );
+			wp_enqueue_script( 'bis-theme-jszip-utils', BIS_THEME_URI . '/assets/js/vendor/jszip-utils.js', array( 'bis-theme-jszip' ), BIS_THEME_VERSION, true );
+			wp_enqueue_script( 'bis-theme-filesaver', BIS_THEME_URI . '/assets/js/vendor/filesaver.min.js', array(), BIS_THEME_VERSION, true );
+			wp_enqueue_script( 'bis-theme-fancybox', BIS_THEME_URI . '/assets/js/vendor/fancybox.umd.js', array(), BIS_THEME_VERSION, true );
+			wp_enqueue_script( 'bis-theme-packery', BIS_THEME_URI . '/assets/js/vendor/packery.pkgd.min.js', array(), BIS_THEME_VERSION, true );
+
+			$deps = array( 'bis-theme-jszip-utils', 'bis-theme-filesaver', 'bis-theme-fancybox', 'bis-theme-packery' );
+		}
+
+		wp_enqueue_script(
+			'bis-theme-internal-projects',
+			BIS_THEME_URI . '/assets/js/internal-projects.js',
+			$deps,
+			BIS_THEME_VERSION,
+			true
+		);
 	}
 
 	public static function enqueue_editor_styles() {

@@ -34,6 +34,15 @@ class ACF
             'capability'  => 'manage_options',
             'redirect'    => false,
         ) );
+
+        acf_add_options_sub_page( array(
+            'page_title'  => __( 'Internal Projects Settings', 'parklex-core' ),
+            'menu_title'  => __( 'Settings', 'parklex-core' ),
+            'menu_slug'   => 'acf-options-internal-projects-settings',
+            'parent_slug' => 'edit.php?post_type=project_internal',
+            'capability'  => 'manage_options',
+            'redirect'    => false,
+        ) );
     }
 
     /**

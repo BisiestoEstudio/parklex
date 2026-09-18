@@ -111,7 +111,6 @@ acf_add_local_field_group( array(
 						1 => 'taxonomy',
 					),
 					'return_format' => 'object',
-					'min' => 1,
 					'max' => '',
 					'allow_in_bindings' => 1,
 					'elements' => array(
