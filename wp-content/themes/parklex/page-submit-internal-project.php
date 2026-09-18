@@ -22,7 +22,7 @@ get_header();
 			),
 			'submit_value'    => get_field( 'submit_button_text', 'option' ),
 			'updated_message' => get_field( 'updated_form_message', 'option' ),
-			'uploader'        => 'wp',
+			'uploader'        => 'basic',
 		) );
 		?>
 	</div>

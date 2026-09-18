@@ -52,6 +52,14 @@ $download_modal_text_field = array(
 	'type'  => 'text',
 );
 
+$max_upload_count_images_field = array(
+	'key'           => "{$group_key}_max_upload_count_images",
+	'label'         => __( 'Max upload count images', 'parklex-core' ),
+	'name'          => 'max_upload_count_images',
+	'type'          => 'number',
+	'default_value' => 20,
+);
+
 acf_add_local_field_group( array(
 	'key'                   => $group_key,
 	'title'                 => $title,
@@ -62,6 +70,7 @@ acf_add_local_field_group( array(
 		$internal_projects_title_field,
 		$enable_search_field,
 		$download_modal_text_field,
+		$max_upload_count_images_field,
 	),
 	'location'              => array(
 		array(

@@ -6,24 +6,31 @@ get_header();
 while ( have_posts() ) :
 	the_post();
 
-	$gallery             = get_field( 'image_gallery' );
+	$gallery_rows        = get_field( 'image_gallery' );
 	$title               = get_field( 'project_name' ) ?: get_the_title();
 	$hide_download_link  = get_field( 'hide_download_link' );
 	$notes_text          = get_field( 'notes_text_ipf', 'option' );
 	$download_confirm    = get_field( 'text_modal_download_photos', 'option' );
 
-	$download_urls = array();
+	// The gallery repeater takes priority; if it's empty, fall back to the featured image alone.
+	$images = array();
 
-	foreach ( (array) $gallery as $image ) {
-		$download_urls[] = $image['url'];
+	if ( ! empty( $gallery_rows ) ) {
+		foreach ( $gallery_rows as $row ) {
+			if ( ! empty( $row['image'] ) ) {
+				$images[] = $row['image'];
+			}
+		}
+	} elseif ( $featured_image = get_field( 'featured_image' ) ) {
+		$images[] = $featured_image;
 	}
 
-	$gallery_count = is_array( $gallery ) ? count( $gallery ) : 0;
+	$download_urls = wp_list_pluck( $images, 'url' );
 
 	$grid_class = '';
-	if ( 2 === $gallery_count ) {
+	if ( 2 === count( $images ) ) {
 		$grid_class = ' width-half';
-	} elseif ( 1 === $gallery_count ) {
+	} elseif ( 1 === count( $images ) ) {
 		$grid_class = ' width-full';
 	}
 	?>
@@ -31,11 +38,11 @@ while ( have_posts() ) :
 	<main class="entry-content is-layout-constrained has-global-padding">
 		<div class="c-internal-project alignwide">
 			<div class="c-internal-project__gallery">
-				<?php if ( ! empty( $gallery ) ) : ?>
+				<?php if ( ! empty( $images ) ) : ?>
 					<div class="images-grid-inpr">
 						<div class="holder">
 							<div class="grid-sizer"></div>
-							<?php foreach ( $gallery as $image ) : ?>
+							<?php foreach ( $images as $image ) : ?>
 								<figure class="grid-item<?php echo esc_attr( $grid_class ); ?>">
 									<a href="<?php echo esc_url( $image['url'] ); ?>" data-fancybox="gallery">
 										<img src="<?php echo esc_url( $image['sizes']['large'] ?? $image['url'] ); ?>" loading="lazy" alt="<?php echo esc_attr( $image['alt'] ); ?>">

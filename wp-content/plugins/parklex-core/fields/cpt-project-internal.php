@@ -16,13 +16,50 @@ $project_name_field = array(
 	'required' => 1,
 );
 
-$image_gallery_field = array(
-	'key'      => "{$group_key}_image_gallery",
-	'label'    => __( 'Image gallery', 'parklex-core' ),
-	'name'     => 'image_gallery',
-	'type'     => 'gallery',
+/**
+ * The gallery is driven by a custom drag&drop uploader (see class-internal-projects.php
+ * and assets/js/internal-project-form.js), same mechanism as the original theme:
+ * - `images_ids` (hidden) collects the uploaded attachment IDs, comma-separated, from JS.
+ * - `custom_gallery` (message) is the container the uploader UI renders into.
+ * - `image_gallery` (repeater) and `featured_image` are populated server-side, on save,
+ *   from `images_ids` (see Bis_Core_Internal_Projects::sync_gallery_from_images_ids()) —
+ *   not edited directly. Both must stay hidden on the front-end form via CSS.
+ */
+$images_ids_field = array(
+	'key'      => "{$group_key}_images_ids",
+	'label'    => __( 'Images', 'parklex-core' ),
+	'name'     => 'images_ids',
+	'type'     => 'text',
 	'required' => 1,
-	'min'      => 1,
+	'wrapper'  => array( 'class' => 'bis-internal-project-images-ids' ),
+);
+
+$custom_gallery_field = array(
+	'key'     => "{$group_key}_custom_gallery",
+	'label'   => '',
+	'name'    => 'custom_gallery',
+	'type'    => 'message',
+	'message' => '',
+	'wrapper' => array( 'id' => 'bis-internal-project-custom-gallery' ),
+);
+
+$image_gallery_field = array(
+	'key'        => "{$group_key}_image_gallery",
+	'label'      => __( 'Image gallery', 'parklex-core' ),
+	'name'       => 'image_gallery',
+	'type'       => 'repeater',
+	'layout'     => 'table',
+	'wrapper'    => array( 'class' => 'bis-internal-project-hidden-field' ),
+	'sub_fields' => array(
+		array(
+			'key'           => "{$group_key}_image_gallery_image",
+			'label'         => __( 'Image', 'parklex-core' ),
+			'name'          => 'image',
+			'type'          => 'image',
+			'required'      => 1,
+			'return_format' => 'array',
+		),
+	),
 );
 
 $featured_image_field = array(
@@ -31,6 +68,7 @@ $featured_image_field = array(
 	'name'          => 'featured_image',
 	'type'          => 'image',
 	'return_format' => 'array',
+	'wrapper'       => array( 'class' => 'bis-internal-project-hidden-field' ),
 );
 
 $hide_download_link_field = array(
@@ -120,6 +158,8 @@ acf_add_local_field_group( array(
 	'fields'                => array_merge(
 		array(
 			$project_name_field,
+			$images_ids_field,
+			$custom_gallery_field,
 			$image_gallery_field,
 			$featured_image_field,
 			$hide_download_link_field,

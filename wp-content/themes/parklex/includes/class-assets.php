@@ -33,6 +33,10 @@ class Bis_Theme_Assets {
 		if ( is_singular( 'project_internal' ) || is_post_type_archive( 'project_internal' ) ) {
 			self::enqueue_internal_projects_assets();
 		}
+
+		if ( is_page_template( 'page-submit-internal-project.php' ) ) {
+			self::enqueue_internal_project_form_assets();
+		}
 	}
 
 	/**
@@ -63,6 +67,29 @@ class Bis_Theme_Assets {
 			BIS_THEME_VERSION,
 			true
 		);
+	}
+
+	/**
+	 * Drag&drop, reorderable gallery uploader for the Internal Projects submission form
+	 * (Muuri + Hammer.js for the reorderable grid, vendored locally, no CDN).
+	 */
+	private static function enqueue_internal_project_form_assets() {
+		wp_enqueue_script( 'bis-theme-hammer', BIS_THEME_URI . '/assets/js/vendor/hammer.min.js', array(), BIS_THEME_VERSION, true );
+		wp_enqueue_script( 'bis-theme-muuri', BIS_THEME_URI . '/assets/js/vendor/muuri.min.js', array( 'bis-theme-hammer' ), BIS_THEME_VERSION, true );
+
+		wp_enqueue_script(
+			'bis-theme-internal-project-form',
+			BIS_THEME_URI . '/assets/js/internal-project-form.js',
+			array( 'bis-theme-muuri' ),
+			BIS_THEME_VERSION,
+			true
+		);
+
+		wp_localize_script( 'bis-theme-internal-project-form', 'bisInternalProjectForm', array(
+			'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+			'action'  => Bis_Core_Internal_Projects::UPLOAD_ACTION,
+			'nonce'   => wp_create_nonce( Bis_Core_Internal_Projects::UPLOAD_NONCE_ACTION ),
+		) );
 	}
 
 	public static function enqueue_editor_styles() {
