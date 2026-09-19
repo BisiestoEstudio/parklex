@@ -92,6 +92,10 @@ Thumbs.db
 !CHANGELOG.md
 !composer.json
 
+# track project documentation
+!docs/
+!docs/**
+
 # track favicon files, if they exist
 !android-chrome-*.png
 !apple-touch-icon*.png
