@@ -21,6 +21,47 @@ class Bis_Core_Internal_Projects {
 		add_action( 'wp_ajax_' . self::UPLOAD_ACTION, array( __CLASS__, 'handle_gallery_image_upload' ) );
 		add_action( 'admin_head-post.php', array( __CLASS__, 'hide_gallery_uploader_field_in_admin' ) );
 		add_action( 'admin_head-post-new.php', array( __CLASS__, 'hide_gallery_uploader_field_in_admin' ) );
+
+		if ( class_exists( 'WooCommerce' ) ) {
+			add_filter( 'woocommerce_account_menu_items', array( __CLASS__, 'add_my_account_menu_item' ) );
+			add_filter( 'woocommerce_get_endpoint_url', array( __CLASS__, 'redirect_my_account_menu_item_url' ), 10, 2 );
+		}
+	}
+
+	/**
+	 * Add "Internal Projects" to the My Account menu, right before "Log out" — only for
+	 * users with the "allow_internal_projects" permission (same gate as the front-end).
+	 */
+	public static function add_my_account_menu_item( $items ) {
+		if ( ! get_field( 'allow_internal_projects', 'user_' . get_current_user_id() ) ) {
+			return $items;
+		}
+
+		if ( ! isset( $items['customer-logout'] ) ) {
+			$items['internal-projects'] = __( 'Internal Projects', 'parklex-core' );
+			return $items;
+		}
+
+		$logout = $items['customer-logout'];
+		unset( $items['customer-logout'] );
+
+		$items['internal-projects'] = __( 'Internal Projects', 'parklex-core' );
+		$items['customer-logout']   = $logout;
+
+		return $items;
+	}
+
+	/**
+	 * "Internal Projects" isn't a real My Account endpoint/tab — it's a plain link to the
+	 * CPT archive, same as the original theme (which achieved this by overriding the whole
+	 * myaccount/navigation.php template; this filter is the same result without that).
+	 */
+	public static function redirect_my_account_menu_item_url( $url, $endpoint ) {
+		if ( 'internal-projects' === $endpoint ) {
+			return get_post_type_archive_link( 'project_internal' );
+		}
+
+		return $url;
 	}
 
 	/**
