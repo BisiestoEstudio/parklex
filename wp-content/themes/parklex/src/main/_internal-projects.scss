@@ -1,7 +1,7 @@
 .c-internal-projects {
     display: grid;
     grid-template-columns: 260px 1fr;
-    gap: var(--wp--preset--spacing--m);
+    gap: var(--wp--preset--spacing--xl);
 
     &__title {
         margin-bottom: var(--wp--preset--spacing--m);
@@ -10,7 +10,10 @@
     &__sidebar {
         display: flex;
         flex-direction: column;
-        gap: var(--wp--preset--spacing--m);
+        gap: var(--wp--preset--spacing--l);
+        position: sticky;
+        top: var(--wp--preset--spacing--m);
+        align-self: start;
     }
 
     &__filters {
@@ -19,9 +22,29 @@
         gap: var(--wp--preset--spacing--sm);
     }
 
-    &__filter-item select,
-    &__filter-item input {
+    &__filter-item {
+        label {
+            font-size: var(--wp--preset--font-size--caption, 0.8125em);
+            font-family: var(--base-font);
+            margin-bottom: 4px;
+            color: var(--gray);
+        }
+
+        select,
+        input {
+            width: 100%;
+        }
+    }
+
+    &__reset {
+        font-size: var(--wp--preset--font-size--caption, 0.8125em);
+        text-decoration: underline;
+        align-self: flex-start;
+    }
+
+    &__new .btn {
         width: 100%;
+        justify-content: center;
     }
 
     &__grid {
@@ -30,20 +53,52 @@
         gap: var(--wp--preset--spacing--m);
     }
 
+    &__card {
+        a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+    }
+
     &__card-image {
         aspect-ratio: 3 / 4;
         overflow: hidden;
+        background-color: var(--gray-light);
+        border-radius: var(--border-radius);
+        margin: 0;
 
         img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.3s ease;
         }
+    }
+
+    &__card a:hover &__card-image img {
+        transform: scale(1.04);
     }
 
     &__card-title {
         display: block;
         margin-top: var(--wp--preset--spacing--xs);
+    }
+
+    &__empty {
+        padding: var(--wp--preset--spacing--xl);
+        text-align: center;
+        background-color: var(--gray-light);
+        border-radius: var(--border-radius);
+    }
+}
+
+.c-internal-project__breadcrumb {
+    margin-bottom: var(--wp--preset--spacing--m);
+    font-size: 0.875em;
+
+    a {
+        text-decoration: underline;
     }
 }
 
@@ -153,13 +208,20 @@
     }
 }
 
+@media (max-width: $lg) {
+    .c-internal-projects__grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
 @media (max-width: $md) {
     .c-internal-projects,
     .c-internal-project {
         grid-template-columns: 1fr;
     }
 
-    .c-internal-project__details {
+    .c-internal-project__details,
+    .c-internal-projects__sidebar {
         position: static;
     }
 

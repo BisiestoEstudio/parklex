@@ -50,8 +50,9 @@ $taxonomy_filters = array(
 					<?php endif; ?>
 					<?php $active = isset( $_GET[ $get_key ] ) ? sanitize_text_field( wp_unslash( $_GET[ $get_key ] ) ) : ''; ?>
 					<div class="c-internal-projects__filter-item">
-						<select data-tax="<?php echo esc_attr( $get_key ); ?>">
-							<option value=""<?php selected( '', $active ); ?>><?php echo esc_html( $label ); ?></option>
+						<label for="filter-<?php echo esc_attr( $get_key ); ?>"><?php echo esc_html( $label ); ?></label>
+						<select id="filter-<?php echo esc_attr( $get_key ); ?>" data-tax="<?php echo esc_attr( $get_key ); ?>">
+							<option value=""<?php selected( '', $active ); ?>><?php esc_html_e( 'All', 'parklex' ); ?></option>
 							<?php foreach ( $values as $value ) : ?>
 								<option value="<?php echo esc_attr( $value ); ?>"<?php selected( $value, $active ); ?>><?php echo esc_html( $value ); ?></option>
 							<?php endforeach; ?>
@@ -66,8 +67,9 @@ $taxonomy_filters = array(
 					<?php endif; ?>
 					<?php $active = isset( $_GET[ $taxonomy ] ) ? sanitize_title( wp_unslash( $_GET[ $taxonomy ] ) ) : ''; ?>
 					<div class="c-internal-projects__filter-item">
-						<select data-tax="<?php echo esc_attr( $taxonomy ); ?>">
-							<option value=""<?php selected( '', $active ); ?>><?php echo esc_html( $label ); ?></option>
+						<label for="filter-<?php echo esc_attr( $taxonomy ); ?>"><?php echo esc_html( $label ); ?></label>
+						<select id="filter-<?php echo esc_attr( $taxonomy ); ?>" data-tax="<?php echo esc_attr( $taxonomy ); ?>">
+							<option value=""<?php selected( '', $active ); ?>><?php esc_html_e( 'All', 'parklex' ); ?></option>
 							<?php foreach ( $terms as $term ) : ?>
 								<option value="<?php echo esc_attr( $term->slug ); ?>"<?php selected( $term->slug, $active ); ?>><?php echo esc_html( $term->name ); ?></option>
 							<?php endforeach; ?>
@@ -76,9 +78,7 @@ $taxonomy_filters = array(
 				<?php endforeach; ?>
 
 				<?php if ( ! empty( $_GET ) ) : ?>
-					<div class="c-internal-projects__filter-item">
-						<a href="<?php echo esc_url( get_post_type_archive_link( 'project_internal' ) ); ?>"><?php esc_html_e( 'Reset all filters', 'parklex' ); ?></a>
-					</div>
+					<a class="c-internal-projects__reset" href="<?php echo esc_url( get_post_type_archive_link( 'project_internal' ) ); ?>"><?php esc_html_e( 'Reset all filters', 'parklex' ); ?></a>
 				<?php endif; ?>
 			</form>
 
@@ -101,7 +101,9 @@ $taxonomy_filters = array(
 				</div>
 				<?php the_posts_pagination(); ?>
 			<?php else : ?>
-				<p><?php esc_html_e( 'No projects found. Try changing your search options.', 'parklex' ); ?></p>
+				<div class="c-internal-projects__empty">
+					<p><?php esc_html_e( 'No projects found. Try changing your search options.', 'parklex' ); ?></p>
+				</div>
 			<?php endif; ?>
 		</div>
 	</div>

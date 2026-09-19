@@ -9,7 +9,7 @@ get_header();
 ?>
 
 <main class="entry-content is-layout-constrained has-global-padding">
-	<div class="c-internal-project-form alignwide">
+	<div class="c-internal-project-form">
 		<?php the_content(); ?>
 
 		<?php
@@ -20,8 +20,8 @@ get_header();
 				'post_status' => 'pending',
 				'post_type'   => 'project_internal',
 			),
-			'submit_value'    => get_field( 'submit_button_text', 'option' ),
-			'updated_message' => get_field( 'updated_form_message', 'option' ),
+			'submit_value'    => get_field( 'submit_button_text', 'option' ) ?: __( 'Submit', 'parklex' ),
+			'updated_message' => get_field( 'updated_form_message', 'option' ) ?: __( 'Project successfully created and pending to review.', 'parklex' ),
 			'uploader'        => 'basic',
 		) );
 		?>

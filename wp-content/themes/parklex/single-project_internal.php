@@ -36,6 +36,12 @@ while ( have_posts() ) :
 	?>
 
 	<main class="entry-content is-layout-constrained has-global-padding">
+		<?php if ( function_exists( 'yoast_breadcrumb' ) ) : ?>
+			<div class="c-internal-project__breadcrumb alignwide">
+				<?php yoast_breadcrumb(); ?>
+			</div>
+		<?php endif; ?>
+
 		<div class="c-internal-project alignwide">
 			<div class="c-internal-project__gallery">
 				<?php if ( ! empty( $images ) ) : ?>
