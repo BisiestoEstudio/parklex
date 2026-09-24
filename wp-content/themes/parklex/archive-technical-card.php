@@ -56,50 +56,60 @@ $template_params = array(
 	<div class="c-technical-card-body alignwide">
 		<div class="c-technical-card-body__sidebar">
 			<?php
-			$classification_parents = get_terms(
-				array(
-					'taxonomy'   => 'classification_technical_card',
-					'hide_empty' => false,
-					'parent'     => 0,
-				)
-			);
+			$active_classification_term = $active_classification
+				? get_term_by( 'slug', $active_classification, 'classification_technical_card' )
+				: false;
 			?>
-			<?php if ( ! empty( $classification_parents ) && ! is_wp_error( $classification_parents ) ) : ?>
-				<?php foreach ( $classification_parents as $classification_parent ) : ?>
-					<?php
-					$classification_children = get_terms(
-						array(
-							'taxonomy'   => 'classification_technical_card',
-							'hide_empty' => false,
-							'parent'     => $classification_parent->term_id,
-						)
-					);
-					?>
-					<div class="c-technical-card-body__clasification-group">
-						<span class="has-display-xxs-font-size"><?php echo esc_html( $classification_parent->name ); ?></span>
-						<?php if ( ! empty( $classification_children ) && ! is_wp_error( $classification_children ) ) : ?>
-							<ul class="c-technical-card-body__clasification-terms">
-								<?php foreach ( $classification_children as $classification_child ) : ?>
-									<?php
-									$classification_child_is_active = $active_classification === $classification_child->slug;
-									$classification_child_href       = $classification_child_is_active
-										? remove_query_arg( 'classification_technical_card' )
-										: add_query_arg( 'classification_technical_card', $classification_child->slug );
-									?>
-									<li class="c-technical-card-body__clasification-term">
-										<a
-											class="c-technical-card-body__clasification-link<?php echo $classification_child_is_active ? ' active' : ''; ?>"
-											href="<?php echo esc_url( $classification_child_href ); ?>"
-										>
-											<?php echo esc_html( $classification_child->name ); ?>
-										</a>
-									</li>
-								<?php endforeach; ?>
-							</ul>
-						<?php endif; ?>
-					</div>
-				<?php endforeach; ?>
-			<?php endif; ?>
+			<button type="button" class="c-technical-card-body__sidebar-toggle js-technical-sidebar-toggle has-base-font-size" aria-expanded="false">
+				<?php echo esc_html( $active_classification_term ? $active_classification_term->name : __( 'Filters', 'parklex' ) ); ?>
+			</button>
+			<div class="c-technical-card-body__sidebar-content">
+				<?php
+				$classification_parents = get_terms(
+					array(
+						'taxonomy'   => 'classification_technical_card',
+						'hide_empty' => false,
+						'parent'     => 0,
+					)
+				);
+				?>
+				<?php if ( ! empty( $classification_parents ) && ! is_wp_error( $classification_parents ) ) : ?>
+					<?php foreach ( $classification_parents as $classification_parent ) : ?>
+						<?php
+						$classification_children = get_terms(
+							array(
+								'taxonomy'   => 'classification_technical_card',
+								'hide_empty' => false,
+								'parent'     => $classification_parent->term_id,
+							)
+						);
+						?>
+						<div class="c-technical-card-body__clasification-group">
+							<span class="has-display-xxs-font-size"><?php echo esc_html( $classification_parent->name ); ?></span>
+							<?php if ( ! empty( $classification_children ) && ! is_wp_error( $classification_children ) ) : ?>
+								<ul class="c-technical-card-body__clasification-terms">
+									<?php foreach ( $classification_children as $classification_child ) : ?>
+										<?php
+										$classification_child_is_active = $active_classification === $classification_child->slug;
+										$classification_child_href       = $classification_child_is_active
+											? remove_query_arg( 'classification_technical_card' )
+											: add_query_arg( 'classification_technical_card', $classification_child->slug );
+										?>
+										<li class="c-technical-card-body__clasification-term">
+											<a
+												class="c-technical-card-body__clasification-link<?php echo $classification_child_is_active ? ' active' : ''; ?>"
+												href="<?php echo esc_url( $classification_child_href ); ?>"
+											>
+												<?php echo esc_html( $classification_child->name ); ?>
+											</a>
+										</li>
+									<?php endforeach; ?>
+								</ul>
+							<?php endif; ?>
+						</div>
+					<?php endforeach; ?>
+				<?php endif; ?>
+			</div>
 		</div>
 		<div class="c-technical-card-list__grid">
 			<?php

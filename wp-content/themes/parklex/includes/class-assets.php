@@ -28,6 +28,14 @@ class Bis_Theme_Assets {
 				BIS_THEME_VERSION,
 				true
 			);
+
+			wp_enqueue_script(
+				'bis-theme-technical-sidebar-toggle',
+				BIS_THEME_URI . '/assets/js/technical-sidebar-toggle.js',
+				array(),
+				BIS_THEME_VERSION,
+				true
+			);
 		}
 
 		if ( is_singular( 'project_internal' ) || is_post_type_archive( 'project_internal' ) ) {
