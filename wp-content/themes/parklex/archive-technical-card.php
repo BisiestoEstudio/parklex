@@ -111,7 +111,7 @@ $template_params = array(
 				<?php endif; ?>
 			</div>
 		</div>
-		<div class="c-technical-card-list__grid">
+		<div class="c-technical-card-body__wrapper">
 			<?php
 			if ( $active_classification ) :
 				get_template_part( 'templates/technical', 'classification', $template_params );

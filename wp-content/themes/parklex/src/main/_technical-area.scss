@@ -1,6 +1,6 @@
 .c-technical-card-categories {
 	background-color: var(--gray-light);
-    padding: var(--wp--preset--spacing--m) 0;
+    padding: var(--wp--preset--spacing--m) var(--layout-margin);
 
     [data-device="movil"] & {
         overflow-x: scroll;
@@ -11,8 +11,7 @@
         display: flex;
         flex-wrap: wrap;
         gap: var(--wp--preset--spacing--m);
-        padding-left: var(--layout-margin);
-        padding-right: var(--layout-margin);
+
         [data-device="movil"] & {
             flex-wrap: nowrap;
             width: fit-content;
@@ -54,6 +53,11 @@
     display: grid;
     grid-template-columns: 280px 1fr;
     gap: var(--wp--preset--spacing--l);
+    margin-top: 0;
+
+    &__wrapper {
+        padding-top: var(--wp--preset--spacing--l);
+    }
  
 
     @media (max-width: $md) {
@@ -66,6 +70,7 @@
         gap: var(--wp--preset--spacing--xl);
         padding-right: var(--wp--preset--spacing--m);
         border-right: 1px solid var(--gray);
+        padding-top: var(--wp--preset--spacing--l);
     }
 
     &__sidebar-toggle {
