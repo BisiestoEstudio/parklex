@@ -6,6 +6,7 @@ global $wp_query;
 $active_classification = $args['active_classification'];
 $active_category       = $args['active_category'];
 $query                 = ! empty( $args['query'] ) ? $args['query'] : $wp_query;
+$is_home               = ! empty( $args['is_home'] );
 
 $classification_term = get_term_by( 'slug', $active_classification, 'classification_technical_card' );
 
@@ -16,6 +17,12 @@ $grid_type      = 'grid-2';
 if ( $classification_term && ! is_wp_error( $classification_term ) ) {
 	$card_type     = get_field( 'card_type', $classification_term ) ?: 'card';
 	$disable_label = (bool) get_field( 'disable_label', $classification_term );
+
+	// On the home overview, "row" layouts are always shown as "card" instead.
+	if ( $is_home && 'row' === $card_type ) {
+		$card_type = 'card';
+	}
+
 	$grid_type = $card_type === 'card' ? 'grid-3' : 'grid-2';
 }
 ?>

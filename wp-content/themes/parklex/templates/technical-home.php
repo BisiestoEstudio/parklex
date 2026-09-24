@@ -54,6 +54,7 @@ if ( ! empty( $classification_ids ) ) {
 			'active_classification' => $classification_category->slug,
 			'active_category'       => $active_category,
 			'query'                 => $classification_query,
+			'is_home'               => true,
 		)
 	);
 	?>

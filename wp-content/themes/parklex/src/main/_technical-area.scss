@@ -160,7 +160,7 @@
 .c-technical-row {
     display: flex;
     flex-direction: column;
-    gap: var(--wp--preset--spacing--sm);
+    gap: var(--wp--preset--spacing--s);
     border-top: 1px solid var(--black);
     padding-top: var(--wp--preset--spacing--m);
 
@@ -180,6 +180,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: var(--wp--preset--spacing--m);
+    row-gap: var(--wp--preset--spacing--l);
 
     &.grid-2 {
         grid-template-columns: repeat(auto-fill, minmax(min(400px, 100%), 1fr));
@@ -193,7 +194,7 @@
 .c-technical-video-modal {
     position: fixed;
     inset: 0;
-    z-index: 1000;
+    z-index: 1000; 
     display: flex;
     align-items: center;
     justify-content: center;
