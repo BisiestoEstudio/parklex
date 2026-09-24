@@ -22,6 +22,8 @@ if ( ! empty( $classification_ids ) ) {
 }
 ?>
 
+<div class="c-technical-home__classification-sections">
+
 <?php foreach ( $classification_categories as $classification_category ) : ?>
 	<?php
 	$classification_query_args = array(
@@ -40,6 +42,7 @@ if ( ! empty( $classification_ids ) ) {
 		continue;
 	}
 	?>
+	<div class="c-technical-home__classification-section">
 
 	<h2 class="c-technical-home__title has-h-5-font-size"><?php echo esc_html( $classification_category->name ); ?></h2>
 
@@ -54,4 +57,6 @@ if ( ! empty( $classification_ids ) ) {
 		)
 	);
 	?>
+	</div>
 <?php endforeach; ?>
+</div>

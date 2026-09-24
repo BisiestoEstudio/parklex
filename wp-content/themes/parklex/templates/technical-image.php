@@ -6,7 +6,13 @@ defined( 'ABSPATH' ) || exit;
 
 $disable_label = ! empty( $args['disable_label'] );
 $vimeo_url     = get_field( 'link' );
-$image         = get_field( 'image' );
+$image_id      = get_field( 'image', false, false );
+
+if ( $image_id ) {
+	// The image attachment isn't always translated into the post's language in WPML;
+	// fall back to the original ID when no translation exists instead of losing the image.
+	$image_id = apply_filters( 'wpml_object_id', $image_id, 'attachment', true );
+}
 ?>
 <div class="c-technical-row">
 	<?php get_template_part( 'templates/technical-chips', null, array( 'disable_label' => $disable_label ) ); ?>
@@ -25,9 +31,9 @@ $image         = get_field( 'image' );
 		</div>
 	</div>
 
-	<?php if ( ! empty( $image['ID'] ) ) : ?>
+	<?php if ( ! empty( $image_id ) ) : ?>
 		<div class="c-technical-media">
-			<?php echo wp_get_attachment_image( $image['ID'], 'large', false, array( 'class' => 'c-technical-media__img' ) ); ?>
+			<?php echo wp_get_attachment_image( $image_id, 'large', false, array( 'class' => 'c-technical-media__img' ) ); ?>
 		</div>
 	<?php endif; ?>
 </div>

@@ -35,6 +35,21 @@
     }
 }
 
+.c-technical-home {
+    &__title{
+        text-transform: uppercase;
+    }
+    &__classification-sections {
+        display: grid;
+        gap: var(--wp--preset--spacing--xxl);
+    }
+
+    &__classification-section {
+        display: grid;
+        gap: var(--wp--preset--spacing--m);
+    }
+}
+
 .c-technical-card-body {
     display: grid;
     grid-template-columns: 260px 1fr;
@@ -165,8 +180,13 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: var(--wp--preset--spacing--m);
+
+    &.grid-2 {
+        grid-template-columns: repeat(auto-fill, minmax(min(400px, 100%), 1fr));
+    }
+
     &.grid-3 {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
     }
 }
 

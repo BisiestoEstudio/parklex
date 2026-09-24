@@ -34,7 +34,7 @@ $template_params = array(
 			<ul class="c-technical-card-categories__list alignwide">
 				<li class="c-technical-card-categories__item">
 					<a
-						class="c-technical-card-categories__link<?php echo $active_category ? ' active' : ''; ?>"
+						class="c-technical-card-categories__link<?php echo $active_category ? '' : ' active'; ?>"
 						href="<?php echo esc_url( remove_query_arg( 'category_technical_card' ) ); ?>"
 					>
 						<?php esc_html_e( 'All', 'parklex' ); ?>
