@@ -9,24 +9,13 @@ $title     = __( 'Technical Card Fields', 'parklex-core' );
 $group_key = 'bisiesto_cpt_technical_card';
 
 $downloads_field = array(
-	'key'          => "{$group_key}_downloads",
-	'label'        => __( 'Downloads', 'parklex-core' ),
-	'name'         => 'downloads',
-	'type'         => 'repeater',
-	'required'     => 1,
-	'layout'       => 'table',
-	'button_label' => __( 'Add File', 'parklex-core' ),
-	'sub_fields'   => array(
-		array(
-			'key'           => "{$group_key}_downloads_file",
-			'label'         => __( 'File', 'parklex-core' ),
-			'name'          => 'file',
-			'type'          => 'file',
-			'required'      => 1,
-			'return_format' => 'array',
-			'library'       => 'all',
-		),
-	),
+	'key'           => "{$group_key}_downloads",
+	'label'         => __( 'Downloads', 'parklex-core' ),
+	'name'          => 'downloads',
+	'type'          => 'file',
+	'required'      => 1,
+	'return_format' => 'array',
+	'library'       => 'all',
 );
 
 $link_field = array(
