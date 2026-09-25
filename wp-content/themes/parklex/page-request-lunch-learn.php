@@ -5,6 +5,8 @@
 defined( 'ABSPATH' ) || exit;
 
 get_header();
+
+$required_mark = '<span class="c-lunch-learn-form__required" aria-hidden="true">*</span>';
 ?>
 
 <main class="entry-content is-layout-constrained has-global-padding">
@@ -14,42 +16,44 @@ get_header();
 		</div>
 
 		<form id="lunch-learn-request-form" class="c-lunch-learn-form__form" novalidate>
+			<p class="c-lunch-learn-form__required-note"><?php echo $required_mark; // phpcs:ignore ?> <?php esc_html_e( 'Required fields', 'parklex' ); ?></p>
+
 			<div class="c-lunch-learn-form__row">
 				<label class="c-lunch-learn-form__field">
-					<span><?php esc_html_e( 'Architectural / Interior design Firm', 'parklex' ); ?></span>
+					<span><?php esc_html_e( 'Architectural / Interior design Firm', 'parklex' ); ?> <?php echo $required_mark; // phpcs:ignore ?></span>
 					<input type="text" name="design-firm-request" required>
 				</label>
 			</div>
 
 			<div class="c-lunch-learn-form__row c-lunch-learn-form__row--split">
 				<label class="c-lunch-learn-form__field">
-					<span><?php esc_html_e( 'Date', 'parklex' ); ?></span>
+					<span><?php esc_html_e( 'Date', 'parklex' ); ?> <?php echo $required_mark; // phpcs:ignore ?></span>
 					<input type="date" name="date-request" required>
 				</label>
 				<label class="c-lunch-learn-form__field">
-					<span><?php esc_html_e( 'Time', 'parklex' ); ?></span>
+					<span><?php esc_html_e( 'Time', 'parklex' ); ?> <?php echo $required_mark; // phpcs:ignore ?></span>
 					<input type="time" name="time-request" required>
 				</label>
 			</div>
 
 			<div class="c-lunch-learn-form__row c-lunch-learn-form__row--split">
 				<label class="c-lunch-learn-form__field">
-					<span><?php esc_html_e( 'Location', 'parklex' ); ?></span>
+					<span><?php esc_html_e( 'Location', 'parklex' ); ?> <?php echo $required_mark; // phpcs:ignore ?></span>
 					<input type="text" name="location-request" required>
 				</label>
 				<label class="c-lunch-learn-form__field">
-					<span><?php esc_html_e( 'Address', 'parklex' ); ?></span>
+					<span><?php esc_html_e( 'Address', 'parklex' ); ?> <?php echo $required_mark; // phpcs:ignore ?></span>
 					<input type="text" name="address-request" required>
 				</label>
 			</div>
 
 			<div class="c-lunch-learn-form__row c-lunch-learn-form__row--split">
 				<label class="c-lunch-learn-form__field">
-					<span><?php esc_html_e( 'Number of expected attendees', 'parklex' ); ?></span>
+					<span><?php esc_html_e( 'Number of expected attendees', 'parklex' ); ?> <?php echo $required_mark; // phpcs:ignore ?></span>
 					<input type="number" name="expected-assistants" min="1" required>
 				</label>
 				<label class="c-lunch-learn-form__field">
-					<span><?php esc_html_e( 'Type of event', 'parklex' ); ?></span>
+					<span><?php esc_html_e( 'Type of event', 'parklex' ); ?> <?php echo $required_mark; // phpcs:ignore ?></span>
 					<select name="type-event" data-role="type-event" required>
 						<option value=""><?php esc_html_e( 'Select a type', 'parklex' ); ?></option>
 					</select>
@@ -58,14 +62,14 @@ get_header();
 
 			<div class="c-lunch-learn-form__row" data-role="name-presentation-row">
 				<label class="c-lunch-learn-form__field">
-					<span><?php esc_html_e( 'Name of the presentation', 'parklex' ); ?></span>
+					<span><?php esc_html_e( 'Name of the presentation', 'parklex' ); ?> <?php echo $required_mark; // phpcs:ignore ?></span>
 					<input type="text" name="name-presentation" data-role="name-presentation">
 				</label>
 			</div>
 
 			<div class="c-lunch-learn-form__row" data-role="name-course-row" hidden>
 				<label class="c-lunch-learn-form__field">
-					<span><?php esc_html_e( 'Course name', 'parklex' ); ?></span>
+					<span><?php esc_html_e( 'Course name', 'parklex' ); ?> <?php echo $required_mark; // phpcs:ignore ?></span>
 					<select name="name-course" data-role="name-course">
 						<option value=""><?php esc_html_e( 'Select a course', 'parklex' ); ?></option>
 					</select>
@@ -74,7 +78,7 @@ get_header();
 
 			<div class="c-lunch-learn-form__row">
 				<label class="c-lunch-learn-form__field">
-					<span><?php esc_html_e( 'Cost of the event per person', 'parklex' ); ?></span>
+					<span><?php esc_html_e( 'Cost of the event per person', 'parklex' ); ?> <?php echo $required_mark; // phpcs:ignore ?></span>
 					<input type="number" name="cost-presentation" min="0" step="0.01" required>
 				</label>
 			</div>

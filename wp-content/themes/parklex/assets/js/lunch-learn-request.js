@@ -116,7 +116,11 @@
 			var submitButton = form.querySelector( 'button[type="submit"]' );
 			submitButton.disabled = true;
 
-			postForm( 'bis_lunch_learn_create_request', new FormData( form ) ).then( function ( response ) {
+			// The backend expects the whole form serialized into a single "data" field
+			// (parse_str'd server-side), not as top-level POST params.
+			var serializedData = new URLSearchParams( new FormData( form ) ).toString();
+
+			postForm( 'bis_lunch_learn_create_request', { data: serializedData } ).then( function ( response ) {
 				submitButton.disabled = false;
 
 				if ( response.success ) {

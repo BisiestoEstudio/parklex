@@ -32,12 +32,19 @@ class Bis_Core_Lunch_Learn_Legacy {
 	const REMIND_EVENT_TRANSIENT   = 'remember_lanch_learn_distributor_email';
 	const REMIND_INVOICE_TRANSIENT = 'repeat_lanch_learn_invoices_email';
 
-	const EMAIL_CREATE             = 'bis_lunch_learn_request_created';
-	const EMAIL_APPROVED           = 'bis_lunch_learn_request_approved';
-	const EMAIL_REJECTED           = 'bis_lunch_learn_request_rejected';
-	const EMAIL_INVOICE_SUBMITTED  = 'bis_lunch_learn_invoice_submitted';
-	const EMAIL_INVOICE_RETURNED   = 'bis_lunch_learn_invoice_returned';
-	const EMAIL_INVOICE_REMINDER   = 'bis_lunch_learn_invoice_reminder';
+	/**
+	 * Kept as the ORIGINAL theme's email ids on purpose (not renamed to a "bis_lunch_learn_*"
+	 * pattern): each one already has real, hand-written copy saved in the production database
+	 * under `woocommerce_{id}_settings` (recipient overrides, subject, and — most importantly —
+	 * the "content_email" body text with real business copy, e.g. "IMPORTANT: AIA number is
+	 * required"). Renaming the id would silently orphan that content and send blank emails.
+	 */
+	const EMAIL_CREATE             = 'theme_email_create_lunch_learn';
+	const EMAIL_APPROVED           = 'theme_email_lunch_learn_distributor';
+	const EMAIL_REJECTED           = 'theme_email_lunch_learn_distributor_reject';
+	const EMAIL_INVOICE_SUBMITTED  = 'theme_email_invoice_lunch_learn';
+	const EMAIL_INVOICE_RETURNED   = 'theme_email_invoice_return_lunch_learn';
+	const EMAIL_INVOICE_REMINDER   = 'theme_email_remember_invoice_lunch_learn';
 
 	/**
 	 * Idempotent: safe to run on every activation (add_role() is a no-op if the role
@@ -361,7 +368,7 @@ class Bis_Core_Lunch_Learn_Legacy {
 		$fields = array();
 		parse_str( wp_unslash( $_POST['data'] ), $fields );
 
-		if ( empty( $fields['date-request'] ) || empty( $fields['name-presentation'] ) ) {
+		if ( empty( $fields['date-request'] ) ) {
 			wp_send_json_error( __( 'Unknown error', 'parklex-core' ) );
 		}
 
@@ -376,7 +383,10 @@ class Bis_Core_Lunch_Learn_Legacy {
 			wp_send_json_error( __( 'Unknown error', 'parklex-core' ) );
 		}
 
-		$title = $fields['name-presentation'] . ' (' . $date->format( 'd/m/Y' ) . ')';
+		// "name-presentation" is empty when the chosen "type-event" has associated courses —
+		// the form shows "course-name-text" instead in that case (see lunch-learn-request.js).
+		$title_source = ! empty( $fields['name-presentation'] ) ? $fields['name-presentation'] : ( $fields['course-name-text'] ?? '' );
+		$title        = $title_source . ' (' . $date->format( 'd/m/Y' ) . ')';
 		unset( $fields['date-request'] );
 
 		$fields['user_id'] = $user_id;

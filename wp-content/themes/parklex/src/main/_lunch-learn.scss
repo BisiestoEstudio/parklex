@@ -1,6 +1,16 @@
 /* Public request form (page-request-lunch-learn.php) and My Account area
    (woocommerce/myaccount/lunch-learn/*.php). See class-lunch-learn.php / class-lunch-learn-legacy.php. */
 
+/* Several elements below set their own "display" (flex, etc.), which — being a class
+   selector — ties in specificity with the browser's own [hidden] { display: none } rule
+   and wins the cascade by coming later, so a JS-toggled "hidden" attribute stops hiding
+   anything. This blanket, higher-specificity rule makes "hidden" always win instead of
+   having to remember to override "display" individually on every new element. */
+.c-lunch-learn-form [hidden],
+.c-lunch-learn-my-account [hidden] {
+	display: none !important;
+}
+
 .c-lunch-learn-form,
 .c-lunch-learn-my-account {
 	max-width: 720px;
@@ -17,6 +27,15 @@
 				flex: 1 1 240px;
 			}
 		}
+	}
+
+	&__required {
+		color: #a52121;
+	}
+
+	&__required-note {
+		font-size: 0.875rem;
+		margin-bottom: var(--wp--preset--spacing--30, 1rem);
 	}
 
 	&__field {

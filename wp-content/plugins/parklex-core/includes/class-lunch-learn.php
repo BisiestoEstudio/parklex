@@ -13,6 +13,11 @@ class Bis_Core_Lunch_Learn {
 	public static function init() {
 		add_action( 'template_redirect', array( __CLASS__, 'gate_frontend_access' ) );
 
+		add_filter( 'manage_lunch_learn_request_posts_columns', array( __CLASS__, 'admin_columns' ) );
+		add_action( 'manage_lunch_learn_request_posts_custom_column', array( __CLASS__, 'render_admin_column' ), 10, 2 );
+		add_filter( 'manage_edit-lunch_learn_request_sortable_columns', array( __CLASS__, 'sortable_admin_columns' ) );
+		add_action( 'pre_get_posts', array( __CLASS__, 'sort_admin_columns_query' ) );
+
 		if ( ! class_exists( 'WooCommerce' ) ) {
 			return;
 		}
@@ -98,5 +103,97 @@ class Bis_Core_Lunch_Learn {
 			'meta_key'       => 'user_id',
 			'meta_value'     => get_current_user_id(),
 		) );
+	}
+
+	/**
+	 * Admin list table columns for the "Lunch & Learn requests" screen (wp-admin > Lunch &
+	 * Learn requests) — replaces the Admin Columns Pro screen config the old site relied on
+	 * (never migrated: it's plugin UI config, not application data), so the wp-admin list
+	 * doesn't depend on that plugin staying installed.
+	 */
+	public static function admin_columns( $columns ) {
+		$new_columns = array();
+
+		foreach ( $columns as $key => $label ) {
+			$new_columns[ $key ] = $label;
+
+			if ( 'title' === $key ) {
+				$new_columns['request_id'] = __( 'Request ID', 'parklex-core' );
+				$new_columns['user']       = __( 'User', 'parklex-core' );
+				$new_columns['firm']       = __( 'Architectural / Interior Firm', 'parklex-core' );
+				$new_columns['invoices']   = __( 'Invoices', 'parklex-core' );
+				$new_columns['complited']  = __( 'Complited', 'parklex-core' );
+				$new_columns['event_date'] = __( 'Date', 'parklex-core' );
+			}
+		}
+
+		// Replace the native "Date" column (post published date) with our own — the
+		// screenshot's "Date" column is the event date, not the post's publish date.
+		unset( $new_columns['date'] );
+
+		return $new_columns;
+	}
+
+	public static function render_admin_column( $column, $post_id ) {
+		switch ( $column ) {
+			case 'request_id':
+				echo '#' . (int) $post_id;
+				break;
+
+			case 'user':
+				$user_id = get_field( 'user_id', $post_id );
+				$user    = $user_id ? get_userdata( $user_id ) : false;
+				echo $user ? esc_html( trim( $user->first_name . ' ' . $user->last_name ) ?: $user->user_login ) : '—';
+				break;
+
+			case 'firm':
+				echo esc_html( get_field( 'design-firm-request', $post_id ) ?: '—' );
+				break;
+
+			case 'invoices':
+				echo get_field( 'distributor_approved', $post_id ) ? '✅' : '❌';
+				break;
+
+			case 'complited':
+				echo get_field( 'complited_lrequest', $post_id ) ? '✅' : '❌';
+				break;
+
+			case 'event_date':
+				echo esc_html( get_field( 'date-request', $post_id ) ?: '—' );
+				break;
+		}
+	}
+
+	public static function sortable_admin_columns( $columns ) {
+		$columns['request_id'] = 'ID';
+		$columns['invoices']   = 'invoices';
+		$columns['complited']  = 'complited';
+		$columns['event_date'] = 'event_date';
+
+		return $columns;
+	}
+
+	/**
+	 * ACF meta-backed sorting for the "Invoices" / "Complited" / "Date" columns above
+	 * ("Request ID" sorts natively via orderby=ID, no meta lookup needed).
+	 */
+	public static function sort_admin_columns_query( $query ) {
+		if ( ! is_admin() || ! $query->is_main_query() || 'lunch_learn_request' !== $query->get( 'post_type' ) ) {
+			return;
+		}
+
+		$meta_orderby = array(
+			'invoices'   => array( 'distributor_approved', 'meta_value_num' ),
+			'complited'  => array( 'complited_lrequest', 'meta_value_num' ),
+			'event_date' => array( 'date-request', 'meta_value' ),
+		);
+
+		$orderby = $query->get( 'orderby' );
+
+		if ( isset( $meta_orderby[ $orderby ] ) ) {
+			list( $meta_key, $orderby_type ) = $meta_orderby[ $orderby ];
+			$query->set( 'meta_key', $meta_key );
+			$query->set( 'orderby', $orderby_type );
+		}
 	}
 }
