@@ -1,0 +1,131 @@
+/* Public request form (page-request-lunch-learn.php) and My Account area
+   (woocommerce/myaccount/lunch-learn/*.php). See class-lunch-learn.php / class-lunch-learn-legacy.php. */
+
+.c-lunch-learn-form,
+.c-lunch-learn-my-account {
+	max-width: 720px;
+	margin: 0 auto;
+
+	&__row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--wp--preset--spacing--30, 1rem);
+		margin-bottom: var(--wp--preset--spacing--30, 1rem);
+
+		&--split {
+			.c-lunch-learn-form__field {
+				flex: 1 1 240px;
+			}
+		}
+	}
+
+	&__field {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+		flex: 1 1 100%;
+
+		span {
+			font-weight: 600;
+		}
+
+		input,
+		select,
+		textarea {
+			width: 100%;
+			padding: 0.6rem 0.8rem;
+			border: 1px solid var(--gray, #ccc);
+		}
+	}
+
+	&__message {
+		margin-bottom: var(--wp--preset--spacing--30, 1rem);
+		padding: 0.75rem 1rem;
+
+		&.is-success {
+			background: #eaf7ee;
+			color: #1a7a34;
+		}
+
+		&.is-error {
+			background: #fbeaea;
+			color: #a52121;
+		}
+	}
+}
+
+.c-lunch-learn-my-account {
+	&__intro {
+		margin-bottom: var(--wp--preset--spacing--30, 1rem);
+	}
+
+	&__new,
+	&__back {
+		margin-bottom: var(--wp--preset--spacing--30, 1rem);
+	}
+
+	&__table {
+		width: 100%;
+	}
+
+	&__assistant-row {
+		position: relative;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		padding: 1rem;
+		margin-bottom: 1rem;
+		border: 1px solid var(--gray, #ccc);
+
+		label {
+			display: flex;
+			flex-direction: column;
+			gap: 0.25rem;
+			flex: 1 1 200px;
+
+			input,
+			select,
+			textarea {
+				padding: 0.5rem 0.7rem;
+				border: 1px solid var(--gray, #ccc);
+			}
+		}
+	}
+
+	&__remove-row {
+		position: absolute;
+		top: 0.5rem;
+		right: 0.5rem;
+		border: 0;
+		background: none;
+		font-size: 1.25rem;
+		line-height: 1;
+		cursor: pointer;
+	}
+
+	&__actions {
+		display: flex;
+		gap: 0.75rem;
+		margin: 1rem 0;
+	}
+
+	&__file-list {
+		margin-bottom: 1rem;
+	}
+
+	&__files-table {
+		width: 100%;
+
+		td {
+			padding: 0.4rem 0.6rem;
+		}
+	}
+
+	&__remove-file {
+		border: 0;
+		background: none;
+		font-size: 1.1rem;
+		line-height: 1;
+		cursor: pointer;
+	}
+}

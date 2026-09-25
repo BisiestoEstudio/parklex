@@ -8,6 +8,7 @@ class Bis_Core_CPT_Manager {
 		self::register_proyecto();
 		self::register_project_internal();
 		self::register_products();
+		self::register_lunch_learn_request();
 
 		add_filter( 'post_type_link', array( __CLASS__, 'filter_products_permalink' ), 1, 2 );
 	}
@@ -180,6 +181,51 @@ class Bis_Core_CPT_Manager {
 				'menu_position'      => null,
 				'supports'           => array( 'title', 'editor', 'excerpt', 'thumbnail', 'page-attributes' ),
 				'menu_icon'          => 'dashicons-cart',
+			)
+		);
+	}
+
+	/**
+	 * Not public: requests are only ever listed/edited from wp-admin and from the
+	 * front-end "Lunch & Learn" areas (which query directly), never browsed as an archive.
+	 * Keeps the original theme's custom capability_type ("llrequest"/"llrequests"), granted
+	 * to "lunch_learn_editor"/"editor"/"administrator" by Bis_Core_Lunch_Learn_Legacy.
+	 */
+	private static function register_lunch_learn_request() {
+		$labels = array(
+			'name'               => _x( 'Lunch & Learn requests', 'post type general name', 'parklex-core' ),
+			'singular_name'      => _x( 'Lunch & Learn request', 'post type singular name', 'parklex-core' ),
+			'menu_name'          => _x( 'Lunch & Learn requests', 'admin menu', 'parklex-core' ),
+			'name_admin_bar'     => _x( 'Lunch & Learn request', 'add new on admin bar', 'parklex-core' ),
+			'add_new'            => _x( 'Add New', 'Lunch & Learn request', 'parklex-core' ),
+			'add_new_item'       => __( 'Add Lunch & Learn request', 'parklex-core' ),
+			'new_item'           => __( 'New Lunch & Learn request', 'parklex-core' ),
+			'edit_item'          => __( 'Edit Lunch & Learn request', 'parklex-core' ),
+			'view_item'          => __( 'View Lunch & Learn request', 'parklex-core' ),
+			'all_items'          => __( 'All Lunch & Learn requests', 'parklex-core' ),
+			'search_items'       => __( 'Search Lunch & Learn requests', 'parklex-core' ),
+			'parent_item_colon'  => __( 'Parent Lunch & Learn request:', 'parklex-core' ),
+			'not_found'          => __( 'No Lunch & Learn requests found.', 'parklex-core' ),
+			'not_found_in_trash' => __( 'No Lunch & Learn requests found in Trash.', 'parklex-core' ),
+		);
+
+		register_post_type(
+			'lunch_learn_request',
+			array(
+				'labels'             => $labels,
+				'description'        => __( 'Lunch & Learn requests', 'parklex-core' ),
+				'public'             => false,
+				'publicly_queryable' => false,
+				'show_ui'            => true,
+				'show_in_menu'       => true,
+				'show_in_rest'       => false,
+				'query_var'          => true,
+				'capability_type'    => array( 'llrequest', 'llrequests' ),
+				'has_archive'        => false,
+				'hierarchical'       => true,
+				'menu_position'      => null,
+				'supports'           => array( 'title' ),
+				'menu_icon'          => 'dashicons-coffee',
 			)
 		);
 	}

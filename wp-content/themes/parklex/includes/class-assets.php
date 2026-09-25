@@ -45,6 +45,12 @@ class Bis_Theme_Assets {
 		if ( is_page_template( 'page-submit-internal-project.php' ) ) {
 			self::enqueue_internal_project_form_assets();
 		}
+
+		if ( is_page_template( Bis_Core_Lunch_Learn::SUBMIT_PAGE_TEMPLATE )
+			|| ( function_exists( 'is_wc_endpoint_url' ) && is_wc_endpoint_url( 'lunch-learn' ) )
+		) {
+			self::enqueue_lunch_learn_assets();
+		}
 	}
 
 	/**
@@ -97,6 +103,31 @@ class Bis_Theme_Assets {
 			'ajaxUrl' => admin_url( 'admin-ajax.php' ),
 			'action'  => Bis_Core_Internal_Projects::UPLOAD_ACTION,
 			'nonce'   => wp_create_nonce( Bis_Core_Internal_Projects::UPLOAD_NONCE_ACTION ),
+		) );
+	}
+
+	/**
+	 * Vanilla JS for both the public "Lunch & Learn" request form and the request's My
+	 * Account area (attendees, invoice file upload) — one shared file, same as the
+	 * original theme's single request-lunch-learn.js.
+	 */
+	private static function enqueue_lunch_learn_assets() {
+		wp_enqueue_script(
+			'bis-theme-lunch-learn-request',
+			BIS_THEME_URI . '/assets/js/lunch-learn-request.js',
+			array(),
+			BIS_THEME_VERSION,
+			true
+		);
+
+		wp_localize_script( 'bis-theme-lunch-learn-request', 'bisLunchLearn', array(
+			'ajaxUrl'      => admin_url( 'admin-ajax.php' ),
+			'nonce'        => wp_create_nonce( Bis_Core_Lunch_Learn_Legacy::NONCE_ACTION ),
+			'typeOfEvents' => get_field( 'type_of_events', 'option' ) ?: array(),
+			'i18n'         => array(
+				'addAssistant' => __( 'Add Attendee', 'parklex' ),
+				'confirmSend'  => __( 'Send the invoice info? You will not be able to edit it afterwards.', 'parklex' ),
+			),
 		) );
 	}
 

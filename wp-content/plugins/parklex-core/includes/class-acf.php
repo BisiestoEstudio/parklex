@@ -43,6 +43,24 @@ class ACF
             'capability'  => 'manage_options',
             'redirect'    => false,
         ) );
+
+        acf_add_options_sub_page( array(
+            'page_title'  => __( 'Lunch & Learn Settings', 'parklex-core' ),
+            'menu_title'  => __( 'Settings', 'parklex-core' ),
+            'menu_slug'   => 'acf-options-lunch-learn-settings',
+            'parent_slug' => 'edit.php?post_type=lunch_learn_request',
+            'capability'  => 'manage_options',
+            'redirect'    => false,
+        ) );
+
+        acf_add_options_sub_page( array(
+            'page_title'  => __( 'Lunch & Learn Statistics', 'parklex-core' ),
+            'menu_title'  => __( 'Statistics', 'parklex-core' ),
+            'menu_slug'   => 'acf-options-lunch-learn-statistics',
+            'parent_slug' => 'edit.php?post_type=lunch_learn_request',
+            'capability'  => 'manage_options',
+            'redirect'    => false,
+        ) );
     }
 
     /**
