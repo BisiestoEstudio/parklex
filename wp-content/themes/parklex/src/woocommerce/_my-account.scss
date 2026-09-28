@@ -1,0 +1,139 @@
+/**
+ * My Account — Addresses
+ * Default billing/shipping cards: rendered by the "WooCommerce Multiple Addresses" plugin
+ * (ThemeHigh), which overrides myaccount/my-address.php (.woocommerce-Addresses /
+ * .woocommerce-address-title markup). The same plugin appends the "Additional billing/shipping
+ * addresses" slider below it (.thmaf-* markup, see class-thmaf-public.php).
+ */
+
+.woocommerce-Addresses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wp--preset--spacing--l, 32px);
+  margin-block: var(--wp--preset--spacing--m, 16px) var(--wp--preset--spacing--xl, 64px);
+
+  > div[class*="u-column"] {
+    flex: 1 1 260px;
+    min-width: 0;
+  }
+}
+
+.woocommerce-Address-title,
+.woocommerce-address-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--wp--preset--spacing--s, 12px);
+  margin-bottom: var(--wp--preset--spacing--m, 16px);
+  padding-bottom: var(--wp--preset--spacing--s, 12px);
+  border-bottom: 1px solid var(--gray-light);
+
+  h2, h3, h4 {
+    font-size: var(--wp--preset--font-size--h5);
+    font-weight: var(--font-weight-bold);
+    margin: 0;
+  }
+
+  a.edit {
+    font-size: var(--wp--preset--font-size--caption);
+    text-decoration: underline;
+    white-space: nowrap;
+
+    &:hover {
+      color: var(--gray-dark);
+    }
+  }
+}
+
+.woocommerce-Address address {
+  font-style: normal;
+  line-height: var(--base-height);
+}
+
+/* "Additional billing/shipping addresses" */
+
+.thmaf-my-acnt.th-custom {
+  margin-top: var(--wp--preset--spacing--xl, 64px);
+}
+
+.thmaf-acnt-cus-addr.th-custom-address {
+  padding-top: 0;
+
+  .th-head h3 {
+    font-size: var(--wp--preset--font-size--h5);
+    font-weight: var(--font-weight-bold);
+    border-bottom: 1px solid var(--gray-light);
+    padding-bottom: var(--wp--preset--spacing--s, 12px);
+    margin-bottom: var(--wp--preset--spacing--m, 16px);
+  }
+}
+
+.thmaf-adr-box.address-box {
+  border: 1px solid var(--gray-light);
+  border-radius: var(--border-radius-s);
+  overflow: hidden;
+
+  &:hover {
+    box-shadow: none;
+    border-color: var(--gray);
+  }
+}
+
+.thmaf-thslider-viewport .complete-aaddress {
+  min-height: 0;
+}
+
+.thmaf-adr-text.address-text {
+  min-height: 0;
+  font-size: var(--wp--preset--font-size--caption);
+  line-height: var(--base-height);
+}
+
+.thmaf-main-content .address-wrapper {
+  padding-inline: var(--wp--preset--spacing--m, 16px);
+}
+
+.btn-continue.address-wrapper {
+  height: auto;
+  padding-block: var(--wp--preset--spacing--s, 12px) !important;
+}
+
+.account-default.thmaf-acnt-dflt {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--black);
+  color: var(--black);
+  font-family: var(--heading-font);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  border-radius: 999px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+
+  &:hover {
+    background: var(--black);
+    color: var(--white);
+  }
+}
+
+.thmaf-acnt-adr-footer.acnt-address-footer {
+  height: auto;
+  padding: var(--wp--preset--spacing--s, 12px) var(--wp--preset--spacing--m, 16px);
+  border-top: 1px solid var(--gray-light);
+}
+
+.thmaf-del-acnt.th-del-acnt {
+  padding: 0;
+  font-family: var(--base-font);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+
+  &:hover {
+    color: var(--black);
+    text-decoration: underline;
+  }
+}

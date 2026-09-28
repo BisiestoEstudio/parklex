@@ -13,7 +13,7 @@ $downloads_field = array(
 	'label'         => __( 'Downloads', 'parklex-core' ),
 	'name'          => 'downloads',
 	'type'          => 'file',
-	'required'      => 1,
+	'required'      => 0,
 	'return_format' => 'array',
 	'library'       => 'all',
 );

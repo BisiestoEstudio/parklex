@@ -35,6 +35,8 @@ class Bis_Core_WooCommerce_Legacy {
 		add_action( 'woocommerce_my_account_my_orders_column_courier', array( __CLASS__, 'render_my_orders_courier_column' ) );
 
 		add_filter( 'woocommerce_email_recipient_new_order', array( __CLASS__, 'add_new_order_email_recipient_for_spain' ), 10, 2 );
+
+		add_filter( 'woocommerce_my_account_get_addresses', array( __CLASS__, 'rename_my_account_address_titles' ) );
 	}
 
 	/**
@@ -245,5 +247,28 @@ class Bis_Core_WooCommerce_Legacy {
 		}
 
 		return $recipient;
+	}
+
+	/**
+	 * The "WooCommerce Multiple Addresses" plugin (ThemeHigh) always overrides
+	 * myaccount/my-address.php via `woocommerce_locate_template`, ignoring any theme
+	 * override of that same template — so "Billing"/"Shipping" can't be relabeled by
+	 * overriding the template file. Both that plugin's template and WooCommerce's own
+	 * pass the address titles through this filter, so it works regardless of which one
+	 * ends up rendering.
+	 */
+	public static function rename_my_account_address_titles( $addresses ) {
+		$labels = array(
+			'billing'  => __( 'Representative address', 'parklex-core' ),
+			'shipping' => __( 'Client address', 'parklex-core' ),
+		);
+
+		foreach ( $labels as $key => $label ) {
+			if ( isset( $addresses[ $key ] ) ) {
+				$addresses[ $key ] = $label;
+			}
+		}
+
+		return $addresses;
 	}
 }
