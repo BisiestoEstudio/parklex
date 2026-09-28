@@ -8,7 +8,48 @@ Cada apartado corresponde a un bloque de funcionalidad. Los que aún no están r
 
 ## 1. WooCommerce (tienda)
 
-_Pendiente de completar._
+**Qué es:** varias personalizaciones que la tienda antigua tenía sobre las pantallas de WooCommerce (checkout, direcciones de Mi Cuenta, detalle de pedido, emails y la factura en PDF). Este apartado cubre la comprobación de esas personalizaciones ya traspasadas al tema nuevo. Se irán añadiendo más bloques de WooCommerce a medida que se cierren.
+
+### Antes de probar
+
+- [ ] En wp-admin, entra en **WooCommerce → Ajustes → PDF** (pestaña "General") y comprueba que el campo **"Document Template"** apunta a la plantilla del tema `parklex` (no a la del tema antiguo, `parklexprodema`).
+
+### Checkout
+
+- [ ] En el paso de facturación del checkout, el título del bloque debe decir **"Representative details"** (no "Billing details").
+- [ ] La casilla **"Ship to a different address?"** debe verse (un cuadrado con su marca al activarla) y funcionar: al marcarla/desmarcarla, los campos de envío aparecen/desaparecen con el texto habitual de WooCommerce — es así a propósito, no es un error.
+- [ ] Revisa también otras casillas y botones de radio del sitio (por ejemplo, en formularios de Internal Projects o Lunch & Learn) — deben verse igual de bien, ya que la causa era un icono que faltaba a nivel de todo el sitio, no solo del checkout.
+- [ ] Completa un pedido de prueba de principio a fin y confirma que el checkout funciona sin errores.
+
+### Mi Cuenta — Direcciones
+
+- [ ] En Mi Cuenta → Direcciones, los dos bloques deben llamarse **"Representative address"** y **"Client address"** (no "Billing"/"Shipping").
+- [ ] Edita la dirección "Representative", guarda, y comprueba que no da error.
+- [ ] Edita la dirección "Client", guarda, y comprueba que no da error.
+
+### Detalle de pedido
+
+- [ ] En la página que aparece justo después de pagar ("pedido recibido"), los bloques de dirección deben decir **"Representative details"** / **"Client details"**.
+- [ ] Entra en Mi Cuenta → Pedidos → ver un pedido, y comprueba que aparecen los mismos textos correctos.
+
+### Emails de pedido (al cliente)
+
+- [ ] Revisa el email de confirmación de pedido (o el de "pedido completado"): el bloque de direcciones debe decir **"Representative details"** / **"Client details"**.
+
+### Email de cambio de estado (aviso interno al cambiar el estado de un pedido)
+
+- [ ] Cambia el estado de un pedido que **tenga** una nota de cliente escrita y comprueba que en el email aparece una fila **"Note:"** con el texto de esa nota.
+- [ ] Cambia el estado de un pedido **sin** nota de cliente y comprueba que el email se ve bien, sin la fila "Note:" y sin huecos raros.
+
+### Factura PDF — la parte más delicada de este apartado
+
+- [ ] Genera la factura PDF de un pedido con destino **fuera de Estados Unidos/Canadá**: debe aparecer la empresa y dirección de siempre (PARKLEX PRODEMA INT, S.L.).
+- [ ] Genera la factura PDF de un pedido con destino **Estados Unidos o Canadá**: debe aparecer en su lugar **"PARKLEX PRODEMA USA, INC."**, con su EIN y su dirección en Woodstock, GA.
+- [ ] En ambas facturas debe aparecer una fila **"Project Name"** con el nombre de proyecto que se indicó en el pedido.
+- [ ] Junto a cada producto de la factura debe aparecer su código arancelario (si el producto tiene categoría asignada).
+- [ ] La dirección de envío ("Delivery Address") debe aparecer siempre en la factura, aunque no la hayas marcado como visible en los ajustes del plugin — es el comportamiento heredado del sitio antiguo.
+- [ ] Debe aparecer la firma escaneada al final de la factura, con buena calidad.
+- [ ] El texto legal del pie (declaración de exportación/aduanas, VAT, Incoterms) debe seguir apareciendo igual que en las facturas antiguas.
 
 ## 2. Roles y permisos
 
