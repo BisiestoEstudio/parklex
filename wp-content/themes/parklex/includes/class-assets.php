@@ -46,8 +46,13 @@ class Bis_Theme_Assets {
 			self::enqueue_internal_project_form_assets();
 		}
 
+		// Not is_wc_endpoint_url('lunch-learn'): that helper only recognizes WooCommerce's
+		// own built-in endpoints (orders, downloads...); "lunch-learn" is a custom one added
+		// directly via add_rewrite_endpoint(), which never registers it into WC_Query's own
+		// list — is_wc_endpoint_url() would silently always return false for it. Checking the
+		// resolved query var directly works for any endpoint, custom or not.
 		if ( is_page_template( Bis_Core_Lunch_Learn::SUBMIT_PAGE_TEMPLATE )
-			|| ( function_exists( 'is_wc_endpoint_url' ) && is_wc_endpoint_url( 'lunch-learn' ) )
+			|| null !== get_query_var( 'lunch-learn', null )
 		) {
 			self::enqueue_lunch_learn_assets();
 		}
