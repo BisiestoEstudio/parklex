@@ -16,11 +16,35 @@
 	max-width: 720px;
 	margin: 0 auto;
 
+	/* The_content()/WYSIWYG intro text (page-request-lunch-learn.php's heading, the My
+	   Account "intro" options) can contain any number of headings/paragraphs — give them
+	   their own spacing rather than relying on layout context, which varies between the
+	   plain page template and WooCommerce's My Account markup. */
+	&__heading,
+	&__intro {
+		margin-bottom: var(--wp--preset--spacing--40, 1.5rem);
+
+		> * + * {
+			margin-top: 0.75rem;
+		}
+	}
+
+	&__actions {
+		display: flex;
+		gap: 0.75rem;
+		margin-top: var(--wp--preset--spacing--m);
+	}
+
+	&__form {
+		display: flex;
+		flex-direction: column;
+		gap: var(--wp--preset--spacing--m);
+	}
+
 	&__row {
 		display: flex;
 		flex-wrap: wrap;
-		gap: var(--wp--preset--spacing--30, 1rem);
-		margin-bottom: var(--wp--preset--spacing--30, 1rem);
+		gap: var(--wp--preset--spacing--s);
 
 		&--split {
 			.c-lunch-learn-form__field {
@@ -74,8 +98,16 @@
 }
 
 .c-lunch-learn-my-account {
-	&__intro {
-		margin-bottom: var(--wp--preset--spacing--30, 1rem);
+	/* This content is rendered inside WooCommerce's My Account area, not inside
+	   .entry-content — so it doesn't inherit the theme's usual heading/paragraph spacing
+	   and needs its own here. */
+	h3,
+	h4 {
+		margin: 2rem 0 1rem;
+	}
+
+	p {
+		margin: 0 0 0.75rem;
 	}
 
 	&__new,
@@ -96,11 +128,24 @@
 		margin-bottom: 1rem;
 		border: 1px solid var(--gray, #ccc);
 
+		&--readonly {
+			flex-direction: column;
+			gap: 0.35rem;
+
+			p {
+				margin: 0.35rem 0 0;
+			}
+		}
+
 		label {
 			display: flex;
 			flex-direction: column;
 			gap: 0.25rem;
 			flex: 1 1 200px;
+
+			&:has(textarea) {
+				flex-basis: 100%;
+			}
 
 			input,
 			select,
@@ -120,12 +165,6 @@
 		font-size: 1.25rem;
 		line-height: 1;
 		cursor: pointer;
-	}
-
-	&__actions {
-		display: flex;
-		gap: 0.75rem;
-		margin: 1rem 0;
 	}
 
 	&__file-list {

@@ -16,7 +16,6 @@ $required_mark = '<span class="c-lunch-learn-form__required" aria-hidden="true">
 		</div>
 
 		<form id="lunch-learn-request-form" class="c-lunch-learn-form__form" novalidate>
-			<p class="c-lunch-learn-form__required-note"><?php echo $required_mark; // phpcs:ignore ?> <?php esc_html_e( 'Required fields', 'parklex' ); ?></p>
 
 			<div class="c-lunch-learn-form__row">
 				<label class="c-lunch-learn-form__field">

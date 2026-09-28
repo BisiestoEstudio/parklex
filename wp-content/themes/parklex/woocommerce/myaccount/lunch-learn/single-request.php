@@ -34,7 +34,7 @@ $type_event = get_field( 'type-event', $request_id );
 		<div data-role="assistants-rows">
 			<?php if ( $approved ) : ?>
 				<?php foreach ( $assistants as $assistant ) : ?>
-					<div class="c-lunch-learn-my-account__assistant-row">
+					<div class="c-lunch-learn-my-account__assistant-row c-lunch-learn-my-account__assistant-row--readonly">
 						<span><?php echo esc_html( $assistant['name'] . ' ' . $assistant['surname'] . ' (' . $assistant['email'] . ')' ); ?></span>
 						<?php if ( ! empty( $assistant['associate_number'] ) ) : ?><span><?php esc_html_e( 'Associate number', 'parklex' ); ?>: <?php echo esc_html( $assistant['associate_number'] ); ?></span><?php endif; ?>
 						<?php if ( ! empty( $assistant['certificate'] ) ) : ?><span><?php esc_html_e( 'Certificate', 'parklex' ); ?>: <?php echo esc_html( $assistant['certificate'] ); ?></span><?php endif; ?>
