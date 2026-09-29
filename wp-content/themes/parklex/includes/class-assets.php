@@ -38,6 +38,16 @@ class Bis_Theme_Assets {
 			);
 		}
 
+		if ( class_exists( 'Bis_Core_Technical_Card' ) && Bis_Core_Technical_Card::is_gate_active() ) {
+			wp_enqueue_script(
+				'bis-theme-technical-access-gate',
+				BIS_THEME_URI . '/assets/js/technical-access-gate.js',
+				array(),
+				BIS_THEME_VERSION,
+				true
+			);
+		}
+
 		if ( is_singular( 'project_internal' ) || is_post_type_archive( 'project_internal' ) ) {
 			self::enqueue_internal_projects_assets();
 		}

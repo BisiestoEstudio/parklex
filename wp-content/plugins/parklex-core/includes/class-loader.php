@@ -13,6 +13,7 @@ class Bis_Core_Loader {
 		require_once BIS_CORE_DIR . 'includes/class-internal-projects.php';
 		require_once BIS_CORE_DIR . 'includes/class-lunch-learn-legacy.php';
 		require_once BIS_CORE_DIR . 'includes/class-lunch-learn.php';
+		require_once BIS_CORE_DIR . 'includes/class-technical-card.php';
 
 		add_action( 'init', array( 'Bis_Core_CPT_Manager', 'register' ) );
 		add_action( 'init', array( 'Bis_Core_Taxonomy_Manager', 'register' ) );
@@ -22,6 +23,7 @@ class Bis_Core_Loader {
 		add_action( 'init', array( 'Bis_Core_Internal_Projects', 'init' ) );
 		add_action( 'init', array( 'Bis_Core_Lunch_Learn_Legacy', 'init' ) );
 		add_action( 'init', array( 'Bis_Core_Lunch_Learn', 'init' ) );
+		add_action( 'init', array( 'Bis_Core_Technical_Card', 'init' ) );
 	}
 
 	public static function activate() {

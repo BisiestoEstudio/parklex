@@ -46,6 +46,46 @@ $submit_documents_technical_cards_field = array(
 	'return_format' => 'id',
 );
 
+$script_field = array(
+	'key'          => "{$group_key}_registration_form",
+	'label'        => __( 'Formulario de registro', 'parklex-core' ),
+	'name'         => 'registration_form',
+	'instructions' => __( 'Introduce el script del formulario de hubspot de registro de acceso a la zona técnica', 'parklex-core' ),
+	'type'         => 'textarea',
+	'rows'         => 10,
+	'new_lines'    => '',
+);
+
+$access_gate_title_field = array(
+	'key'   => "{$group_key}_access_gate_title",
+	'label' => __( 'Título', 'parklex-core' ),
+	'name'  => 'access_gate_title',
+	'type'  => 'text',
+);
+
+$access_gate_text_field = array(
+	'key'   => "{$group_key}_access_gate_text",
+	'label' => __( 'Texto', 'parklex-core' ),
+	'name'  => 'access_gate_text',
+	'type'  => 'wysiwyg',
+);
+
+$access_gate_image_field = array(
+	'key'           => "{$group_key}_access_gate_image",
+	'label'         => __( 'Imagen', 'parklex-core' ),
+	'name'          => 'access_gate_image',
+	'type'          => 'image',
+	'return_format' => 'array',
+);
+
+$hubspot_api_key_field = array(
+	'key'          => "{$group_key}_hubspot_api_key",
+	'label'        => __( 'HubSpot API Key', 'parklex-core' ),
+	'name'         => 'hubspot_api_key',
+	'instructions' => __( 'Clave privada de la API de HubSpot.', 'parklex-core' ),
+	'type'         => 'password',
+);
+
 acf_add_local_field_group( array(
 	'key'                   => $group_key,
 	'title'                 => $title,
@@ -53,6 +93,11 @@ acf_add_local_field_group( array(
 		$classification_categories_field,
 		$presentations_technical_cards_field,
 		$submit_documents_technical_cards_field,
+		$script_field,
+		$access_gate_title_field,
+		$access_gate_text_field,
+		$access_gate_image_field,
+		$hubspot_api_key_field,
 	),
 	'location'              => array(
 		array(
