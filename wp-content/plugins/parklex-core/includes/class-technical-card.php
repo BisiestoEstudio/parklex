@@ -10,9 +10,13 @@ defined( 'ABSPATH' ) || exit;
 class Bis_Core_Technical_Card {
 
 	const REGISTERED_COOKIE = 'technical_area_registered_user';
+	const LOGIN_ACTION       = 'bis_technical_area_login';
+	const LOGIN_NONCE_ACTION = 'bis_technical_area_login';
 
 	public static function init() {
 		add_action( 'template_redirect', array( __CLASS__, 'gate_archive_access' ) );
+		add_action( 'wp_ajax_' . self::LOGIN_ACTION, array( __CLASS__, 'handle_login' ) );
+		add_action( 'wp_ajax_nopriv_' . self::LOGIN_ACTION, array( __CLASS__, 'handle_login' ) );
 	}
 
 	/**
@@ -43,5 +47,30 @@ class Bis_Core_Technical_Card {
 
 	public static function is_registered_user() {
 		return isset( $_COOKIE[ self::REGISTERED_COOKIE ] ) && 'true' === $_COOKIE[ self::REGISTERED_COOKIE ];
+	}
+
+	/**
+	 * Handles the email-only login form (templates/technical-login-form.php), the
+	 * alternative to the HubSpot registration form on the same gate. For now any
+	 * valid email is accepted and marks the visitor as registered; a later step will
+	 * look the email up in HubSpot (using the "HubSpot API Key" option) instead of
+	 * accepting every address.
+	 */
+	public static function handle_login() {
+		check_ajax_referer( self::LOGIN_NONCE_ACTION, 'nonce' );
+
+		$email = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
+
+		if ( ! is_email( $email ) ) {
+			wp_send_json_error( array( 'message' => __( 'Introduce un email válido.', 'parklex-core' ) ) );
+		}
+
+		self::set_registered_cookie();
+
+		wp_send_json_success();
+	}
+
+	public static function set_registered_cookie() {
+		setcookie( self::REGISTERED_COOKIE, 'true', time() + YEAR_IN_SECONDS, '/' );
 	}
 }

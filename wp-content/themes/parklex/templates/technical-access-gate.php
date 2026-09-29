@@ -27,8 +27,19 @@ $registration_form = get_field( 'registration_form', 'option' );
 		</div>
 	</div>
 	<div class="c-technical-access-gate__form">
-		<?php if ( $registration_form ) : ?>
-			<?php echo $registration_form; // phpcs:ignore -- trusted admin-entered embed script. ?>
-		<?php endif; ?>
+		<div class="c-technical-access-gate__panel" data-role="login-panel">
+			<?php get_template_part( 'templates/technical-login-form' ); ?>
+			<button type="button" class="c-technical-access-gate__toggle" data-role="show-registration">
+				<?php esc_html_e( 'Crea una cuenta', 'parklex' ); ?>
+			</button>
+		</div>
+		<div class="c-technical-access-gate__panel" data-role="registration-panel" hidden>
+			<?php if ( $registration_form ) : ?>
+				<?php echo $registration_form; // phpcs:ignore -- trusted admin-entered embed script. ?>
+			<?php endif; ?>
+			<button type="button" class="c-technical-access-gate__toggle" data-role="show-login">
+				<?php esc_html_e( 'Inicia sesión', 'parklex' ); ?>
+			</button>
+		</div>
 	</div>
 </main>

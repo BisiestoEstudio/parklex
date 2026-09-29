@@ -295,6 +295,57 @@
         align-items: center;
         padding: var(--wp--preset--spacing--xl) var(--layout-margin);
     }
+
+    &__panel {
+        display: flex;
+        flex-direction: column;
+        gap: var(--wp--preset--spacing--m);
+        width: 100%;
+
+        &[hidden] {
+            display: none;
+        }
+    }
+
+    &__toggle {
+        border: none;
+        background: none;
+        text-decoration: underline;
+        cursor: pointer;
+        text-align: center;
+    }
+}
+
+.c-technical-login-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--wp--preset--spacing--m);
+
+    &__label {
+        display: block;
+        margin-bottom: var(--wp--preset--spacing--xxs);
+    }
+
+    &__input {
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid var(--gray);
+        padding: var(--wp--preset--spacing--xxs) 0;
+        background: none;
+    }
+
+    &__error {
+        color: var(--ambar);
+    }
+
+    &__submit {
+        border: 1px solid var(--black);
+        border-radius: 100px;
+        padding: var(--wp--preset--spacing--s);
+        background: none;
+        cursor: pointer;
+        text-transform: uppercase;
+    }
 }
 
 .c-technical-video-modal {

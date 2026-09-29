@@ -46,6 +46,15 @@ class Bis_Theme_Assets {
 				BIS_THEME_VERSION,
 				true
 			);
+
+			wp_localize_script( 'bis-theme-technical-access-gate', 'bisTechnicalAccessGate', array(
+				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+				'action'  => Bis_Core_Technical_Card::LOGIN_ACTION,
+				'nonce'   => wp_create_nonce( Bis_Core_Technical_Card::LOGIN_NONCE_ACTION ),
+				'i18n'    => array(
+					'genericError' => __( 'Ha ocurrido un error. Inténtalo de nuevo.', 'parklex' ),
+				),
+			) );
 		}
 
 		if ( is_singular( 'project_internal' ) || is_post_type_archive( 'project_internal' ) ) {
