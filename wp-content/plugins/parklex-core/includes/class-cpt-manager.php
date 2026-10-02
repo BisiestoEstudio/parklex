@@ -11,6 +11,65 @@ class Bis_Core_CPT_Manager {
 		self::register_lunch_learn_request();
 
 		add_filter( 'post_type_link', array( __CLASS__, 'filter_products_permalink' ), 1, 2 );
+		add_action( 'pre_get_posts', array( __CLASS__, 'apply_manual_order' ) );
+
+		foreach ( array( 'proyecto', 'products', 'technical-card' ) as $post_type ) {
+			add_filter( "manage_{$post_type}_posts_columns", array( __CLASS__, 'add_order_column' ) );
+			add_action( "manage_{$post_type}_posts_custom_column", array( __CLASS__, 'render_order_column' ), 10, 2 );
+			add_filter( "manage_edit-{$post_type}_sortable_columns", array( __CLASS__, 'make_order_column_sortable' ) );
+		}
+	}
+
+	/**
+	 * Projects, Acabados and Technical Cards support "page-attributes", which gives editors
+	 * a native "Order" field. Apply it to any front-end/REST query of these post types that
+	 * hasn't already asked for a specific orderby (e.g. 'rand' for related content, or
+	 * 'post__in' to preserve a manually picked relationship field order).
+	 */
+	public static function apply_manual_order( $query ) {
+		if ( is_admin() || $query->get( 'orderby' ) ) {
+			return;
+		}
+
+		$ordered_post_types = array( 'proyecto', 'products', 'technical-card' );
+		$post_type          = $query->get( 'post_type' );
+
+		if ( is_array( $post_type ) ) {
+			if ( ! array_intersect( $post_type, $ordered_post_types ) ) {
+				return;
+			}
+		} elseif ( ! in_array( $post_type, $ordered_post_types, true ) ) {
+			return;
+		}
+
+		$query->set( 'orderby', 'menu_order title' );
+		$query->set( 'order', 'ASC' );
+	}
+
+	/**
+	 * Insert the "Orden" column right after Title, so editors see the menu_order value
+	 * that drives the manual sort applied in apply_manual_order().
+	 */
+	public static function add_order_column( $columns ) {
+		$position = array_search( 'title', array_keys( $columns ), true );
+		$position = false === $position ? count( $columns ) : $position + 1;
+
+		return array_merge(
+			array_slice( $columns, 0, $position, true ),
+			array( 'bis_order' => __( 'Orden', 'parklex-core' ) ),
+			array_slice( $columns, $position, null, true )
+		);
+	}
+
+	public static function render_order_column( $column, $post_id ) {
+		if ( 'bis_order' === $column ) {
+			echo (int) get_post_field( 'menu_order', $post_id );
+		}
+	}
+
+	public static function make_order_column_sortable( $columns ) {
+		$columns['bis_order'] = 'menu_order';
+		return $columns;
 	}
 
 	private static function register_technical_card() {
@@ -50,7 +109,7 @@ class Bis_Core_CPT_Manager {
 				'has_archive'        => true,
 				'hierarchical'       => true,
 				'menu_position'      => null,
-				'supports'           => array( 'title', 'thumbnail' ),
+				'supports'           => array( 'title', 'thumbnail', 'page-attributes' ),
 				'menu_icon'          => 'dashicons-hammer',
 			)
 		);
@@ -93,7 +152,7 @@ class Bis_Core_CPT_Manager {
 					'with_front' => false,
 				),
 				'menu_position'      => null,
-				'supports'           => array( 'title', 'excerpt', 'thumbnail', 'editor' ),
+				'supports'           => array( 'title', 'excerpt', 'thumbnail', 'editor', 'page-attributes' ),
 				'menu_icon'          => 'dashicons-building',
 			)
 		);
