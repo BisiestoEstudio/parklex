@@ -16,7 +16,7 @@ if ( empty( $items ) ) {
 ?>
 <nav class="c-blog-toc" aria-label="<?php esc_attr_e( 'En este artículo', 'parklex' ); ?>">
 	<div class="c-blog-toc__header">
-		<p class="c-blog-toc__title"><?php esc_html_e( 'En este artículo', 'parklex' ); ?></p>
+		<p class="c-blog-toc__title has-h-4-font-size"><?php esc_html_e( 'En este artículo', 'parklex' ); ?></p>
 		<span class="c-blog-toc__icon" aria-hidden="true"></span>
 	</div>
 

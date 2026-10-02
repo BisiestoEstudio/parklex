@@ -15,13 +15,17 @@ const ALLOWED_MEDIA_TYPES = [ 'image' ];
 function imagesToBlocks( media ) {
 	return media
 		.filter( ( item ) => item.url )
-		.map( ( item ) =>
-			createBlock( 'core/image', {
+		.map( ( item ) => {
+			const full = item.sizes?.full ?? {};
+			return createBlock( 'core/image', {
 				id: item.id,
-				url: item.url,
+				url: full.url || item.url,
+				width: full.width || item.width,
+				height: full.height || item.height,
 				alt: item.alt || '',
-			} )
-		);
+				sizeSlug: 'full',
+			} );
+		} );
 }
 
 export default function Edit( { clientId } ) {

@@ -4,7 +4,7 @@ defined( 'ABSPATH' ) || exit;
 get_header();
 ?>
 
-<main class="entry-content is-layout-constrained has-global-padding">
+<main class="entry-content">
 	<?php
 	while ( have_posts() ) :
 		the_post();
@@ -14,7 +14,7 @@ get_header();
 		?>
 
 		<article class="c-blog-single">
-			<header class="c-blog-single__header">
+			<header class="c-blog-single__header is-layout-constrained has-global-padding">
 				<?php if ( $categories ) : ?>
 					<p class="c-blog-single__category display-xxs">
 						<?php echo esc_html( implode( ', ', wp_list_pluck( $categories, 'name' ) ) ); ?>
@@ -24,9 +24,7 @@ get_header();
 				<h1 class="c-blog-single__title"><?php the_title(); ?></h1>
 
 				<p class="c-blog-single__date"><?php echo esc_html( get_the_date( 'j \d\e F Y' ) ); ?></p>
-			</header>
-
-			<?php if ( has_post_thumbnail() ) : ?>
+				<?php if ( has_post_thumbnail() ) : ?>
 				<figure class="c-blog-single__featured-image alignwide">
 					<?php
 					echo wp_get_attachment_image(
@@ -38,12 +36,15 @@ get_header();
 					?>
 				</figure>
 			<?php endif; ?>
+			</header>
+
+			<div class="c-blog-single__content is-layout-constrained has-global-padding">
 
 			<?php if ( ! empty( $toc_data['toc'] ) ) : ?>
 				<?php get_template_part( 'template-parts/content-blog-toc', null, array( 'items' => $toc_data['toc'] ) ); ?>
 			<?php endif; ?>
 
-			<div class="c-blog-single__content is-layout-constrained">
+			
 				<?php echo $toc_data['content']; ?>
 			</div>
 		</article>
