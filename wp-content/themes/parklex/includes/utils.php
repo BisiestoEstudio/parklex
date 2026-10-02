@@ -26,6 +26,16 @@ function bis_theme_get_page_by_template( $template ) {
 }
 
 /**
+ * URL of the blog archive (the static "Posts page" if one is set in
+ * Settings > Reading, otherwise the site root).
+ */
+function bis_theme_get_blog_archive_url() {
+	$page_for_posts = (int) get_option( 'page_for_posts' );
+
+	return $page_for_posts ? get_permalink( $page_for_posts ) : home_url( '/' );
+}
+
+/**
  * Extracts a nested h2/h3 table of contents out of already-filtered post
  * content, and returns the content with matching anchor ids applied so the
  * TOC links actually resolve. A heading's own "HTML anchor" (block editor

@@ -105,10 +105,11 @@
 
 .c-blog-post{
     &__featured-image{
-        aspect-ratio: 720 / 420;
+        aspect-ratio: 1 / 1;
         display: block;
         overflow: hidden;
         margin: 0 calc(-1 * var(--layout-margin));
+
         img{
             width: 100%;
             height: 100%;
@@ -122,8 +123,113 @@
         gap: 16px;
     }
 
+    &__category{
+        text-transform: uppercase;
+        color: var(--gray-dark);
+    }
+
+    &__title{
+        margin: 0;
+    }
+
     &__excerpt{
         padding-top: 40px;
+    }
+}
+
+.c-blog-archive{
+    display: grid;
+    gap: var(--wp--preset--spacing--xl);
+
+    &__header{
+        position: relative;
+        display: grid;
+        text-align: center;
+        color: var(--white);
+    }
+
+    &__header-image{
+        aspect-ratio: 16 / 7;
+        width: 100%;
+        max-height: 420px;
+        object-fit: cover;
+        grid-area: 1 / 1;
+    }
+
+    &__header-content{
+        grid-area: 1 / 1;
+        align-self: center;
+        justify-self: center;
+        display: grid;
+        gap: var(--wp--preset--spacing--s);
+        padding: var(--wp--preset--spacing--m);
+    }
+
+    &__title,
+    &__subtitle{
+        margin: 0;
+    }
+
+    &__nav{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--wp--preset--spacing--m);
+        border-bottom: 1px solid var(--gray-light);
+        padding-bottom: var(--wp--preset--spacing--s);
+    }
+
+    &__tabs{
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--wp--preset--spacing--m);
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    &__tab{
+        a{
+            text-decoration: none;
+        }
+
+        &.is-active a{
+            text-decoration: underline;
+        }
+    }
+
+    &__search{
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    &__grid{
+        display: grid;
+        gap: var(--wp--preset--spacing--l) var(--wp--preset--spacing--m);
+        grid-template-columns: 1fr;
+    }
+
+    &__pagination{
+        display: flex;
+        justify-content: center;
+    }
+
+    &__empty{
+        text-align: center;
+    }
+}
+
+@media (min-width: 600px) {
+    .c-blog-archive__grid{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 1080px) {
+    .c-blog-archive__grid{
+        grid-template-columns: 1fr 1fr 1fr;
     }
 }
 .c-blog-related{

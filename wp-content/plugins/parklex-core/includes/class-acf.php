@@ -141,6 +141,15 @@ class ACF
             'capability'  => 'manage_options',
             'redirect'    => false,
         ) );
+
+        acf_add_options_sub_page( array(
+            'page_title'  => __( 'Blog Settings', 'parklex-core' ),
+            'menu_title'  => __( 'Blog Settings', 'parklex-core' ),
+            'menu_slug'   => 'acf-options-blog',
+            'parent_slug' => 'edit.php',
+            'capability'  => 'manage_options',
+            'redirect'    => false,
+        ) );
     }
 
     /**
