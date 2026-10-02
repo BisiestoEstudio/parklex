@@ -32,6 +32,7 @@ $page404 = array(
 	'key' => $page404_slug,
 	'label' => 'Page 404',
 	'name' => "error404",
+	'translation' => 'sync',
 	'instructions' => 'Bloque que se mostrará en la página de error 404. Si no lo tienes creado, puedes crearlo <a href="/wp-admin/site-editor.php?postType=wp_block" target="_blank">aquí</a>',
 	'type' => 'post_object',
 	'post_type' => array(

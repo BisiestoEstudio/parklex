@@ -84,6 +84,8 @@ $hubspot_api_key_field = array(
 	'name'         => 'hubspot_api_key',
 	'instructions' => __( 'Clave privada de la API de HubSpot.', 'parklex-core' ),
 	'type'         => 'password',
+	// Same value regardless of WPML language — see Bis_Core\ACF::maybe_register_synced_field().
+	'translation'  => 'sync',
 );
 
 acf_add_local_field_group( array(

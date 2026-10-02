@@ -294,6 +294,7 @@
         display: flex;
         align-items: center;
         padding: var(--wp--preset--spacing--xl) var(--layout-margin);
+        justify-content: center;
     }
 
     &__panel {
@@ -301,6 +302,7 @@
         flex-direction: column;
         gap: var(--wp--preset--spacing--m);
         width: 100%;
+        max-width: 368px;
 
         &[hidden] {
             display: none;

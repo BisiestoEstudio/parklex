@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
  */
 class Bis_Core_Technical_Card {
 
-	const REGISTERED_COOKIE = 'technical_area_registered_user';
+	const REGISTERED_COOKIE  = 'technical_area_registered_user';
 	const LOGIN_ACTION       = 'bis_technical_area_login';
 	const LOGIN_NONCE_ACTION = 'bis_technical_area_login';
 
@@ -51,10 +51,9 @@ class Bis_Core_Technical_Card {
 
 	/**
 	 * Handles the email-only login form (templates/technical-login-form.php), the
-	 * alternative to the HubSpot registration form on the same gate. For now any
-	 * valid email is accepted and marks the visitor as registered; a later step will
-	 * look the email up in HubSpot (using the "HubSpot API Key" option) instead of
-	 * accepting every address.
+	 * alternative to the HubSpot registration form on the same gate. Looks the email
+	 * up in HubSpot and only marks the visitor as registered if a matching contact
+	 * exists there.
 	 */
 	public static function handle_login() {
 		check_ajax_referer( self::LOGIN_NONCE_ACTION, 'nonce' );
@@ -65,9 +64,71 @@ class Bis_Core_Technical_Card {
 			wp_send_json_error( array( 'message' => __( 'Introduce un email válido.', 'parklex-core' ) ) );
 		}
 
+		$is_registered = self::is_email_registered_in_hubspot( $email );
+
+		if ( is_wp_error( $is_registered ) ) {
+			// Logs the real reason (missing/invalid API key, network failure, unexpected
+			// HubSpot response...) server-side, but the visitor only ever sees the
+			// generic message below.
+			error_log( 'Bis_Core_Technical_Card::handle_login HubSpot lookup failed: ' . $is_registered->get_error_message() ); // phpcs:ignore -- intentional error logging, no sensitive data exposed to the visitor.
+			wp_send_json_error( array( 'message' => __( 'Ha ocurrido un error al comprobar el registro. Inténtalo de nuevo.', 'parklex-core' ) ) );
+		}
+
+		if ( ! $is_registered ) {
+			wp_send_json_error( array( 'message' => __( 'Este email no está registrado. Regístrate para acceder a la zona técnica.', 'parklex-core' ) ) );
+		}
+
 		self::set_registered_cookie();
 
 		wp_send_json_success();
+	}
+
+	/**
+	 * Looks up a contact by email in HubSpot (CRM API: GET /crm/v3/objects/contacts/{email}
+	 * ?idProperty=email — 200 if the contact exists, 404 if it doesn't). Returns true/false,
+	 * or a WP_Error if the API key isn't configured or the request itself fails.
+	 */
+	public static function is_email_registered_in_hubspot( $email ) {
+		$api_key = get_field( 'hubspot_api_key', 'option' );
+
+		if ( ! $api_key ) {
+			return new WP_Error( 'bis_technical_card_missing_api_key', __( 'No se ha configurado la API Key de HubSpot.', 'parklex-core' ) );
+		}
+
+		$response = wp_remote_get(
+			'https://api.hubapi.com/crm/v3/objects/contacts/' . rawurlencode( $email ) . '?idProperty=email',
+			array(
+				'headers' => array(
+					'Authorization' => 'Bearer ' . $api_key,
+				),
+				'timeout' => 10,
+			)
+		);
+
+		if ( is_wp_error( $response ) ) {
+			return $response;
+		}
+
+		$status_code = wp_remote_retrieve_response_code( $response );
+
+		if ( 200 === $status_code ) {
+			return true;
+		}
+
+		if ( in_array( $status_code, array( 400, 404 ), true ) ) {
+			return false;
+		}
+
+		return new WP_Error(
+			'bis_technical_card_hubspot_error',
+			sprintf(
+				/* translators: %1$d: HTTP status code, %2$s: response body */
+				__( 'Respuesta inesperada de la API de HubSpot (código %1$d): %2$s', 'parklex-core' ),
+				$status_code,
+				wp_remote_retrieve_body( $response )
+			),
+			array( 'status' => $status_code )
+		);
 	}
 
 	public static function set_registered_cookie() {
