@@ -16,7 +16,7 @@ get_header();
 		<article class="c-blog-single">
 			<header class="c-blog-single__header is-layout-constrained has-global-padding">
 				<?php if ( $categories ) : ?>
-					<p class="c-blog-single__category display-xxs">
+					<p class="c-blog-single__category has-display-s-font-size">
 						<?php echo esc_html( implode( ', ', wp_list_pluck( $categories, 'name' ) ) ); ?>
 					</p>
 				<?php endif; ?>
@@ -38,13 +38,14 @@ get_header();
 			<?php endif; ?>
 			</header>
 
+
+
+
 			<div class="c-blog-single__content is-layout-constrained has-global-padding">
 
 			<?php if ( ! empty( $toc_data['toc'] ) ) : ?>
 				<?php get_template_part( 'template-parts/content-blog-toc', null, array( 'items' => $toc_data['toc'] ) ); ?>
 			<?php endif; ?>
-
-			
 				<?php echo $toc_data['content']; ?>
 			</div>
 		</article>
