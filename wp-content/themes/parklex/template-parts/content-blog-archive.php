@@ -28,14 +28,14 @@ $blog_archive_url = bis_theme_get_blog_archive_url();
 
 
 <main class="c-blog-archive is-layout-constrained has-global-padding">
-	<div class="c-blog-archive__nav">
+	<div class="c-blog-archive__nav alignwide">
 		<ul class="c-blog-archive__tabs">
 			<li class="c-blog-archive__tab<?php echo is_home() ? ' is-active' : ''; ?>">
-				<a href="<?php echo esc_url( $blog_archive_url ); ?>"><?php esc_html_e( 'Todos', 'parklex' ); ?></a>
+				<a class="has-display-s-font-size" href="<?php echo esc_url( $blog_archive_url ); ?>"><?php esc_html_e( 'Todos', 'parklex' ); ?></a>
 			</li>
 			<?php foreach ( $categories as $category ) : ?>
 				<li class="c-blog-archive__tab<?php echo is_category( $category->term_id ) ? ' is-active' : ''; ?>">
-					<a href="<?php echo esc_url( get_category_link( $category ) ); ?>"><?php echo esc_html( $category->name ); ?></a>
+					<a class="has-display-s-font-size" href="<?php echo esc_url( get_category_link( $category ) ); ?>"><?php echo esc_html( $category->name ); ?></a>
 				</li>
 			<?php endforeach; ?>
 		</ul>
@@ -47,7 +47,7 @@ $blog_archive_url = bis_theme_get_blog_archive_url();
 	</div>
 
 	<?php if ( have_posts() ) : ?>
-		<div class="c-blog-archive__grid">
+		<div class="c-blog-archive__grid alignwide<?php echo is_paged() ? '' : ' c-blog-archive__grid--first-page'; ?>">
 			<?php
 			while ( have_posts() ) :
 				the_post();
