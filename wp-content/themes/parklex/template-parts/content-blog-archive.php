@@ -7,6 +7,8 @@ $archive_subtitle = get_field( 'blog_archive_subtitle', 'option' );
 $search           = isset( $_GET['search'] ) ? sanitize_text_field( wp_unslash( $_GET['search'] ) ) : '';
 $categories       = get_categories( array( 'hide_empty' => true ) );
 $blog_archive_url = bis_theme_get_blog_archive_url();
+$blog_page_id     = (int) get_option( 'page_for_posts' );
+$blog_page_content = $blog_page_id ? get_post_field( 'post_content', $blog_page_id ) : '';
 ?>
 
 
@@ -66,6 +68,12 @@ $blog_archive_url = bis_theme_get_blog_archive_url();
 	<?php else : ?>
 		<div class="c-blog-archive__empty">
 			<p><?php esc_html_e( 'No se han encontrado artículos. Prueba a cambiar los filtros de búsqueda.', 'parklex' ); ?></p>
+		</div>
+	<?php endif; ?>
+
+	<?php if ( $blog_page_content ) : ?>
+		<div class="c-blog-archive__content alignwide">
+			<?php echo apply_filters( 'the_content', $blog_page_content ); ?>
 		</div>
 	<?php endif; ?>
 </main>

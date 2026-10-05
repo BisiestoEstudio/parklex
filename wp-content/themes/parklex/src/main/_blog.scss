@@ -272,6 +272,10 @@
     &__empty{
         text-align: center;
     }
+
+    &__content{
+        margin-top: var(--wp--preset--spacing--xl);
+    }
 }
 
 @media (min-width: 600px) {
