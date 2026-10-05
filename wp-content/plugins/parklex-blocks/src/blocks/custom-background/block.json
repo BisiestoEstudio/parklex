@@ -35,6 +35,10 @@
 			"type": "string",
 			"enum": [ "cover", "contain" ],
 			"default": "cover"
+		},
+		"videoPosition": {
+			"type": "string",
+			"default": "center"
 		}
 	},
 	"supports": {

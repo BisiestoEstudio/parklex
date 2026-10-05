@@ -89,10 +89,14 @@ function VideoSelector( {
 	return (
 		<div className="media-picker__video">
 			<TextControl
-				label={ __( 'URL del vídeo', 'factoria-cruzcampo-blocks' ) }
+				label={ __( 'URL de Vimeo', 'parklex-blocks' ) }
+				help={ __(
+					'Pega la URL del vídeo de Vimeo, p. ej. https://vimeo.com/123456789',
+					'parklex-blocks'
+				) }
 				value={ videoUrl }
 				onChange={ onVideoUrlChange }
-				placeholder="https://"
+				placeholder="https://vimeo.com/123456789"
 			/>
 			<p className="media-picker__poster-label">
 				{ __( 'Póster', 'factoria-cruzcampo-blocks' ) }

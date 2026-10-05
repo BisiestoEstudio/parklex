@@ -95,6 +95,79 @@ function bis_get_block_inline_styles( $block ) {
 }
 
 /**
+ * Extrae el ID (y hash privado opcional) de una URL de Vimeo.
+ * Soporta vimeo.com/ID, vimeo.com/ID/HASH, player.vimeo.com/video/ID y URLs de canal.
+ *
+ * @return array{id:string,hash:string}|null
+ */
+function bis_get_vimeo_id( $url ) {
+	$url = trim( (string) $url );
+
+	if ( ! $url || ! preg_match( '#vimeo(?:\.com)?/(?:.*/)?(?:video/)?(\d+)(?:/([0-9a-z]+))?#i', $url, $matches ) ) {
+		return null;
+	}
+
+	return [
+		'id'   => $matches[1],
+		'hash' => $matches[2] ?? '',
+	];
+}
+
+/**
+ * Construye la URL de embed del player de Vimeo configurada como vídeo de fondo:
+ * silenciado, en bucle y autorreproducido, sin controles ni chrome del player.
+ */
+function bis_get_vimeo_embed_url( array $vimeo ) {
+	if ( empty( $vimeo['id'] ) ) {
+		return '';
+	}
+
+	$params = [
+		'background' => 1,
+		'autoplay'   => 1,
+		'loop'       => 1,
+		'muted'      => 1,
+		'byline'     => 0,
+		'title'      => 0,
+		'portrait'   => 0,
+		'dnt'        => 1,
+	];
+
+	if ( ! empty( $vimeo['hash'] ) ) {
+		$params['h'] = $vimeo['hash'];
+	}
+
+	return 'https://player.vimeo.com/video/' . rawurlencode( $vimeo['id'] ) . '?' . http_build_query( $params );
+}
+
+/**
+ * Convierte un valor de AlignmentMatrixControl ("top left", "center", "bottom right"...)
+ * en coordenadas x/y (0, 50, 100) para usar en object-position o anclajes CSS.
+ *
+ * @return array{x:int,y:int}
+ */
+function bis_get_alignment_matrix_xy( $position ) {
+	$map = [
+		'top left'      => [ 'x' => 0, 'y' => 0 ],
+		'top center'    => [ 'x' => 50, 'y' => 0 ],
+		'top'           => [ 'x' => 50, 'y' => 0 ],
+		'top right'     => [ 'x' => 100, 'y' => 0 ],
+		'center left'   => [ 'x' => 0, 'y' => 50 ],
+		'left'          => [ 'x' => 0, 'y' => 50 ],
+		'center'        => [ 'x' => 50, 'y' => 50 ],
+		'center center' => [ 'x' => 50, 'y' => 50 ],
+		'center right'  => [ 'x' => 100, 'y' => 50 ],
+		'right'         => [ 'x' => 100, 'y' => 50 ],
+		'bottom left'   => [ 'x' => 0, 'y' => 100 ],
+		'bottom center' => [ 'x' => 50, 'y' => 100 ],
+		'bottom'        => [ 'x' => 50, 'y' => 100 ],
+		'bottom right'  => [ 'x' => 100, 'y' => 100 ],
+	];
+
+	return $map[ (string) $position ] ?? [ 'x' => 50, 'y' => 50 ];
+}
+
+/**
  * Pinta el elemento media (imagen o vídeo) de un MediaPicker con soporte a vídeo.
  * $media: array con mediaType, imageId, videoUrl, posterId.
  * $class: clase CSS aplicada al elemento resultante.

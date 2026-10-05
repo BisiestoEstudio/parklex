@@ -3,6 +3,7 @@ import { InspectorControls, useSettings } from '@wordpress/block-editor';
 import {
 	PanelBody,
 	FocalPointPicker,
+	AlignmentMatrixControl,
 	BaseControl,
 	ColorPalette,
 	RangeControl,
@@ -15,11 +16,19 @@ import { useSelect } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
 import { useBisiestoBlockProps } from '../../hooks/useBisiestoBlockProps';
 import MediaPicker from '../../components/MediaPicker';
+import { getVimeoId, getVimeoEmbedUrl } from '../../utils/getVimeoId';
+import { getAlignmentXY } from '../../utils/getAlignmentXY';
 import './editor.scss';
 
 export default function Edit( { attributes, setAttributes } ) {
-	const { media, focalPoint, overlayColor, overlayOpacity, objectFit } =
-		attributes;
+	const {
+		media,
+		focalPoint,
+		overlayColor,
+		overlayOpacity,
+		objectFit,
+		videoPosition,
+	} = attributes;
 	const [ colors ] = useSettings( 'color.palette' );
 
 	const imageUrl = useSelect(
@@ -30,10 +39,12 @@ export default function Edit( { attributes, setAttributes } ) {
 		[ media?.imageId ]
 	);
 
-	const mediaUrl =
-		media?.mediaType === 'video' ? media?.videoUrl : imageUrl;
+	const vimeo =
+		media?.mediaType === 'video' ? getVimeoId( media?.videoUrl ) : null;
 
 	const objectPosition = `${ focalPoint?.x * 100 }% ${ focalPoint?.y * 100 }%`;
+	const videoPositionXY = getAlignmentXY( videoPosition );
+	const videoObjectPosition = `${ videoPositionXY.x }% ${ videoPositionXY.y }%`;
 
 	const blockProps = useBisiestoBlockProps( {} );
 
@@ -63,7 +74,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							setAttributes( { media: { ...media, posterId } } )
 						}
 					/>
-					{ mediaUrl && (
+					{ media?.mediaType === 'image' && imageUrl && (
 						<ToggleGroupControl
 							label={ __( 'Ajuste', 'parklex-blocks' ) }
 							value={ objectFit }
@@ -83,15 +94,32 @@ export default function Edit( { attributes, setAttributes } ) {
 							/>
 						</ToggleGroupControl>
 					) }
-					{ mediaUrl && (
+					{ media?.mediaType === 'image' && imageUrl && (
 						<FocalPointPicker
 							label={ __( 'Punto focal', 'parklex-blocks' ) }
-							url={ mediaUrl }
+							url={ imageUrl }
 							value={ focalPoint }
 							onChange={ ( value ) =>
 								setAttributes( { focalPoint: value } )
 							}
 						/>
+					) }
+					{ media?.mediaType === 'video' && media?.videoUrl && (
+						<BaseControl
+							label={ __( 'Posición del vídeo', 'parklex-blocks' ) }
+							id="custom-background-video-position"
+							help={ __(
+								'Punto del vídeo que queda fijo al recortarlo para cubrir el contenedor.',
+								'parklex-blocks'
+							) }
+						>
+							<AlignmentMatrixControl
+								value={ videoPosition }
+								onChange={ ( value ) =>
+									setAttributes( { videoPosition: value } )
+								}
+							/>
+						</BaseControl>
 					) }
 				</PanelBody>
 
@@ -132,14 +160,30 @@ export default function Edit( { attributes, setAttributes } ) {
 
 			<div { ...blockProps }>
 				{ media?.mediaType === 'video' && media?.videoUrl ? (
-					<video
-						className="b-custom-background__preview"
-						src={ media.videoUrl }
-						style={ { objectPosition, objectFit } }
-						muted
-						loop
-						playsInline
-					/>
+					vimeo ? (
+						<iframe
+							className="b-custom-background__preview"
+							src={ getVimeoEmbedUrl( vimeo ) }
+							title={ __(
+								'Vista previa del vídeo de Vimeo',
+								'parklex-blocks'
+							) }
+							allow="autoplay; fullscreen; picture-in-picture"
+							tabIndex={ -1 }
+						/>
+					) : (
+						<video
+							className="b-custom-background__preview"
+							src={ media.videoUrl }
+							style={ {
+								objectPosition: videoObjectPosition,
+								objectFit: 'cover',
+							} }
+							muted
+							loop
+							playsInline
+						/>
+					)
 				) : imageUrl ? (
 					<img
 						className="b-custom-background__preview"
