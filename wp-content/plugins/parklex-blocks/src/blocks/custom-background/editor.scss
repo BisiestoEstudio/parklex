@@ -2,9 +2,27 @@
 	position: relative !important;
 	inset: auto !important;
 	overflow: visible !important;
-	border: 2px dashed rgba(0, 0, 0, 0.2);
+	border: 2px dashed #7900d8;
 	border-radius: 4px;
-	padding: 8px;
+	padding: 16px 8px 8px;
+	margin-top: 10px;
+	background: rgba(121, 0, 216, 0.04);
+
+	&__badge {
+		position: absolute;
+		top: -10px;
+		left: 12px;
+		background: #7900d8;
+		color: #fff;
+		font-size: 10px;
+		font-weight: 600;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		line-height: 1.4;
+		padding: 2px 8px;
+		border-radius: 3px;
+		z-index: 1;
+	}
 
 	&__preview {
 		max-height: 160px;

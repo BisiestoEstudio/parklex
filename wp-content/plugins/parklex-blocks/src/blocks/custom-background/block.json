@@ -15,8 +15,7 @@
 			"default": {
 				"mediaType": "image",
 				"imageId": 0,
-				"videoUrl": "",
-				"posterId": 0
+				"videoUrl": ""
 			}
 		},
 		"focalPoint": {

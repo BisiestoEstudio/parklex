@@ -69,10 +69,6 @@ export default function Edit( { attributes, setAttributes } ) {
 						onVideoUrlChange={ ( videoUrl ) =>
 							setAttributes( { media: { ...media, videoUrl } } )
 						}
-						posterId={ media?.posterId }
-						onPosterChange={ ( posterId ) =>
-							setAttributes( { media: { ...media, posterId } } )
-						}
 					/>
 					{ media?.mediaType === 'image' && imageUrl && (
 						<ToggleGroupControl
@@ -159,6 +155,9 @@ export default function Edit( { attributes, setAttributes } ) {
 			</InspectorControls>
 
 			<div { ...blockProps }>
+				<span className="b-custom-background__badge">
+					{ __( 'Fondo', 'parklex-blocks' ) }
+				</span>
 				{ media?.mediaType === 'video' && media?.videoUrl ? (
 					vimeo ? (
 						<iframe

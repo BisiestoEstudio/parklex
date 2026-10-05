@@ -5,6 +5,23 @@ import { MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
 import { Button, ToggleControl, TextControl } from '@wordpress/components';
 import './MediaPicker.scss';
 
+function VideoSelector( { videoUrl, onVideoUrlChange } ) {
+	return (
+		<div className="media-picker__video">
+			<TextControl
+				label={ __( 'URL de Vimeo', 'parklex-blocks' ) }
+				help={ __(
+					'Pega la URL del vídeo de Vimeo, p. ej. https://vimeo.com/123456789',
+					'parklex-blocks'
+				) }
+				value={ videoUrl }
+				onChange={ onVideoUrlChange }
+				placeholder="https://vimeo.com/123456789"
+			/>
+		</div>
+	);
+}
+
 function ImageSelector( { imageId, onImageChange } ) {
 	const imageUrl = useSelect(
 		( select ) => {
@@ -70,94 +87,6 @@ function ImageSelector( { imageId, onImageChange } ) {
 	);
 }
 
-function VideoSelector( {
-	videoUrl,
-	onVideoUrlChange,
-	posterId,
-	onPosterChange,
-} ) {
-	const posterUrl = useSelect(
-		( select ) => {
-			if ( ! posterId ) {
-				return null;
-			}
-			return select( coreStore ).getMedia( posterId )?.source_url ?? null;
-		},
-		[ posterId ]
-	);
-
-	return (
-		<div className="media-picker__video">
-			<TextControl
-				label={ __( 'URL de Vimeo', 'parklex-blocks' ) }
-				help={ __(
-					'Pega la URL del vídeo de Vimeo, p. ej. https://vimeo.com/123456789',
-					'parklex-blocks'
-				) }
-				value={ videoUrl }
-				onChange={ onVideoUrlChange }
-				placeholder="https://vimeo.com/123456789"
-			/>
-			<p className="media-picker__poster-label">
-				{ __( 'Póster', 'factoria-cruzcampo-blocks' ) }
-			</p>
-			<MediaUploadCheck>
-				<MediaUpload
-					onSelect={ ( media ) => onPosterChange( media.id ) }
-					allowedTypes={ [ 'image' ] }
-					value={ posterId }
-					render={ ( { open } ) => (
-						<div className="media-picker__selector">
-							{ posterUrl && (
-								<div
-									className="media-picker__preview"
-									onClick={ open }
-								>
-									<img src={ posterUrl } alt="" />
-								</div>
-							) }
-							<Button
-								onClick={ open }
-								variant="secondary"
-								style={ { width: '100%' } }
-							>
-								{ posterId
-									? __(
-											'Cambiar póster',
-											'factoria-cruzcampo-blocks'
-									  )
-									: __(
-											'Seleccionar póster',
-											'factoria-cruzcampo-blocks'
-									  ) }
-							</Button>
-							{ posterId > 0 && (
-								<Button
-									onClick={ ( e ) => {
-										e.stopPropagation();
-										onPosterChange( 0 );
-									} }
-									variant="tertiary"
-									isDestructive
-									style={ {
-										width: '100%',
-										marginTop: '4px',
-									} }
-								>
-									{ __(
-										'Eliminar póster',
-										'factoria-cruzcampo-blocks'
-									) }
-								</Button>
-							) }
-						</div>
-					) }
-				/>
-			</MediaUploadCheck>
-		</div>
-	);
-}
-
 export default function MediaPicker( {
 	mode = 'both',
 	mediaType = 'image',
@@ -166,8 +95,6 @@ export default function MediaPicker( {
 	onImageChange,
 	videoUrl = '',
 	onVideoUrlChange,
-	posterId = 0,
-	onPosterChange,
 } ) {
 	const showToggle = mode === 'both';
 	const showImage =
@@ -200,8 +127,6 @@ export default function MediaPicker( {
 				<VideoSelector
 					videoUrl={ videoUrl }
 					onVideoUrlChange={ onVideoUrlChange }
-					posterId={ posterId }
-					onPosterChange={ onPosterChange }
 				/>
 			) }
 		</div>

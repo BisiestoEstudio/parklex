@@ -8,8 +8,6 @@ $media      = $attributes['media'] ?? array();
 $media_type = $media['mediaType'] ?? 'image';
 $image_id   = (int) ( $media['imageId'] ?? 0 );
 $video_url  = trim( (string) ( $media['videoUrl'] ?? '' ) );
-$poster_id  = (int) ( $media['posterId'] ?? 0 );
-$poster_url = $poster_id ? wp_get_attachment_image_url( $poster_id, 'full' ) : '';
 
 $focal_point = $attributes['focalPoint'] ?? [ 'x' => 0.5, 'y' => 0.5 ];
 $focal_x     = (float) ( $focal_point['x'] ?? 0.5 );
@@ -39,10 +37,7 @@ $vimeo = $media_type === 'video' ? bis_get_vimeo_id( $video_url ) : null;
 ?>
 <div <?php echo bis_get_block_prop( $block, false ); ?>>
 	<?php if ( $media_type === 'video' && $vimeo ) : ?>
-		<div
-			class="b-custom-background__video-wrap"
-			<?php echo $poster_url ? 'style="background-image:url(' . esc_url( $poster_url ) . ');"' : ''; ?>
-		>
+		<div class="b-custom-background__video-wrap">
 			<iframe
 				class="b-custom-background__video"
 				style="<?php echo esc_attr( $video_anchor_style ); ?>"
@@ -59,7 +54,6 @@ $vimeo = $media_type === 'video' ? bis_get_vimeo_id( $video_url ) : null;
 			class="b-custom-background__video"
 			style="<?php echo esc_attr( $video_object_style ); ?>"
 			autoplay muted loop playsinline
-			<?php echo $poster_url ? 'poster="' . esc_url( $poster_url ) . '"' : ''; ?>
 		>
 			<source src="<?php echo esc_url( $video_url ); ?>" type="video/mp4">
 		</video>
