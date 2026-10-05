@@ -27,7 +27,7 @@ $project_ids = array(
 
 			<div class="b-layout-2-proyectos__project b-layout-2-proyectos__project--<?php echo esc_attr( $modifier ); ?>">
 				<a class="b-layout-2-proyectos__image" href="<?php echo esc_url( get_permalink( $project_id ) ); ?>">
-					<?php echo get_the_post_thumbnail( $project_id, 'large', array( 'class' => 'b-layout-2-proyectos__img' ) ); ?>
+					<?php echo get_the_post_thumbnail( $project_id, 'full', array( 'class' => 'b-layout-2-proyectos__img' ) ); ?>
 				</a>
 				<p class="b-layout-2-proyectos__caption has-caption-font-size">
 					<span class="b-layout-2-proyectos__title"><?php echo esc_html( get_the_title( $project_id ) ); ?></span>

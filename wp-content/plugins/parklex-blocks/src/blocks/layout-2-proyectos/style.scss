@@ -33,7 +33,8 @@
 
 		img {
 			display: block;
-			inset: 0;
+			width: 100%;
+			height: 100%;
 			object-fit: cover;
 		}
 	}
@@ -102,12 +103,6 @@
 
 			.b-layout-2-proyectos__image {
 				aspect-ratio: 687/579;
-
-				img {
-					object-fit: cover;
-					width: 100%;
-					height: 100%;
-				}
 			}
 		}
 	}
