@@ -49,9 +49,13 @@ $blog_archive_url = bis_theme_get_blog_archive_url();
 	<?php if ( have_posts() ) : ?>
 		<div class="c-blog-archive__grid alignwide<?php echo is_paged() ? '' : ' c-blog-archive__grid--first-page'; ?>">
 			<?php
+			$post_number = 0;
 			while ( have_posts() ) :
 				the_post();
-				get_template_part( 'template-parts/content', get_post_type() );
+				$post_number++;
+				get_template_part( 'template-parts/content', get_post_type(), array(
+					'position' => is_paged() ? 0 : $post_number,
+				) );
 			endwhile;
 			?>
 		</div>
