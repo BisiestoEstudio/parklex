@@ -8,6 +8,7 @@ class Bis_Core_Taxonomy_Manager {
 		self::register_proyecto_taxonomies();
 		self::register_products_taxonomies();
 		self::register_project_internal_taxonomies();
+		self::register_map_pin_taxonomies();
 	}
 
 	private static function register_technical_card_taxonomies() {
@@ -161,6 +162,36 @@ class Bis_Core_Taxonomy_Manager {
 					'show_in_nav_menus' => true,
 					'show_in_rest'      => false,
 					'public'            => false,
+				)
+			);
+		}
+	}
+
+	/**
+	 * Non-hierarchical (tag-like): pins are filtered by these, not browsed as a tree.
+	 * Kept non-public/no rewrite to match the "map-pin" CPT, which has no archive or single.
+	 */
+	private static function register_map_pin_taxonomies() {
+		$taxonomies = array(
+			'year_map_pin'         => __( 'Year', 'parklex-core' ),
+			'product_type_map_pin' => __( 'Product Type', 'parklex-core' ),
+			'product_map_pin'      => __( 'Finish', 'parklex-core' ),
+			'country_map_pin'      => __( 'Country', 'parklex-core' ),
+		);
+
+		foreach ( $taxonomies as $taxonomy => $label ) {
+			register_taxonomy(
+				$taxonomy,
+				'map-pin',
+				array(
+					'label'             => $label,
+					'hierarchical'      => false,
+					'public'            => false,
+					'show_ui'           => true,
+					'show_admin_column' => true,
+					'show_in_nav_menus' => false,
+					'show_in_rest'      => true,
+					'rewrite'           => false,
 				)
 			);
 		}

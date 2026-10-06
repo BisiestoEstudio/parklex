@@ -9,6 +9,7 @@ class Bis_Core_CPT_Manager {
 		self::register_project_internal();
 		self::register_products();
 		self::register_lunch_learn_request();
+		self::register_map_pin();
 
 		add_filter( 'post_type_link', array( __CLASS__, 'filter_products_permalink' ), 1, 2 );
 		add_action( 'pre_get_posts', array( __CLASS__, 'apply_manual_order' ) );
@@ -285,6 +286,49 @@ class Bis_Core_CPT_Manager {
 				'menu_position'      => null,
 				'supports'           => array( 'title' ),
 				'menu_icon'          => 'dashicons-coffee',
+			)
+		);
+	}
+
+	/**
+	 * No archive, no single: pins are only ever managed from wp-admin and consumed
+	 * server-side (e.g. via WP_Query/REST) by the interactive map block.
+	 */
+	private static function register_map_pin() {
+		$labels = array(
+			'name'               => _x( 'Map Pins', 'post type general name', 'parklex-core' ),
+			'singular_name'      => _x( 'Map Pin', 'post type singular name', 'parklex-core' ),
+			'menu_name'          => _x( 'Map Pins', 'admin menu', 'parklex-core' ),
+			'name_admin_bar'     => _x( 'Map Pin', 'add new on admin bar', 'parklex-core' ),
+			'add_new'            => _x( 'Add New', 'Map Pin', 'parklex-core' ),
+			'add_new_item'       => __( 'Add Map Pin', 'parklex-core' ),
+			'new_item'           => __( 'New Map Pin', 'parklex-core' ),
+			'edit_item'          => __( 'Edit Map Pin', 'parklex-core' ),
+			'view_item'          => __( 'View Map Pin', 'parklex-core' ),
+			'all_items'          => __( 'All Map Pins', 'parklex-core' ),
+			'search_items'       => __( 'Search Map Pins', 'parklex-core' ),
+			'parent_item_colon'  => __( 'Parent Map Pin:', 'parklex-core' ),
+			'not_found'          => __( 'No Map Pins found.', 'parklex-core' ),
+			'not_found_in_trash' => __( 'No Map Pins found in Trash.', 'parklex-core' ),
+		);
+
+		register_post_type(
+			'map-pin',
+			array(
+				'labels'             => $labels,
+				'description'        => __( 'Map Pins', 'parklex-core' ),
+				'public'             => false,
+				'publicly_queryable' => false,
+				'show_ui'            => true,
+				'show_in_menu'       => true,
+				'show_in_rest'       => true,
+				'query_var'          => false,
+				'rewrite'            => false,
+				'has_archive'        => false,
+				'hierarchical'       => false,
+				'menu_position'      => null,
+				'supports'           => array( 'title' ),
+				'menu_icon'          => 'dashicons-location-alt',
 			)
 		);
 	}
