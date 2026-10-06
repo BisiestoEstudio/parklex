@@ -8,6 +8,7 @@ class Blocks {
 		add_action( 'init', array( $this, 'register_patterns' ) );
 		add_action( 'block_categories_all', array( $this, 'register_category' ), 10, 1 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_swiper' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'register_leaflet' ) );
 		add_action( 'enqueue_block_editor_assets', array( $this, 'register_editor_scripts' ) );
 	}
 
@@ -37,6 +38,44 @@ class Blocks {
 			'bis-blocks-swiper',
 			BIS_BLOCKS_URL . 'assets/css/swiper-bundle.min.css',
 			[],
+			BIS_BLOCKS_VERSION
+		);
+	}
+
+	function register_leaflet() {
+		// Same "defer" strategy WP core gives block viewScripts (see
+		// register_block_script_handle() in wp-includes/blocks.php), so these load in
+		// the same batch/order as the block's own view.js instead of racing it.
+		$script_args = [
+			'strategy'  => 'defer',
+			'in_footer' => true,
+		];
+
+		wp_register_script(
+			'bis-blocks-leaflet',
+			BIS_BLOCKS_URL . 'assets/js/leaflet.min.js',
+			[],
+			BIS_BLOCKS_VERSION,
+			$script_args
+		);
+		wp_register_style(
+			'bis-blocks-leaflet',
+			BIS_BLOCKS_URL . 'assets/css/leaflet.min.css',
+			[],
+			BIS_BLOCKS_VERSION
+		);
+
+		wp_register_script(
+			'bis-blocks-leaflet-markercluster',
+			BIS_BLOCKS_URL . 'assets/js/leaflet.markercluster.min.js',
+			[ 'bis-blocks-leaflet' ],
+			BIS_BLOCKS_VERSION,
+			$script_args
+		);
+		wp_register_style(
+			'bis-blocks-leaflet-markercluster',
+			BIS_BLOCKS_URL . 'assets/css/leaflet.markercluster.min.css',
+			[ 'bis-blocks-leaflet' ],
 			BIS_BLOCKS_VERSION
 		);
 	}

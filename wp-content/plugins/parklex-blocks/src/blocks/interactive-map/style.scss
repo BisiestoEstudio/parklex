@@ -1,0 +1,25 @@
+.b-interactive-map {
+	&__map {
+		width: 100%;
+		height: 100%;
+		min-height: 600px;
+		z-index: 0;
+	}
+
+	&__pin {
+		width: 16px;
+		height: 16px;
+		background-color: var( --wp--preset--color--ambar, #c97e51 );
+		border: 2px solid #fff;
+		border-radius: 50%;
+		box-shadow: 0 1px 4px rgba( 0, 0, 0, 0.35 );
+	}
+
+	&__popup {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		font-size: 0.875rem;
+		line-height: 1.4;
+	}
+}

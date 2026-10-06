@@ -1,0 +1,40 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bisiesto/interactive-map",
+	"version": "0.1.0",
+	"title": "Mapa interactivo",
+	"category": "bisiesto",
+	"icon": {
+		"src": "location-alt",
+		"foreground": "#7900D8"
+	},
+	"description": "Mapa interactivo con los pines de proyectos (CPT Map Pin), agrupados por cercanía.",
+	"keywords": [ "mapa", "map", "pines", "leaflet", "proyectos" ],
+	"example": {},
+	"attributes": {
+		"anchor": { "type": "string", "default": "" }
+	},
+	"supports": {
+		"html": false,
+		"anchor": true,
+		"align": [ "wide", "full" ],
+		"dimensions": {
+			"minHeight": true
+		},
+		"spacing": {
+			"margin": true,
+			"padding": true
+		},
+		"color": {
+			"background": true,
+			"text": false
+		}
+	},
+	"textdomain": "parklex-blocks",
+	"render": "file:./render.php",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": [ "bis-blocks-leaflet", "bis-blocks-leaflet-markercluster", "file:./style-index.css" ],
+	"viewScript": [ "bis-blocks-leaflet", "bis-blocks-leaflet-markercluster", "file:./view.js" ]
+}

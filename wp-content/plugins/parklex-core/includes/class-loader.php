@@ -14,9 +14,11 @@ class Bis_Core_Loader {
 		require_once BIS_CORE_DIR . 'includes/class-lunch-learn-legacy.php';
 		require_once BIS_CORE_DIR . 'includes/class-lunch-learn.php';
 		require_once BIS_CORE_DIR . 'includes/class-technical-card.php';
+		require_once BIS_CORE_DIR . 'includes/class-map-pins-rest.php';
 
 		add_action( 'init', array( 'Bis_Core_CPT_Manager', 'register' ) );
 		add_action( 'init', array( 'Bis_Core_Taxonomy_Manager', 'register' ) );
+		add_action( 'init', array( 'Bis_Core_Map_Pins_REST', 'init' ) );
 		add_action( 'init', array( 'Bis_Core_WooCommerce_Legacy', 'init' ) );
 		add_action( 'init', array( 'Bis_Core_WooCommerce', 'init' ) );
 		add_action( 'init', array( 'Bis_Core_Roles_Legacy', 'init' ) );

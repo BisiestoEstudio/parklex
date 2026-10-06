@@ -1,0 +1,22 @@
+.b-interactive-map__placeholder {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	min-height: 300px;
+	padding: var( --wp--preset--spacing--m );
+	background-color: var( --wp--preset--color--gray-light );
+	text-align: center;
+}
+
+.b-interactive-map__placeholder-title {
+	font-weight: 600;
+	margin: 0;
+}
+
+.b-interactive-map__placeholder-hint {
+	max-width: 32em;
+	color: var( --wp--preset--color--gray-dark );
+	margin: 0;
+}
