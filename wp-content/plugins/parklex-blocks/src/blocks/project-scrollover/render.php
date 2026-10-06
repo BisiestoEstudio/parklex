@@ -26,7 +26,7 @@ $project_ids = array_filter(array_map('absint', $attributes['projects'] ?? []));
 			<div class="b-project-scrollover__project-wrapper">
 				<div class="b-project-scrollover__project">
 					<a class="b-project-scrollover__image" href="<?php echo esc_url(get_permalink($project_id)); ?>">
-						<?php echo get_the_post_thumbnail($project_id, 'full', array('class' => 'b-project-scrollover__img')); ?>
+						<?php echo get_the_post_thumbnail($project_id, 'full', array('class' => 'b-project-scrollover__img', 'loading' => 'eager')); ?>
 					</a>
 					<p class="b-project-scrollover__caption">
 						<span class="b-project-scrollover__title"><?php echo esc_html(get_the_title($project_id)); ?></span>

@@ -27,7 +27,7 @@ if($variation === 'wide') {
 		</div>
 		</div>
 		<div class="b-imagen-texto__image">
-			<?php bis_paint_image( $image ); ?>
+			<?php bis_paint_image( $image, '', 'eager' ); ?>
 		</div>
 	</div>
 </div>

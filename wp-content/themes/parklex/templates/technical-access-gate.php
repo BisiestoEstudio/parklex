@@ -15,7 +15,7 @@ $registration_form = get_field( 'registration_form', 'option' );
 <main class="c-technical-access-gate alignfull">
 	<div class="c-technical-access-gate__media">
 		<?php if ( $access_gate_image ) : ?>
-			<?php echo wp_get_attachment_image( $access_gate_image['ID'], 'full', false, array( 'class' => 'c-technical-access-gate__image' ) ); ?>
+			<?php echo wp_get_attachment_image( $access_gate_image['ID'], 'full', false, array( 'class' => 'c-technical-access-gate__image', 'loading' => 'eager' ) ); ?>
 		<?php endif; ?>
 		<div class="c-technical-access-gate__overlay">
 			<?php if ( $access_gate_title ) : ?>

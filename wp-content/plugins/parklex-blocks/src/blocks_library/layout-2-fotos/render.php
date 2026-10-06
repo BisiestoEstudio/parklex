@@ -30,8 +30,8 @@ $icon_right_id = isset( $attributes['iconRight'] ) ? (int) $attributes['iconRigh
 				?>
 			</div>
 
-			<?php bis_paint_media( $center1, 'b-layout-2-fotos__media--1' ); ?>
-			<?php bis_paint_media( $center2, 'b-layout-2-fotos__media--2' ); ?>
+			<?php bis_paint_media( $center1, 'b-layout-2-fotos__media--1', 'eager' ); ?>
+			<?php bis_paint_media( $center2, 'b-layout-2-fotos__media--2', 'eager' ); ?>
 
 			<div class="b-layout-2-fotos__icon b-layout-2-fotos__icon--right">
 				<?php

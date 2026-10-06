@@ -58,7 +58,7 @@ $vimeo = $media_type === 'video' ? bis_get_vimeo_id( $video_url ) : null;
 			<source src="<?php echo esc_url( $video_url ); ?>" type="video/mp4">
 		</video>
 	<?php else : ?>
-		<?php echo wp_get_attachment_image( $image_id, 'full', false, [ 'class' => 'b-custom-background__image', 'loading' => 'lazy', 'style' => $media_style ] ); ?>
+		<?php echo wp_get_attachment_image( $image_id, 'full', false, [ 'class' => 'b-custom-background__image', 'loading' => 'eager', 'style' => $media_style ] ); ?>
 	<?php endif; ?>
 
 	<?php if ( $overlay_color ) : ?>

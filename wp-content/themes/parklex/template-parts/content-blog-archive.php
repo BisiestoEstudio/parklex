@@ -14,7 +14,7 @@ $blog_page_content = $blog_page_id ? get_post_field( 'post_content', $blog_page_
 
 <header class="c-blog-archive__header">
 	<?php if ( $header_image_id ) : ?>
-		<?php echo wp_get_attachment_image( $header_image_id, 'full', false, array( 'class' => 'c-blog-archive__header-image' ) ); ?>
+		<?php echo wp_get_attachment_image( $header_image_id, 'full', false, array( 'class' => 'c-blog-archive__header-image', 'loading' => 'eager' ) ); ?>
 	<?php endif; ?>
 
 	<div class="c-blog-archive__header-content">

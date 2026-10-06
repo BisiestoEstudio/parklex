@@ -172,7 +172,7 @@ function bis_get_alignment_matrix_xy( $position ) {
  * $media: array con mediaType, imageId, videoUrl, posterId.
  * $class: clase CSS aplicada al elemento resultante.
  */
-function bis_paint_media( $media, $class = '' ) {
+function bis_paint_media( $media, $class = '', $loading = 'lazy' ) {
 	$type      = isset( $media['mediaType'] ) ? (string) $media['mediaType'] : 'image';
 	$image_id  = isset( $media['imageId'] ) ? (int) $media['imageId'] : 0;
 	$video_url = isset( $media['videoUrl'] ) ? trim( (string) $media['videoUrl'] ) : '';
@@ -199,7 +199,7 @@ function bis_paint_media( $media, $class = '' ) {
 	if ( $image_id ) {
 		?>
 		<div class="c-media <?php echo esc_attr( $class ); ?>">
-		<?php echo wp_get_attachment_image( $image_id, 'full', false, [ 'class' => 'c-media__item', 'loading' => 'lazy' ] ); ?>
+		<?php echo wp_get_attachment_image( $image_id, 'full', false, [ 'class' => 'c-media__item', 'loading' => $loading ] ); ?>
 		</div>
 		<?php
 	}
@@ -209,9 +209,9 @@ function bis_paint_media( $media, $class = '' ) {
  * Pinta una imagen a partir de un ID de media library o una URL de fallback.
  * Si se proporciona $id tiene prioridad sobre $url.
  */
-function bis_paint_image( $image, string $class = '' ): void {
+function bis_paint_image( $image, string $class = '', $loading = 'lazy' ): void {
 	if ( is_numeric( $image ) && (int) $image > 0 ) {
-		$attrs = [ 'loading' => 'lazy' ];
+		$attrs = [ 'loading' => $loading ];
 		if ( $class ) {
 			$attrs['class'] = $class;
 		}
@@ -220,7 +220,8 @@ function bis_paint_image( $image, string $class = '' ): void {
 	}
 	if ( is_string( $image ) && $image ) {
 		$class_attr = $class ? ' class="' . esc_attr( $class ) . '"' : '';
-		echo '<img src="' . esc_url( $image ) . '"' . $class_attr . ' alt="" loading="lazy">';
+		$loading_attr = $loading ? ' loading="' . esc_attr( (string) $loading ) . '"' : '';
+		echo '<img src="' . esc_url( $image ) . '"' . $class_attr . ' alt="" ' . $loading_attr . '>';
 	}
 }
 
