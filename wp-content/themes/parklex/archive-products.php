@@ -6,6 +6,24 @@ get_header();
 
 <main class="entry-content is-layout-constrained has-global-padding">
 	<div class="c-products-archive alignwide">
+		<?php
+		$header_image_id = get_field( 'products_header_image', 'option' );
+		$archive_title    = get_field( 'products_archive_title', 'option' );
+		?>
+		<?php if ( $header_image_id || $archive_title ) : ?>
+			<header class="c-products-archive__header">
+				<?php if ( $header_image_id ) : ?>
+					<?php echo wp_get_attachment_image( $header_image_id, 'full', false, array( 'class' => 'c-products-archive__header-image', 'loading' => 'eager' ) ); ?>
+				<?php endif; ?>
+
+				<div class="c-products-archive__header-content">
+					<?php if ( $archive_title ) : ?>
+						<h1 class="c-products-archive__header-title has-display-xl-font-size"><?php echo esc_html( $archive_title ); ?></h1>
+					<?php endif; ?>
+				</div>
+			</header>
+		<?php endif; ?>
+
 		<?php if ( have_posts() ) : ?>
 			<div class="c-products-archive__grid">
 				<?php
@@ -27,6 +45,10 @@ get_header();
 					<?php
 				endwhile;
 				?>
+			</div>
+
+			<div class="c-products-archive__pagination">
+				<?php bis_paint_pagination(); ?>
 			</div>
 
 		<?php else : ?>

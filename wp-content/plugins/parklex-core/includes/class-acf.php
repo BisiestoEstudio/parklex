@@ -150,6 +150,15 @@ class ACF
             'capability'  => 'manage_options',
             'redirect'    => false,
         ) );
+
+        acf_add_options_sub_page( array(
+            'page_title'  => __( 'Product Settings', 'parklex-core' ),
+            'menu_title'  => __( 'Product Settings', 'parklex-core' ),
+            'menu_slug'   => 'acf-options-products',
+            'parent_slug' => 'edit.php?post_type=products',
+            'capability'  => 'manage_options',
+            'redirect'    => false,
+        ) );
     }
 
     /**
