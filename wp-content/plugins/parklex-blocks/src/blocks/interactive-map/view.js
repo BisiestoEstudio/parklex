@@ -11,34 +11,24 @@ function initMap( container ) {
 	const map = L.map( container, {
 		scrollWheelZoom: false,
 		minZoom: 2,
-		// Sin esta capa de tiles no hay nada que le dé al mapa un maxZoom implícito,
-		// y leaflet.markercluster exige uno finito (si no, lanza al añadir el grupo).
-		maxZoom: 18,
+		// Esri ya declara maxZoom en el tileLayer, pero lo fijamos también aquí: si esa
+		// capa fallara al cargar, leaflet.markercluster necesita igualmente uno finito.
+		maxZoom: 19,
 		maxBounds: [
 			[ -85, -200 ],
 			[ 85, 200 ],
 		],
 	} ).setView( [ 20, 0 ], 2 );
 
-	// Países en vez de tiles online: sin API key, sin límite de peticiones, offline.
-	fetch( container.dataset.worldGeojson )
-		.then( ( response ) => response.json() )
-		.then( ( world ) => {
-			L.geoJSON( world, {
-				interactive: false,
-				style: {
-					color: '#c7cdd6',
-					weight: 0.8,
-					fillColor: '#f1f1f1',
-					fillOpacity: 1,
-				},
-			} ).addTo( map );
-			map.attributionControl.setPrefix( false );
-			map.attributionControl.addAttribution( 'Países: Natural Earth' );
-		} )
-		.catch( ( error ) => {
-			console.error( 'No se pudo cargar el mapa base.', error );
-		} );
+	// Tiles ráster gratuitos de Esri: sin API key, sin login, con relieve/topografía.
+	L.tileLayer(
+		'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
+		{
+			attribution:
+				'Tiles &copy; Esri &mdash; Sources: Esri, HERE, Garmin, Intermap, increment P Corp., GEBCO, USGS, FAO, NPS, NRCAN, GeoBase, IGN, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), (c) OpenStreetMap contributors, and the GIS User Community',
+			maxZoom: 19,
+		}
+	).addTo( map );
 
 	// Si leaflet.markercluster no ha cargado por lo que sea, no bloqueamos los pines:
 	// se muestran sueltos (sin agrupar) en vez de no mostrarse.
@@ -85,23 +75,26 @@ function pinIcon() {
 }
 
 function buildPopupContent( pin ) {
-	const lines = [ `<strong>${ escapeHtml( pin.title ) }</strong>` ];
+	const lines = [];
 
 	const location = [ pin.city, pin.country[ 0 ] ].filter( Boolean ).join( ', ' );
 	if ( location ) {
 		lines.push( `<span>${ escapeHtml( location ) }</span>` );
 	}
-	if ( pin.year[ 0 ] ) {
-		lines.push( `<span>${ escapeHtml( pin.year[ 0 ] ) }</span>` );
-	}
+
+	lines.push( `<span class="has-h-3-font-size">${ escapeHtml( pin.title ) }</span>` );
+
 	if ( pin.architect ) {
 		lines.push( `<span>${ escapeHtml( pin.architect ) }</span>` );
 	}
+	if ( pin.year[ 0 ] ) {
+		lines.push( `<span>${ escapeHtml( pin.year[ 0 ] ) }</span>` );
+	}
 	if ( pin.product.length ) {
-		lines.push( `<span>${ escapeHtml( pin.product.join( ', ' ) ) }</span>` );
+		lines.push( `<span>${ escapeHtml( pin.product.join( ' | ' ) ) }</span>` );
 	}
 	if ( pin.finish.length ) {
-		lines.push( `<span>${ escapeHtml( pin.finish.join( ', ' ) ) }</span>` );
+		lines.push( `<span>${ escapeHtml( pin.finish.join( ' | ' ) ) }</span>` );
 	}
 
 	return `<div class="b-interactive-map__popup">${ lines.join( '' ) }</div>`;
