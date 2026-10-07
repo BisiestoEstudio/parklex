@@ -27,14 +27,14 @@ $gallery_group = array(
     'name' => 'gallery',
     'type' => 'gallery',
     'return_format' => 'id',
-    'translations' => 'sync',
+    // Copied to translations (wpml-config.xml); IDs mapped per language in Bis_Core_WPML_Media.
 );
 
 acf_add_local_field_group( array(
     'key'                   => $group_key,
     'title'                 => $title,
     'fields'                => array(
-        $sku_group,
+       // $sku_group,
         $gallery_group,
     ),
     'show_in_rest'          => true,

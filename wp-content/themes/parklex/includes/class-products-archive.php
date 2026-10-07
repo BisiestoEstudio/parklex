@@ -11,10 +11,15 @@ class Bis_Theme_Products_Archive {
 	}
 
 	/**
-	 * Forces 12 posts per page on the Products archive.
+	 * Forces 12 posts per page on the Products archive and the products_type
+	 * taxonomy archive (same template/layout for both).
 	 */
 	public static function filter_archive_query( $query ) {
-		if ( is_admin() || ! $query->is_main_query() || ! $query->is_post_type_archive( 'products' ) ) {
+		if ( is_admin() || ! $query->is_main_query() ) {
+			return;
+		}
+
+		if ( ! $query->is_post_type_archive( 'products' ) && ! $query->is_tax( 'products_type' ) ) {
 			return;
 		}
 

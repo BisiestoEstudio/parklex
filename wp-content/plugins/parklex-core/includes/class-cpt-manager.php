@@ -3,6 +3,12 @@ defined( 'ABSPATH' ) || exit;
 
 class Bis_Core_CPT_Manager {
 
+	/**
+	 * menu_order captured per post right after it's saved, before WPML's own "save_post"
+	 * sync runs — see guard_menu_order_against_wpml_sync().
+	 */
+	private static $captured_menu_order = array();
+
 	public static function register() {
 		self::register_technical_card();
 		self::register_proyecto();
@@ -18,6 +24,59 @@ class Bis_Core_CPT_Manager {
 			add_filter( "manage_{$post_type}_posts_columns", array( __CLASS__, 'add_order_column' ) );
 			add_action( "manage_{$post_type}_posts_custom_column", array( __CLASS__, 'render_order_column' ), 10, 2 );
 			add_filter( "manage_edit-{$post_type}_sortable_columns", array( __CLASS__, 'make_order_column_sortable' ) );
+			add_action( "save_post_{$post_type}", array( __CLASS__, 'capture_menu_order' ) );
+		}
+		add_action( 'save_post', array( __CLASS__, 'guard_menu_order_against_wpml_sync' ), 999 );
+	}
+
+	/**
+	 * WPML's "Synchronize page order for translations" setting (WPML > Settings > Posts and
+	 * pages synchronization) re-syncs menu_order on every save of a translated post, via
+	 * WPML_Post_Synchronization::sync_with_translations() hooked on 'save_post' at priority
+	 * 100. That method recurses into each translation and, depending on which translation was
+	 * edited, can either revert the edited post's own new value back to a sibling's stale one,
+	 * or push the new value to a sibling while never writing it to the other translations —
+	 * the end result is unreliable either way. `save_post_{$post_type}` fires before the
+	 * generic `save_post` (and therefore before WPML's sync), so it's used here to capture the
+	 * value actually saved; once WPML's callback has run, that value is force-applied to the
+	 * edited post AND every one of its translations (found via WPML's own `wpml_element_trid`/
+	 * `wpml_get_element_translations` API), making this the single source of truth for
+	 * menu_order instead of relying on WPML's own propagation.
+	 */
+	public static function capture_menu_order( $post_id ) {
+		self::$captured_menu_order[ $post_id ] = (int) get_post_field( 'menu_order', $post_id );
+	}
+
+	public static function guard_menu_order_against_wpml_sync( $post_id ) {
+		if ( ! isset( self::$captured_menu_order[ $post_id ] ) ) {
+			return;
+		}
+
+		$expected  = self::$captured_menu_order[ $post_id ];
+		$post_type = get_post_type( $post_id );
+		unset( self::$captured_menu_order[ $post_id ] );
+
+		$ids_to_fix = array( $post_id );
+
+		$trid = apply_filters( 'wpml_element_trid', null, $post_id, 'post_' . $post_type );
+
+		if ( $trid ) {
+			$translations = apply_filters( 'wpml_get_element_translations', null, $trid, 'post_' . $post_type );
+
+			foreach ( (array) $translations as $translation ) {
+				if ( ! empty( $translation->element_id ) ) {
+					$ids_to_fix[] = (int) $translation->element_id;
+				}
+			}
+		}
+
+		global $wpdb;
+
+		foreach ( array_unique( $ids_to_fix ) as $id ) {
+			if ( (int) get_post_field( 'menu_order', $id ) !== $expected ) {
+				$wpdb->update( $wpdb->posts, array( 'menu_order' => $expected ), array( 'ID' => $id ) );
+				clean_post_cache( $id );
+			}
 		}
 	}
 

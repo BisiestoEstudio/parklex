@@ -1,4 +1,8 @@
 <wpml-config>
+	<custom-fields>
+		<custom-field action="copy">gallery</custom-field>
+		<custom-field action="copy">_gallery</custom-field>
+	</custom-fields>
 	<custom-term-fields>
 		<custom-term-field action="copy">card_type</custom-term-field>
 		<custom-term-field action="copy">disable_label</custom-term-field>
