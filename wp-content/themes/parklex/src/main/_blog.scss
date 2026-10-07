@@ -187,10 +187,13 @@
     }
 
     &__tabs{
-        display: flex;
-        flex-wrap: wrap;
         flex-grow: 999;
         flex-basis: 0;
+    }
+
+    &__tabs-list{
+        display: flex;
+        flex-wrap: wrap;
         gap: var(--wp--preset--spacing--m);
         row-gap: var(--wp--preset--spacing--s);
         list-style: none;
@@ -235,6 +238,10 @@
     &__pagination{
         display: flex;
         justify-content: center;
+
+        .navigation{
+            padding-block: var(--wp--preset--spacing--l);
+        }
 
         .nav-links{
             display: flex;

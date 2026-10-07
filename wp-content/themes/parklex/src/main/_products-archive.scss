@@ -61,7 +61,6 @@
 		grid-template-columns: 1fr;
 		gap: var(--wp--preset--spacing--m);
 		padding-top: var(--wp--preset--spacing--fluid-m);
-		padding-bottom: var(--wp--preset--spacing--fluid-m);
 	}
 
 	&__item {
@@ -101,7 +100,10 @@
 	&__pagination {
 		display: flex;
 		justify-content: center;
-		padding-bottom: var(--wp--preset--spacing--fluid-m);
+
+		.navigation {
+			padding-block: var(--wp--preset--spacing--l);
+		}
 
 		.nav-links {
 			display: flex;
