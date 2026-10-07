@@ -27,7 +27,7 @@ $gallery_group = array(
     'name' => 'gallery',
     'type' => 'gallery',
     'return_format' => 'id',
-    // Copied to translations (wpml-config.xml); IDs mapped per language in Bis_Core_WPML_Media.
+    // Copied to translations (wpml-config.xml); IDs mapped per language in Bis_Core_WPML_Fields.
 );
 
 acf_add_local_field_group( array(

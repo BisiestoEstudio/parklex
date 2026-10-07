@@ -1,7 +1,24 @@
 <wpml-config>
 	<custom-fields>
+		<!-- products -->
 		<custom-field action="copy">gallery</custom-field>
 		<custom-field action="copy">_gallery</custom-field>
+
+		<!-- proyecto: "Project Info" group (ID fields mapped per language in Bis_Core_WPML_Fields) -->
+		<custom-field action="copy">project_info</custom-field>
+		<custom-field action="copy">_project_info</custom-field>
+		<custom-field action="copy">project_info_year</custom-field>
+		<custom-field action="copy">_project_info_year</custom-field>
+		<custom-field action="copy">project_info_location</custom-field>
+		<custom-field action="copy">_project_info_location</custom-field>
+		<custom-field action="copy">project_info_product</custom-field>
+		<custom-field action="copy">_project_info_product</custom-field>
+		<custom-field action="copy">project_info_related_product</custom-field>
+		<custom-field action="copy">_project_info_related_product</custom-field>
+		<custom-field action="copy">project_info_awards</custom-field>
+		<custom-field action="copy">_project_info_awards</custom-field>
+		<custom-field action="copy">project_info_photography</custom-field>
+		<custom-field action="copy">_project_info_photography</custom-field>
 	</custom-fields>
 	<custom-term-fields>
 		<custom-term-field action="copy">card_type</custom-term-field>
