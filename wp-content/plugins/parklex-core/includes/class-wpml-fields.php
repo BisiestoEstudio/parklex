@@ -17,9 +17,11 @@ class Bis_Core_WPML_Fields {
 	 * ACF field key => WPML element type of the IDs it stores.
 	 */
 	const FIELDS = array(
-		'bisiesto_cpt_products_gallery' => 'attachment',    // products: gallery
-		'field_606ace2f3bd88'           => 'products_type', // proyecto: project_info.product
-		'field_6086728a3878b'           => 'products',      // proyecto: project_info.related_product
+		'bisiesto_cpt_products_gallery'         => 'attachment',    // products: gallery
+		'field_606ace2f3bd88'                   => 'products_type', // proyecto: project_info.product
+		'field_6086728a3878b'                   => 'products',      // proyecto: project_info.related_product
+		'bisiesto_cpt_technical_card_downloads' => 'attachment',    // technical-card: downloads
+		'bisiesto_cpt_technical_card_image'     => 'attachment',    // technical-card: image
 	);
 
 	public static function init() {

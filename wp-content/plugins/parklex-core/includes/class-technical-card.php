@@ -6,6 +6,9 @@ defined( 'ABSPATH' ) || exit;
  * are shown the registration form (see fields/options-technical-card.php) instead of
  * the archive content, until the technical_area_registered_user cookie is set to "true".
  * Administrators always have access, regardless of the cookie.
+ *
+ * Also disables the single pages (404) and keeps the post type and its taxonomies out
+ * of the Yoast sitemap.
  */
 class Bis_Core_Technical_Card {
 
@@ -13,10 +16,47 @@ class Bis_Core_Technical_Card {
 	const LOGIN_ACTION       = 'bis_technical_area_login';
 	const LOGIN_NONCE_ACTION = 'bis_technical_area_login';
 
+	const TAXONOMIES = array( 'category_technical_card', 'classification_technical_card' );
+
 	public static function init() {
+		add_action( 'template_redirect', array( __CLASS__, 'disable_single' ), 1 );
 		add_action( 'template_redirect', array( __CLASS__, 'gate_archive_access' ) );
 		add_action( 'wp_ajax_' . self::LOGIN_ACTION, array( __CLASS__, 'handle_login' ) );
 		add_action( 'wp_ajax_nopriv_' . self::LOGIN_ACTION, array( __CLASS__, 'handle_login' ) );
+		add_filter( 'wpseo_sitemap_exclude_post_type', array( __CLASS__, 'exclude_post_type_from_sitemap' ), 10, 2 );
+		add_filter( 'wpseo_sitemap_exclude_taxonomy', array( __CLASS__, 'exclude_taxonomy_from_sitemap' ), 10, 2 );
+	}
+
+	/**
+	 * Technical cards only exist as items listed in the archive (their files are downloaded
+	 * directly) — their single pages must not be reachable, so they always return a 404.
+	 * The post type stays public/publicly_queryable because the archive needs it.
+	 */
+	public static function disable_single() {
+		if ( ! is_singular( 'technical-card' ) ) {
+			return;
+		}
+
+		global $wp_query;
+		$wp_query->set_404();
+		status_header( 404 );
+		nocache_headers();
+	}
+
+	/**
+	 * Removes the technical-card post type sitemap from Yoast (single pages are disabled
+	 * and the archive sits behind the registration gate).
+	 */
+	public static function exclude_post_type_from_sitemap( $excluded, $post_type ) {
+		return 'technical-card' === $post_type ? true : $excluded;
+	}
+
+	/**
+	 * Removes the technical-card taxonomies' sitemaps from Yoast — they have no term
+	 * archives, they're only used as filters inside the technical-card archive.
+	 */
+	public static function exclude_taxonomy_from_sitemap( $excluded, $taxonomy ) {
+		return in_array( $taxonomy, self::TAXONOMIES, true ) ? true : $excluded;
 	}
 
 	/**

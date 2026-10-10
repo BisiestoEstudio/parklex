@@ -20,6 +20,14 @@ class Bis_Theme_Assets {
 		wp_enqueue_style( 'bis-theme-blocks', BIS_THEME_URI . '/assets/css/blocks.css', array( 'bis-theme-main' ), BIS_THEME_VERSION );
 		wp_enqueue_style( 'bis-theme-woocommerce', BIS_THEME_URI . '/assets/css/woocommerce.min.css', array( 'bis-theme-main' ), BIS_THEME_VERSION );
 		// JS
+		wp_enqueue_script(
+			'bis-theme-site-header',
+			BIS_THEME_URI . '/assets/js/site-header.js',
+			array(),
+			BIS_THEME_VERSION,
+			true
+		);
+
 		if ( is_post_type_archive( 'technical-card' ) ) {
 			wp_enqueue_script(
 				'bis-theme-technical-video-modal',

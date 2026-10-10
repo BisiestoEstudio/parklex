@@ -40,7 +40,7 @@ class Bis_Theme_Config
     static function register_menus()
     {
         register_nav_menus(array(
-            'primary'   => __('Primary Menu', 'parklex'),
+            'primary'   => __('Menú principal', 'parklex'),
             'shop_menu' => __('Shop Menu (distributor role)', 'parklex'),
         ));
     }

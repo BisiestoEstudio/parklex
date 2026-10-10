@@ -16,13 +16,14 @@ class Bis_Core_Taxonomy_Manager {
 			'category_technical_card',
 			'technical-card',
 			array(
-				'label'             => __( 'Technical Card Category', 'parklex-core' ),
-				'hierarchical'      => true,
-				'show_ui'           => true,
-				'show_admin_column' => true,
-				'show_in_nav_menus' => true,
-				'show_in_rest'      => true,
-				'rewrite'           => false,
+				'label'              => __( 'Technical Card Category', 'parklex-core' ),
+				'hierarchical'       => true,
+				'show_ui'            => true,
+				'show_admin_column'  => true,
+				'show_in_nav_menus'  => true,
+				'show_in_rest'       => true,
+				'publicly_queryable' => false,
+				'rewrite'            => false,
 			)
 		);
 
@@ -30,13 +31,14 @@ class Bis_Core_Taxonomy_Manager {
 			'classification_technical_card',
 			'technical-card',
 			array(
-				'label'             => __( 'Technical Card Classification', 'parklex-core' ),
-				'hierarchical'      => true,
-				'show_ui'           => true,
-				'show_admin_column' => true,
-				'show_in_nav_menus' => true,
-				'show_in_rest'      => true,
-				'rewrite'           => false,
+				'label'              => __( 'Technical Card Classification', 'parklex-core' ),
+				'hierarchical'       => true,
+				'show_ui'            => true,
+				'show_admin_column'  => true,
+				'show_in_nav_menus'  => true,
+				'show_in_rest'       => true,
+				'publicly_queryable' => false,
+				'rewrite'            => false,
 			)
 		);
 

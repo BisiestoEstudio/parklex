@@ -16,7 +16,9 @@ include_once get_template_directory() . '/includes/utils.php';
 include_once get_template_directory() . '/includes/class-config.php';
 include_once get_template_directory() . '/includes/class-assets.php';
 include_once get_template_directory() . '/includes/class-acf.php';
+include_once get_template_directory() . '/includes/class-header.php';
 include_once get_template_directory() . '/includes/class-blog-archive.php';
 include_once get_template_directory() . '/includes/class-products-archive.php';
+include_once get_template_directory() . '/includes/class-technical-card-archive.php';
 
 

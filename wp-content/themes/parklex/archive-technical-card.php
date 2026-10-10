@@ -3,13 +3,8 @@ defined( 'ABSPATH' ) || exit;
 
 get_header();
 
-$active_category = isset( $_GET['category_technical_card'] )
-? sanitize_title( wp_unslash( $_GET['category_technical_card'] ) )
-: false;
-
-$active_classification = isset( $_GET['classification_technical_card'] )
-? sanitize_title( wp_unslash( $_GET['classification_technical_card'] ) )
-: false;
+$active_category       = Bis_Theme_Technical_Card_Archive::get_active_term( 'category_technical_card' );
+$active_classification = Bis_Theme_Technical_Card_Archive::get_active_term( 'classification_technical_card' );
 
 $template_params = array(
 	'active_category' => $active_category,

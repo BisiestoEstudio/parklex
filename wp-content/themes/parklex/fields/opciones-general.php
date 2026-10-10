@@ -2,29 +2,13 @@
 $option_page= 'general';
 $acf_field_group_title = 'General';
 
-$acabados_group_slug = "bisiesto-option_{$option_page}_acabados";
-$acabados_group = array(
-	'key' => $acabados_group_slug,
-	'label' => 'Acabados',
-	'name' => 'acabados',
-	'type' => 'group',
-	'sub_fields' => array(
-		array(
-			'key' => $acabados_group_slug . '_title',
-			'label' => 'Título de la página de archivo de acabados',
-			'name' => 'title',
-			'type' => 'text',
-		),
-		array(
-			'key' => $acabados_group_slug . '_image',
-			'label' => 'Imagen',
-			'instructions' => 'Esta imagen se mostrará en la cabecera de la página de archivo de acabados.',
-			'name' => 'image',
-			'type' => 'image',
-			'return_format' => 'id',
-			'allow_null' => 1,
-		),
-	),
+$header_button_slug = "bisiesto-option_{$option_page}_header_button";
+$header_button = array(
+	'key' => $header_button_slug,
+	'label' => 'Botón de menú superior',
+	'name' => 'header_button',
+	'type' => 'link',
+	'return_format' => 'array',
 );
 
 $page404_slug = "bisiesto-option_{$option_page}_404";
@@ -113,7 +97,7 @@ acf_add_local_field_group( array(
 	'title' => $acf_field_group_title,
 	'fields' => array(
 		//$page404,
-		$acabados_group,
+		$header_button,
 		//$footer,
 		//$blog_pattern,
 	),

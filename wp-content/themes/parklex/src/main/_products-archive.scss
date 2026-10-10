@@ -59,7 +59,7 @@
 	&__grid {
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: var(--wp--preset--spacing--m);
+		gap: var(--wp--preset--spacing--l) var(--wp--preset--spacing--m);
 		padding-top: var(--wp--preset--spacing--fluid-m);
 	}
 
@@ -90,6 +90,7 @@
 
 	&__title {
 		margin-bottom: 0;
+		text-transform: none;
 	}
 
 	&__placeholder {
@@ -146,7 +147,7 @@
 @media (min-width: 768px) {
 	.c-products-archive__grid {
 		grid-template-columns: repeat(2, 1fr);
-		gap: var(--wp--preset--spacing--sm);
+		column-gap: var(--wp--preset--spacing--sm);
 	}
 }
 

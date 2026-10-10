@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || exit;
 <body <?php body_class( 'wp-site-blocks' ); ?> data-device="<?php echo wp_is_mobile() ? 'movil' : 'desktop'; ?>">
 <?php wp_body_open(); ?>
 
-<header>
-<?php get_template_part( 'template-parts/language-switcher' ); ?>
+<header class="site-header-wrapper">
 <?php get_template_part( 'header-woocommerce' ); ?>
+<?php get_template_part( 'template-parts/site-header' ); ?>
 </header>

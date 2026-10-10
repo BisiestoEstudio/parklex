@@ -26,17 +26,13 @@ if ( ! empty( $classification_ids ) ) {
 
 <?php foreach ( $classification_categories as $classification_category ) : ?>
 	<?php
-	$classification_query_args = array(
-		'post_type'                      => 'technical-card',
-		'posts_per_page'                 => 2,
-		'classification_technical_card'  => $classification_category->slug,
+	$classification_query = new WP_Query(
+		array(
+			'post_type'      => 'technical-card',
+			'posts_per_page' => 2,
+			'tax_query'      => Bis_Theme_Technical_Card_Archive::get_tax_query( $active_category, $classification_category->slug ), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+		)
 	);
-
-	if ( $active_category ) {
-		$classification_query_args['category_technical_card'] = $active_category;
-	}
-
-	$classification_query = new WP_Query( $classification_query_args );
 
 	if ( ! $classification_query->have_posts() ) {
 		continue;

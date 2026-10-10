@@ -9,7 +9,7 @@
 		<custom-field action="copy">_project_info</custom-field>
 		<custom-field action="copy">project_info_year</custom-field>
 		<custom-field action="copy">_project_info_year</custom-field>
-		<custom-field action="copy">project_info_location</custom-field>
+		<custom-field action="translate">project_info_location</custom-field>
 		<custom-field action="copy">_project_info_location</custom-field>
 		<custom-field action="copy">project_info_product</custom-field>
 		<custom-field action="copy">_project_info_product</custom-field>
@@ -19,6 +19,12 @@
 		<custom-field action="copy">_project_info_awards</custom-field>
 		<custom-field action="copy">project_info_photography</custom-field>
 		<custom-field action="copy">_project_info_photography</custom-field>
+
+		<!-- technical-card: attachment IDs mapped per language in Bis_Core_WPML_Fields -->
+		<custom-field action="copy-once">downloads</custom-field>
+		<custom-field action="copy-once">_downloads</custom-field>
+		<custom-field action="copy-once">image</custom-field>
+		<custom-field action="copy-once">_image</custom-field>
 	</custom-fields>
 	<custom-term-fields>
 		<custom-term-field action="copy">card_type</custom-term-field>
