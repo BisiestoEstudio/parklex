@@ -8,8 +8,7 @@ if ( ! class_exists( 'WooCommerce' ) ) {
 	return;
 }
 
-// TODO: quitar 'administrator' de esta condicion cuando se termine de probar el menu wholesale.
-$is_wholesale_user = is_user_logged_in() && ( current_user_can( 'distributor' ) || current_user_can( 'sample_supervisor' ) || current_user_can( 'administrator' ) );
+$is_wholesale_user = is_user_logged_in() && ( current_user_can( 'distributor' ) || current_user_can( 'sample_supervisor' ) );
 
 if ( ! $is_wholesale_user ) {
 	return;

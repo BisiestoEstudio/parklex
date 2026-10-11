@@ -15,6 +15,8 @@ abstract class Bis_Core_Email_Lunch_Learn_Legacy extends WC_Email {
 
 	public $request_id;
 
+	public $content = '';
+
 	/**
 	 * True for the 2 admin-facing emails (create, invoice submitted) that let the admin
 	 * override the recipient from wp-admin. The 4 distributor-facing emails always resolve
@@ -28,6 +30,11 @@ abstract class Bis_Core_Email_Lunch_Learn_Legacy extends WC_Email {
 		$this->content        = '';
 
 		parent::__construct();
+
+		// WC_Email::get_recipient() reads this property; it feeds the "Recipient(s)" column in the emails list.
+		if ( $this->configurable_recipient ) {
+			$this->recipient = $this->get_option( 'recipient' ) ?: get_option( 'admin_email' );
+		}
 	}
 
 	/**
@@ -81,6 +88,20 @@ abstract class Bis_Core_Email_Lunch_Learn_Legacy extends WC_Email {
 	}
 
 	public function get_content_html() {
+		// WooCommerce's email preview sets $this->object to a PreviewOrder, not our array.
+		if ( ! is_array( $this->object ) ) {
+			$this->object = array(
+				'content'              => $this->get_option( 'content_email', '' ) ?: $this->content,
+				'request_id'           => 0,
+				'user_name'            => 'John Doe',
+				'user_email'           => 'john.doe@example.com',
+				'request_name'         => __( 'Sample request', 'parklex-core' ),
+				'admin_link'           => admin_url( 'edit.php?post_type=lunch_learn_request' ),
+				'invoice_account_link' => wc_get_endpoint_url( 'lunch-learn', '', wc_get_page_permalink( 'myaccount' ) ),
+				'request_details'      => '',
+			);
+		}
+
 		$heading = str_replace( '{request_id}', $this->request_id, $this->get_heading() );
 
 		return wc_get_template_html( $this->template_html, array(

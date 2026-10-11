@@ -20,7 +20,7 @@ class Bis_Core_Email_Lunch_Learn_Create_Legacy extends Bis_Core_Email_Lunch_Lear
 	}
 
 	public function trigger( $request_id, $user_id ) {
-		$this->send_to( $this->get_option( 'recipient', get_option( 'admin_email' ) ), $request_id );
+		$this->send_to( $this->get_recipient(), $request_id );
 	}
 }
 

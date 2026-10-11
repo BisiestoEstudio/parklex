@@ -23,7 +23,7 @@ class Bis_Core_Email_Lunch_Learn_Invoice_Submitted_Legacy extends Bis_Core_Email
 
 	public function trigger( $request_id, $user_id = null ) {
 		$this->send_to(
-			$this->get_option( 'recipient', get_option( 'admin_email' ) ),
+			$this->get_recipient(),
 			$request_id,
 			$this->invoice_file_attachments( $request_id )
 		);
