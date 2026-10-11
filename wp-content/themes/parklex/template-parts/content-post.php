@@ -15,7 +15,7 @@ $position   = isset( $args['position'] ) ? (int) $args['position'] : 0;
 
 		<div class="c-blog-post__details">
 			<?php if ( $category ) : ?>
-				<span class="c-blog-post__category"><?php echo esc_html( $category->name ); ?></span>
+				<span class="c-blog-post__category has-caption-font-size"><?php echo esc_html( $category->name ); ?></span>
 			<?php endif; ?>
 
 			<h2 class="c-blog-post__title"><?php the_title(); ?></h2>
