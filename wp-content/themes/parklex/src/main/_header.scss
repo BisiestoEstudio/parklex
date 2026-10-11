@@ -55,10 +55,29 @@
   --site-header-gap: fluid(28px, 16px);
   position: relative;
   z-index: 100;
-  background-color: transparent;
-  color: var(--text-color);
-  transition: background-color 0.3s ease-in-out;
 
+  /* Dark variant (default): dark text/logo. */
+  --header-fg: var(--text-color);
+  --header-fg-inverse: var(--white);
+  --header-pill-bg: rgba(2, 2, 2, 0.03);
+  --header-pill-blur: 5px;
+  --header-logo-filter: var(--filter-to-black);
+
+  background-color: transparent;
+  color: var(--header-fg);
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+
+  /* Light variant: white text/logo over a dark background. Only while the header has not
+     been hidden yet (back at the top it resets) and no megamenu is open; otherwise it always
+     uses the dark look on a white background (.is-scrolled is toggled in site-header.js). */
+  &--light:not(.is-scrolled):not(.has-submenu-open) {
+    --header-fg: var(--white);
+    --header-fg-inverse: var(--black);
+    --header-pill-bg: var(--white-10);
+    --header-logo-filter: var(--filter-to-white);
+  }
+
+  &.is-scrolled,
   &.has-submenu-open {
     background-color: var(--white);
   }
@@ -84,7 +103,8 @@
       display: block;
       width: fluid(210px, 150px);
       height: fluid(32px, 24px);
-      filter: var(--filter-to-black);
+      filter: var(--header-logo-filter);
+      transition: filter 0.3s ease-in-out;
     }
   }
 
@@ -111,8 +131,9 @@
     padding: 14px fluid(40px, 24px);
     list-style: none;
     border-radius: 999px;
-    background-color: var(--gray-light);
-    transition: background-color 0.3s ease-in-out;
+    background-color: var(--header-pill-bg);
+    backdrop-filter: blur(var(--header-pill-blur));
+    transition: background-color 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out;
   }
 
   &__item {
@@ -127,7 +148,7 @@
     line-height: 1.2;
     text-transform: uppercase;
     text-decoration: none;
-    color: var(--text-color);
+    color: var(--header-fg);
     transition: color 0.3s ease-in-out;
 
     &::after {
@@ -225,6 +246,17 @@
   }
 
   /* Actions */
+
+  &__button {
+    color: var(--header-fg);
+    border-color: var(--header-fg);
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--header-fg);
+      color: var(--header-fg-inverse);
+    }
+  }
 
   &__actions {
     grid-column: 3;

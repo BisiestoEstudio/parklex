@@ -22,6 +22,7 @@
 
 	/**
 	 * Hides the fixed header when scrolling down and shows it again when scrolling up.
+	 * Toggles .is-scrolled on the header: set once it has been hidden, cleared back at the top.
 	 */
 	function initRetractable( wrapper, header ) {
 		var threshold = 8;
@@ -33,6 +34,14 @@
 			var delta = y - lastY;
 			ticking = false;
 
+			// Back at the top: transparent again, whatever happened before.
+			if ( y <= 0 ) {
+				wrapper.classList.remove( 'is-hidden' );
+				header.classList.remove( 'is-scrolled' );
+				lastY = 0;
+				return;
+			}
+
 			if ( Math.abs( delta ) < threshold ) {
 				return;
 			}
@@ -40,6 +49,11 @@
 			// Never hide it near the top, or while a submenu / the language list is in use.
 			var inUse = header.classList.contains( 'has-submenu-open' ) || header.contains( document.activeElement ) && document.activeElement !== document.body;
 			var shouldHide = delta > 0 && y > wrapper.offsetHeight && ! inUse;
+
+			// Revealing it after it had been hidden: it must already be dark on white.
+			if ( ! shouldHide && wrapper.classList.contains( 'is-hidden' ) ) {
+				header.classList.add( 'is-scrolled' );
+			}
 
 			wrapper.classList.toggle( 'is-hidden', shouldHide );
 			lastY = y;
@@ -51,6 +65,14 @@
 				window.requestAnimationFrame( update );
 			}
 		}, { passive: true } );
+
+		// The header stays transparent until it has been hidden for the first time. The dark
+		// on white look is applied once the slide-out ends, so it is never seen changing.
+		wrapper.addEventListener( 'transitionend', function ( event ) {
+			if ( event.target === wrapper && event.propertyName === 'transform' && wrapper.classList.contains( 'is-hidden' ) ) {
+				header.classList.add( 'is-scrolled' );
+			}
+		} );
 	}
 
 	function initSubmenus( header ) {

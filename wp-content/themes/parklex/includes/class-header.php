@@ -59,6 +59,31 @@ class Bis_Theme_Header {
 		);
 	}
 
+	const VARIANTS = array( 'auto', 'light', 'dark' );
+
+	/**
+	 * Menu variant (auto | light | dark) chosen in the "Variante del menú" field of the
+	 * current page. Falls back to 'auto' when unset, invalid or not a single page
+	 * (e.g. archives).
+	 */
+	public static function get_variant() {
+		if ( ! function_exists( 'get_field' ) ) {
+			return 'auto';
+		}
+
+		$post_id = 0;
+
+		if ( is_singular() || is_home() ) {
+			$post_id = get_queried_object_id();
+		} elseif ( function_exists( 'is_shop' ) && is_shop() ) {
+			$post_id = wc_get_page_id( 'shop' );
+		}
+
+		$variant = $post_id > 0 ? get_field( 'header_variant', $post_id ) : '';
+
+		return in_array( $variant, self::VARIANTS, true ) ? $variant : 'auto';
+	}
+
 	/**
 	 * Link field "Botón de menú superior" from Theme Options.
 	 *

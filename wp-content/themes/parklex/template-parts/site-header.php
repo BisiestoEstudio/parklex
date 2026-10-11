@@ -9,7 +9,7 @@ $button     = Bis_Theme_Header::get_button();
 $logo       = get_custom_logo();
 ?>
 
-<div class="site-header js-site-header">
+<div class="site-header site-header--<?php echo esc_attr( Bis_Theme_Header::get_variant() ); ?> js-site-header">
 	<div class="site-header__bar">
 
 		<div class="site-header__logo">
