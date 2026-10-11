@@ -1,36 +1,87 @@
-.footer{
+/* Site footer — template-parts/site-footer.php */
 
-    gap: 24px;
-    &__bottom{
-        padding: 0 var(--layout-margin);
+.site-footer {
+  background: var(--wp--preset--color--black);
+  color: var(--wp--preset--color--white);
+  padding: fluid(56px, 32px) var(--layout-margin);
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: fluid(96px, 48px);
+    max-width: var(--wp--style--global--wide-size, 1500px);
+    margin-inline: auto;
+  }
+
+  &__menus {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 24px;
+
+    @media screen and (min-width: $lg) {
+      grid-template-columns: repeat(4, 1fr);
     }
+  }
 
+  &__menu {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
 
+  a {
+    color: inherit;
+    text-decoration: none;
 
-}
-
-@media screen and (max-width: 782px) {
-    .footer{
-        &__columns{
-            display: grid !important;
-            grid-template-columns: 1fr 1fr;
-        }
-
-        &__logo-area{
-            grid-column: span 2;
-        }
-
-
-
-        &__bottom{
-            padding: 0 var(--layout-margin);
-            flex-direction: column-reverse !important;
-            align-items: flex-start !important;
-        }
-
-        &__legal-nav{
-            flex-direction: column !important;
-            align-items: flex-start !important;
-        }
+    &:hover,
+    &:focus-visible {
+      text-decoration: underline;
     }
+  }
+
+  &__bottom {
+    display: grid;
+    gap: 32px;
+    align-items: end;
+
+    @media screen and (min-width: $lg) {
+      grid-template-columns: 1fr auto 1fr;
+    }
+  }
+
+  &__address {
+    font-size: 0.875rem;
+
+    p {
+      margin: 0 0 1em;
+    }
+  }
+
+  &__logo {
+    display: flex;
+    justify-content: flex-start;
+
+    @media screen and (min-width: $lg) {
+      justify-content: center;
+    }
+  }
+
+  &__logo-img {
+    display: block;
+    max-width: fluid(260px, 180px);
+    height: auto;
+  }
+
+  &__copy {
+    margin: 48px 0 0;
+    font-size: 0.875rem;
+
+    @media screen and (min-width: $lg) {
+      margin: 0;
+      text-align: right;
+    }
+  }
 }

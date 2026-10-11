@@ -11,6 +11,27 @@ $header_button = array(
 	'return_format' => 'array',
 );
 
+$footer_address_slug = "bisiesto-option_{$option_page}_footer_address";
+$footer_address = array(
+	'key' => $footer_address_slug,
+	'label' => 'Footer: dirección y teléfono',
+	'name' => 'footer_address',
+	'type' => 'wysiwyg',
+	'tabs' => 'visual',
+	'media_upload' => 0,
+);
+
+$footer_logo_slug = "bisiesto-option_{$option_page}_footer_logo";
+$footer_logo = array(
+	'key' => $footer_logo_slug,
+	'label' => 'Footer: logo',
+	'name' => 'footer_logo',
+	'translation' => 'sync',
+	'type' => 'image',
+	'return_format' => 'id',
+	'preview_size' => 'medium',
+);
+
 $page404_slug = "bisiesto-option_{$option_page}_404";
 $page404 = array(
 	'key' => $page404_slug,
@@ -98,6 +119,8 @@ acf_add_local_field_group( array(
 	'fields' => array(
 		//$page404,
 		$header_button,
+		$footer_address,
+		$footer_logo,
 		//$footer,
 		//$blog_pattern,
 	),

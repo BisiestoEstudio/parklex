@@ -42,6 +42,10 @@ class Bis_Theme_Config
         register_nav_menus(array(
             'primary'   => __('Menú principal', 'parklex'),
             'shop_menu' => __('Shop Menu (distributor role)', 'parklex'),
+            'footer_menu_1' => __('Footer Navigation 1', 'parklex'),
+            'footer_menu_2' => __('Footer Navigation 2', 'parklex'),
+            'footer_menu_3' => __('Footer Navigation 3', 'parklex'),
+            'footer_menu_4' => __('Footer Navigation 4', 'parklex'),
         ));
     }
 
