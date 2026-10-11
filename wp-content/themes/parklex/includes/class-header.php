@@ -62,26 +62,58 @@ class Bis_Theme_Header {
 	const VARIANTS = array( 'auto', 'light', 'dark' );
 
 	/**
-	 * Menu variant (auto | light | dark) chosen in the "Variante del menú" field of the
-	 * current page. Falls back to 'auto' when unset, invalid or not a single page
-	 * (e.g. archives).
+	 * Variant the header is actually painted with: 'light' or 'dark'.
+	 *
+	 * The editor can choose auto | light | dark ("Variante del menú" field). Auto resolves
+	 * to light when the first block of the page content has the class has-white-color
+	 * (i.e. the page opens with a dark section), and to dark otherwise.
 	 */
 	public static function get_variant() {
-		if ( ! function_exists( 'get_field' ) ) {
-			return 'auto';
+		$post_id = self::get_current_post_id();
+		$variant = $post_id > 0 && function_exists( 'get_field' ) ? get_field( 'header_variant', $post_id ) : '';
+
+		if ( 'light' === $variant || 'dark' === $variant ) {
+			return $variant;
 		}
 
-		$post_id = 0;
+		return $post_id > 0 && self::first_block_is_white( $post_id ) ? 'light' : 'dark';
+	}
 
+	/**
+	 * ID of the page the header belongs to, or 0 when there is none (archives, search...).
+	 */
+	private static function get_current_post_id() {
 		if ( is_singular() || is_home() ) {
-			$post_id = get_queried_object_id();
-		} elseif ( function_exists( 'is_shop' ) && is_shop() ) {
-			$post_id = wc_get_page_id( 'shop' );
+			return (int) get_queried_object_id();
 		}
 
-		$variant = $post_id > 0 ? get_field( 'header_variant', $post_id ) : '';
+		if ( function_exists( 'is_shop' ) && is_shop() ) {
+			return (int) wc_get_page_id( 'shop' );
+		}
 
-		return in_array( $variant, self::VARIANTS, true ) ? $variant : 'auto';
+		return 0;
+	}
+
+	/**
+	 * Whether the root element of the first block of the post content has the class
+	 * has-white-color. The block is rendered, so it also covers blocks that add that class
+	 * themselves (render.php) and not only the ones with a text colour attribute.
+	 */
+	private static function first_block_is_white( $post_id ) {
+		$content = (string) get_post_field( 'post_content', $post_id );
+
+		foreach ( parse_blocks( $content ) as $block ) {
+			// Whitespace between blocks comes as a block without name.
+			if ( empty( $block['blockName'] ) && '' === trim( $block['innerHTML'] ) ) {
+				continue;
+			}
+
+			$tags = new WP_HTML_Tag_Processor( render_block( $block ) );
+
+			return $tags->next_tag() && $tags->has_class( 'has-white-color' );
+		}
+
+		return false;
 	}
 
 	/**
