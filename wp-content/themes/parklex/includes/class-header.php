@@ -8,6 +8,65 @@ defined( 'ABSPATH' ) || exit;
 class Bis_Theme_Header {
 
 	const MENU_LOCATION = 'primary';
+	const SHOP_LOCATION = 'shop_menu';
+
+	public static function init() {
+		add_filter( 'body_class', array( __CLASS__, 'body_class' ) );
+	}
+
+	public static function body_class( $classes ) {
+		if ( self::is_wholesale() ) {
+			// The wholesale header is solid: the page content starts below it (see _header.scss).
+			$classes[] = 'has-wholesale-header';
+		}
+
+		return $classes;
+	}
+
+	/**
+	 * Wholesale users (distributor / sample_supervisor) get the shop header: account links
+	 * and the product categories instead of the public menu.
+	 */
+	public static function is_wholesale() {
+		return class_exists( 'WooCommerce' )
+			&& is_user_logged_in()
+			&& ( current_user_can( 'distributor' ) || current_user_can( 'sample_supervisor' ) );
+	}
+
+	/**
+	 * Category links of the wholesale header: the menu assigned to the "Shop Menu" location
+	 * (as in the previous theme), as one flat list in menu order whatever the depth of each
+	 * item. Empty when no menu is assigned.
+	 *
+	 * @return array[] Each: title, url, current (bool).
+	 */
+	public static function get_shop_items() {
+		$locations = get_nav_menu_locations();
+
+		if ( empty( $locations[ self::SHOP_LOCATION ] ) ) {
+			return array();
+		}
+
+		$menu_items = wp_get_nav_menu_items( $locations[ self::SHOP_LOCATION ] );
+
+		if ( ! $menu_items ) {
+			return array();
+		}
+
+		_wp_menu_item_classes_by_context( $menu_items );
+
+		$items = array();
+
+		foreach ( $menu_items as $item ) {
+			$items[] = array(
+				'title'   => $item->title,
+				'url'     => $item->url,
+				'current' => in_array( 'current-menu-item', (array) $item->classes, true ),
+			);
+		}
+
+		return $items;
+	}
 
 	/**
 	 * Top-level items of the "Menú principal" location, each with its direct children
@@ -131,3 +190,5 @@ class Bis_Theme_Header {
 		return ! empty( $button['url'] ) ? $button : null;
 	}
 }
+
+Bis_Theme_Header::init();

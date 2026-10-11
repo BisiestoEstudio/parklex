@@ -18,6 +18,19 @@
 
 	var wrapper = document.querySelector( '.site-header-wrapper' );
 
+	// Solid headers (wholesale) push the page content down by their own height.
+	if ( wrapper && document.body.classList.contains( 'has-wholesale-header' ) ) {
+		var setHeight = function () {
+			document.documentElement.style.setProperty( '--site-header-height', wrapper.offsetHeight + 'px' );
+		};
+
+		setHeight();
+
+		if ( 'ResizeObserver' in window ) {
+			new ResizeObserver( setHeight ).observe( wrapper );
+		}
+	}
+
 	/**
 	 * Collapsed menu (below the menu breakpoint): the nav becomes an offset panel opened with
 	 * the toggle button. The bar height is exposed as --site-header-bar-height so the panel

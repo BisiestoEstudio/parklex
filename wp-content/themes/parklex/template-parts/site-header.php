@@ -4,12 +4,22 @@
  */
 defined( 'ABSPATH' ) || exit;
 
-$menu_items = Bis_Theme_Header::get_menu_tree();
-$button     = Bis_Theme_Header::get_button();
-$logo       = get_custom_logo();
+$is_wholesale = Bis_Theme_Header::is_wholesale();
+$menu_items   = $is_wholesale ? array() : Bis_Theme_Header::get_menu_tree();
+$shop_items   = $is_wholesale ? Bis_Theme_Header::get_shop_items() : array();
+$button       = $is_wholesale ? null : Bis_Theme_Header::get_button();
+$logo         = get_custom_logo();
+// The wholesale panel always exists: it also holds the account links when collapsed.
+$has_nav      = $is_wholesale || ! empty( $menu_items );
+// The wholesale header is always the dark look on white.
+$variant      = $is_wholesale ? 'dark' : Bis_Theme_Header::get_variant();
 ?>
 
-<div class="site-header site-header--<?php echo esc_attr( Bis_Theme_Header::get_variant() ); ?> js-site-header">
+<div class="site-header site-header--<?php echo esc_attr( $variant ); ?><?php echo $is_wholesale ? ' site-header--wholesale' : ''; ?> js-site-header">
+	<?php if ( $is_wholesale ) : ?>
+		<?php get_template_part( 'template-parts/site-header-account', null, array( 'modifier' => 'bar' ) ); ?>
+	<?php endif; ?>
+
 	<div class="site-header__bar">
 
 		<div class="site-header__logo">
@@ -20,7 +30,19 @@ $logo       = get_custom_logo();
 			<?php endif; ?>
 		</div>
 
-		<?php if ( $menu_items ) : ?>
+		<?php if ( $is_wholesale ) : ?>
+			<nav class="site-header__nav" id="site-header-nav" aria-label="<?php esc_attr_e( 'Tienda', 'parklex' ); ?>">
+				<ul class="site-header__menu">
+					<?php foreach ( $shop_items as $item ) : ?>
+						<li class="site-header__item<?php echo $item['current'] ? ' site-header__item--current' : ''; ?>">
+							<a class="site-header__link" href="<?php echo esc_url( $item['url'] ); ?>"><?php echo esc_html( $item['title'] ); ?></a>
+						</li>
+					<?php endforeach; ?>
+				</ul>
+
+				<?php get_template_part( 'template-parts/site-header-account', null, array( 'modifier' => 'panel' ) ); ?>
+			</nav>
+		<?php elseif ( $menu_items ) : ?>
 			<nav class="site-header__nav" id="site-header-nav" aria-label="<?php esc_attr_e( 'Menú principal', 'parklex' ); ?>">
 				<ul class="site-header__menu">
 					<?php foreach ( $menu_items as $item ) : ?>
@@ -94,9 +116,11 @@ $logo       = get_custom_logo();
 				><?php echo esc_html( $button['title'] ); ?></a>
 			<?php endif; ?>
 
-			<?php get_template_part( 'template-parts/language-switcher' ); ?>
+			<?php if ( ! $is_wholesale ) : ?>
+				<?php get_template_part( 'template-parts/language-switcher' ); ?>
+			<?php endif; ?>
 
-			<?php if ( $menu_items ) : ?>
+			<?php if ( $has_nav ) : ?>
 				<button
 					class="site-header__toggle js-site-header-toggle"
 					type="button"
