@@ -22,6 +22,7 @@ get_header();
 			),
 			'submit_value'    => get_field( 'submit_button_text', 'option' ) ?: __( 'Submit', 'parklex' ),
 			'updated_message' => get_field( 'updated_form_message', 'option' ) ?: __( 'Project successfully created and pending to review.', 'parklex' ),
+			'html_updated_message' => '<div id="message" class="c-internal-project-form__notice" role="status" tabindex="-1"><p>%s</p></div>',
 			'uploader'        => 'basic',
 		) );
 		?>

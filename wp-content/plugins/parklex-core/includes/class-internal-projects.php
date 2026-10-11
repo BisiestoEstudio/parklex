@@ -237,7 +237,7 @@ class Bis_Core_Internal_Projects {
 			return;
 		}
 
-		$query->set( 'posts_per_page', -1 );
+		$query->set( 'posts_per_page', 12 );
 
 		$meta_query = $query->get( 'meta_query' ) ?: array();
 

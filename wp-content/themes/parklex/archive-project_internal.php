@@ -99,7 +99,9 @@ $taxonomy_filters = array(
 					endwhile;
 					?>
 				</div>
-				<?php the_posts_pagination(); ?>
+				<div class="c-internal-projects__pagination">
+					<?php bis_paint_pagination(); ?>
+				</div>
 			<?php else : ?>
 				<div class="c-internal-projects__empty">
 					<p><?php esc_html_e( 'No projects found. Try changing your search options.', 'parklex' ); ?></p>

@@ -47,6 +47,51 @@
         justify-content: center;
     }
 
+    &__pagination {
+        display: flex;
+        justify-content: center;
+
+        .navigation {
+            padding-block: var(--wp--preset--spacing--l);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: var(--wp--preset--spacing--m);
+        }
+
+        .page-numbers {
+            color: var(--gray-dark);
+            text-decoration: none;
+
+            &.current {
+                color: var(--black);
+                font-weight: var(--font-weight-bold);
+            }
+
+            &.prev,
+            &.next {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 24px;
+                height: 24px;
+
+                &::before {
+                    content: url('../images/pagination-icon.svg');
+                    display: block;
+                    width: 24px;
+                    height: 24px;
+                }
+            }
+
+            &.next::before {
+                transform: scaleX(-1);
+            }
+        }
+    }
+
     &__grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);

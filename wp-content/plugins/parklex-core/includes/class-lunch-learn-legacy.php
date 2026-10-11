@@ -49,9 +49,7 @@ class Bis_Core_Lunch_Learn_Legacy {
 	/**
 	 * Idempotent: safe to run on every activation (add_role() is a no-op if the role
 	 * already exists — and it already does, for 5 real users, in the production database
-	 * this environment is a copy of). Also seeds "type_of_events" once, carrying over the
-	 * real configuration that used to live on the old front-end page (see
-	 * fields/options-lunch-learn-settings.php).
+	 * this environment is a copy of).
 	 */
 	public static function activate() {
 		add_role( self::ROLE, __( 'Lunch & Learn Editor', 'parklex-core' ), array(
@@ -61,36 +59,6 @@ class Bis_Core_Lunch_Learn_Legacy {
 			'publish_posts' => false,
 			'upload_files' => true,
 		) );
-
-		self::seed_type_of_events_option();
-	}
-
-	private static function seed_type_of_events_option() {
-		if ( get_field( 'type_of_events', 'option' ) ) {
-			return;
-		}
-
-		update_field( 'type_of_events', array(
-			array(
-				'type'         => 'Official CEU / AIA',
-				'course_names' => array(
-					array( 'code' => 'AIACESPCPDINT3', 'name' => 'Interior Engineered Woods - The Next Generation' ),
-					array( 'code' => 'AIACESPUSA3', 'name' => 'High pressure laminates in modern building design' ),
-				),
-			),
-			array(
-				'type'         => 'Official CPD / RIBA',
-				'course_names' => array(
-					array( 'code' => 'timber-claddings', 'name' => 'Timber claddings complying with UK Fire Regulations (RIBA Approved)' ),
-					array( 'code' => 'maintenance-free-timber', 'name' => 'Maintenance Free Timber Solutions for ventilated façades (RIBA Approved)' ),
-					array( 'code' => 'fire-resistance-timber', 'name' => 'Fire resistance timber flooring for Fire Escape applications (SBID Approved)' ),
-					array( 'code' => 'installation-wood -based-panels', 'name' => 'Installation of wood based panels for extremely wet areas (SBID Approved)' ),
-					array( 'code' => 'wood-flooring-commercial-applications', 'name' => 'Wood flooring for commercial applications (SBID Approved)' ),
-				),
-			),
-			array( 'type' => 'Lunch & Learn', 'course_names' => array() ),
-			array( 'type' => 'Show', 'course_names' => array() ),
-		), 'option' );
 	}
 
 	public static function init() {

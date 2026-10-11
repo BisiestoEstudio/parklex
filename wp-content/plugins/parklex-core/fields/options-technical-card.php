@@ -24,26 +24,36 @@ $classification_categories_field = array(
 	'multiple'      => 0,
 );
 
-$presentations_technical_cards_field = array(
-	'key'           => "{$group_key}_presentations_technical_cards",
+$presentations_classification_field = array(
+	'key'           => "{$group_key}_presentations_classification",
 	'label'         => __( 'Presentations', 'parklex-core' ),
-	'name'          => 'presentations_technical_cards',
-	'instructions'  => __( 'Fichas técnicas que se mostrarán en la pestaña "Presentations" de Mi Cuenta. El orden de selección se conserva.', 'parklex-core' ),
-	'type'          => 'relationship',
-	'post_type'     => array( 'technical-card' ),
-	'filters'       => array( 'search' ),
+	'name'          => 'presentations_classification',
+	'instructions'  => __( 'Clasificación cuyas fichas técnicas se mostrarán en la pestaña "Presentations" de Mi Cuenta (incluye sus subclasificaciones).', 'parklex-core' ),
+	'type'          => 'taxonomy',
+	'taxonomy'      => 'classification_technical_card',
+	'field_type'    => 'select',
+	'add_term'      => 0,
+	'save_terms'    => 0,
+	'load_terms'    => 0,
 	'return_format' => 'id',
+	'allow_null'    => 1,
+	'multiple'      => 0,
 );
 
-$submit_documents_technical_cards_field = array(
-	'key'           => "{$group_key}_submit_documents_technical_cards",
+$submit_documents_classification_field = array(
+	'key'           => "{$group_key}_submit_documents_classification",
 	'label'         => __( 'Submit Documents', 'parklex-core' ),
-	'name'          => 'submit_documents_technical_cards',
-	'instructions'  => __( 'Fichas técnicas que se mostrarán en la pestaña "Submit Documents" de Mi Cuenta. El orden de selección se conserva.', 'parklex-core' ),
-	'type'          => 'relationship',
-	'post_type'     => array( 'technical-card' ),
-	'filters'       => array( 'search' ),
+	'name'          => 'submit_documents_classification',
+	'instructions'  => __( 'Clasificación cuyas fichas técnicas se mostrarán en la pestaña "Submit Documents" de Mi Cuenta (incluye sus subclasificaciones).', 'parklex-core' ),
+	'type'          => 'taxonomy',
+	'taxonomy'      => 'classification_technical_card',
+	'field_type'    => 'select',
+	'add_term'      => 0,
+	'save_terms'    => 0,
+	'load_terms'    => 0,
 	'return_format' => 'id',
+	'allow_null'    => 1,
+	'multiple'      => 0,
 );
 
 $script_field = array(
@@ -93,8 +103,8 @@ acf_add_local_field_group( array(
 	'title'                 => $title,
 	'fields'                => array(
 		$classification_categories_field,
-		$presentations_technical_cards_field,
-		$submit_documents_technical_cards_field,
+		$presentations_classification_field,
+		$submit_documents_classification_field,
 		$script_field,
 		$access_gate_title_field,
 		$access_gate_text_field,

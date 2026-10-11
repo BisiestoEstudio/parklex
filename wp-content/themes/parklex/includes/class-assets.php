@@ -152,10 +152,12 @@ class Bis_Theme_Assets {
 			true
 		);
 
+		$request_page_id = bis_theme_get_page_by_template( 'page-request-lunch-learn.php' );
+
 		wp_localize_script( 'bis-theme-lunch-learn-request', 'bisLunchLearn', array(
 			'ajaxUrl'      => admin_url( 'admin-ajax.php' ),
 			'nonce'        => wp_create_nonce( Bis_Core_Lunch_Learn_Legacy::NONCE_ACTION ),
-			'typeOfEvents' => get_field( 'type_of_events', 'option' ) ?: array(),
+			'typeOfEvents' => ( $request_page_id ? get_field( 'type_of_events', $request_page_id ) : array() ) ?: array(),
 			'i18n'         => array(
 				'addAssistant' => __( 'Add Attendee', 'parklex' ),
 				'confirmSend'  => __( 'Send the invoice info? You will not be able to edit it afterwards.', 'parklex' ),

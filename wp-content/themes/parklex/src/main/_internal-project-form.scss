@@ -3,3 +3,15 @@
 .bis-internal-project-hidden-field {
     display: none !important;
 }
+
+.c-internal-project-form__notice {
+    margin-bottom: var(--wp--preset--spacing--m);
+    padding: var(--wp--preset--spacing--s) var(--wp--preset--spacing--m);
+    border-left: 4px solid var(--success);
+    background: var(--gray-light);
+    color: var(--black);
+
+    p {
+        margin: 0;
+    }
+}

@@ -180,4 +180,13 @@
 
 		syncImagesIdsField();
 	} );
+
+	document.addEventListener( 'DOMContentLoaded', function () {
+		var notice = document.querySelector( '.c-internal-project-form__notice' );
+
+		if ( notice ) {
+			notice.scrollIntoView( { behavior: 'smooth', block: 'center' } );
+			notice.focus( { preventScroll: true } );
+		}
+	} );
 } )();

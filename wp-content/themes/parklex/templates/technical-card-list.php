@@ -1,24 +1,34 @@
 <?php
 /**
- * Renders a curated list of Technical Card posts (title + downloads) picked via an
- * ACF relationship field on the Technical Card options page. Shared by the
- * "Presentations" and "Submit Documents" My Account tabs.
+ * Renders the Technical Card posts (title + downloads) of a classification term
+ * picked via an ACF taxonomy field on the Technical Card options page (child
+ * terms included). Shared by the "Presentations" and "Submit Documents" My
+ * Account tabs.
  */
 defined( 'ABSPATH' ) || exit;
 
-$acf_field     = $args['acf_field'];
-$empty_notice  = $args['empty_notice'];
-$technical_card_ids = get_field( $acf_field, 'option' );
+$acf_field    = $args['acf_field'];
+$empty_notice = $args['empty_notice'];
+$term_id      = (int) get_field( $acf_field, 'option' );
 
-if ( empty( $technical_card_ids ) ) {
+if ( ! $term_id ) {
 	wc_print_notice( esc_html( $empty_notice ), 'notice' );
 	return;
 }
 
 $query = new WP_Query( array(
 	'post_type'      => 'technical-card',
-	'post__in'       => $technical_card_ids,
-	'orderby'        => 'post__in',
+	'tax_query'      => array(
+		array(
+			'taxonomy' => 'classification_technical_card',
+			'field'    => 'term_id',
+			'terms'    => $term_id,
+		),
+	),
+	'orderby'        => array(
+		'menu_order' => 'ASC',
+		'title'      => 'ASC',
+	),
 	'posts_per_page' => -1,
 ) );
 

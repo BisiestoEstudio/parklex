@@ -4,11 +4,11 @@
  *
  * Shows a second curated selection of Technical Card posts, picked in
  * Technical Cards > Ajustes > Submit Documents (ACF relationship field
- * "submit_documents_technical_cards").
+ * "submit_documents_classification").
  */
 defined( 'ABSPATH' ) || exit;
 
 get_template_part( 'templates/technical-card-list', null, array(
-	'acf_field'    => 'submit_documents_technical_cards',
+	'acf_field'    => 'submit_documents_classification',
 	'empty_notice' => __( 'No documents available yet.', 'parklex-core' ),
 ) );

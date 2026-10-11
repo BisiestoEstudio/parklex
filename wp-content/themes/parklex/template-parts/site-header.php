@@ -48,8 +48,8 @@ $logo       = get_custom_logo();
 							><?php echo esc_html( $item->title ); ?></a>
 
 							<?php if ( $has_children ) : ?>
-								<div class="site-header__submenu" id="<?php echo esc_attr( $submenu_id ); ?>">
-									<ul class="site-header__cards">
+								<div class="site-header__submenu is-layout-constrained has-global-padding" id="<?php echo esc_attr( $submenu_id ); ?>">
+									<ul class="site-header__cards alignwide">
 										<?php foreach ( $item->children as $child ) : ?>
 											<?php $image_id = function_exists( 'get_field' ) ? get_field( 'image', $child ) : 0; ?>
 											<li class="site-header__card-item">
