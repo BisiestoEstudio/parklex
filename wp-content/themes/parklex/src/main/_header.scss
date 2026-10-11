@@ -70,7 +70,7 @@
   /* Light variant: white text/logo over a dark background. Only while the header has not
      been hidden yet (back at the top it resets) and no megamenu is open; otherwise it always
      uses the dark look on a white background (.is-scrolled is toggled in site-header.js). */
-  &--light:not(.is-scrolled):not(.has-submenu-open) {
+  &--light:not(.is-scrolled):not(.has-submenu-open):not(.is-menu-open) {
     --header-fg: var(--white);
     --header-fg-inverse: var(--black);
     --header-pill-bg: var(--white-10);
@@ -78,7 +78,8 @@
   }
 
   &.is-scrolled,
-  &.has-submenu-open {
+  &.has-submenu-open,
+  &.is-menu-open {
     background-color: var(--white);
   }
 
@@ -282,6 +283,187 @@
 @media screen and (min-width: $breakpoint-menu) {
   .site-header__nav {
     display: grid;
+  }
+
+  .site-header__toggle,
+  .site-header__button--panel {
+    display: none;
+  }
+}
+
+
+/* Collapsed menu: offset panel (below $breakpoint-menu) */
+
+.site-header__toggle {
+  display: none;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--header-fg);
+  cursor: pointer;
+}
+
+.site-header__toggle-icon {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    left: 2px;
+    right: 2px;
+    height: 1.5px;
+    background-color: currentColor;
+    transition: transform 0.3s ease-in-out, top 0.3s ease-in-out;
+  }
+
+  &::before {
+    top: 8px;
+  }
+
+  &::after {
+    top: 15px;
+  }
+}
+
+.site-header__toggle[aria-expanded="true"] .site-header__toggle-icon {
+  &::before,
+  &::after {
+    top: 11px;
+  }
+
+  &::before {
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+  }
+}
+
+html.has-site-menu-open {
+  overflow: hidden;
+}
+
+@media screen and (max-width: 1279px) {
+  .site-header__bar {
+    grid-template-columns: 1fr auto;
+  }
+
+  /* The panel (fixed) is a child of the bar, so it shares its stacking context:
+     logo and actions go above it to stay visible while it is open. */
+  .site-header__logo,
+  .site-header__actions {
+    position: relative;
+    z-index: 2;
+  }
+
+  .site-header__actions {
+    grid-column: 2;
+    gap: 24px;
+  }
+
+  .site-header__actions > .site-header__button {
+    display: none;
+  }
+
+  .site-header__toggle {
+    display: block;
+  }
+
+  .site-header__nav {
+    position: fixed;
+    inset: var(--wp-admin--admin-bar--height, 0px) 0 0 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: calc(100dvh - var(--wp-admin--admin-bar--height, 0px));
+    padding: calc(var(--site-header-bar-height, 80px) + 16px) var(--layout-margin) var(--layout-margin);
+    overflow-y: auto;
+    background-color: var(--white);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, visibility 0s linear 0.3s;
+
+    &::before {
+      display: none;
+    }
+  }
+
+  .site-header.is-menu-open .site-header__nav {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out, visibility 0s;
+  }
+
+  .site-header__menu {
+    display: block;
+    margin-bottom: 32px;
+    padding: 0;
+  }
+
+  .site-header__item {
+    padding: 0;
+  }
+
+  .site-header__link {
+    padding: 12px 0;
+    font-size: 16px;
+
+    &::after {
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+  }
+
+  /* Accordion: the submenu opens in place, text only (no images) */
+  .site-header .site-header__submenu {
+    position: static;
+    display: none;
+    padding: 8px 0 0;
+    background-color: transparent;
+    visibility: visible;
+    opacity: 1;
+    transition: none;
+  }
+
+  .site-header .site-header__item.is-open > .site-header__submenu {
+    display: block;
+  }
+
+  .site-header .site-header__cards {
+    flex-direction: column;
+    gap: 0;
+    max-width: none;
+    margin: 0;
+  }
+
+  .site-header__card-item {
+    flex: none;
+  }
+
+  .site-header__card {
+    padding: 12px 0;
+  }
+
+  .site-header__card-media {
+    display: none;
+  }
+
+  .site-header__card-title {
+    margin-top: 0;
+    font-size: 18px;
+  }
+
+  .site-header__button--panel {
+    margin-top: auto;
   }
 }
 

@@ -2,6 +2,7 @@
  * Site header (template-parts/site-header.php):
  * - Card submenus: toggle on click of the parent item (which doesn't navigate); they close on
  *   clicking it again, clicking outside, following a card link, or Escape.
+ * - Collapsed menu: offset panel opened with the toggle button.
  * - Language switcher dropdown.
  * - Retractable header: hides on scroll down, reappears on scroll up.
  */
@@ -10,11 +11,63 @@
 
 	if ( header ) {
 		initSubmenus( header );
+		initOffsetMenu( header );
 	}
 
 	document.querySelectorAll( '.js-lang-switcher' ).forEach( initLangSwitcher );
 
 	var wrapper = document.querySelector( '.site-header-wrapper' );
+
+	/**
+	 * Collapsed menu (below the menu breakpoint): the nav becomes an offset panel opened with
+	 * the toggle button. The bar height is exposed as --site-header-bar-height so the panel
+	 * starts right under it.
+	 */
+	function initOffsetMenu( header ) {
+		var toggle = header.querySelector( '.js-site-header-toggle' );
+		var bar = header.querySelector( '.site-header__bar' );
+		var desktop = window.matchMedia( '(min-width: 1280px)' );
+
+		if ( ! toggle || ! bar ) {
+			return;
+		}
+
+		function setOpen( isOpen ) {
+			header.classList.toggle( 'is-menu-open', isOpen );
+			toggle.setAttribute( 'aria-expanded', isOpen ? 'true' : 'false' );
+			document.documentElement.classList.toggle( 'has-site-menu-open', isOpen );
+		}
+
+		function setBarHeight() {
+			header.style.setProperty( '--site-header-bar-height', bar.offsetHeight + 'px' );
+		}
+
+		toggle.addEventListener( 'click', function () {
+			setBarHeight();
+			setOpen( ! header.classList.contains( 'is-menu-open' ) );
+		} );
+
+		// Escape closes the panel (submenus are handled first, see initSubmenus).
+		header.addEventListener( 'keydown', function ( event ) {
+			if ( event.key === 'Escape' && header.classList.contains( 'is-menu-open' ) && ! header.classList.contains( 'has-submenu-open' ) ) {
+				setOpen( false );
+				toggle.focus();
+			}
+		} );
+
+		// Back to the full menu: reset the panel.
+		desktop.addEventListener( 'change', function ( event ) {
+			if ( event.matches ) {
+				setOpen( false );
+			}
+		} );
+
+		if ( 'ResizeObserver' in window ) {
+			new ResizeObserver( setBarHeight ).observe( bar );
+		}
+
+		setBarHeight();
+	}
 
 	if ( header && wrapper ) {
 		initRetractable( wrapper, header );
@@ -47,7 +100,7 @@
 			}
 
 			// Never hide it near the top, or while a submenu / the language list is in use.
-			var inUse = header.classList.contains( 'has-submenu-open' ) || header.contains( document.activeElement ) && document.activeElement !== document.body;
+			var inUse = header.classList.contains( 'has-submenu-open' ) || header.classList.contains( 'is-menu-open' ) || header.contains( document.activeElement ) && document.activeElement !== document.body;
 			var shouldHide = delta > 0 && y > wrapper.offsetHeight && ! inUse;
 
 			// Revealing it after it had been hidden: it must already be dark on white.
@@ -143,6 +196,8 @@
 			if ( openItem ) {
 				closeAll();
 				openItem.querySelector( ':scope > .site-header__link' ).focus();
+				// First Escape only closes the submenu, not the offset panel too.
+				event.stopImmediatePropagation();
 			}
 		} );
 	}

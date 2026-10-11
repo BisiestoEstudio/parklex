@@ -21,7 +21,7 @@ $logo       = get_custom_logo();
 		</div>
 
 		<?php if ( $menu_items ) : ?>
-			<nav class="site-header__nav" aria-label="<?php esc_attr_e( 'Menú principal', 'parklex' ); ?>">
+			<nav class="site-header__nav" id="site-header-nav" aria-label="<?php esc_attr_e( 'Menú principal', 'parklex' ); ?>">
 				<ul class="site-header__menu">
 					<?php foreach ( $menu_items as $item ) : ?>
 						<?php
@@ -73,6 +73,15 @@ $logo       = get_custom_logo();
 						</li>
 					<?php endforeach; ?>
 				</ul>
+
+				<?php if ( $button ) : ?>
+					<?php // Collapsed menu: the button lives inside the offset panel. ?>
+					<a
+						class="btn btn-outline site-header__button site-header__button--panel"
+						href="<?php echo esc_url( $button['url'] ); ?>"
+						<?php echo ! empty( $button['target'] ) ? 'target="' . esc_attr( $button['target'] ) . '"' : ''; ?>
+					><?php echo esc_html( $button['title'] ); ?></a>
+				<?php endif; ?>
 			</nav>
 		<?php endif; ?>
 
@@ -86,6 +95,18 @@ $logo       = get_custom_logo();
 			<?php endif; ?>
 
 			<?php get_template_part( 'template-parts/language-switcher' ); ?>
+
+			<?php if ( $menu_items ) : ?>
+				<button
+					class="site-header__toggle js-site-header-toggle"
+					type="button"
+					aria-expanded="false"
+					aria-controls="site-header-nav"
+					aria-label="<?php esc_attr_e( 'Menú', 'parklex' ); ?>"
+				>
+					<span class="site-header__toggle-icon" aria-hidden="true"></span>
+				</button>
+			<?php endif; ?>
 		</div>
 
 	</div>
