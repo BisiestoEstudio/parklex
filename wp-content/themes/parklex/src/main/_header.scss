@@ -2,7 +2,7 @@
   &__logo{
     a{
       display: block;
-      width: fluid(150px, 110px);
+      max-width: fluid(150px, 110px);
       height: 40px;
       position: relative;
     }
@@ -37,12 +37,31 @@
 
 /* Site header — template-parts/site-header.php + assets/js/site-header.js */
 
+/* Fixed over the content; slides away on scroll down and comes back on scroll up (.is-hidden toggled in JS). */
+.site-header-wrapper {
+  position: fixed;
+  top: var(--wp-admin--admin-bar--height, 0px);
+  left: 0;
+  right: 0;
+  z-index: 100;
+  transition: transform 0.3s ease-in-out;
+
+  &.is-hidden {
+    transform: translateY(-100%);
+  }
+}
+
 .site-header {
   --site-header-gap: fluid(28px, 16px);
   position: relative;
   z-index: 100;
-  background-color: var(--white);
+  background-color: transparent;
   color: var(--text-color);
+  transition: background-color 0.3s ease-in-out;
+
+  &.has-submenu-open {
+    background-color: var(--white);
+  }
 
   &__bar {
     display: grid;
@@ -63,7 +82,7 @@
 
     .custom-logo {
       display: block;
-      width: auto;
+      width: fluid(210px, 150px);
       height: fluid(32px, 24px);
       filter: var(--filter-to-black);
     }

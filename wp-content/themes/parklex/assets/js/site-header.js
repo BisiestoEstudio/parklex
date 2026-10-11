@@ -3,6 +3,7 @@
  * - Card submenus: open on hover / keyboard focus, close on leaving the header or Escape.
  *   On touch, the first tap on a parent item opens its submenu instead of navigating.
  * - Language switcher dropdown.
+ * - Retractable header: hides on scroll down, reappears on scroll up.
  */
 ( function () {
 	var header = document.querySelector( '.js-site-header' );
@@ -12,6 +13,45 @@
 	}
 
 	document.querySelectorAll( '.js-lang-switcher' ).forEach( initLangSwitcher );
+
+	var wrapper = document.querySelector( '.site-header-wrapper' );
+
+	if ( header && wrapper ) {
+		initRetractable( wrapper, header );
+	}
+
+	/**
+	 * Hides the fixed header when scrolling down and shows it again when scrolling up.
+	 */
+	function initRetractable( wrapper, header ) {
+		var threshold = 8;
+		var lastY = window.scrollY;
+		var ticking = false;
+
+		function update() {
+			var y = Math.max( window.scrollY, 0 );
+			var delta = y - lastY;
+			ticking = false;
+
+			if ( Math.abs( delta ) < threshold ) {
+				return;
+			}
+
+			// Never hide it near the top, or while a submenu / the language list is in use.
+			var inUse = header.classList.contains( 'has-submenu-open' ) || header.contains( document.activeElement ) && document.activeElement !== document.body;
+			var shouldHide = delta > 0 && y > wrapper.offsetHeight && ! inUse;
+
+			wrapper.classList.toggle( 'is-hidden', shouldHide );
+			lastY = y;
+		}
+
+		window.addEventListener( 'scroll', function () {
+			if ( ! ticking ) {
+				ticking = true;
+				window.requestAnimationFrame( update );
+			}
+		}, { passive: true } );
+	}
 
 	function initSubmenus( header ) {
 		var items = header.querySelectorAll( '.site-header__item' );
