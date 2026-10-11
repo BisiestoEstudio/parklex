@@ -1,7 +1,7 @@
 /**
  * Site header (template-parts/site-header.php):
- * - Card submenus: open on hover / keyboard focus, close on leaving the header or Escape.
- *   On touch, the first tap on a parent item opens its submenu instead of navigating.
+ * - Card submenus: toggle on click of the parent item (which doesn't navigate); they close on
+ *   clicking it again, clicking outside, following a card link, or Escape.
  * - Language switcher dropdown.
  * - Retractable header: hides on scroll down, reappears on scroll up.
  */
@@ -76,17 +76,13 @@
 	}
 
 	function initSubmenus( header ) {
-		var items = header.querySelectorAll( '.site-header__item' );
-		var lastPointerType = 'mouse';
+		var items = header.querySelectorAll( '.site-header__item--has-children' );
 
-		function open( item ) {
-			items.forEach( function ( other ) {
-				if ( other !== item ) {
-					setOpen( other, false );
-				}
-			} );
-			setOpen( item, true );
-			header.classList.add( 'has-submenu-open' );
+		function setOpen( item, isOpen ) {
+			var link = item.querySelector( ':scope > .site-header__link' );
+
+			item.classList.toggle( 'is-open', isOpen );
+			link.setAttribute( 'aria-expanded', isOpen ? 'true' : 'false' );
 		}
 
 		function closeAll() {
@@ -96,66 +92,43 @@
 			header.classList.remove( 'has-submenu-open' );
 		}
 
-		function setOpen( item, isOpen ) {
-			var link = item.querySelector( ':scope > .site-header__link' );
+		// Opening one closes the others; clicking the open one closes it.
+		function toggle( item ) {
+			var willOpen = ! item.classList.contains( 'is-open' );
 
-			item.classList.toggle( 'is-open', isOpen );
+			closeAll();
 
-			if ( link && link.hasAttribute( 'aria-expanded' ) ) {
-				link.setAttribute( 'aria-expanded', isOpen ? 'true' : 'false' );
+			if ( willOpen ) {
+				setOpen( item, true );
+				header.classList.add( 'has-submenu-open' );
 			}
-		}
-
-		function hasChildren( item ) {
-			return item.classList.contains( 'site-header__item--has-children' );
 		}
 
 		items.forEach( function ( item ) {
 			var link = item.querySelector( ':scope > .site-header__link' );
 
-			item.addEventListener( 'mouseenter', function () {
-				if ( lastPointerType !== 'mouse' ) {
-					return;
-				}
-				hasChildren( item ) ? open( item ) : closeAll();
+			link.addEventListener( 'click', function ( event ) {
+				event.preventDefault();
+				toggle( item );
 			} );
-
-			item.addEventListener( 'focusin', function () {
-				hasChildren( item ) ? open( item ) : closeAll();
-			} );
-
-			if ( link && hasChildren( item ) ) {
-				// Read on pointerdown: the tap also focuses the link, and focusin opens the submenu before click.
-				var wasOpen = false;
-
-				link.addEventListener( 'pointerdown', function ( event ) {
-					lastPointerType = event.pointerType;
-					wasOpen = item.classList.contains( 'is-open' );
-				} );
-
-				link.addEventListener( 'click', function ( event ) {
-					if ( lastPointerType !== 'mouse' && ! wasOpen ) {
-						event.preventDefault();
-						open( item );
-					}
-				} );
-			}
 		} );
 
-		header.addEventListener( 'pointermove', function ( event ) {
-			lastPointerType = event.pointerType;
-		} );
-
-		header.addEventListener( 'mouseleave', closeAll );
-
-		header.addEventListener( 'focusout', function ( event ) {
-			if ( ! header.contains( event.relatedTarget ) ) {
+		// Click outside the open submenu / its menu (anywhere but the parent links and the submenu itself).
+		document.addEventListener( 'click', function ( event ) {
+			if ( ! event.target.closest( '.site-header__item--has-children' ) ) {
 				closeAll();
 			}
 		} );
 
-		document.addEventListener( 'click', function ( event ) {
-			if ( ! header.contains( event.target ) ) {
+		// Following a card link or any other link of the header also closes it (same-page anchors).
+		header.addEventListener( 'click', function ( event ) {
+			if ( event.target.closest( '.site-header__submenu a' ) ) {
+				closeAll();
+			}
+		} );
+
+		header.addEventListener( 'focusout', function ( event ) {
+			if ( event.relatedTarget && ! header.contains( event.relatedTarget ) ) {
 				closeAll();
 			}
 		} );

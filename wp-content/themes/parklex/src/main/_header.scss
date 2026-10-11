@@ -121,6 +121,18 @@
 
   &__nav {
     display: none;
+
+    /* The pill is a sibling of the list, not its background: backdrop-filter on an ancestor
+       of the submenu would make it the containing block and the submenu would no longer span
+       the full header width. */
+    &::before {
+      content: "";
+      grid-area: 1 / 1;
+      border-radius: 999px;
+      background-color: var(--header-pill-bg);
+      backdrop-filter: blur(var(--header-pill-blur));
+      transition: background-color 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out;
+    }
   }
 
   &__menu {
@@ -130,10 +142,7 @@
     margin: 0;
     padding: 14px fluid(40px, 24px);
     list-style: none;
-    border-radius: 999px;
-    background-color: var(--header-pill-bg);
-    backdrop-filter: blur(var(--header-pill-blur));
-    transition: background-color 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out;
+    grid-area: 1 / 1;
   }
 
   &__item {
@@ -164,7 +173,7 @@
     }
   }
 
-  &.has-submenu-open &__menu {
+  &.has-submenu-open &__nav::before {
     background-color: transparent;
   }
 
@@ -187,6 +196,8 @@
     top: 100%;
     left: 0;
     right: 0;
+    padding-top: 40px;
+    padding-bottom: 40px;
     background-color: var(--white);
     visibility: hidden;
     opacity: 0;
@@ -200,8 +211,7 @@
   }
 
   &__cards {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    display: flex;
     gap: 16px;
     margin: 0;
     padding: 0;
@@ -209,6 +219,8 @@
   }
 
   &__card-item {
+    flex: 1 1 0;
+    min-width: 0;
     margin: 0;
   }
 
@@ -225,7 +237,7 @@
 
   &__card-media {
     display: block;
-    aspect-ratio: 1;
+    height: 336px;
     overflow: hidden;
     background-color: var(--gray-light);
   }
@@ -269,7 +281,7 @@
 
 @media screen and (min-width: $breakpoint-menu) {
   .site-header__nav {
-    display: block;
+    display: grid;
   }
 }
 
