@@ -91,7 +91,8 @@ class Bis_Core_Roles_Legacy {
 			exit();
 		}
 
-		if ( ! is_user_logged_in() && ( is_woocommerce() || is_shop() || is_cart() || is_checkout() || is_tax( 'product_cat' ) ) ) {
+		// TEMP-DISABLED (layout work on shop): restore by removing 'false &&'.
+		if ( false && ! is_user_logged_in() && ( is_woocommerce() || is_shop() || is_cart() || is_checkout() || is_tax( 'product_cat' ) ) ) {
 			wp_redirect( get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) );
 			exit();
 		}
