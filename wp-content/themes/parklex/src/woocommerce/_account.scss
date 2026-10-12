@@ -1,0 +1,359 @@
+/**
+ * My Account — layout (nav sidebar + content)
+ * Markup: WooCommerce [woocommerce_my_account] inside page.php (<main class="entry-content">).
+ * Selectors start with .woocommerce-account to beat WooCommerce's float layout CSS.
+ */
+
+.woocommerce-account .entry-content {
+  /* Header is fixed over the content: reserve its height. */
+  padding-top: calc(var(--spacing-fluid-menu) + var(--wp--preset--spacing--l));
+  padding-bottom: var(--wp--preset--spacing--xxl);
+  padding-inline: var(--layout-margin);
+
+  > .woocommerce {
+    max-width: var(--widesize);
+    margin-inline: auto;
+  }
+}
+
+/* Logged in: sidebar + content */
+
+.woocommerce-account .woocommerce:has(> .woocommerce-MyAccount-navigation) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--wp--preset--spacing--l);
+  align-items: start;
+
+  /* WooCommerce's clearfix pseudo-elements would become grid items. */
+  &::before,
+  &::after {
+    content: none !important; /* beats WooCommerce's more specific clearfix rules */
+    display: none !important;
+  }
+}
+
+.woocommerce-account .woocommerce .woocommerce-MyAccount-navigation,
+.woocommerce-account .woocommerce .woocommerce-MyAccount-content {
+  float: none;
+  width: auto;
+  min-width: 0;
+}
+
+.woocommerce-account .woocommerce-MyAccount-navigation {
+  ul {
+    display: flex;
+    gap: var(--wp--preset--spacing--xs);
+    margin: 0;
+    padding: 0 0 var(--wp--preset--spacing--xs);
+    list-style: none;
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  li {
+    flex: 0 0 auto;
+    margin: 0;
+  }
+
+  a {
+    display: block;
+    padding: 0.5em 1.25em;
+    border: 1px solid var(--black-20);
+    border-radius: 999px;
+    color: var(--black);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+
+    &:hover {
+      border-color: var(--black);
+    }
+  }
+
+  .is-active a {
+    background-color: var(--black);
+    border-color: var(--black);
+    color: var(--white);
+  }
+}
+
+@media (min-width: 782px) {
+  .woocommerce-account .woocommerce:has(> .woocommerce-MyAccount-navigation) {
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: var(--wp--preset--spacing--xl);
+  }
+
+  .woocommerce-account .woocommerce-MyAccount-navigation {
+    position: sticky;
+    top: calc(var(--spacing-fluid-menu) + var(--wp--preset--spacing--s));
+
+    ul {
+      flex-direction: column;
+      gap: 0;
+      padding: 0;
+      overflow: visible;
+    }
+
+    a {
+      padding: 0.85em 0;
+      border: 0;
+      border-bottom: 1px solid var(--gray-light);
+      border-radius: 0;
+      color: var(--gray-dark);
+
+      &:hover {
+        border-color: var(--gray-light);
+        color: var(--black);
+      }
+    }
+
+    .is-active a {
+      background: none;
+      border-bottom-color: var(--black);
+      color: var(--black);
+      font-weight: var(--font-weight-bold);
+    }
+
+    .woocommerce-MyAccount-navigation-link--customer-logout a {
+      border-bottom: 0;
+    }
+  }
+}
+
+/* Content */
+
+.woocommerce-account .woocommerce-MyAccount-content {
+  > :first-child {
+    margin-top: 0;
+  }
+
+  h2,
+  h3 {
+    font-size: var(--wp--preset--font-size--h5);
+    font-weight: var(--font-weight-bold);
+  }
+
+  p a:not(.button) {
+    text-decoration: underline;
+  }
+}
+
+/* Notices */
+
+.woocommerce-account .woocommerce-info,
+.woocommerce-account .woocommerce-message,
+.woocommerce-account .woocommerce-error {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--wp--preset--spacing--s);
+  margin: 0 0 var(--wp--preset--spacing--m);
+  padding: var(--wp--preset--spacing--m);
+  border: 0;
+  border-radius: var(--border-radius-s);
+  background-color: var(--gray-light);
+  color: var(--black);
+  list-style: none;
+
+  &::before {
+    display: none;
+  }
+
+  .button {
+    float: none;
+    order: 2;
+    margin: 0 0 0 auto;
+  }
+}
+
+/* Buttons */
+
+.woocommerce-account .woocommerce a.button,
+.woocommerce-account .woocommerce button.button,
+.woocommerce-account .woocommerce input.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 1.5em;
+  border: 0;
+  border-radius: 999px;
+  background-color: var(--black);
+  color: var(--white);
+  font-weight: var(--font-weight-regular);
+  line-height: 1;
+  text-decoration: none;
+  transition: background-color 0.3s ease-in-out;
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--gray-dark);
+    color: var(--white);
+  }
+}
+
+/* Tables (orders, downloads) */
+
+.woocommerce-account table.shop_table {
+  width: 100%;
+  border: 0;
+  border-collapse: collapse;
+  border-radius: 0;
+
+  th,
+  td {
+    padding: var(--wp--preset--spacing--s) var(--wp--preset--spacing--s) var(--wp--preset--spacing--s) 0;
+    border: 0;
+    border-bottom: 1px solid var(--gray-light);
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  thead th {
+    border-bottom-color: var(--black);
+    font-size: var(--wp--preset--font-size--caption);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+}
+
+/* Forms (account details) */
+
+.woocommerce-account .woocommerce-EditAccountForm {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--wp--preset--spacing--m);
+  max-width: 720px;
+
+  .clear {
+    display: none;
+  }
+
+  .form-row {
+    float: none;
+    width: auto;
+    margin: 0;
+    padding: 0;
+  }
+
+  label {
+    display: block;
+    margin-bottom: var(--wp--preset--spacing--xxs);
+    font-size: var(--wp--preset--font-size--caption);
+    color: var(--gray-dark);
+  }
+
+  .required {
+    color: inherit;
+  }
+
+  em {
+    display: block;
+    margin-top: var(--wp--preset--spacing--xxs);
+    font-size: var(--wp--preset--font-size--caption);
+    font-style: normal;
+    color: var(--gray-dark);
+  }
+
+  fieldset {
+    display: grid;
+    gap: var(--wp--preset--spacing--m);
+    margin: var(--wp--preset--spacing--s) 0 0;
+    padding: var(--wp--preset--spacing--m) 0 0;
+    border: 0;
+    border-top: 1px solid var(--gray-light);
+
+    legend {
+      padding: 0;
+      font-size: var(--wp--preset--font-size--h5);
+      font-weight: var(--font-weight-bold);
+    }
+  }
+}
+
+@media (min-width: 782px) {
+  .woocommerce-account .woocommerce-EditAccountForm {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    .form-row-wide,
+    fieldset,
+    > p:last-of-type {
+      grid-column: 1 / -1;
+    }
+  }
+}
+
+/* Logged out: login / lost password forms */
+
+.woocommerce-account .woocommerce:not(:has(> .woocommerce-MyAccount-navigation)) {
+  max-width: 520px;
+
+  h2 {
+    margin: 0 0 var(--wp--preset--spacing--m);
+  }
+}
+
+.woocommerce-account .woocommerce-form-login,
+.woocommerce-account .woocommerce-form-register,
+.woocommerce-account .woocommerce-ResetPassword {
+  display: grid;
+  gap: var(--wp--preset--spacing--m);
+  margin: 0;
+  padding: var(--wp--preset--spacing--l);
+  border: 1px solid var(--gray-light);
+  border-radius: var(--border-radius-s);
+
+  .form-row {
+    float: none;
+    width: auto;
+    margin: 0;
+    padding: 0;
+  }
+
+  label {
+    display: block;
+    margin-bottom: var(--wp--preset--spacing--xxs);
+    font-size: var(--wp--preset--font-size--caption);
+    color: var(--gray-dark);
+  }
+
+  .required {
+    color: inherit;
+  }
+
+  .clear {
+    display: none;
+  }
+
+  .woocommerce-form-login__rememberme {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--wp--preset--spacing--xs);
+    margin: 0 0 0 var(--wp--preset--spacing--s);
+
+    label {
+      margin: 0;
+    }
+  }
+
+  .lost_password {
+    margin: 0;
+  }
+}
+
+/* Addresses: WooCommerce's clearfix pseudo-elements would become flex items. */
+
+.woocommerce-account .woocommerce-Addresses,
+.woocommerce-account .woocommerce-Address-title,
+.woocommerce-account .woocommerce-address-title {
+  &::before,
+  &::after {
+    content: none !important; /* beats WooCommerce's more specific clearfix rules */
+    display: none !important;
+  }
+}
