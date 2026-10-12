@@ -4,7 +4,8 @@
  * Selectors start with .woocommerce-account to beat WooCommerce's float layout CSS.
  */
 
-.woocommerce-account .entry-content {
+.woocommerce-account .entry-content,
+.woocommerce-cart .entry-content {
   /* Header is fixed over the content: reserve its height. */
   padding-top: calc(var(--spacing-fluid-menu) + var(--wp--preset--spacing--l));
   padding-bottom: var(--wp--preset--spacing--xxl);
@@ -146,7 +147,10 @@
 
 .woocommerce-account .woocommerce-info,
 .woocommerce-account .woocommerce-message,
-.woocommerce-account .woocommerce-error {
+.woocommerce-account .woocommerce-error,
+.woocommerce-cart .woocommerce-info,
+.woocommerce-cart .woocommerce-message,
+.woocommerce-cart .woocommerce-error {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -174,7 +178,10 @@
 
 .woocommerce-account .woocommerce a.button,
 .woocommerce-account .woocommerce button.button,
-.woocommerce-account .woocommerce input.button {
+.woocommerce-account .woocommerce input.button,
+.woocommerce-cart .woocommerce a.button,
+.woocommerce-cart .woocommerce button.button,
+.woocommerce-cart .woocommerce input.button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
