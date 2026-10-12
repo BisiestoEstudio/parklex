@@ -113,15 +113,14 @@
 		text-align: left;
 	}
 
-	ul.products li.product a.woocommerce-LoopProduct-link {
+	ul.products li.product .c-shop__product {
 		display: flex;
 		flex-direction: column;
 		gap: var(--wp--preset--spacing--s);
 		flex: 1;
-		text-decoration: none;
 	}
 
-	ul.products li.product a img {
+	ul.products li.product .c-shop__product img {
 		display: block;
 		width: 100%;
 		height: auto;
@@ -144,9 +143,161 @@
 		color: var(--gray-dark);
 	}
 
-	ul.products li.product .button {
+	ul.products li.product .button:not(.c-shop__add) {
 		align-self: flex-start;
 		margin-top: var(--wp--preset--spacing--s);
+	}
+
+	&__cart {
+		display: grid;
+		gap: var(--wp--preset--spacing--xs);
+		margin-top: var(--wp--preset--spacing--s);
+	}
+
+	&__chips {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--wp--preset--spacing--xxs);
+		min-width: 0;
+		margin: 0;
+		padding: 0;
+		border: 0;
+	}
+
+	&__chip {
+		position: relative;
+		cursor: pointer;
+
+		&.is-disabled {
+			cursor: not-allowed;
+			opacity: 0.4;
+		}
+	}
+
+	&__chip-input {
+		position: absolute;
+		inset: 0;
+		opacity: 0;
+		margin: 0;
+		cursor: inherit;
+	}
+
+	&__chip-label {
+		display: block;
+		padding: 0.35em 0.9em;
+		border: 1px solid var(--black-20);
+		border-radius: 999px;
+		font-size: 0.875rem;
+		line-height: 1.4;
+		transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+	}
+
+	&__chip:not(.is-disabled):hover &__chip-label,
+	&__chip-input:checked + &__chip-label {
+		background-color: var(--black);
+		border-color: var(--black);
+		color: var(--white);
+	}
+
+	&__chip-input:focus-visible + &__chip-label {
+		outline: 2px solid var(--black);
+		outline-offset: 2px;
+	}
+
+	&__cart-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--wp--preset--spacing--xs);
+		align-items: center;
+	}
+
+	/* Quantity stepper: [-] number [+] in a white pill with dark text. */
+	&__qty {
+		display: flex;
+		align-items: stretch;
+		flex: 0 0 auto;
+		box-sizing: border-box;
+		height: 44px;
+		overflow: hidden;
+		border: 1px solid var(--black);
+		border-radius: 999px;
+		background-color: var(--white);
+	}
+
+	&__qty-btn {
+		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex: 0 0 auto;
+		width: 40px;
+		margin: 0;
+		padding: 0;
+		border: 0;
+		background-color: var(--white);
+		color: var(--black);
+		font-family: inherit;
+		font-size: 1.25rem;
+		line-height: 1;
+		cursor: pointer;
+		transition: background-color 0.3s ease-in-out;
+
+		&:hover,
+		&:focus-visible {
+			background-color: var(--gray-light);
+		}
+	}
+
+	/* .woocommerce prefix: the global input rule in framework/_6_forms.scss has very high specificity. */
+	@at-root .woocommerce .c-shop__cart .c-shop__qty input.c-shop__qty-input[type="number"] {
+		flex: 0 0 auto;
+		box-sizing: border-box;
+		display: block;
+		width: 2.5em;
+		min-width: 0;
+		max-width: none;
+		height: 100%;
+		min-height: 0;
+		margin: 0;
+		padding: 0;
+		border: 0 !important;
+		background-color: var(--white);
+		font-size: 1rem;
+		line-height: 1;
+		text-align: center;
+		-moz-appearance: textfield;
+
+		&::-webkit-outer-spin-button,
+		&::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+		}
+	}
+
+	@at-root .woocommerce ul.products li.product .c-shop__add.button {
+		flex: 1 1 auto;
+		height: 44px;
+		min-height: 44px;
+		margin: 0;
+		padding: 0 1.25em;
+		border: 0;
+		border-radius: 999px;
+		background-color: var(--black);
+		color: var(--white);
+		font-weight: var(--font-weight-regular);
+		white-space: nowrap;
+		transition: background-color 0.3s ease-in-out;
+
+		&:hover,
+		&:focus-visible {
+			background-color: var(--gray-dark);
+			color: var(--white);
+		}
+
+		&:disabled {
+			opacity: 0.4;
+			cursor: not-allowed;
+		}
 	}
 
 	&__pagination {
