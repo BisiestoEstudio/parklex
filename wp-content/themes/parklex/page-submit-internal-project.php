@@ -8,7 +8,7 @@ acf_form_head();
 get_header();
 ?>
 
-<main class="entry-content is-layout-constrained has-global-padding">
+<main class="c-internal-project-page entry-content is-layout-constrained has-global-padding">
 	<div class="c-internal-project-form">
 		<?php the_content(); ?>
 

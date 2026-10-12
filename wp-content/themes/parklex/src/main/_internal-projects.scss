@@ -1,3 +1,9 @@
+/* Header is fixed over the content: reserve its height at the top. */
+.c-internal-projects-page {
+    padding-top: calc(var(--spacing-fluid-menu) + var(--wp--preset--spacing--l));
+    padding-bottom: var(--wp--preset--spacing--xxl);
+}
+
 .c-internal-projects {
     display: grid;
     grid-template-columns: 260px 1fr;
@@ -12,7 +18,7 @@
         flex-direction: column;
         gap: var(--wp--preset--spacing--l);
         position: sticky;
-        top: var(--wp--preset--spacing--m);
+        top: calc(var(--spacing-fluid-menu) + var(--wp--preset--spacing--s));
         align-self: start;
     }
 

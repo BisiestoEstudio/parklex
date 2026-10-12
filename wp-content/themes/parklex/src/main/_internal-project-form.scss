@@ -1,3 +1,35 @@
+/* Header is fixed over the content: reserve its height at the top. */
+.c-internal-project-page {
+    padding-top: calc(var(--spacing-fluid-menu) + var(--wp--preset--spacing--l));
+    padding-bottom: var(--wp--preset--spacing--xxl);
+}
+
+/* ACF draws a divider above every field; the underlined inputs already separate them. */
+.c-internal-project-form .acf-fields > .acf-field {
+    padding-block: var(--wp--preset--spacing--s);
+    border-top: 0;
+}
+
+/* Checkbox (true/false) fields: checkbox and label on one line. */
+.c-internal-project-form .acf-field-true-false {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    gap: var(--wp--preset--spacing--xs);
+
+    .acf-label,
+    .acf-input,
+    .acf-true-false label {
+        margin: 0;
+    }
+
+    .acf-true-false input[type="checkbox"] {
+        display: block;
+        margin: 0;
+    }
+}
+
 /* Hide the raw ACF fields driven by the custom uploader (see class-internal-projects.php). */
 .bis-internal-project-images-ids,
 .bis-internal-project-hidden-field {

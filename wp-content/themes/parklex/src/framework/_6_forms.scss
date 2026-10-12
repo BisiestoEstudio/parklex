@@ -192,6 +192,16 @@ select {
         }
     }
 
+    /* The inline search input of multi-selects inherits the global input underline: that
+       was a second line under the select2 box. Selector is long to beat that global rule. */
+    .select2-selection .select2-search input.select2-search__field[type="search"] {
+        min-height: 0 !important;
+        margin: 0;
+        padding: 0 !important;
+        border: 0 !important;
+        background: transparent;
+    }
+
     &.select2-container--focus,
     &.select2-container--open {
         .select2-selection--single,

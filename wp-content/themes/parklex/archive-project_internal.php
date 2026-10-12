@@ -29,7 +29,7 @@ $taxonomy_filters = array(
 );
 ?>
 
-<main class="entry-content is-layout-constrained has-global-padding">
+<main class="c-internal-projects-page entry-content is-layout-constrained has-global-padding">
 	<?php if ( $archive_title ) : ?>
 		<h1 class="c-internal-projects__title"><?php echo esc_html( $archive_title ); ?></h1>
 	<?php endif; ?>
