@@ -251,6 +251,11 @@
     }
 }
 
+/* Removes the block-gap margin that WP applies to every direct child of .wp-site-blocks (body). */
+.post-type-archive-technical-card.wp-site-blocks > * {
+    margin-block-start: 0;
+}
+
 .c-technical-access-gate {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -263,6 +268,11 @@
     &__media {
         position: relative;
         min-height: 320px;
+
+        @media (min-width: $lg) {
+            display: flex;
+            justify-content: flex-end;
+        }
     }
 
     &__image {
@@ -279,7 +289,10 @@
         display: flex;
         flex-direction: column;
         gap: var(--wp--preset--spacing--m);
-        padding: var(--wp--preset--spacing--xl) var(--layout-margin);
+        width: 100%;
+        max-width: calc(var(--widesize) / 2);
+        margin-left: var(--layout-margin);
+        padding: var(--wp--preset--spacing--menu) var(--layout-margin) var(--wp--preset--spacing--xl) 0;
     }
 
     &__title {
@@ -296,7 +309,10 @@
     &__form {
         display: flex;
         align-items: center;
-        padding: var(--wp--preset--spacing--xl) var(--layout-margin);
+        justify-self: start;
+        width: 100%;
+        max-width: calc(var(--widesize) / 2);
+        padding: var(--wp--preset--spacing--menu) var(--layout-margin) var(--wp--preset--spacing--xl);
         justify-content: center;
     }
 
@@ -305,7 +321,10 @@
         flex-direction: column;
         gap: var(--wp--preset--spacing--m);
         width: 100%;
-        max-width: 368px;
+        max-width: 400px;
+        margin-right: var(--layout-margin);
+        padding-right: 0;
+        padding-left: var(--layout-margin);
 
         &[hidden] {
             display: none;

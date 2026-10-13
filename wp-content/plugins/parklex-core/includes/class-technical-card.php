@@ -82,7 +82,8 @@ class Bis_Core_Technical_Card {
 	 * the gate's script only when it's actually rendered.
 	 */
 	public static function is_gate_active() {
-		return is_post_type_archive( 'technical-card' ) && ! self::is_registered_user() && ! current_user_can( 'manage_options' );
+		// TEMPORARY: administrators see the gate too (no cookie) to style it. Restore `&& ! current_user_can( 'manage_options' )` afterwards.
+		return is_post_type_archive( 'technical-card' ) && ! self::is_registered_user();
 	}
 
 	public static function is_registered_user() {
