@@ -71,6 +71,10 @@ $template_params = array(
 				<?php if ( ! empty( $classification_parents ) && ! is_wp_error( $classification_parents ) ) : ?>
 					<?php foreach ( $classification_parents as $classification_parent ) : ?>
 						<?php
+						if ( Bis_Theme_Technical_Card_Archive::is_classification_disabled( $classification_parent ) ) {
+							continue;
+						}
+
 						$classification_children = get_terms(
 							array(
 								'taxonomy'   => 'classification_technical_card',
@@ -85,6 +89,10 @@ $template_params = array(
 								<ul class="c-technical-card-body__clasification-terms">
 									<?php foreach ( $classification_children as $classification_child ) : ?>
 										<?php
+										if ( Bis_Theme_Technical_Card_Archive::is_classification_disabled( $classification_child ) ) {
+											continue;
+										}
+
 										$classification_child_is_active = $active_classification === $classification_child->slug;
 										$classification_child_href       = $classification_child_is_active
 											? remove_query_arg( 'classification_technical_card' )

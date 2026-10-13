@@ -28,6 +28,22 @@ class Bis_Theme_Technical_Card_Archive {
 	}
 
 	/**
+	 * Whether a classification term is hidden from the technical area: it, or any of its
+	 * ancestors, has "disable_in_technical_area" checked.
+	 */
+	public static function is_classification_disabled( $term ) {
+		$term_ids = array_merge( array( $term->term_id ), get_ancestors( $term->term_id, 'classification_technical_card', 'taxonomy' ) );
+
+		foreach ( $term_ids as $term_id ) {
+			if ( get_field( 'disable_in_technical_area', 'classification_technical_card_' . $term_id ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
 	 * Term slug of the given taxonomy filter from the URL, or false if it isn't set.
 	 */
 	public static function get_active_term( $taxonomy ) {

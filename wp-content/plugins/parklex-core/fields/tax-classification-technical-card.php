@@ -36,12 +36,24 @@ $disable_label_field = array(
 	'ui'            => 1,
 );
 
+$disable_in_technical_area_field = array(
+	'key'           => "{$group_key}_disable_in_technical_area",
+	'label'         => __( 'Deshabilitar en zona técnica', 'parklex-core' ),
+	'name'          => 'disable_in_technical_area',
+	'type'          => 'true_false',
+	'instructions'  => __( 'Si se marca, esta clasificación y sus clasificaciones hijas no se mostrarán en el sidebar de la zona técnica.', 'parklex-core' ),
+	'required'      => 0,
+	'default_value' => 0,
+	'ui'            => 1,
+);
+
 acf_add_local_field_group( array(
 	'key'                   => $group_key,
 	'title'                 => $title,
 	'fields'                => array(
 		$card_type_field,
 		$disable_label_field,
+		$disable_in_technical_area_field,
 	),
 	'show_in_rest'          => true,
 	'location'              => array(
