@@ -21,6 +21,8 @@ class Bis_Theme_Config
     {
         // Allow alignwide and fullalign Gutenberg
         add_theme_support('align-wide');
+        // Fluid embeds (adds wp-embed-responsive to body so iframes fill their container)
+        add_theme_support('responsive-embeds');
         // Allow post-thumbnail
         add_theme_support('post-thumbnails');
         add_theme_support('title-tag');

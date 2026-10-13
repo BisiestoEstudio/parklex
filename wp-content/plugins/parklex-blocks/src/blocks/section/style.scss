@@ -45,6 +45,12 @@
 		margin-block-start: 0;
 	}
 
+	// Embeds use an absolutely positioned iframe, so they have no intrinsic width
+	// and would collapse inside the centered grid (.is-style-center).
+	.wp-block-embed {
+		width: 100%;
+	}
+
 	.wp-block-buttons{
 		justify-content: center;
 		gap: 8px;

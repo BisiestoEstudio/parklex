@@ -21,3 +21,28 @@
     }
     
 }
+
+/* Embeds (Vimeo, YouTube...) inside the section: the preview iframe is
+   sandboxed and may render blank, so keep the container visible and sized. */
+.b-section .wp-block-embed {
+    width: 100%;
+
+    .wp-block-embed__wrapper {
+        aspect-ratio: 16 / 9;
+        background: rgba(0, 0, 0, 0.06);
+        outline: 1px dashed rgba(0, 0, 0, 0.3);
+        outline-offset: -1px;
+
+        &::before {
+            display: none;
+        }
+
+        iframe,
+        .components-sandbox {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
