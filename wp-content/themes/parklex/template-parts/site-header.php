@@ -135,3 +135,6 @@ $variant      = $is_wholesale ? 'dark' : Bis_Theme_Header::get_variant();
 
 	</div>
 </div>
+
+<?php // Dims the page behind an open megamenu; clicking it closes the megamenu (see site-header.js). ?>
+<div class="site-header__overlay" aria-hidden="true"></div>

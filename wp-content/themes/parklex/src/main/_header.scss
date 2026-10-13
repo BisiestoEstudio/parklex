@@ -281,6 +281,23 @@
 }
 
 @media screen and (min-width: $breakpoint-menu) {
+  /* Sibling of .site-header inside the fixed wrapper, right under it (z-index 100) */
+  .site-header__overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    background-color: var(--black-40);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0s linear 0.3s;
+  }
+
+  .site-header.has-submenu-open ~ .site-header__overlay {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease-in-out, visibility 0s;
+  }
+
   .site-header__nav {
     display: grid;
   }
