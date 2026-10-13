@@ -30,20 +30,23 @@ $author_names   = (! empty($author_terms) && ! is_wp_error($author_terms)) ? wp_
 $work_type_terms = get_the_terms($post_id, 'type_work');
 $solution_terms  = get_the_terms($post_id, 'app');
 
+$archive_url = get_post_type_archive_link('proyecto');
+
 /**
  * Convierte una lista de términos en enlaces "Nombre" separados por comas.
+ * Cada enlace apunta al archivo de proyectos con el filtro $param aplicado.
  */
-$term_links = function ($terms) {
+$term_links = function ($terms, $param) use ($archive_url) {
 	if (empty($terms) || is_wp_error($terms)) {
 		return '';
 	}
 	$links = array();
 	foreach ($terms as $term) {
-		$url = get_term_link($term);
-		if (is_wp_error($url)) {
-			$links[] = esc_html($term->name);
-		} else {
+		if ($archive_url) {
+			$url     = add_query_arg($param, $term->term_id, $archive_url);
 			$links[] = sprintf('<a href="%s">%s</a>', esc_url($url), esc_html($term->name));
+		} else {
+			$links[] = esc_html($term->name);
 		}
 	}
 	return implode(', ', $links);
@@ -83,7 +86,7 @@ $term_links = function ($terms) {
 			<div class="b-header-projects__spec-group">
 				<div class="b-header-projects__spec">
 					<span class="b-header-projects__spec-label"><?php esc_html_e('Producto', 'parklex-blocks'); ?></span>
-					<span class="b-header-projects__spec-value"><?php echo wp_kses_post($term_links($product_terms)); ?></span>
+					<span class="b-header-projects__spec-value"><?php echo wp_kses_post($term_links($product_terms, 'filter_product')); ?></span>
 				</div>
 			</div>
 
@@ -112,12 +115,12 @@ $term_links = function ($terms) {
 			<div class="b-header-projects__spec-group span-2">
 				<div class="b-header-projects__spec">
 					<span class="b-header-projects__spec-label"><?php esc_html_e('Tipo de obra', 'parklex-blocks'); ?></span>
-					<span class="b-header-projects__spec-value"><?php echo wp_kses_post($term_links($work_type_terms)); ?></span>
+					<span class="b-header-projects__spec-value"><?php echo wp_kses_post($term_links($work_type_terms, 'filter_work_type')); ?></span>
 				</div>
 
 				<div class="b-header-projects__spec">
 					<span class="b-header-projects__spec-label"><?php esc_html_e('Soluciones', 'parklex-blocks'); ?></span>
-					<span class="b-header-projects__spec-value"><?php echo wp_kses_post($term_links($solution_terms)); ?></span>
+					<span class="b-header-projects__spec-value"><?php echo wp_kses_post($term_links($solution_terms, 'filter_application')); ?></span>
 				</div>
 			</div>
 		</div>
