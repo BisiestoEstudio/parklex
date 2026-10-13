@@ -28,6 +28,16 @@ class Bis_Theme_Assets {
 			true
 		);
 
+		if ( is_post_type_archive( 'proyecto' ) ) {
+			wp_enqueue_script(
+				'bis-theme-projects-archive',
+				BIS_THEME_URI . '/assets/js/projects-archive.js',
+				array(),
+				BIS_THEME_VERSION,
+				true
+			);
+		}
+
 		if ( is_post_type_archive( 'technical-card' ) ) {
 			wp_enqueue_script(
 				'bis-theme-technical-video-modal',

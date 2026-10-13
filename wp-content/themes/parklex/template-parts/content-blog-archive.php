@@ -6,6 +6,7 @@ $archive_title    = get_field( 'blog_archive_title', 'option' );
 $archive_subtitle = get_field( 'blog_archive_subtitle', 'option' );
 $search           = isset( $_GET['search'] ) ? sanitize_text_field( wp_unslash( $_GET['search'] ) ) : '';
 $categories       = get_categories( array( 'hide_empty' => true ) );
+$is_numbered      = ! is_paged() && ! is_category() && '' === $search;
 $blog_archive_url = bis_theme_get_blog_archive_url();
 $blog_page_id     = (int) get_option( 'page_for_posts' );
 $blog_page_content = $blog_page_id ? get_post_field( 'post_content', $blog_page_id ) : '';
@@ -51,14 +52,14 @@ $blog_page_content = $blog_page_id ? get_post_field( 'post_content', $blog_page_
 	</div>
 
 	<?php if ( have_posts() ) : ?>
-		<div class="c-blog-archive__grid alignwide<?php echo is_paged() ? '' : ' c-blog-archive__grid--first-page'; ?>">
+		<div class="c-blog-archive__grid alignwide<?php echo $is_numbered ? ' c-blog-archive__grid--first-page' : ''; ?>">
 			<?php
 			$post_number = 0;
 			while ( have_posts() ) :
 				the_post();
 				$post_number++;
 				get_template_part( 'template-parts/content', get_post_type(), array(
-					'position' => is_paged() ? 0 : $post_number,
+					'position' => $is_numbered ? $post_number : 0,
 				) );
 			endwhile;
 			?>

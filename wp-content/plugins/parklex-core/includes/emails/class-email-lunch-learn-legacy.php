@@ -64,7 +64,27 @@ abstract class Bis_Core_Email_Lunch_Learn_Legacy extends WC_Email {
 
 		$subject = str_replace( '{request_id}', $request_id, $this->get_subject() );
 
-		$this->send( $recipient, $subject, $this->get_content(), $this->get_headers(), $attachments );
+		$this->send( $recipient, $subject, $this->get_content(), $this->get_headers_with_bcc(), $attachments );
+	}
+
+	/**
+	 * Distributor-facing emails: append the optional "Additional recipients (Bcc)" option
+	 * as a Bcc header, so the distributor doesn't see them (invalid addresses are dropped).
+	 */
+	protected function get_headers_with_bcc() {
+		$headers = $this->get_headers();
+
+		if ( $this->configurable_recipient ) {
+			return $headers;
+		}
+
+		$bcc = array_filter( array_map( 'sanitize_email', explode( ',', (string) $this->get_option( 'additional_recipients', '' ) ) ), 'is_email' );
+
+		if ( $bcc ) {
+			$headers .= 'Bcc: ' . implode( ', ', $bcc ) . "\r\n";
+		}
+
+		return $headers;
 	}
 
 	/**
@@ -198,6 +218,15 @@ abstract class Bis_Core_Email_Lunch_Learn_Legacy extends WC_Email {
 				'description' => sprintf( __( 'Enter recipients (comma separated). Defaults to %s.', 'parklex-core' ), '<code>' . esc_attr( get_option( 'admin_email' ) ) . '</code>' ),
 				'default'     => '',
 				'placeholder' => '',
+			);
+		} else {
+			$this->form_fields['additional_recipients'] = array(
+				'title'       => __( 'Additional recipients (Bcc)', 'parklex-core' ),
+				'type'        => 'text',
+				'description' => __( 'Optional. Comma-separated emails that receive a hidden copy (Bcc) of this email, in addition to the distributor.', 'parklex-core' ),
+				'default'     => '',
+				'placeholder' => '',
+				'desc_tip'    => true,
 			);
 		}
 

@@ -159,6 +159,15 @@ class ACF
             'capability'  => 'manage_options',
             'redirect'    => false,
         ) );
+
+        acf_add_options_sub_page( array(
+            'page_title'  => __( 'Project Settings', 'parklex-core' ),
+            'menu_title'  => __( 'Project Settings', 'parklex-core' ),
+            'menu_slug'   => 'acf-options-projects',
+            'parent_slug' => 'edit.php?post_type=proyecto',
+            'capability'  => 'manage_options',
+            'redirect'    => false,
+        ) );
     }
 
     /**

@@ -126,11 +126,11 @@ class Bis_Theme_Header {
 	 * The editor can choose auto | light | dark ("Variante del menú" field). Auto resolves
 	 * to light when the first block of the page content has the class has-white-color
 	 * (i.e. the page opens with a dark section), and to dark otherwise. The blog archive
-	 * and the category archives are always light.
+	 * and the category archives, and the projects archive, are always light.
 	 */
 	public static function get_variant() {
-		// Blog archive and category archives always open on a dark hero.
-		if ( is_home() || is_category() ) {
+		// Blog, category and projects archives always open on a dark hero.
+		if ( is_home() || is_category() || is_post_type_archive( 'proyecto' ) ) {
 			return 'light';
 		}
 
