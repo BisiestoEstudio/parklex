@@ -1,6 +1,7 @@
 .c-technical-card-categories {
 	background-color: var(--gray-light);
     padding: var(--wp--preset--spacing--m) var(--layout-margin);
+    padding-top: var(--wp--preset--spacing--menu);
 
     [data-device="movil"] & {
         overflow-x: scroll;
@@ -57,6 +58,7 @@
 
     &__wrapper {
         padding-top: var(--wp--preset--spacing--l);
+        padding-bottom: var(--wp--preset--spacing--xl);
     }
  
 
@@ -71,6 +73,7 @@
         padding-right: var(--wp--preset--spacing--m);
         border-right: 1px solid var(--gray);
         padding-top: var(--wp--preset--spacing--l);
+        padding-bottom: var(--wp--preset--spacing--xl);
     }
 
     &__sidebar-toggle {

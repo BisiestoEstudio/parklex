@@ -113,6 +113,11 @@
           "name": "XXXL",
           "size": "156px",
           "slug": "xxxl"
+        },
+        {
+          "name": "Menu",
+          "size": "var(--spacing-fluid-menu)",
+          "slug": "menu"
         }
       ],
       "units": [

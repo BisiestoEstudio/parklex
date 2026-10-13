@@ -1,5 +1,6 @@
 .b-header-products {
-	padding: var( --wp--preset--spacing--m ) 0;
+	// Extra top space so the (transparent, overlaid) menu doesn't cover the content.
+	padding: var( --wp--preset--spacing--menu ) 0 var( --wp--preset--spacing--m );
 	&__wrapper {
 		display: grid;
 		grid-template-columns: 1fr;
