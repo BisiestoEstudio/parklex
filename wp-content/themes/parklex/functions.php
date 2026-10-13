@@ -7,6 +7,7 @@ defined( 'ABSPATH' ) || exit;
 define( 'BIS_THEME_VERSION', wp_get_theme()->get( 'Version' ) );
 define( 'BIS_THEME_DIR', get_template_directory() );
 define( 'BIS_THEME_URI', get_template_directory_uri() );
+define( 'BIS_THEME_HUBSPOT_ID', '144758579' ); // HubSpot portal ID (EU1 region).
 
 
 /**********************************

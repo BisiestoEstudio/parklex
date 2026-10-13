@@ -11,7 +11,19 @@ class Bis_Theme_Assets {
         add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
         add_action( 'after_setup_theme', array( __CLASS__, 'enqueue_editor_styles' ) );
         add_action( 'enqueue_block_editor_assets', array( __CLASS__, 'enqueue_editor_assets' ) );
+        add_filter( 'script_loader_tag', array( __CLASS__, 'wrap_hubspot_script' ), 10, 2 );
     }
+
+	/**
+	 * Wraps the HubSpot script tag in visible HTML comments (as in the original theme).
+	 */
+	public static function wrap_hubspot_script( $tag, $handle ) {
+		if ( 'hs-script-loader' !== $handle ) {
+			return $tag;
+		}
+
+		return "<!-- Start of HubSpot Embed Code -->\n" . $tag . "<!-- End of HubSpot Embed Code -->\n";
+	}
 
 	public static function enqueue_scripts() {
 		// CSS
@@ -20,6 +32,19 @@ class Bis_Theme_Assets {
 		wp_enqueue_style( 'bis-theme-blocks', BIS_THEME_URI . '/assets/css/blocks.css', array( 'bis-theme-main' ), BIS_THEME_VERSION );
 		wp_enqueue_style( 'bis-theme-woocommerce', BIS_THEME_URI . '/assets/css/woocommerce.min.css', array( 'bis-theme-main' ), BIS_THEME_VERSION );
 		// JS
+		/* Hubspot script */
+		// HubSpot tracking script (also loads the forms embed API used by hbspt.forms.create).
+		wp_enqueue_script(
+			'hs-script-loader',
+			'https://js-eu1.hs-scripts.com/' . BIS_THEME_HUBSPOT_ID . '.js',
+			array(),
+			null,
+			array(
+				'in_footer' => true,
+				'strategy'  => 'async',
+			)
+		);
+
 		wp_enqueue_script(
 			'bis-theme-site-header',
 			BIS_THEME_URI . '/assets/js/site-header.js',
