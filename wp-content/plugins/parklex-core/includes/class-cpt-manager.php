@@ -19,6 +19,7 @@ class Bis_Core_CPT_Manager {
 
 		add_filter( 'post_type_link', array( __CLASS__, 'filter_products_permalink' ), 1, 2 );
 		add_action( 'pre_get_posts', array( __CLASS__, 'apply_manual_order' ) );
+		add_filter( 'rewrite_rules_array', array( __CLASS__, 'prioritize_products_type_pagination' ) );
 
 		foreach ( array( 'proyecto', 'products', 'technical-card' ) as $post_type ) {
 			add_filter( "manage_{$post_type}_posts_columns", array( __CLASS__, 'add_order_column' ) );
@@ -390,6 +391,21 @@ class Bis_Core_CPT_Manager {
 				'menu_icon'          => 'dashicons-location-alt',
 			)
 		);
+	}
+
+	/**
+	 * The products single rule (products/%products_type%/slug) swallows
+	 * products/{term}/page/N/ as a product named "page". Put the taxonomy
+	 * pagination rules first. Requires flushing permalinks once.
+	 */
+	public static function prioritize_products_type_pagination( $rules ) {
+		$paging = array();
+		foreach ( $rules as $regex => $query ) {
+			if ( 0 === strpos( $regex, 'products/' ) && false !== strpos( $query, 'products_type=' ) && false !== strpos( $query, 'paged=' ) ) {
+				$paging[ $regex ] = $query;
+			}
+		}
+		return $paging + array_diff_key( $rules, $paging );
 	}
 
 	/**

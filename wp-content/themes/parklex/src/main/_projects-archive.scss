@@ -1,5 +1,7 @@
 /* Projects archive */
 .c-projects-archive{
+    padding-bottom: var(--spacing-fluid-m);
+
     &__header{
         position: relative;
         display: grid;
@@ -90,7 +92,7 @@
         justify-content: center;
 
         .navigation{
-            padding-block: var(--wp--preset--spacing--l);
+            padding-top: var(--wp--preset--spacing--l);
         }
 
         .nav-links{

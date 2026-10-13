@@ -150,6 +150,8 @@
 }
 
 .c-blog-archive{
+    padding-bottom: var(--spacing-fluid-m);
+
 
     &__header{
         position: relative;
@@ -243,7 +245,7 @@
         justify-content: center;
 
         .navigation{
-            padding-block: var(--wp--preset--spacing--l);
+            padding-top: var(--wp--preset--spacing--l);
         }
 
         .nav-links{
