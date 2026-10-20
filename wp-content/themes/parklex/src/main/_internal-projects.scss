@@ -161,7 +161,7 @@
 
     &__details {
         position: sticky;
-        top: var(--wp--preset--spacing--m);
+        top: calc(var(--spacing-fluid-menu) + var(--wp--preset--spacing--s));
     }
 
     &__title {

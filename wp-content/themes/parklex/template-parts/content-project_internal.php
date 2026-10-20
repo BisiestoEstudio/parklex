@@ -8,7 +8,12 @@ $title           = get_field( 'project_name' ) ?: get_the_title();
 	<a href="<?php the_permalink(); ?>">
 		<figure class="c-internal-projects__card-image">
 			<?php if ( $featured_image ) : ?>
-				<img src="<?php echo esc_url( $featured_image['sizes']['medium'] ?? $featured_image['url'] ); ?>" alt="<?php echo esc_attr( $featured_image['alt'] ); ?>" loading="lazy">
+				<?php
+				// No srcset: always serve 'large', don't let the browser pick a smaller candidate.
+				add_filter( 'wp_calculate_image_srcset', '__return_false' );
+				echo wp_get_attachment_image( $featured_image['ID'], 'large' );
+				remove_filter( 'wp_calculate_image_srcset', '__return_false' );
+				?>
 			<?php endif; ?>
 		</figure>
 		<span class="c-internal-projects__card-title"><?php echo esc_html( $title ); ?></span>

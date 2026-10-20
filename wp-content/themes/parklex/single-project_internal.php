@@ -35,7 +35,7 @@ while ( have_posts() ) :
 	}
 	?>
 
-	<main class="entry-content is-layout-constrained has-global-padding">
+	<main class="c-internal-projects-page entry-content is-layout-constrained has-global-padding">
 		<?php if ( function_exists( 'yoast_breadcrumb' ) ) : ?>
 			<div class="c-internal-project__breadcrumb alignwide">
 				<?php yoast_breadcrumb(); ?>
