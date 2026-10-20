@@ -1,0 +1,11 @@
+/* Legal pages (Privacy Page template) */
+.c-legal-page{
+    display: grid;
+    gap: var(--wp--preset--spacing--l);
+    padding-top: var(--wp--preset--spacing--menu);
+    padding-bottom: var(--wp--preset--spacing--xl);
+
+    &__title{
+        margin: 0;
+    }
+}
