@@ -190,7 +190,7 @@ $is_usa_entity = in_array( $dest_country, array( 'US', 'CA' ), true );
 		</tr>
 	</tfoot>
 </table>
-<img src="<?php echo get_template_directory_uri(); ?>/woocommerce/pdf/parklex/firmaok.png" width="300" alt="Firma" />
+<img src="<?php echo esc_attr( __DIR__ . '/firmaok.png' ); ?>" width="300" alt="Firma" />
 
 <div class="bottom-spacer"></div>
 
