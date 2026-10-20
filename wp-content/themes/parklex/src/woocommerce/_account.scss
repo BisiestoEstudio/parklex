@@ -5,7 +5,8 @@
  */
 
 .woocommerce-account .entry-content,
-.woocommerce-cart .entry-content {
+.woocommerce-cart .entry-content,
+.woocommerce-checkout .entry-content {
   /* Header is fixed over the content: reserve its height. */
   padding-top: calc(var(--spacing-fluid-menu) + var(--wp--preset--spacing--l));
   padding-bottom: var(--wp--preset--spacing--xxl);
@@ -123,6 +124,12 @@
       border-bottom: 0;
     }
   }
+}
+
+/* Headings */
+
+.woocommerce h3 {
+  margin-bottom: var(--wp--preset--spacing--m);
 }
 
 /* Content */
