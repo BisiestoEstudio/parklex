@@ -14,12 +14,14 @@
 		z-index: 2;
 		display: grid;
 		grid-template-columns: repeat(1, 1fr);
+		pointer-events: none;
 		gap: var(--wp--preset--spacing--m);
 	}
 
 	&__project {
 		display: grid;
 		gap: var(--wp--preset--spacing--m);
+		pointer-events: auto;
 
 	}
 
