@@ -186,7 +186,6 @@ class Bis_Theme_Woocommerce {
 							<?php echo wp_kses_post( wc_format_content( term_description() ) ); ?>
 						<?php endif; ?>
 					</header>
-					<?php self::paint_filters(); ?>
 		<?php
 	}
 
