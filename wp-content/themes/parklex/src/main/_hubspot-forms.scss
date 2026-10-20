@@ -88,6 +88,7 @@ $required-color: #EB5757; /* Same red as $error-color in framework/_6_forms.scss
     .inputs-list {
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
         gap: var(--wp--preset--spacing--s);
         margin: 0;
         padding: var(--wp--preset--spacing--xs) 0 0;
