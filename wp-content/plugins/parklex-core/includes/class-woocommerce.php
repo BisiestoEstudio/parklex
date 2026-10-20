@@ -20,6 +20,35 @@ class Bis_Core_WooCommerce {
 		add_rewrite_endpoint( 'submit-documents', EP_PAGES );
 		add_filter( 'woocommerce_account_menu_items', array( __CLASS__, 'add_submit_documents_menu_item' ) );
 		add_action( 'woocommerce_account_submit-documents_endpoint', array( __CLASS__, 'render_submit_documents_content' ) );
+
+		add_filter( 'woocommerce_order_number', array( __CLASS__, 'legacy_order_number' ), 10, 2 );
+		add_filter( 'woocommerce_shop_order_search_fields', array( __CLASS__, 'add_legacy_order_number_search_field' ) );
+	}
+
+	/**
+	 * Orders migrated from the old site (2026-10-15) whose original ID was already taken
+	 * on the new site were created with a new ID and keep the old one in `_legacy_order_id`.
+	 * Customers already have that number in their emails and invoices, so it stays the
+	 * visible order number (admin, My Account, emails, PDF invoices).
+	 */
+	public static function legacy_order_number( $number, $order ) {
+		if ( $order instanceof WC_Order ) {
+			$legacy = $order->get_meta( '_legacy_order_id' );
+			if ( $legacy ) {
+				return (string) $legacy;
+			}
+		}
+
+		return $number;
+	}
+
+	/**
+	 * Let the admin order search find migrated orders by their old number.
+	 */
+	public static function add_legacy_order_number_search_field( $fields ) {
+		$fields[] = '_legacy_order_id';
+
+		return $fields;
 	}
 
 	/**
