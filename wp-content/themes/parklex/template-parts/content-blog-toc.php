@@ -1,9 +1,9 @@
 <?php
 /**
- * Table of contents for a single blog post, built from its h2/h3 headings.
+ * Table of contents for a single blog post, built from its h2 headings.
  *
  * @var array $args {
- *     @type array $items Nested TOC items: array{id, text, children}.
+ *     @type array $items TOC items: array{id, text}.
  * }
  */
 defined( 'ABSPATH' ) || exit;
@@ -24,16 +24,6 @@ if ( empty( $items ) ) {
 		<?php foreach ( $items as $item ) : ?>
 			<li class="c-blog-toc__item">
 				<a href="#<?php echo esc_attr( $item['id'] ); ?>"><?php echo esc_html( $item['text'] ); ?></a>
-
-				<?php if ( ! empty( $item['children'] ) ) : ?>
-					<ul class="c-blog-toc__sublist">
-						<?php foreach ( $item['children'] as $child ) : ?>
-							<li class="c-blog-toc__subitem">
-								<a href="#<?php echo esc_attr( $child['id'] ); ?>"><?php echo esc_html( $child['text'] ); ?></a>
-							</li>
-						<?php endforeach; ?>
-					</ul>
-				<?php endif; ?>
 			</li>
 		<?php endforeach; ?>
 	</ul>

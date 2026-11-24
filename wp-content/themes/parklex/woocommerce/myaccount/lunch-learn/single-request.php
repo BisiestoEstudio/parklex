@@ -21,7 +21,7 @@ $type_event = get_field( 'type-event', $request_id );
 		<a class="btn btn-dark" href="<?php echo esc_url( wc_get_endpoint_url( 'lunch-learn', '', wc_get_page_permalink( 'myaccount' ) ) ); ?>"><?php esc_html_e( 'Back to requests', 'parklex' ); ?></a>
 	</div>
 
-	<h3>#<?php echo (int) $request_id; ?> — <?php echo esc_html( get_the_title( $request_id ) ); ?></h3>
+	<h3>#<?php echo (int) Bis_Core_Lunch_Learn::get_request_number( $request_id ); ?> — <?php echo esc_html( get_the_title( $request_id ) ); ?></h3>
 
 	<section class="c-lunch-learn-my-account__assistants" data-role="assistants-section">
 		<h4>

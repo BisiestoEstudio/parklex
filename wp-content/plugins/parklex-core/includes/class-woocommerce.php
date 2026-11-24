@@ -23,6 +23,56 @@ class Bis_Core_WooCommerce {
 
 		add_filter( 'woocommerce_order_number', array( __CLASS__, 'legacy_order_number' ), 10, 2 );
 		add_filter( 'woocommerce_shop_order_search_fields', array( __CLASS__, 'add_legacy_order_number_search_field' ) );
+
+		// Orders list table: legacy (posts) and HPOS screens use different hooks.
+		// Priority 20 so WooCommerce's own "Origin" column (added at 10) exists to be removed.
+		add_filter( 'manage_edit-shop_order_columns', array( __CLASS__, 'filter_orders_list_columns' ), 20 );
+		add_filter( 'manage_woocommerce_page_wc-orders_columns', array( __CLASS__, 'filter_orders_list_columns' ), 20 );
+		add_action( 'manage_shop_order_posts_custom_column', array( __CLASS__, 'render_orders_list_column' ), 10, 2 );
+		add_action( 'manage_woocommerce_page_wc-orders_custom_column', array( __CLASS__, 'render_orders_list_column' ), 10, 2 );
+	}
+
+	/**
+	 * Admin orders list: add a "Shipping country" column right after "Ship to" and
+	 * drop WooCommerce's order attribution "Origin" column.
+	 */
+	public static function filter_orders_list_columns( $columns ) {
+		unset( $columns['origin'] );
+
+		$new_columns = array();
+		foreach ( $columns as $key => $label ) {
+			$new_columns[ $key ] = $label;
+			if ( 'shipping_address' === $key ) {
+				$new_columns['shipping_country'] = __( 'Shipping country', 'parklex-core' );
+			}
+		}
+
+		if ( ! isset( $new_columns['shipping_country'] ) ) {
+			$new_columns['shipping_country'] = __( 'Shipping country', 'parklex-core' );
+		}
+
+		return $new_columns;
+	}
+
+	/**
+	 * Render the "Shipping country" column. Receives a post ID on the legacy screen
+	 * and a WC_Order on the HPOS screen.
+	 */
+	public static function render_orders_list_column( $column, $order ) {
+		if ( 'shipping_country' !== $column ) {
+			return;
+		}
+
+		$order = $order instanceof WC_Order ? $order : wc_get_order( $order );
+		$code  = $order ? $order->get_shipping_country() : '';
+
+		if ( ! $code ) {
+			echo '&ndash;';
+			return;
+		}
+
+		$countries = WC()->countries->get_countries();
+		echo esc_html( $countries[ $code ] ?? $code );
 	}
 
 	/**

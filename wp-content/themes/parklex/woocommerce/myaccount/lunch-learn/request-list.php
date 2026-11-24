@@ -42,7 +42,7 @@ $submit_page_id = bis_theme_get_page_by_template( Bis_Core_Lunch_Learn::SUBMIT_P
 					?>
 					<tr>
 						<td><?php echo esc_html( get_the_title( $request_id ) ); ?></td>
-						<td>#<?php echo (int) $request_id; ?></td>
+						<td>#<?php echo (int) Bis_Core_Lunch_Learn::get_request_number( $request_id ); ?></td>
 						<td><?php echo esc_html( get_field( 'design-firm-request', $request_id ) ); ?></td>
 						<td><?php echo $approved ? esc_html__( 'Sent', 'parklex' ) : esc_html__( 'Pending', 'parklex' ); ?></td>
 						<td><a class="btn btn-dark" href="<?php echo esc_url( $link ); ?>"><?php echo $approved ? esc_html__( 'View', 'parklex' ) : esc_html__( 'Edit', 'parklex' ); ?></a></td>

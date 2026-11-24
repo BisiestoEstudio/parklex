@@ -3,6 +3,10 @@
     padding-left: 24px;
     margin-block-end: 18px;
 
+    li:not(:last-child) {
+        margin-block-end: 6px;
+    }
+
     &.is-style-expanded li:not(:last-child) {
         margin-block-end: 16px !important;
     }

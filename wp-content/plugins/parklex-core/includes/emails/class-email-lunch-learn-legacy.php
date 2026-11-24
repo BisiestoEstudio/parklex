@@ -53,7 +53,7 @@ abstract class Bis_Core_Email_Lunch_Learn_Legacy extends WC_Email {
 
 		$this->object = array(
 			'content'              => $this->get_option( 'content_email', '' ) ?: $this->content,
-			'request_id'           => $request_id,
+			'request_id'           => Bis_Core_Lunch_Learn::get_request_number( $request_id ),
 			'user_name'            => $user_data ? trim( $user_data->first_name . ' ' . $user_data->last_name ) : '',
 			'user_email'           => $user_data ? $user_data->user_email : '',
 			'request_name'         => get_the_title( $request_id ),
@@ -62,7 +62,7 @@ abstract class Bis_Core_Email_Lunch_Learn_Legacy extends WC_Email {
 			'request_details'      => $this->build_request_details_table( $request_id ),
 		);
 
-		$subject = str_replace( '{request_id}', $request_id, $this->get_subject() );
+		$subject = str_replace( '{request_id}', Bis_Core_Lunch_Learn::get_request_number( $request_id ), $this->get_subject() );
 
 		$this->send( $recipient, $subject, $this->get_content(), $this->get_headers_with_bcc(), $attachments );
 	}
@@ -122,7 +122,7 @@ abstract class Bis_Core_Email_Lunch_Learn_Legacy extends WC_Email {
 			);
 		}
 
-		$heading = str_replace( '{request_id}', $this->request_id, $this->get_heading() );
+		$heading = str_replace( '{request_id}', $this->request_id ? Bis_Core_Lunch_Learn::get_request_number( $this->request_id ) : $this->request_id, $this->get_heading() );
 
 		return wc_get_template_html( $this->template_html, array(
 			'email_heading' => $heading,

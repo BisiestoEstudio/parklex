@@ -36,17 +36,17 @@ function bis_theme_get_blog_archive_url() {
 }
 
 /**
- * Extracts a nested h2/h3 table of contents out of already-filtered post
+ * Extracts an h2 table of contents out of already-filtered post
  * content, and returns the content with matching anchor ids applied so the
  * TOC links actually resolve. A heading's own "HTML anchor" (block editor
  * advanced setting) is kept as-is; ids are only generated for headings that
  * don't already have one.
  *
  * @param string $content Content already run through the `the_content` filter.
- * @return array{toc: array, content: string}
+ * @return array{toc: array, content: string} TOC items are array{id, text}.
  */
 function bis_theme_build_toc( $content ) {
-	if ( false === stripos( $content, '<h2' ) && false === stripos( $content, '<h3' ) ) {
+	if ( false === stripos( $content, '<h2' ) ) {
 		return array(
 			'toc'     => array(),
 			'content' => $content,
@@ -63,7 +63,7 @@ function bis_theme_build_toc( $content ) {
 	);
 	libxml_clear_errors();
 
-	$headings = ( new DOMXPath( $dom ) )->query( '//h2 | //h3' );
+	$headings = ( new DOMXPath( $dom ) )->query( '//h2' );
 
 	if ( 0 === $headings->length ) {
 		return array(
@@ -72,9 +72,8 @@ function bis_theme_build_toc( $content ) {
 		);
 	}
 
-	$toc          = array();
-	$used_ids     = array();
-	$last_h2_index = null;
+	$toc      = array();
+	$used_ids = array();
 
 	foreach ( $headings as $heading ) {
 		$text = trim( $heading->textContent );
@@ -97,18 +96,10 @@ function bis_theme_build_toc( $content ) {
 			$heading->setAttribute( 'id', $id );
 		}
 
-		$item = array(
-			'id'       => $id,
-			'text'     => $text,
-			'children' => array(),
+		$toc[] = array(
+			'id'   => $id,
+			'text' => $text,
 		);
-
-		if ( 'h2' === $heading->nodeName || null === $last_h2_index ) {
-			$toc[]         = $item;
-			$last_h2_index = count( $toc ) - 1;
-		} else {
-			$toc[ $last_h2_index ]['children'][] = $item;
-		}
 	}
 
 	$wrapper = $dom->getElementById( $wrapper_id );

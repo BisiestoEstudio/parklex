@@ -94,6 +94,18 @@ class Bis_Core_Lunch_Learn {
 		) );
 	}
 
+	/**
+	 * Visible request number. Requests migrated from the old site (2026-10) whose original
+	 * ID was already taken on the new site got a new ID and keep the old one in
+	 * `_legacy_post_id`: users and admins already know them by that number (emails,
+	 * My Account), so it stays the one shown everywhere.
+	 */
+	public static function get_request_number( $request_id ) {
+		$legacy = (int) get_post_meta( $request_id, '_legacy_post_id', true );
+
+		return $legacy ? $legacy : (int) $request_id;
+	}
+
 	public static function get_user_request_ids() {
 		return get_posts( array(
 			'post_type'      => 'lunch_learn_request',
@@ -137,7 +149,7 @@ class Bis_Core_Lunch_Learn {
 	public static function render_admin_column( $column, $post_id ) {
 		switch ( $column ) {
 			case 'request_id':
-				echo '#' . (int) $post_id;
+				echo '#' . (int) self::get_request_number( $post_id );
 				break;
 
 			case 'user':

@@ -31,7 +31,7 @@ if ( 'manual' === $mode ) {
 
 			<div class="b-related-project__project">
 				<a class="b-related-project__image" href="<?php echo esc_url( get_permalink( $project_id ) ); ?>">
-					<?php echo get_the_post_thumbnail( $project_id, 'large', array( 'class' => 'b-related-project__img' ) ); ?>
+					<?php echo get_the_post_thumbnail( $project_id, 'full', array( 'class' => 'b-related-project__img', 'loading' => 'eager' ) ); ?>
 				</a>
 				<p class="b-related-project__caption has-caption-font-size">
 					<span class="b-related-project__title"><?php echo esc_html( get_the_title( $project_id ) ); ?></span>
