@@ -3,7 +3,11 @@ defined( 'ABSPATH' ) || exit;
 
 $header_image_id = get_field( 'products_header_image', 'option' );
 $archive_title    = get_field( 'products_archive_title', 'option' );
-$product_types    = get_terms( array( 'taxonomy' => 'products_type', 'hide_empty' => true ) );
+$product_types    = get_terms( array(
+	'taxonomy'   => 'products_type',
+	'parent'     => 0,
+	'hide_empty' => true,
+) );
 ?>
 
 <main class="c-products-archive">
